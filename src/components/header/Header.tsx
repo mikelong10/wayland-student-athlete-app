@@ -46,7 +46,7 @@ export default async function Header() {
           <nav className="flex h-full flex-col items-center justify-center">
             <ul className="flex h-full flex-col items-center justify-center gap-16">
               {headerNavLinks.map((link) => (
-                <Link href={link.url}>
+                <Link key={link.url} href={link.url}>
                   <InteractiveButton
                     variant={"link"}
                     className="text-4xl tracking-tight"

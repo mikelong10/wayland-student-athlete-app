@@ -73,9 +73,7 @@ export default function ProfileForm() {
           className="flex flex-col gap-4 w-full"
         >
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-semibold tracking-tight">
-              Adult's name
-            </h2>
+            <h3 className="text-lg font-medium tracking-tight">Adult&apos;s name</h3>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full">
               <FormField
                 control={form.control}
@@ -107,9 +105,9 @@ export default function ProfileForm() {
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex flex-col">
-              <h2 className="text-lg font-semibold tracking-tight">
-                Child's name
-              </h2>
+              <h3 className="text-lg font-medium tracking-tight">
+                Child&apos;s name
+              </h3>
               <FormDescription>
                 {"(if applicable for tutoring, sports/music lesson, etc.)"}
               </FormDescription>
@@ -143,9 +141,9 @@ export default function ProfileForm() {
               />
             </div>
           </div>
-          <Separator />
+          <Separator className="bg-accent rounded-full" />
           <div className="flex flex-col gap-4">
-            <h2 className="text-lg font-semibold tracking-tight">Job info</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">Job info</h2>
             <FormField
               control={form.control}
               name="description"
@@ -215,15 +213,15 @@ export default function ProfileForm() {
               )}
             />
           </div>
-          <Separator />
+          <Separator className="bg-accent rounded-full" />
           <div className="flex flex-col gap-4">
-            <h2 className="text-lg font-semibold tracking-tight">Contact</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
             <FormField
               control={form.control}
               name="contact"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>What's the best way to reach you?</FormLabel>
+                  <FormLabel>What&apos;s the best way to reach you?</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -266,7 +264,7 @@ export default function ProfileForm() {
               )}
             />
           </div>
-          <Separator />
+          <Separator className="bg-accent rounded-full" />
           <div>
             <FormField
               control={form.control}
@@ -287,7 +285,12 @@ export default function ProfileForm() {
               )}
             />
           </div>
-          <Button type="submit" variant={"secondary"} size={'lg'} className="text-md rounded-full">
+          <Button
+            type="submit"
+            variant={"secondary"}
+            size={"lg"}
+            className="text-md rounded-full"
+          >
             Submit
           </Button>
         </form>
