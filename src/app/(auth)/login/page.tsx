@@ -12,14 +12,14 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
+    <div className="flex h-screen w-screen flex-col items-center justify-center">
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
         <Button variant={"ghost"} className="flex items-center gap-3">
           <ChevronLeft className="h-4 w-4" />
           Back
         </Button>
       </Link>
-      <div className="flex flex-col justify-center space-y-6 w-full max-w-md">
+      <div className="flex flex-col justify-center space-y-6 w-full min-w-[280px] max-w-md px-6">
         <div className="flex flex-col w-full space-y-2 text-center">
           <Command className="mx-auto h-6 w-6" />
           <h1 className="text-2xl font-semibold tracking-tight">

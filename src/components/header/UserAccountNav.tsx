@@ -1,7 +1,6 @@
 "use client";
 
 import { HTMLAttributes } from "react";
-import { notFound } from "next/navigation";
 import { Button } from "@components/ui/button";
 import { LightDarkModeToggle } from "@components/LightDarkModeToggle";
 import { Separator } from "@components/ui/separator";
@@ -26,6 +25,7 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
     <div className="flex items-center gap-3">
       <LightDarkModeToggle />
       <Separator orientation="vertical" className="h-6" />
+      <Button onClick={() => console.log(user)}>User</Button>
       <div className="flex gap-2">
         {!user ? (
           <div className="flex gap-2">
@@ -58,6 +58,9 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Link href="/profile">Profile</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/jobs">Job dashboard</Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem

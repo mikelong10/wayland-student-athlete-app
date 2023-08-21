@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function RegisterPage() {
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
+    <div className="flex h-screen w-screen flex-col items-center justify-center">
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
         <Button variant={"ghost"} className="flex items-center gap-3">
           <ChevronLeft className="h-4 w-4" />

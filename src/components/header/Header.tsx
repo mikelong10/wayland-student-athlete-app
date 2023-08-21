@@ -1,7 +1,6 @@
 import { Button } from "@components/ui/button";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetTrigger,
 } from "@components/ui/sheet";
