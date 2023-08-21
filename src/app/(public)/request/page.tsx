@@ -54,7 +54,6 @@ export default function ProfileForm() {
     },
   });
 
-  // 2. Define a submit handler.
   function onSubmit(values: RequestJobFormValues) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
