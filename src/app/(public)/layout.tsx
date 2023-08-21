@@ -6,7 +6,7 @@ interface PublicLayoutProps {
 
 export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen w-full flex flex-col items-center">
       <Header />
       {children}
     </div>

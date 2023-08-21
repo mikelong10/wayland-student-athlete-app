@@ -1,5 +1,5 @@
 import { Button } from "@components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
 import { Separator } from "@components/ui/separator";
 import { Menu } from "lucide-react";
 import Link from "next/link";
