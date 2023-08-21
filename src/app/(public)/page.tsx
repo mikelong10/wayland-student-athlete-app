@@ -27,12 +27,12 @@ export default function Home() {
           >
             Learn more
           </InteractiveButton>
-          <Button variant={"secondary"} className="w-44">
-            <Link href="/request" className="flex items-center gap-2">
+          <Link href="/request" className="w-44">
+            <Button variant={"secondary"} className="flex items-center gap-2">
               Request a job
               <MoveRight />
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
       </section>
       <section
@@ -47,12 +47,12 @@ export default function Home() {
           <span className="text-secondary">solutions</span> for all your{" "}
           <span className="text-secondary">odd jobs</span>.
         </p>
-        <Button variant={"secondary"} className="w-44">
-          <Link href="/request" className="flex items-center gap-2">
+        <Link href="/request" className="w-44">
+          <Button variant={"secondary"} className="flex items-center gap-2">
             Request a job
             <MoveRight />
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </section>
       <section className="flex min-h-screen w-full flex-col justify-center gap-6 md:px-10 lg:px-16 xl:px-24">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl xl:text-6xl">
@@ -63,12 +63,12 @@ export default function Home() {
           <span className="text-secondary">solutions</span> for all your{" "}
           <span className="text-secondary">odd jobs</span>.
         </p>
-        <Button variant={"secondary"} className="w-44">
-          <Link href="/request" className="flex items-center gap-2">
+        <Link href="/request" className="w-44">
+          <Button variant={"secondary"} className="flex items-center gap-2">
             Request a job
             <MoveRight />
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </section>
       <section className="flex min-h-screen w-full flex-col justify-center gap-6 bg-stone-50 md:px-10 lg:px-16 xl:px-24">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl xl:text-6xl">
@@ -79,12 +79,12 @@ export default function Home() {
           <span className="text-secondary">solutions</span> for all your{" "}
           <span className="text-secondary">odd jobs</span>.
         </p>
-        <Button variant={"secondary"} className="w-44">
-          <Link href="/request" className="flex items-center gap-2">
+        <Link href="/request" className="w-44">
+          <Button variant={"secondary"} className="flex items-center gap-2">
             Request a job
             <MoveRight />
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </section>
     </main>
   );
