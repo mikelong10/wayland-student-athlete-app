@@ -29,7 +29,7 @@ const requestJobFormSchema = z.object({
   contact: z.string().nonempty("This field is required"),
   frequency: z.string().nonempty("This field is required"),
   learn: z.string().nonempty("This field is required"),
-  special: z.string().nonempty("This field is required"),
+  special: z.string().optional(),
   signature: z.string().nonempty("This field is required"),
 });
 

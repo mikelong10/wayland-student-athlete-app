@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatDate } from "@lib/utils";
+import { Badge } from "@components/ui/badge";
 
 export const metadata = {
   title: "Dashboard",
@@ -23,17 +24,20 @@ export default async function JobDashboard() {
     redirect(authOptions?.pages?.signIn || "/login");
   }
 
-  const posts = await db.post.findMany({
+  const jobs = await db.job.findMany({
     where: {
-      authorId: user.id,
+      requestorId: user.id,
     },
     select: {
       id: true,
-      title: true,
-      content: true,
-      author: true,
-      published: true,
+      adultFirstName: true,
+      adultLastName: true,
       createdAt: true,
+      description: true,
+      status: true,
+      time: true,
+      requestor: true,
+      location: true,
     },
     orderBy: {
       updatedAt: "desc",
@@ -46,17 +50,22 @@ export default async function JobDashboard() {
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-extrabold tracking-tight">Dashboard</h1>
           <h2 className="text-md font-bold tracking-tight">Your jobs</h2>
-          {posts.map((post) => (
-            <Card key={post.id}>
+          {jobs.map((job) => (
+            <Card key={job.id} className="flex flex-col gap-4">
               <CardHeader>
-                <CardTitle>{post.title}</CardTitle>
-                <CardDescription>{post.author.name}</CardDescription>
+                <Badge className="w-fit mb-2">
+                  <p>{job.status}</p>
+                </Badge>
+                <CardTitle>{`Job for ${job.adultFirstName} ${job.adultLastName}`}</CardTitle>
+                <CardDescription>Requested by {job.requestor.name}</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>{post.content}</p>
+                <p className="text-sm">{job.description}</p>
               </CardContent>
               <CardFooter>
-                <p>{formatDate(post.createdAt)}</p>
+                <p className="text-xs text-muted-foreground">
+                  {formatDate(job.createdAt)}
+                </p>
               </CardFooter>
             </Card>
           ))}

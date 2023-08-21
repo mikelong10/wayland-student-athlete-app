@@ -11,6 +11,35 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Job {
+  id              Int       @id @default(autoincrement())
+  adultFirstName  String
+  adultLastName   String
+  childFirstName  String?
+  childLastName   String?
+  description     String
+  location        String
+  time            String
+  contact         String
+  frequency       String
+  learn           String
+  special         String?
+  signature       String  
+  status          Status    @default(READY)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  requestor       User      @relation(fields: [requestorId], references: [id])
+  requestorId     Int
+
+  @@index(requestorId)
+}
+
+enum Status {
+  READY
+  PROGRESS
+  DONE
+}
+
 model Post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -37,32 +66,10 @@ model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
   name    String?
+  jobs    Job[]
   posts   Post[]
   profile Profile?
 }
-
-// model Job {
-//   id        String   @id @default(cuid())
-//   adultFirstName String
-//   adultLastName String
-//   childFirstName String?
-//   childLastName String?
-//   description String
-//   location String
-//   time String
-//   contact String
-//   frequency String
-//   learn String
-//   special String
-//   signature String  
-//   createdAt DateTime @default(now()) @map(name: "created_at")
-//   updatedAt DateTime @default(now()) @map(name: "updated_at")
-//   authorId  String
-
-//   author User @relation(fields: [authorId], references: [id])
-
-//   @@map(name: "jobs")
-// }
 
 // model Account {
 //   id                String   @id @default(cuid())

@@ -5,10 +5,16 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-US", {
+export function formatDate(input: Date): string {
+  const date = input.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
   })
+  const time = input.toLocaleTimeString("en-US", {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  })
+  return `${date} @ ${time}`;
 }
