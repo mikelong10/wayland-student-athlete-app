@@ -1,10 +1,22 @@
 import { Button } from "@components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@components/ui/sheet";
 import { Separator } from "@components/ui/separator";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import UserAccountNav from "./UserAccountNav";
 import { getCurrentUser } from "@lib/session";
+import InteractiveButton from "@components/ui/InteractiveButton";
+
+const headerNavLinks = [
+  { url: "/what", text: "What we do" },
+  { url: "/who", text: "Who we are" },
+  { url: "/reviews", text: "Reviews" },
+];
 
 export default async function Header() {
   const user = await getCurrentUser();
@@ -33,28 +45,25 @@ export default async function Header() {
           <Separator className="my-4" />
           <nav className="flex h-full flex-col items-center justify-center">
             <ul className="flex h-full flex-col items-center justify-center gap-16">
-              <Link href={"/what"}>
-                <Button variant={"link"} className="text-3xl">
-                  What we do
-                </Button>
-              </Link>
-              <Link href={"/who"}>
-                <Button variant={"link"} className="text-3xl">
-                  Who we are
-                </Button>
-              </Link>
-              <Link href={"/reviews"}>
-                <Button variant={"link"} className="text-3xl">
-                  Reviews
-                </Button>
-              </Link>
+              {headerNavLinks.map((link) => (
+                <Link href={link.url}>
+                  <InteractiveButton
+                    variant={"link"}
+                    className="text-4xl tracking-tight"
+                    sheetCloseButton
+                  >
+                    {link.text}
+                  </InteractiveButton>
+                </Link>
+              ))}
               <Link href="/request">
-                <Button
+                <InteractiveButton
                   variant={"secondary"}
-                  className="rounded-full p-6 text-xl"
+                  className="rounded-full p-8 text-2xl tracking-tight"
+                  sheetCloseButton
                 >
                   Request a job
-                </Button>
+                </InteractiveButton>
               </Link>
             </ul>
           </nav>

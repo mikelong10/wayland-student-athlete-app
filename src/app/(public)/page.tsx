@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center w-full">
-      <section className="flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-bl from-accent to-white to-70% px-6 dark:from-stone-900 dark:to-background md:px-10 lg:px-16 xl:px-24">
+      <section className="flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-bl from-accent to-white to-70% dark:from-stone-900 dark:to-background px-6 md:px-10 lg:px-16 xl:px-24">
         <div className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground xs:hidden">
           <h1>Wayland</h1>
           <h1>Student-Athlete</h1>
@@ -27,8 +27,8 @@ export default function Home() {
           >
             Learn more
           </InteractiveButton>
-          <Link href="/request" className="w-44">
-            <Button variant={"secondary"} className="flex items-center gap-2">
+          <Link href="/request">
+            <Button variant={"secondary"} className="w-40 flex items-center gap-2">
               Request a job
               <MoveRight />
             </Button>
@@ -37,7 +37,7 @@ export default function Home() {
       </section>
       <section
         id="landing-what-we-do"
-        className="flex min-h-screen w-full flex-col justify-center gap-6 bg-stone-100 md:px-10 lg:px-16 xl:px-24"
+        className="flex min-h-screen w-full flex-col justify-center gap-6 bg-stone-100 px-6 md:px-10 lg:px-16 xl:px-24"
       >
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl xl:text-6xl">
           What we do
@@ -47,14 +47,14 @@ export default function Home() {
           <span className="text-secondary">solutions</span> for all your{" "}
           <span className="text-secondary">odd jobs</span>.
         </p>
-        <Link href="/request" className="w-44">
-          <Button variant={"secondary"} className="flex items-center gap-2">
+        <Link href="/request">
+          <Button variant={"secondary"} className="w-40 flex items-center gap-2">
             Request a job
             <MoveRight />
           </Button>
         </Link>
       </section>
-      <section className="flex min-h-screen w-full flex-col justify-center gap-6 md:px-10 lg:px-16 xl:px-24">
+      <section className="flex min-h-screen w-full flex-col justify-center gap-6 px-6 md:px-10 lg:px-16 xl:px-24">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl xl:text-6xl">
           Who we are
         </h1>
@@ -63,14 +63,14 @@ export default function Home() {
           <span className="text-secondary">solutions</span> for all your{" "}
           <span className="text-secondary">odd jobs</span>.
         </p>
-        <Link href="/request" className="w-44">
-          <Button variant={"secondary"} className="flex items-center gap-2">
+        <Link href="/request">
+          <Button variant={"secondary"} className="w-40 flex items-center gap-2">
             Request a job
             <MoveRight />
           </Button>
         </Link>
       </section>
-      <section className="flex min-h-screen w-full flex-col justify-center gap-6 bg-stone-50 md:px-10 lg:px-16 xl:px-24">
+      <section className="flex min-h-screen w-full flex-col justify-center gap-6 bg-stone-50 px-6 md:px-10 lg:px-16 xl:px-24">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl xl:text-6xl">
           Reviews
         </h1>
@@ -79,8 +79,8 @@ export default function Home() {
           <span className="text-secondary">solutions</span> for all your{" "}
           <span className="text-secondary">odd jobs</span>.
         </p>
-        <Link href="/request" className="w-44">
-          <Button variant={"secondary"} className="flex items-center gap-2">
+        <Link href="/request">
+          <Button variant={"secondary"} className="w-40 flex items-center gap-2">
             Request a job
             <MoveRight />
           </Button>
