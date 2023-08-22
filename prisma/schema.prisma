@@ -16,8 +16,8 @@ model Job {
   status          Status    @default(TODO)
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-  requestor       User      @relation(fields: [requestorId], references: [id])
-  requestorId     Int
+  requestor       User?      @relation(fields: [requestorId], references: [id])
+  requestorId     Int?
   adultFirstName  String
   adultLastName   String
   childFirstName  String?
