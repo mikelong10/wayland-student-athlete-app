@@ -29,7 +29,7 @@ export default function MobileNav({ user, headerNavLinks }: NavProps) {
               <Link key={link.url} href={link.url}>
                 <InteractiveButton
                   variant={link.variant}
-                  className={link.className}
+                  className={link.mobileStyle}
                   sheetCloseButton
                 >
                   {link.text}
