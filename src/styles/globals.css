@@ -21,8 +21,11 @@
     --muted: 60 5% 96%;
     --muted-foreground: 25 5% 45%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 60 9.1% 97.8%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 60 9% 98%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 60 9% 98%;
 
     --card: 60 9% 98%;
     --card-foreground: 12 6% 15%;
