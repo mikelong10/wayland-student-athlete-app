@@ -18,10 +18,15 @@ import { useForm } from "react-hook-form";
 import { Textarea } from "@components/ui/textarea";
 import { Separator } from "@components/ui/separator";
 import { requestJobFormSchema } from "@lib/types";
+import { Dispatch, SetStateAction } from "react";
 
 type RequestJobFormValues = z.infer<typeof requestJobFormSchema>;
 
-export default function RequestJobForm() {
+export default function RequestJobForm({
+  setRequestSent,
+}: {
+  setRequestSent: Dispatch<SetStateAction<boolean>>;
+}) {
   const form = useForm<RequestJobFormValues>({
     resolver: zodResolver(requestJobFormSchema),
     defaultValues: {
@@ -40,8 +45,6 @@ export default function RequestJobForm() {
   });
 
   async function onSubmit(values: RequestJobFormValues) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
 
     const response = await fetch("/api/jobs", {
@@ -51,6 +54,8 @@ export default function RequestJobForm() {
       },
       body: JSON.stringify(values),
     });
+
+    setRequestSent(true);
   }
 
   return (
