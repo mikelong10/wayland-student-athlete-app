@@ -43,7 +43,7 @@ const headerNavLinks: HeaderNavLink[] = [
     text: "Request a job",
     variant: "ghost",
     mobileStyle: "rounded-full p-8 text-2xl tracking-tight",
-    desktopStyle: "h-10 w-fit items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-primary/50 data-[state=open]:bg-primary/50",
+    desktopStyle: "h-10 w-fit items-center justify-center rounded-md px-4 py-2 text-sm font-medium underline underline-offset-8 hover:no-underline transition-all hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-primary/50 data-[state=open]:bg-primary/50",
   },
 ];
 
