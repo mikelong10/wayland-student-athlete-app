@@ -58,7 +58,7 @@ export default async function JobDashboard() {
     <main className="flex min-h-screen w-full flex-col items-center">
       <section className="h-full w-full flex flex-col sm:max-w-[768px] lg:max-w-[960px] py-20 px-6 md:px-10 lg:px-16 xl:px-24">
         <div className="flex flex-col gap-6">
-          <h1 className="text-4xl font-extrabold tracking-tight">Your jobs</h1>
+          <h1 className="text-4xl font-extrabold tracking-tight">My jobs</h1>
           <Separator />
           <Tabs defaultValue="all" className="w-full">
             <TabsList className="w-full flex mb-4">
