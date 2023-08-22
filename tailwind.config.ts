@@ -19,8 +19,9 @@ export default {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
+        ['background-less']: "hsl(var(--background-less))",
         foreground: "hsl(var(--foreground))",
-        ['foreground-light']: "hsl(var(--foreground-light))",
+        ['foreground-less']: "hsl(var(--foreground-less))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

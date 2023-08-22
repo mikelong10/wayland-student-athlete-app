@@ -140,7 +140,7 @@ export default function ProfileForm() {
               />
             </div>
           </div>
-          <Separator className="bg-accent rounded-full" />
+          <Separator className="bg-secondary rounded-full" />
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-semibold tracking-tight">Job info</h2>
             <FormField
@@ -196,7 +196,7 @@ export default function ProfileForm() {
               )}
             />
           </div>
-          <Separator className="bg-accent rounded-full" />
+          <Separator className="bg-secondary rounded-full" />
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
             <FormField
@@ -247,7 +247,7 @@ export default function ProfileForm() {
               )}
             />
           </div>
-          <Separator className="bg-accent rounded-full" />
+          <Separator className="bg-secondary rounded-full" />
           <div>
             <FormField
               control={form.control}
@@ -270,7 +270,6 @@ export default function ProfileForm() {
           </div>
           <Button
             type="submit"
-            variant={"secondary"}
             size={"lg"}
             className="text-md rounded-full"
           >
