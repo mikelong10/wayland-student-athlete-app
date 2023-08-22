@@ -29,7 +29,7 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
         {!user ? (
           <div className="flex gap-2">
             <Link href={"/login"}>
-              <Button variant={"secondary"}>Sign in</Button>
+              <Button>Sign in</Button>
             </Link>
             <Link href={"/register"}>
               <Button variant={"outline"}>Sign up</Button>

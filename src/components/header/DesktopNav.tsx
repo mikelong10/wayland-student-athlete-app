@@ -19,7 +19,7 @@ import { Button } from "@components/ui/button";
 
 export default function DesktopNav({ user, headerNavLinks }: NavProps) {
   return (
-    <div className="hidden h-full w-full items-center justify-between gap-3 md:flex">
+    <div className="hidden h-full w-full items-center justify-between gap-3 lg:flex">
       <NavigationMenu>
         <NavigationMenuList>
           {headerNavLinks.map((link) => (

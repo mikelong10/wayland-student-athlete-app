@@ -11,7 +11,7 @@ export default function MobileNav({ user, headerNavLinks }: NavProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant={"ghost"} size={"icon"} className="md:hidden">
+        <Button variant={"ghost"} size={"icon"} className="lg:hidden">
           <Menu size={32} />
         </Button>
       </SheetTrigger>
