@@ -16,5 +16,5 @@ export function formatDate(input: Date): string {
     minute: 'numeric',
     hour12: true,
   })
-  return `${date} @ ${time}`;
+  return `${date} ~ ${time}`;
 }

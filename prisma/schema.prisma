@@ -13,6 +13,11 @@ generator client {
 
 model Job {
   id              Int       @id @default(autoincrement())
+  status          Status    @default(TODO)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  requestor       User      @relation(fields: [requestorId], references: [id])
+  requestorId     Int
   adultFirstName  String
   adultLastName   String
   childFirstName  String?
@@ -21,36 +26,17 @@ model Job {
   location        String
   time            String
   contact         String
-  frequency       String
   learn           String
   special         String?
   signature       String  
-  status          Status    @default(READY)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  requestor       User      @relation(fields: [requestorId], references: [id])
-  requestorId     Int
 
   @@index(requestorId)
 }
 
 enum Status {
-  READY
-  PROGRESS
+  TODO
+  INPROGRESS
   DONE
-}
-
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-
-  @@index(authorId)
 }
 
 model Profile {
@@ -67,7 +53,6 @@ model User {
   email   String   @unique
   name    String?
   jobs    Job[]
-  posts   Post[]
   profile Profile?
 }
 

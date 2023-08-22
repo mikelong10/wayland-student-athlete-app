@@ -25,7 +25,6 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
     <div className="flex items-center gap-3">
       <LightDarkModeToggle />
       <Separator orientation="vertical" className="h-6" />
-      <Button onClick={() => console.log(user)}>User</Button>
       <div className="flex gap-2">
         {!user ? (
           <div className="flex gap-2">
@@ -60,7 +59,7 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
                 <Link href="/profile">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/jobs">Job dashboard</Link>
+                <Link href="/jobs">Jobs</Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem

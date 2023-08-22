@@ -21,7 +21,7 @@ export default async function Header() {
   const user = await getCurrentUser();
 
   return (
-    <header className="fixed top-0 flex h-20 w-full items-center justify-between gap-4 px-6 py-4 md:px-10 lg:gap-8 lg:px-16 xl:px-24">
+    <header className="fixed top-0 left-0 flex h-20 w-full items-center justify-between gap-4 px-6 py-4 md:px-10 lg:gap-8 lg:px-16 xl:px-24">
       <Link
         href={"/"}
         className="scroll-m-20 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl transition-all hover:text-foreground-light"

@@ -27,7 +27,6 @@ const requestJobFormSchema = z.object({
   location: z.string().nonempty("This field is required"),
   time: z.string().nonempty("This field is required"),
   contact: z.string().nonempty("This field is required"),
-  frequency: z.string().nonempty("This field is required"),
   learn: z.string().nonempty("This field is required"),
   special: z.string().optional(),
   signature: z.string().nonempty("This field is required"),
@@ -47,7 +46,6 @@ export default function ProfileForm() {
       location: "",
       time: "",
       contact: "",
-      frequency: "",
       learn: "",
       special: "",
       signature: "",
@@ -72,7 +70,9 @@ export default function ProfileForm() {
           className="flex flex-col gap-4 w-full"
         >
           <div className="flex flex-col gap-2">
-            <h3 className="text-lg font-medium tracking-tight">Adult&apos;s name</h3>
+            <h3 className="text-lg font-medium tracking-tight">
+              Adult&apos;s name
+            </h3>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full">
               <FormField
                 control={form.control}
@@ -187,25 +187,9 @@ export default function ProfileForm() {
                     <Input {...field} />
                   </FormControl>
                   <FormDescription>
-                    Let us know a time and date that works best for you!
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="frequency"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Would you like this to be a repeated job?
-                  </FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    {"(ex: daily, weekly, every Tues and Thurs)"}
+                    {
+                      "Provide a date and time or frequency (ex: weekly, monthly, every Tues and Thurs)"
+                    }
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
