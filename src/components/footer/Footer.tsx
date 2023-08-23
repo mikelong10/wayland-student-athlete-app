@@ -29,7 +29,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
             <p>Made with &hearts; by</p>
             <p>
               <a
-                href={"https://github.com/mikelong10"}
+                href={"https://www.linkedin.com/in/michaeltlong10/"}
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium underline underline-offset-4"
@@ -41,7 +41,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
           <Separator className="sm:hidden" />
           <Separator orientation="vertical" className="hidden h-6 sm:block" />
           <div className="flex gap-2">
-            Built with{" "}
+            Built with
             <div className="flex items-end">
               <a
                 href="https://nextjs.org/"
@@ -57,10 +57,10 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
                 />
               </a>
             </div>
-            and hosted on{" "}
+            and hosted on
             <div className="flex items-end">
               <a
-                href="https://nextjs.org/"
+                href="https://vercel.com"
                 target="_blank"
                 rel="noreferrer"
                 className="border-foreground mb-1 border-b-2 pb-1"
