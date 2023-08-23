@@ -1,5 +1,6 @@
 import { Job } from "@prisma/client";
 
+import { formatDate } from "@lib/utils";
 import { Badge } from "@components/ui/badge";
 import {
   Card,
@@ -10,7 +11,6 @@ import {
   CardTitle,
 } from "@components/ui/card";
 import Dot, { Status } from "@components/ui/dot";
-import { formatDate } from "@lib/utils";
 
 interface JobCardProps {
   job: Job;

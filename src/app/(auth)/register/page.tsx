@@ -2,9 +2,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ChevronLeft, Command } from "lucide-react";
 
+import { getCurrentUser } from "@lib/session";
 import { UserAuthForm } from "@components/auth/UserAuthForm";
 import { Button } from "@components/ui/button";
-import { getCurrentUser } from "@lib/session";
 
 export const metadata = {
   title: "Create an account",

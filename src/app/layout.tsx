@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 
 import "@styles/globals.css";
 
-import { ThemeProvider } from "@components/ThemeProvider";
 import { cn } from "@lib/utils";
+import { ThemeProvider } from "@components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("min-w-[360px]", inter.className)} suppressHydrationWarning>
+      <body
+        className={cn("min-w-[360px]", inter.className)}
+        suppressHydrationWarning
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>

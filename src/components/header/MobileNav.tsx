@@ -1,31 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { LightDarkModeToggle } from "@components/LightDarkModeToggle"
-import { Button } from "@components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@components/ui/dropdown-menu"
-import InteractiveButton from "@components/ui/InteractiveButton"
-import { Separator } from "@components/ui/separator"
-import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet"
-import { UserAvatar } from "@components/UserAvatar"
-import { CheckSquare, LogOut, Menu, User as UserIcon } from "lucide-react"
-import { signOut } from "next-auth/react"
+import Link from "next/link";
+import { useState } from "react";
+import { Menu } from "lucide-react";
 
-import { NavProps } from "./Header"
-import UserAccountNav from "./UserAccountNav"
+import { Button } from "@components/ui/button";
+import { Separator } from "@components/ui/separator";
+import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
+import { NavProps } from "./Header";
+import UserAccountNav from "./UserAccountNav";
 
 export default function MobileNav({ user, headerNavLinks }: NavProps) {
-  const router = useRouter()
-
-  const [navOpen, setNavOpen] = useState(false)
+  const [navOpen, setNavOpen] = useState(false);
 
   return (
     <Sheet open={navOpen} onOpenChange={setNavOpen}>
@@ -62,5 +48,5 @@ export default function MobileNav({ user, headerNavLinks }: NavProps) {
         </nav>
       </SheetContent>
     </Sheet>
-  )
+  );
 }

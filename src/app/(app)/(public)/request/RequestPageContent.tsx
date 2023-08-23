@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { ChevronLeft, MailCheck } from "lucide-react";
 
+import { ActiveUser } from "@lib/types";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
-import { ActiveUser } from "@lib/types";
 import RequestJobForm from "./RequestJobForm";
 
 export default function RequestPageContent({ user }: { user?: ActiveUser }) {

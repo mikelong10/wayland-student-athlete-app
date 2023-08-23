@@ -1,12 +1,12 @@
 import { redirect } from "next/navigation";
 import { Job } from "@prisma/client";
 
-import JobCard from "@components/JobCard";
-import { Separator } from "@components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import { authOptions } from "@lib/auth";
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
+import JobCard from "@components/JobCard";
+import { Separator } from "@components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
 export const metadata = {
   title: "Dashboard",

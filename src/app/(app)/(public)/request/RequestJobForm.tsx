@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { requestJobFormSchema } from "@lib/types";
 import { Button } from "@components/ui/button";
 import {
   Form,
@@ -18,7 +19,6 @@ import {
 import { Input } from "@components/ui/input";
 import { Separator } from "@components/ui/separator";
 import { Textarea } from "@components/ui/textarea";
-import { requestJobFormSchema } from "@lib/types";
 
 type RequestJobFormValues = z.infer<typeof requestJobFormSchema>;
 

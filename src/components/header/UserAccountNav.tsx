@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import { Dispatch, HTMLAttributes, SetStateAction } from "react"
-import Link from "next/link"
-import { LightDarkModeToggle } from "@components/LightDarkModeToggle"
-import { Button } from "@components/ui/button"
+import Link from "next/link";
+import { HTMLAttributes } from "react";
+import { CheckSquare, LogOut, User as UserIcon } from "lucide-react";
+import { User } from "next-auth";
+import { signOut } from "next-auth/react";
+
+import { LightDarkModeToggle } from "@components/LightDarkModeToggle";
+import { Button } from "@components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@components/ui/dropdown-menu"
-import InteractiveButton from "@components/ui/InteractiveButton"
-import { Separator } from "@components/ui/separator"
-import { UserAvatar } from "@components/UserAvatar"
-import { CheckSquare, LogOut, User as UserIcon } from "lucide-react"
-import { User } from "next-auth"
-import { signOut } from "next-auth/react"
+} from "@components/ui/dropdown-menu";
+import { Separator } from "@components/ui/separator";
+import { UserAvatar } from "@components/UserAvatar";
 
 interface UserAccountNavProps extends HTMLAttributes<HTMLDivElement> {
-  user?: Pick<User, "name" | "image" | "email">
-  closeMobileNav: () => void
+  user?: Pick<User, "name" | "image" | "email">;
+  closeMobileNav: () => void;
 }
 
 export default function UserAccountNav({
@@ -76,10 +76,10 @@ export default function UserAccountNav({
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onSelect={(event) => {
-                  event.preventDefault()
+                  event.preventDefault();
                   signOut({
                     callbackUrl: `/`,
-                  })
+                  });
                 }}
               >
                 <LogOut className="mr-2 h-4 w-4" />
@@ -90,5 +90,5 @@ export default function UserAccountNav({
         )}
       </div>
     </div>
-  )
+  );
 }

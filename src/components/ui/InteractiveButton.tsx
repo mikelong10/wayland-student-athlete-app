@@ -1,14 +1,10 @@
 "use client";
 
-import * as SheetPrimitive from "@radix-ui/react-dialog";
-
-import { Button, ButtonProps, buttonVariants } from "@components/ui/button";
-import { cn } from "@lib/utils";
+import { Button, ButtonProps } from "@components/ui/button";
 
 interface InteractiveButtonProps extends ButtonProps {
   children?: React.ReactNode;
   idScrollToElement?: string;
-  sheetCloseButton?: boolean;
 }
 
 export default function InteractiveButton({
@@ -17,7 +13,6 @@ export default function InteractiveButton({
   size,
   asChild = false,
   idScrollToElement,
-  sheetCloseButton,
   children,
   ...props
 }: InteractiveButtonProps) {
@@ -40,17 +35,6 @@ export default function InteractiveButton({
         {children}
       </Button>
     );
-
-  if (sheetCloseButton) {
-    return (
-      <SheetPrimitive.Close
-        className={cn(buttonVariants({ variant, size, className }))}
-        {...props}
-      >
-        {children}
-      </SheetPrimitive.Close>
-    );
-  }
 
   return (
     <Button
