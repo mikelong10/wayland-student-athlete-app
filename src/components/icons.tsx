@@ -1,6 +1,6 @@
-import { LucideProps } from "lucide-react";
-
-export const GoogleLogo = ({ ...props }: LucideProps) => (
+export const GoogleLogo = ({
+  ...props
+}: React.HTMLAttributes<SVGSVGElement>) => (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -30,7 +30,9 @@ export const GoogleLogo = ({ ...props }: LucideProps) => (
   </svg>
 );
 
-export const FacebookLogo = ({ ...props }: LucideProps) => (
+export const FacebookLogo = ({
+  ...props
+}: React.HTMLAttributes<SVGSVGElement>) => (
   <svg
     aria-hidden="true"
     focusable="false"

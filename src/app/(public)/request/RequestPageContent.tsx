@@ -1,21 +1,22 @@
 "use client";
 
-import { Separator } from "@components/ui/separator";
-import RequestJobForm from "./RequestJobForm";
+import Link from "next/link";
 import { useState } from "react";
 import { ChevronLeft, MailCheck } from "lucide-react";
+
 import { Button } from "@components/ui/button";
+import { Separator } from "@components/ui/separator";
 import { ActiveUser } from "@lib/types";
-import Link from "next/link";
+import RequestJobForm from "./RequestJobForm";
 
 export default function RequestPageContent({ user }: { user?: ActiveUser }) {
   const [requestSent, setRequestSent] = useState(false);
 
   return (
-    <section className="flex flex-col justify-center md:items-center gap-4 min-h-screen h-full w-full sm:max-w-[768px] lg:max-w-[960px] py-24 px-6 md:px-10 lg:px-16 xl:px-24">
+    <section className="flex h-full min-h-screen w-full flex-col justify-center gap-4 px-6 py-24 sm:max-w-[768px] md:items-center md:px-10 lg:max-w-[960px] lg:px-16 xl:px-24">
       {!requestSent ? (
         <>
-          <h1 className="scroll-m-20 w-full text-4xl font-extrabold text-left tracking-tight lg:text-5xl">
+          <h1 className="w-full scroll-m-20 text-left text-4xl font-extrabold tracking-tight lg:text-5xl">
             Request a job
           </h1>
           <Separator />
@@ -23,7 +24,7 @@ export default function RequestPageContent({ user }: { user?: ActiveUser }) {
         </>
       ) : (
         <>
-          <div className="bg-success p-3 rounded-full">
+          <div className="bg-success rounded-full p-3">
             <MailCheck color="white" />
           </div>
           <p>

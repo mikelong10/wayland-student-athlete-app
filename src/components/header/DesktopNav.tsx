@@ -1,14 +1,14 @@
 "use client";
 
+import { Button } from "@components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import UserAccountNav from "./UserAccountNav";
+} from "@components/ui/navigation-menu";
 import { NavProps } from "./Header";
-import { Button } from "@components/ui/button";
+import UserAccountNav from "./UserAccountNav";
 
 export default function DesktopNav({ user, headerNavLinks }: NavProps) {
   return (

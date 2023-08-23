@@ -1,6 +1,5 @@
 import { getCurrentUser } from "@lib/session";
 import { ActiveUser, HeaderNavLink } from "@lib/types";
-
 import HeaderContent from "./HeaderContent";
 
 export interface NavProps {

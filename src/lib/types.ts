@@ -1,5 +1,6 @@
-import { z } from "zod";
 import { VariantProps } from "class-variance-authority";
+import { z } from "zod";
+
 import { buttonVariants } from "@components/ui/button";
 
 export type ActiveUser = {
@@ -7,7 +8,7 @@ export type ActiveUser = {
   email?: string | null | undefined;
   name?: string | null | undefined;
   image?: string | null | undefined;
-}
+};
 
 export interface HeaderNavLink extends VariantProps<typeof buttonVariants> {
   url: string;

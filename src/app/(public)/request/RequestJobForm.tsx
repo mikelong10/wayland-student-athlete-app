@@ -1,9 +1,11 @@
 "use client";
 
+import { Dispatch, SetStateAction } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,13 +14,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { Textarea } from "@components/ui/textarea";
+} from "@components/ui/form";
+import { Input } from "@components/ui/input";
 import { Separator } from "@components/ui/separator";
+import { Textarea } from "@components/ui/textarea";
 import { requestJobFormSchema } from "@lib/types";
-import { Dispatch, SetStateAction } from "react";
 
 type RequestJobFormValues = z.infer<typeof requestJobFormSchema>;
 
@@ -55,6 +55,7 @@ export default function RequestJobForm({
       body: JSON.stringify(values),
     });
 
+    console.log("Job created response:", response);
     setRequestSent(true);
   }
 
@@ -62,11 +63,11 @@ export default function RequestJobForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-full"
+        className="flex w-full flex-col gap-4"
       >
         <div className="flex flex-col gap-2">
           <h3 className="text-lg font-medium tracking-tight">Name</h3>
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full">
+          <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-4">
             <FormField
               control={form.control}
               name="adultFirstName"
@@ -104,7 +105,7 @@ export default function RequestJobForm({
               {"(if applicable for tutoring, sports/music lesson, etc.)"}
             </FormDescription>
           </div>
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full">
+          <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-4">
             <FormField
               control={form.control}
               name="childFirstName"

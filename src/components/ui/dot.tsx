@@ -11,7 +11,7 @@ interface DotProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function Dot({ status }: DotProps) {
   return (
     <div
-      className={`w-2 h-2 rounded-full ${
+      className={`h-2 w-2 rounded-full ${
         status === Status.TODO
           ? " bg-red-500"
           : status === Status.INPROGRESS

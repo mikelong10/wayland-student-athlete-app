@@ -1,8 +1,8 @@
 "use client";
 
-import { Button, ButtonProps, buttonVariants } from "@components/ui/button";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
-import { SheetClose } from "./sheet";
+
+import { Button, ButtonProps, buttonVariants } from "@components/ui/button";
 import { cn } from "@lib/utils";
 
 interface InteractiveButtonProps extends ButtonProps {

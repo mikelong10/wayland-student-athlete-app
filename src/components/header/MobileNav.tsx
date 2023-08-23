@@ -1,11 +1,12 @@
-import { Button } from "@components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
-import { Separator } from "@components/ui/separator";
-import { Menu } from "lucide-react";
 import Link from "next/link";
-import UserAccountNav from "./UserAccountNav";
+import { Menu } from "lucide-react";
+
+import { Button } from "@components/ui/button";
 import InteractiveButton from "@components/ui/InteractiveButton";
+import { Separator } from "@components/ui/separator";
+import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
 import { NavProps } from "./Header";
+import UserAccountNav from "./UserAccountNav";
 
 export default function MobileNav({ user, headerNavLinks }: NavProps) {
   return (

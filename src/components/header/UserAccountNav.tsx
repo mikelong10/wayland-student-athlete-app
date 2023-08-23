@@ -1,12 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { HTMLAttributes } from "react";
-import { Button } from "@components/ui/button";
-import { LightDarkModeToggle } from "@components/LightDarkModeToggle";
-import { Separator } from "@components/ui/separator";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
+
+import { LightDarkModeToggle } from "@components/LightDarkModeToggle";
+import { Button } from "@components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
+import { Separator } from "@components/ui/separator";
 import { UserAvatar } from "@components/UserAvatar";
 
 interface UserAccountNavProps extends HTMLAttributes<HTMLDivElement> {
@@ -48,7 +49,7 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
                 <div className="flex flex-col gap-1 leading-5">
                   {user?.name && <p className="font-medium">{user.name}</p>}
                   {user?.email && (
-                    <p className="w-[200px] truncate text-sm text-muted-foreground">
+                    <p className="text-muted-foreground w-[200px] truncate text-sm">
                       {user.email}
                     </p>
                   )}

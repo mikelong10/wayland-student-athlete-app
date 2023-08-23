@@ -2,18 +2,18 @@
 
 import { HTMLAttributes, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { cn } from "@lib/utils";
+import { FacebookLogo, GoogleLogo } from "@components/icons";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
-import { toast } from "@components/ui/use-toast";
-import { Loader2 } from "lucide-react";
-import { FacebookLogo, GoogleLogo } from "@components/icons";
 import { Separator } from "@components/ui/separator";
+import { toast } from "@components/ui/use-toast";
+import { cn } from "@lib/utils";
 
 interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -62,7 +62,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   }
 
   return (
-    <div className={cn("flex flex-col w-full gap-6", className)} {...props}>
+    <div className={cn("flex w-full flex-col gap-6", className)} {...props}>
       <div className="flex flex-col gap-2">
         <Button
           variant="outline"
@@ -95,10 +95,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           Facebook
         </Button>
       </div>
-      <div className="flex items-center gap-1 w-full">
+      <div className="flex w-full items-center gap-1">
         <Separator className="flex flex-1" />
         <div className="flex justify-center text-xs uppercase">
-          <span className="px-2 text-muted-foreground">Or continue with</span>
+          <span className="text-muted-foreground px-2">Or continue with</span>
         </div>
         <Separator className="flex flex-1" />
       </div>
@@ -118,7 +118,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               {...register("email")}
             />
             {errors?.email && (
-              <p className="px-3 py-1 text-xs text-destructive">
+              <p className="text-destructive px-3 py-1 text-xs">
                 {errors.email.message}
               </p>
             )}

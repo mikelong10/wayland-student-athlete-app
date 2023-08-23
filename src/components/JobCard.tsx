@@ -1,7 +1,6 @@
-import { authOptions } from "@lib/auth";
-import { db } from "@lib/db";
-import { getCurrentUser } from "@lib/session";
-import { redirect } from "next/navigation";
+import { Job } from "@prisma/client";
+
+import { Badge } from "@components/ui/badge";
 import {
   Card,
   CardContent,
@@ -9,11 +8,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { formatDate } from "@lib/utils";
-import { Badge } from "@components/ui/badge";
-import { Job } from "@prisma/client";
+} from "@components/ui/card";
 import Dot, { Status } from "@components/ui/dot";
+import { formatDate } from "@lib/utils";
 
 interface JobCardProps {
   job: Job;
@@ -28,7 +25,7 @@ export default function JobCard({ job }: JobCardProps) {
           <p className="font-normal">{Status[job.status]}</p>
         </Badge>
         <CardTitle>{`${job.adultFirstName} ${job.adultLastName}`}</CardTitle>
-        <CardDescription className="text-xs pl-2 border-l-2">
+        <CardDescription className="border-l-2 pl-2 text-xs">
           {job.contact}
         </CardDescription>
       </CardHeader>
@@ -36,7 +33,7 @@ export default function JobCard({ job }: JobCardProps) {
         <p className="text-sm">{job.description}</p>
       </CardContent>
       <CardFooter>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-muted-foreground text-xs">
           @ {formatDate(job.createdAt)}
         </p>
       </CardFooter>

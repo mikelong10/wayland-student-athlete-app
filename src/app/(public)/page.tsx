@@ -1,20 +1,21 @@
-import InteractiveButton from "@components/ui/InteractiveButton";
-import { Button } from "@components/ui/button";
-import { MoveRight } from "lucide-react";
 import Link from "next/link";
+import { MoveRight } from "lucide-react";
+
+import { Button } from "@components/ui/button";
+import InteractiveButton from "@components/ui/InteractiveButton";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center w-full">
-      <section className="flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-bl from-secondary to-background to-70% dark:from-stone-900 dark:to-background px-6 md:px-10 lg:px-16 xl:px-24">
-        <div className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground xs:hidden">
+    <main className="flex w-full flex-col items-center justify-center">
+      <section className="from-secondary to-background dark:to-background flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-bl to-70% px-6 dark:from-stone-900 md:px-10 lg:px-16 xl:px-24">
+        <div className="text-foreground xs:hidden scroll-m-20 text-4xl font-extrabold tracking-tight">
           <h1>Wayland</h1>
           <h1>Student-Athlete</h1>
         </div>
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground max-xs:hidden md:text-5xl xl:text-6xl">
+        <h1 className="text-foreground max-xs:hidden scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl xl:text-6xl">
           Wayland Student-Athlete
         </h1>
-        <p className="scroll-m-20 text-xl font-medium tracking-tight text-foreground-less md:text-2xl">
+        <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
           Simple, trustworthy, quality{" "}
           <span className="text-primary">solutions</span> for all your{" "}
           <span className="text-primary">odd jobs</span>.
@@ -28,7 +29,7 @@ export default function Home() {
             Learn more
           </InteractiveButton>
           <Link href="/request">
-            <Button className="w-40 flex items-center gap-2">
+            <Button className="flex w-40 items-center gap-2">
               Request a job
               <MoveRight />
             </Button>
@@ -39,48 +40,48 @@ export default function Home() {
         id="landing-what-we-do"
         className="flex min-h-screen w-full flex-col justify-center gap-6 px-6 md:px-10 lg:px-16 xl:px-24"
       >
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl xl:text-6xl">
+        <h1 className="text-foreground scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl xl:text-6xl">
           What we do
         </h1>
-        <p className="scroll-m-20 text-xl font-medium tracking-tight text-foreground-less md:text-2xl">
+        <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
           Simple, trustworthy, quality{" "}
           <span className="text-primary">solutions</span> for all your{" "}
           <span className="text-primary">odd jobs</span>.
         </p>
         <Link href="/request">
-          <Button className="w-40 flex items-center gap-2">
+          <Button className="flex w-40 items-center gap-2">
             Request a job
             <MoveRight />
           </Button>
         </Link>
       </section>
       <section className="flex min-h-screen w-full flex-col justify-center gap-6 px-6 md:px-10 lg:px-16 xl:px-24">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl xl:text-6xl">
+        <h1 className="text-foreground scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl xl:text-6xl">
           Who we are
         </h1>
-        <p className="scroll-m-20 text-xl font-medium tracking-tight text-foreground-less md:text-2xl">
+        <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
           Simple, trustworthy, quality{" "}
           <span className="text-primary">solutions</span> for all your{" "}
           <span className="text-primary">odd jobs</span>.
         </p>
         <Link href="/request">
-          <Button className="w-40 flex items-center gap-2">
+          <Button className="flex w-40 items-center gap-2">
             Request a job
             <MoveRight />
           </Button>
         </Link>
       </section>
       <section className="flex min-h-screen w-full flex-col justify-center gap-6 px-6 md:px-10 lg:px-16 xl:px-24">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl xl:text-6xl">
+        <h1 className="text-foreground scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl xl:text-6xl">
           Reviews
         </h1>
-        <p className="scroll-m-20 text-xl font-medium tracking-tight text-foreground-less md:text-2xl">
+        <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
           Simple, trustworthy, quality{" "}
           <span className="text-primary">solutions</span> for all your{" "}
           <span className="text-primary">odd jobs</span>.
         </p>
         <Link href="/request">
-          <Button className="w-40 flex items-center gap-2">
+          <Button className="flex w-40 items-center gap-2">
             Request a job
             <MoveRight />
           </Button>
