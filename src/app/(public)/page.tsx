@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center w-full">
-      <section className="flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-bl from-secondary to-white to-70% dark:from-stone-900 dark:to-background px-6 md:px-10 lg:px-16 xl:px-24">
+      <section className="flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-bl from-secondary to-background to-70% dark:from-stone-900 dark:to-background px-6 md:px-10 lg:px-16 xl:px-24">
         <div className="scroll-m-20 text-4xl font-extrabold tracking-tight text-foreground xs:hidden">
           <h1>Wayland</h1>
           <h1>Student-Athlete</h1>

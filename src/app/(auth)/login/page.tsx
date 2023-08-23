@@ -4,15 +4,23 @@ import Link from "next/link";
 import { Button } from "@components/ui/button";
 import { ChevronLeft, Command } from "lucide-react";
 import { UserAuthForm } from "@components/auth/UserAuthForm";
+import { getCurrentUser } from "@lib/session";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Login",
   description: "Login to your account",
 };
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const user = await getCurrentUser();
+
+  if (!!user) {
+    redirect("/");
+  }
+
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-bl from-secondary to-background to-70% dark:from-stone-900 dark:to-background">
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
         <Button variant={"ghost"} className="flex items-center gap-2 px-4">
           <ChevronLeft className="h-4 w-4" />

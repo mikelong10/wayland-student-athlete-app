@@ -63,7 +63,6 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="cursor-pointer"
                 onSelect={(event) => {
                   event.preventDefault();
                   signOut({
