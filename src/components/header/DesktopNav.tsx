@@ -1,14 +1,15 @@
-"use client";
+"use client"
 
-import { Button } from "@components/ui/button";
+import { Button } from "@components/ui/button"
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@components/ui/navigation-menu";
-import { NavProps } from "./Header";
-import UserAccountNav from "./UserAccountNav";
+} from "@components/ui/navigation-menu"
+
+import { NavProps } from "./Header"
+import UserAccountNav from "./UserAccountNav"
 
 export default function DesktopNav({ user, headerNavLinks }: NavProps) {
   return (
@@ -28,5 +29,5 @@ export default function DesktopNav({ user, headerNavLinks }: NavProps) {
       </NavigationMenu>
       <UserAccountNav user={user} />
     </div>
-  );
+  )
 }

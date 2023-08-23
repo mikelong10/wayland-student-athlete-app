@@ -13,7 +13,7 @@ interface InteractiveButtonProps extends ButtonProps {
 
 export default function InteractiveButton({
   className,
-  variant,
+  variant = "default",
   size,
   asChild = false,
   idScrollToElement,

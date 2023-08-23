@@ -1,27 +1,32 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { HTMLAttributes } from "react";
-import { User } from "next-auth";
-import { signOut } from "next-auth/react";
-
-import { LightDarkModeToggle } from "@components/LightDarkModeToggle";
-import { Button } from "@components/ui/button";
+import { Dispatch, HTMLAttributes, SetStateAction } from "react"
+import Link from "next/link"
+import { LightDarkModeToggle } from "@components/LightDarkModeToggle"
+import { Button } from "@components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@components/ui/dropdown-menu";
-import { Separator } from "@components/ui/separator";
-import { UserAvatar } from "@components/UserAvatar";
+} from "@components/ui/dropdown-menu"
+import InteractiveButton from "@components/ui/InteractiveButton"
+import { Separator } from "@components/ui/separator"
+import { UserAvatar } from "@components/UserAvatar"
+import { CheckSquare, LogOut, User as UserIcon } from "lucide-react"
+import { User } from "next-auth"
+import { signOut } from "next-auth/react"
 
 interface UserAccountNavProps extends HTMLAttributes<HTMLDivElement> {
-  user?: Pick<User, "name" | "image" | "email">;
+  user?: Pick<User, "name" | "image" | "email">
+  closeMobileNav: () => void
 }
 
-export default function UserAccountNav({ user }: UserAccountNavProps) {
+export default function UserAccountNav({
+  user,
+  closeMobileNav,
+}: UserAccountNavProps) {
   return (
     <div className="flex items-center gap-3">
       <LightDarkModeToggle />
@@ -29,10 +34,10 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
       <div className="flex gap-2">
         {!user ? (
           <div className="flex gap-2">
-            <Link href={"/login"}>
+            <Link href={"/login"} onClick={() => closeMobileNav()}>
               <Button>Sign in</Button>
             </Link>
-            <Link href={"/register"}>
+            <Link href={"/register"} onClick={() => closeMobileNav()}>
               <Button variant={"outline"}>Sign up</Button>
             </Link>
           </div>
@@ -57,20 +62,27 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
               </div>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/profile">Profile</Link>
+                <Link href="/profile" onClick={() => closeMobileNav()}>
+                  <UserIcon className="mr-2 h-4 w-4" />
+                  Profile
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/jobs">Jobs</Link>
+                <Link href="/jobs" onClick={() => closeMobileNav()}>
+                  <CheckSquare className="mr-2 h-4 w-4" />
+                  Jobs
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onSelect={(event) => {
-                  event.preventDefault();
+                  event.preventDefault()
                   signOut({
                     callbackUrl: `/`,
-                  });
+                  })
                 }}
               >
+                <LogOut className="mr-2 h-4 w-4" />
                 Sign out
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -78,5 +90,5 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
         )}
       </div>
     </div>
-  );
+  )
 }

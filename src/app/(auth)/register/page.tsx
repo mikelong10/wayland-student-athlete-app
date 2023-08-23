@@ -37,7 +37,7 @@ export default async function RegisterPage() {
           </p>
         </div>
         <UserAuthForm />
-        <div className="text-muted-foreground flex flex-col px-8 text-center text-sm">
+        <div className="text-muted-foreground flex flex-col px-4 text-center text-sm">
           <p>By clicking continue, you agree to our </p>
           <p>
             <Link
@@ -56,7 +56,7 @@ export default async function RegisterPage() {
             .
           </p>
         </div>
-        <p className="text-muted-foreground px-8 text-center text-sm">
+        <p className="text-muted-foreground px-4 text-center text-sm">
           <Link
             href="/login"
             className="hover:text-brand underline underline-offset-4"
