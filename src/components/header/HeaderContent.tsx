@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { ActiveUser, HeaderNavLink } from "@lib/types";
 import { cn } from "@lib/utils";
+import logo from "../../../public/logo.png";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
@@ -69,14 +71,11 @@ export default function HeaderContent({ user }: { user?: ActiveUser }) {
     <header
       className={cn(
         "fixed left-0 top-0 flex w-full items-center justify-between gap-4 bg-transparent px-6 py-4 transition-all duration-500 md:px-10 lg:gap-8 lg:px-16 xl:px-24",
-        scrolled && "bg-background shadow-background-less py-3 shadow-lg"
+        scrolled && "bg-background shadow-background-less py-2 shadow-lg"
       )}
     >
-      <Link
-        href={"/"}
-        className="text-foreground hover:text-foreground-less scroll-m-20 text-3xl font-extrabold tracking-tight transition-all md:text-4xl"
-      >
-        WSA
+      <Link href={"/"} className="hover:animate-pulse">
+        <Image src={logo} alt={"WSA logo"} width={40} height={40} />
       </Link>
       <MobileNav user={user} headerNavLinks={headerNavLinks} />
       <DesktopNav user={user} headerNavLinks={headerNavLinks} />

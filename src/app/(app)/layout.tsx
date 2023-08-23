@@ -1,3 +1,4 @@
+import { Footer } from "@components/footer/Footer";
 import Header from "@components/header/Header";
 
 interface AppLayoutProps {
@@ -9,6 +10,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <div className="flex min-h-screen w-full flex-col items-center">
       <Header />
       {children}
+      <Footer />
     </div>
   );
 }

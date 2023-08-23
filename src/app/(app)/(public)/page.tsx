@@ -7,7 +7,10 @@ import InteractiveButton from "@components/ui/InteractiveButton";
 export default function Home() {
   return (
     <main className="flex w-full flex-col items-center justify-center">
-      <section className="from-secondary to-background dark:to-background flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-bl to-70% px-6 dark:from-stone-900 md:px-10 lg:px-16 xl:px-24">
+      <section
+        id="landing-home"
+        className="from-secondary to-background dark:to-background flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-bl to-70% px-6 dark:from-stone-900 md:px-10 lg:px-16 xl:px-24"
+      >
         <div className="text-foreground xs:hidden scroll-m-20 text-4xl font-extrabold tracking-tight">
           <h1>Wayland</h1>
           <h1>Student-Athlete</h1>
