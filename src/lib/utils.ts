@@ -10,11 +10,13 @@ export function formatDate(input: Date): string {
     month: "long",
     day: "numeric",
     year: "numeric",
+    timeZone: "America/New_York",
   });
   const time = input.toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "numeric",
     hour12: true,
+    timeZone: "America/New_York",
   });
   return `${date} ~ ${time}`;
 }
