@@ -45,9 +45,7 @@ export default function RequestJobForm({
   });
 
   async function onSubmit(values: RequestJobFormValues) {
-    console.log(values);
-
-    const response = await fetch("/api/jobs", {
+    const createJobResponse = await fetch("/api/jobs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +53,16 @@ export default function RequestJobForm({
       body: JSON.stringify(values),
     });
 
-    console.log("Job created response:", response);
+    const createJobResponseBody = await createJobResponse.json();
+
+    await fetch("/api/twilio", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(createJobResponseBody),
+    });
+
     setRequestSent(true);
   }
 

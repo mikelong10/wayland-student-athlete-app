@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
 import { requestJobFormSchema } from "@lib/types";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
     const user = await getCurrentUser();
 
@@ -17,7 +17,10 @@ export async function POST(req: NextRequest) {
         data: body,
       });
       console.log("Created new job WITHOUT user:", newJob);
-      return NextResponse.json(newJob);
+      return new Response(JSON.stringify(newJob), {
+        status: StatusCodes.CREATED,
+        statusText: ReasonPhrases.CREATED,
+      });
     }
     const newJob = await db.job.create({
       data: {
@@ -26,12 +29,21 @@ export async function POST(req: NextRequest) {
       },
     });
     console.log("Created new job WITH user:", newJob);
-    return NextResponse.json(newJob);
+    return new Response(JSON.stringify(newJob), {
+      status: StatusCodes.CREATED,
+      statusText: ReasonPhrases.CREATED,
+    });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify(error.issues), { status: 422 });
+      return new Response(JSON.stringify(error.issues), {
+        status: StatusCodes.UNPROCESSABLE_ENTITY,
+        statusText: ReasonPhrases.UNPROCESSABLE_ENTITY,
+      });
     }
 
-    return new Response(null, { status: 500 });
+    return new Response(null, {
+      status: StatusCodes.INTERNAL_SERVER_ERROR,
+      statusText: ReasonPhrases.INTERNAL_SERVER_ERROR,
+    });
   }
 }
