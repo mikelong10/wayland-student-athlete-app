@@ -4,7 +4,7 @@ import { z } from "zod";
 import { buttonVariants } from "@components/ui/button";
 
 export type ActiveUser = {
-  id?: number | undefined;
+  id?: string | undefined;
   email?: string | null | undefined;
   name?: string | null | undefined;
   image?: string | null | undefined;
