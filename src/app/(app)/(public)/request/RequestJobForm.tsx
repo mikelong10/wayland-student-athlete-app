@@ -19,6 +19,7 @@ import {
 import { Input } from "@components/ui/input";
 import { Separator } from "@components/ui/separator";
 import { Textarea } from "@components/ui/textarea";
+import { useToast } from "@components/ui/use-toast";
 
 type RequestJobFormValues = z.infer<typeof requestJobFormSchema>;
 
@@ -27,6 +28,8 @@ export default function RequestJobForm({
 }: {
   setRequestSent: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { toast } = useToast();
+
   const form = useForm<RequestJobFormValues>({
     resolver: zodResolver(requestJobFormSchema),
     defaultValues: {
@@ -63,6 +66,10 @@ export default function RequestJobForm({
       body: JSON.stringify(createJobResponseBody),
     });
 
+    toast({
+      title: "Thank you!",
+      description: "Your job request was successfully submitted",
+    });
     setRequestSent(true);
   }
 

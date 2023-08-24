@@ -68,7 +68,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           variant="outline"
           onClick={() => {
             setIsGoogleLoading(true);
-            signIn("google");
+            signIn("google", { callbackUrl: "/jobs" });
           }}
           disabled={isLoading || isGoogleLoading}
         >
@@ -83,7 +83,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           variant="outline"
           onClick={() => {
             setIsFacebookLoading(true);
-            signIn("facebook");
+            signIn("facebook", { callbackUrl: "/jobs" });
           }}
           disabled={isLoading || isFacebookLoading}
         >

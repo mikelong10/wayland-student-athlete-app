@@ -1,10 +1,13 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Job } from "@prisma/client";
+import { MoveRight } from "lucide-react";
 
 import { authOptions } from "@lib/auth";
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
 import JobCard from "@components/JobCard";
+import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
@@ -54,6 +57,59 @@ export default async function JobDashboard() {
       createdAt: "desc",
     },
   });
+  const jobsTabs = [
+    {
+      value: "all",
+      description: (
+        <p className="text-sm tracking-tight">
+          You&apos;ve requested{" "}
+          <span className="font-bold">{allJobs.length}</span>{" "}
+          {allJobs.length === 1 ? "job" : "jobs"} with us so far.{" "}
+          {allJobs.length > 0 && "Thanks for doing business with us!"}
+        </p>
+      ),
+      jobs: allJobs,
+    },
+    {
+      value: "to-do",
+      description: (
+        <p className="text-sm tracking-tight">
+          You have <span className="font-bold">{toDoJobs.length}</span>{" "}
+          {toDoJobs.length === 1 ? "job" : "jobs"} that we haven&apos;t gotten
+          to yet.{" "}
+          {toDoJobs.length > 0 &&
+            ` We should be getting to ${
+              toDoJobs.length === 1 ? "it" : "these"
+            } shortly!`}
+        </p>
+      ),
+      jobs: toDoJobs,
+    },
+    {
+      value: "in-progress",
+      description: (
+        <p className="text-sm tracking-tight">
+          You have <span className="font-bold">{inProgressJobs.length}</span>{" "}
+          {inProgressJobs.length === 1 ? "job" : "jobs"} that we&apos;re
+          currently working with you on.{" "}
+          {inProgressJobs.length > 0 && "Looking forward to helping you out!"}
+        </p>
+      ),
+      jobs: inProgressJobs,
+    },
+    {
+      value: "done",
+      description: (
+        <p className="text-sm tracking-tight">
+          You have <span className="font-bold">{doneJobs.length}</span>{" "}
+          {doneJobs.length === 1 ? "job" : "jobs"} that you&apos;ve requested
+          and we&apos;ve completed.{" "}
+          {inProgressJobs.length > 0 && "Thanks for reaching out to us!"}
+        </p>
+      ),
+      jobs: doneJobs,
+    },
+  ];
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center">
@@ -76,45 +132,32 @@ export default async function JobDashboard() {
                 Done
               </TabsTrigger>
             </TabsList>
-            <TabsContent value="all" className="flex flex-col gap-4">
-              <p className="text-sm tracking-tight">
-                These are <span className="italic">all</span> of the jobs
-                you&apos;ve requested. Thanks for doing business with us!
-              </p>
-              {allJobs.map((job) => (
-                <JobCard key={job.id} job={job} />
-              ))}
-            </TabsContent>
-            <TabsContent value="to-do" className="flex flex-col gap-4">
-              <p className="text-sm tracking-tight">
-                These are the jobs you&apos;ve requested{" "}
-                <span className="italic">recently</span>. We should be getting
-                to these shortly!
-              </p>
-              {toDoJobs.map((job) => (
-                <JobCard key={job.id} job={job} />
-              ))}
-            </TabsContent>
-            <TabsContent value="in-progress" className="flex flex-col gap-4">
-              <p className="text-sm tracking-tight">
-                These are the jobs we&apos;re{" "}
-                <span className="italic">currently</span> working with you on.
-                Looking forward to helping you out!
-              </p>
-              {inProgressJobs.map((job) => (
-                <JobCard key={job.id} job={job} />
-              ))}
-            </TabsContent>
-            <TabsContent value="done" className="flex flex-col gap-4">
-              <p className="text-sm tracking-tight">
-                These are the jobs you&apos;ve requested and we&apos;ve{" "}
-                <span className="italic">completed</span>. Thanks for reaching
-                out to us!
-              </p>
-              {doneJobs.map((job) => (
-                <JobCard key={job.id} job={job} />
-              ))}
-            </TabsContent>
+            {jobsTabs.map((tabContent) => (
+              <TabsContent
+                key={tabContent.value}
+                value={tabContent.value}
+                className="flex flex-col gap-4"
+              >
+                {tabContent.description}
+                {tabContent.jobs.length ? (
+                  tabContent.jobs.map((job) => (
+                    <JobCard key={job.id} job={job} />
+                  ))
+                ) : (
+                  <div className="flex w-full items-center justify-center">
+                    <Link href="/request">
+                      <Button
+                        variant={"accent"}
+                        className="flex w-40 items-center gap-2"
+                      >
+                        Request a job
+                        <MoveRight />
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </TabsContent>
+            ))}
           </Tabs>
         </div>
       </section>
