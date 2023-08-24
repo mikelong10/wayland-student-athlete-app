@@ -34,7 +34,7 @@ export default function JobCard({ job }: JobCardProps) {
       </CardContent>
       <CardFooter>
         <p className="text-muted-foreground text-xs">
-          @ {formatDate(job.createdAt)}
+          Requested @ {formatDate(job.createdAt)}
         </p>
       </CardFooter>
     </Card>
