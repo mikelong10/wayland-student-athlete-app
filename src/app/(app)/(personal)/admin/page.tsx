@@ -1,4 +1,5 @@
 import { notFound, redirect } from "next/navigation";
+import { Role } from "@prisma/client";
 
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
@@ -16,7 +17,7 @@ export default async function AdminDashboard() {
   if (!user) {
     redirect("/login");
   }
-  if (user.role !== "ADMIN") {
+  if (user.role !== Role.ADMIN) {
     notFound();
   }
 
@@ -27,7 +28,7 @@ export default async function AdminDashboard() {
   });
   const citizens = await db.user.findMany({
     where: {
-      role: "CITIZEN",
+      role: Role.CITIZEN,
     },
     orderBy: {
       createdAt: "desc",
@@ -37,10 +38,10 @@ export default async function AdminDashboard() {
     where: {
       OR: [
         {
-          role: "STUDENTATHLETE",
+          role: Role.STUDENTATHLETE,
         },
 
-        { role: "ADMIN" },
+        { role: Role.ADMIN },
       ],
     },
     orderBy: {
@@ -65,8 +66,8 @@ export default async function AdminDashboard() {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center">
-      <section className="flex h-full w-full flex-col px-6 py-20 sm:max-w-[600px] lg:max-w-[800px]">
-        {user.role === "ADMIN" ? (
+      <section className="xs:max-w-[480px] flex h-full w-full flex-col px-6 py-20 sm:max-w-[600px] md:max-w-[768px] md:px-10 lg:max-w-[960px] lg:px-16 xl:max-w-[1152px] xl:px-24">
+        {user.role === Role.ADMIN ? (
           <div className="flex flex-col gap-6">
             <h1 className="text-4xl font-extrabold tracking-tight">
               Manage users
@@ -88,7 +89,7 @@ export default async function AdminDashboard() {
                 <TabsContent
                   key={tabContent.value}
                   value={tabContent.value}
-                  className="flex flex-col gap-4"
+                  className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"
                 >
                   {tabContent.users.map((user) => (
                     <UserCard key={user.id} user={user} />

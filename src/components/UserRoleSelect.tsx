@@ -38,35 +38,45 @@ export default function UserRoleSelect({
   const [userRoleChangeTo, setUserRoleChangeTo] = useState<Role>();
 
   async function onSelectChangeConfirm() {
-    setIsSavingUserRoleUpdate(true);
+    if (userRoleChangeTo && Object.values(Role).includes(userRoleChangeTo)) {
+      setIsSavingUserRoleUpdate(true);
 
-    const response = await fetch(`/api/users/${user.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        role: userRoleChangeTo,
-      }),
-    });
+      const response = await fetch(`/api/users/${user.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          role: userRoleChangeTo,
+        }),
+      });
 
-    if (!response?.ok) {
-      return toast({
-        title: "Something went wrong.",
-        description: `${user.name}'s user role was not updated. Please try again.`,
-        variant: "destructive",
+      if (!response?.ok) {
+        setIsSavingUserRoleUpdate(false);
+        const responseMessage = await response.text();
+        return toast({
+          title: "Something went wrong.",
+          description:
+            responseMessage ??
+            `${user.name}'s user role was not updated. Please try again.`,
+          variant: "destructive",
+        });
+      }
+
+      toast({
+        title: "Successful user update",
+        description: `${user.name}'s user role was updated from ${
+          UserRoleText[user.role]
+        } to ${UserRoleText[userRoleChangeTo]}.`,
+      });
+
+      router.refresh();
+      setIsSavingUserRoleUpdate(false);
+    } else {
+      toast({
+        description: "Invalid user role update. Please try again.",
       });
     }
-
-    toast({
-      title: "Successful user update",
-      description: `${user.name}'s user role was updated from ${
-        UserRoleText[user.role]
-      } to ${UserRoleText[userRoleChangeTo as Role]}.`,
-    });
-
-    router.refresh();
-    setIsSavingUserRoleUpdate(false);
   }
 
   return (
@@ -78,10 +88,10 @@ export default function UserRoleSelect({
           setAlertDialogOpen(true);
         }}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-44">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="w-44">
           <SelectItem value={Role.CITIZEN}>
             {UserRoleText[Role.CITIZEN]}
           </SelectItem>

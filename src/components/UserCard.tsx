@@ -31,17 +31,17 @@ export default function UserCard({ user }: UserCardProps) {
   const [isSavingUserRoleUpdate, setIsSavingUserRoleUpdate] = useState(false);
 
   return (
-    <Card key={user.id} className="flex flex-col gap-4">
+    <Card key={user.id} className="flex h-56 flex-col justify-between">
       {isSavingUserRoleUpdate ? (
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        <Loader2 className="m-auto h-8 w-8 animate-spin" />
       ) : (
         <>
           <CardHeader className="flex flex-col gap-2">
             <Badge
               variant={
-                user.role === "ADMIN"
+                user.role === Role.ADMIN
                   ? "default"
-                  : user.role === "STUDENTATHLETE"
+                  : user.role === Role.STUDENTATHLETE
                   ? "secondary"
                   : "accent"
               }

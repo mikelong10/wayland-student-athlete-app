@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { HTMLAttributes } from "react";
-import { User } from "@prisma/client";
+import { Role, User } from "@prisma/client";
 import { CheckSquare, LogOut, Settings, User as UserIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
 
@@ -73,7 +73,7 @@ export default function UserAccountNav({
                   Jobs
                 </Link>
               </DropdownMenuItem>
-              {user.role === "ADMIN" && (
+              {user.role === Role.ADMIN && (
                 <>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>

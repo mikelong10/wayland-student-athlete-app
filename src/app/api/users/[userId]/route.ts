@@ -23,7 +23,7 @@ export async function PATCH(
     const { params } = routeContextSchema.parse(context);
 
     const user = await getCurrentUser();
-    if (!user || user.role !== "ADMIN") {
+    if (!user || user.role !== Role.ADMIN) {
       return new Response(null, {
         status: StatusCodes.FORBIDDEN,
         statusText: ReasonPhrases.FORBIDDEN,
@@ -33,18 +33,54 @@ export async function PATCH(
     const body = await req.json();
     const payload = userRoleSchema.parse(body);
 
-    const updatedUser = await db.user.update({
+    const userToUpdate = await db.user.findUnique({
       where: {
         id: params.userId,
       },
-      data: {
-        role: payload.role,
+    });
+    const allOtherAdmins = await db.user.findMany({
+      where: {
+        role: Role.ADMIN,
+        NOT: {
+          id: {
+            equals: user.id,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
 
-    return new Response(JSON.stringify(updatedUser), {
-      status: StatusCodes.OK,
-    });
+    if (
+      userToUpdate &&
+      !(
+        allOtherAdmins.length < 1 &&
+        userToUpdate.role === Role.ADMIN &&
+        payload.role !== Role.ADMIN
+      )
+    ) {
+      const updatedUser = await db.user.update({
+        where: {
+          id: params.userId,
+        },
+        data: {
+          role: payload.role,
+        },
+      });
+
+      return new Response(JSON.stringify(updatedUser), {
+        status: StatusCodes.OK,
+      });
+    } else {
+      return new Response(
+        "Invalid request. You are currently the only admin, and there must be at least 1 admin remaining.",
+        {
+          status: StatusCodes.METHOD_NOT_ALLOWED,
+          statusText: ReasonPhrases.METHOD_NOT_ALLOWED,
+        }
+      );
+    }
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {
