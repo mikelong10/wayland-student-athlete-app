@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { HTMLAttributes } from "react";
-import { CheckSquare, LogOut, User as UserIcon } from "lucide-react";
+import { CheckSquare, LogOut, Settings, User as UserIcon } from "lucide-react";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
 
@@ -71,6 +71,13 @@ export default function UserAccountNav({
                 <Link href="/jobs" onClick={() => closeMobileNav()}>
                   <CheckSquare className="mr-2 h-4 w-4" />
                   Jobs
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/admin" onClick={() => closeMobileNav()}>
+                  <Settings className="mr-2 h-4 w-4" />
+                  Admin
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />

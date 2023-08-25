@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const requestedJobBody = requestJobFormSchema.parse(json);
 
     console.log("TWILIO REQUEST BODY", requestedJobBody);
-    const message = `\nNEW JOB ALERT!\nFrom: ${requestedJobBody.adultFirstName} ${requestedJobBody.adultLastName}:\nDescription: ${requestedJobBody.description}\nContact: ${requestedJobBody.contact}`;
+    const message = `\nNEW JOB ALERT!\nFrom: ${requestedJobBody.adultFirstName} ${requestedJobBody.adultLastName}\nDescription: ${requestedJobBody.description}\nContact: ${requestedJobBody.contact}`;
 
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
     const authToken = process.env.TWILIO_AUTH_TOKEN;

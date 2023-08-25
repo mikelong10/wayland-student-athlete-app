@@ -47,6 +47,8 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
+  createdAt         DateTime @default(now()) @map(name: "created_at")
+  updatedAt         DateTime @updatedAt @map(name: "updated_at")
   name          String?
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
@@ -54,7 +56,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  role          Role      @default(USER)
+  role          Role      @default(CITIZEN)
   jobs          Job[]
 
   @@map("users")
@@ -72,14 +74,14 @@ model VerificationToken {
 model Job {
   id              Int       @id @default(autoincrement())
   status          Status    @default(TODO)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  createdAt         DateTime @default(now()) @map(name: "created_at")
+  updatedAt         DateTime @updatedAt @map(name: "updated_at")
   requestor       User?      @relation(fields: [requestorId], references: [id])
-  requestorId     String?
-  adultFirstName  String
-  adultLastName   String
-  childFirstName  String?
-  childLastName   String?
+  requestorId     String?   @map(name: "requestor_id")
+  adultFirstName  String   @map(name: "adult_first_name")
+  adultLastName   String  @map(name: "adult_last_name")
+  childFirstName  String? @map(name: "child_first_name")
+  childLastName   String? @map(name: "child_last_name")
   description     String    @db.Text
   location        String    @db.Text
   time            String    @db.Text
@@ -101,5 +103,5 @@ enum Status {
 
 enum Role {
   STUDENTATHLETE
-  USER
+  CITIZEN
 }

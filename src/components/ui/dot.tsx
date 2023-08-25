@@ -1,8 +1,4 @@
-export enum Status {
-  TODO = "To-do",
-  INPROGRESS = "In progress",
-  DONE = "Done",
-}
+import { Status } from "@prisma/client";
 
 interface DotProps extends React.HTMLAttributes<HTMLDivElement> {
   status: Status;

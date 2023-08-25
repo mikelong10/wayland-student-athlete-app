@@ -1,4 +1,4 @@
-import { Job } from "@prisma/client";
+import { Job, Status } from "@prisma/client";
 
 import { formatDate } from "@lib/utils";
 import { Badge } from "@components/ui/badge";
@@ -10,11 +10,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@components/ui/card";
-import Dot, { Status } from "@components/ui/dot";
+import Dot from "@components/ui/dot";
 
 interface JobCardProps {
   job: Job;
 }
+
+const JobStatusText: Record<Status, string> = {
+  TODO: "To-do",
+  INPROGRESS: "In progress",
+  DONE: "Done",
+};
 
 export default function JobCard({ job }: JobCardProps) {
   return (
@@ -22,7 +28,7 @@ export default function JobCard({ job }: JobCardProps) {
       <CardHeader className="flex flex-col gap-2">
         <Badge variant={Status[job.status]} className="w-fit gap-2">
           <Dot status={Status[job.status]} />
-          <p className="font-normal">{Status[job.status]}</p>
+          <p className="font-normal">{JobStatusText[job.status]}</p>
         </Badge>
         <CardTitle>{`${job.adultFirstName} ${job.adultLastName}`}</CardTitle>
         <CardDescription className="border-l-2 pl-2 text-xs">
