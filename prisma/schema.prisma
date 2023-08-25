@@ -100,8 +100,8 @@ enum Status {
   DONE
 }
 
-
 enum Role {
+  ADMIN
   STUDENTATHLETE
   CITIZEN
 }
