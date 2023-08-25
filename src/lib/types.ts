@@ -1,13 +1,16 @@
+import { Role } from "@prisma/client";
 import { VariantProps } from "class-variance-authority";
 import { z } from "zod";
 
 import { buttonVariants } from "@components/ui/button";
 
 export type ActiveUser = {
-  id?: string | undefined;
-  email?: string | null | undefined;
-  name?: string | null | undefined;
-  image?: string | null | undefined;
+  id?: string;
+  name?: string | null;
+  image?: string | null;
+  email?: string | null;
+  emailVerified?: Date | null;
+  role?: Role;
 };
 
 export interface HeaderNavLink extends VariantProps<typeof buttonVariants> {

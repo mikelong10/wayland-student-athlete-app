@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { Job } from "@prisma/client";
 import { MoveRight } from "lucide-react";
 
-import { authOptions } from "@lib/auth";
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
 import JobCard from "@components/JobCard";
@@ -18,45 +16,49 @@ export const metadata = {
 export default async function JobDashboard() {
   const user = await getCurrentUser();
 
-  if (!user) {
-    redirect(authOptions?.pages?.signIn || "/login");
+  let allJobs: Job[] = [];
+  let toDoJobs: Job[] = [];
+  let inProgressJobs: Job[] = [];
+  let doneJobs: Job[] = [];
+
+  if (user) {
+    allJobs = await db.job.findMany({
+      where: {
+        requestorId: user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    toDoJobs = await db.job.findMany({
+      where: {
+        requestorId: user.id,
+        status: "TODO",
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    inProgressJobs = await db.job.findMany({
+      where: {
+        requestorId: user.id,
+        status: "INPROGRESS",
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    doneJobs = await db.job.findMany({
+      where: {
+        requestorId: user.id,
+        status: "DONE",
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
   }
 
-  const allJobs: Job[] = await db.job.findMany({
-    where: {
-      requestorId: user.id,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  const toDoJobs: Job[] = await db.job.findMany({
-    where: {
-      requestorId: user.id,
-      status: "TODO",
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  const inProgressJobs: Job[] = await db.job.findMany({
-    where: {
-      requestorId: user.id,
-      status: "INPROGRESS",
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  const doneJobs: Job[] = await db.job.findMany({
-    where: {
-      requestorId: user.id,
-      status: "DONE",
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
   const jobsTabs = [
     {
       value: "all",
