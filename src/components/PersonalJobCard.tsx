@@ -12,17 +12,17 @@ import {
 } from "@components/ui/card";
 import Dot from "@components/ui/dot";
 
-interface JobCardProps {
+export interface JobCardProps {
   job: Job;
 }
 
-const JobStatusText: Record<Status, string> = {
+export const JobStatusText: Record<Status, string> = {
   TODO: "To-do",
   INPROGRESS: "In progress",
   DONE: "Done",
 };
 
-export default function JobCard({ job }: JobCardProps) {
+export default function PersonalJobCard({ job }: JobCardProps) {
   return (
     <Card key={job.id} className="flex flex-col gap-4">
       <CardHeader className="flex flex-col gap-2">

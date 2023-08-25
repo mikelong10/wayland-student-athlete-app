@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { HTMLAttributes } from "react";
 import { Role, User } from "@prisma/client";
-import { CheckSquare, LogOut, Settings, User as UserIcon } from "lucide-react";
+import {
+  CheckSquare,
+  KanbanSquare,
+  LogOut,
+  UserCircle2,
+  Users,
+} from "lucide-react";
 import { signOut } from "next-auth/react";
 
 import { LightDarkModeToggle } from "@components/LightDarkModeToggle";
@@ -12,6 +18,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
@@ -61,25 +68,36 @@ export default function UserAccountNav({
                 </div>
               </div>
               <DropdownMenuSeparator />
+              <DropdownMenuLabel>Personal</DropdownMenuLabel>
               <DropdownMenuItem asChild>
                 <Link href="/profile" onClick={() => closeMobileNav()}>
-                  <UserIcon className="mr-2 h-4 w-4" />
+                  <UserCircle2 className="mr-2 h-4 w-4" />
                   Profile
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/jobs" onClick={() => closeMobileNav()}>
                   <CheckSquare className="mr-2 h-4 w-4" />
-                  Jobs
+                  My jobs
                 </Link>
               </DropdownMenuItem>
-              {user.role === Role.ADMIN && (
+              {(user.role === Role.ADMIN ||
+                user.role === Role.STUDENTATHLETE) && (
                 <>
                   <DropdownMenuSeparator />
+                  <DropdownMenuLabel>Business</DropdownMenuLabel>
+                  {user.role === Role.ADMIN && (
+                    <DropdownMenuItem asChild>
+                      <Link href="/admin" onClick={() => closeMobileNav()}>
+                        <Users className="mr-2 h-4 w-4" />
+                        Users
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuItem asChild>
-                    <Link href="/admin" onClick={() => closeMobileNav()}>
-                      <Settings className="mr-2 h-4 w-4" />
-                      Admin
+                    <Link href="/dashboard" onClick={() => closeMobileNav()}>
+                      <KanbanSquare className="mr-2 h-4 w-4" />
+                      Dashboard
                     </Link>
                   </DropdownMenuItem>
                 </>

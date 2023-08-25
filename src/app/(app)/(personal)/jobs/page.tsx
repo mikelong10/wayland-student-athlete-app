@@ -4,16 +4,16 @@ import { MoveRight } from "lucide-react";
 
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
-import JobCard from "@components/JobCard";
+import PersonalJobCard from "@components/PersonalJobCard";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
 export const metadata = {
-  title: "Dashboard",
+  title: "My jobs",
 };
 
-export default async function JobDashboard() {
+export default async function MyJobs() {
   const user = await getCurrentUser();
 
   let allJobs: Job[] = [];
@@ -61,18 +61,6 @@ export default async function JobDashboard() {
 
   const jobsTabs = [
     {
-      value: "all",
-      description: (
-        <p className="text-sm tracking-tight">
-          You&apos;ve requested{" "}
-          <span className="font-bold">{allJobs.length}</span>{" "}
-          {allJobs.length === 1 ? "job" : "jobs"} with us so far.{" "}
-          {allJobs.length > 0 && "Thanks for doing business with us!"}
-        </p>
-      ),
-      jobs: allJobs,
-    },
-    {
       value: "to-do",
       description: (
         <p className="text-sm tracking-tight">
@@ -111,6 +99,18 @@ export default async function JobDashboard() {
       ),
       jobs: doneJobs,
     },
+    {
+      value: "all",
+      description: (
+        <p className="text-sm tracking-tight">
+          You&apos;ve requested{" "}
+          <span className="font-bold">{allJobs.length}</span>{" "}
+          {allJobs.length === 1 ? "job" : "jobs"} with us so far.{" "}
+          {allJobs.length > 0 && "Thanks for doing business with us!"}
+        </p>
+      ),
+      jobs: allJobs,
+    },
   ];
 
   return (
@@ -119,11 +119,8 @@ export default async function JobDashboard() {
         <div className="flex flex-col gap-6">
           <h1 className="text-4xl font-extrabold tracking-tight">My jobs</h1>
           <Separator />
-          <Tabs defaultValue="all" className="w-full">
+          <Tabs defaultValue="to-do" className="w-full">
             <TabsList className="mb-4 flex w-full">
-              <TabsTrigger value="all" className="flex-1">
-                All
-              </TabsTrigger>
               <TabsTrigger value="to-do" className="flex-1">
                 To-do
               </TabsTrigger>
@@ -132,6 +129,9 @@ export default async function JobDashboard() {
               </TabsTrigger>
               <TabsTrigger value="done" className="flex-1">
                 Done
+              </TabsTrigger>
+              <TabsTrigger value="all" className="flex-1">
+                All
               </TabsTrigger>
             </TabsList>
             {jobsTabs.map((tabContent) => (
@@ -143,7 +143,7 @@ export default async function JobDashboard() {
                 {tabContent.description}
                 {tabContent.jobs.length ? (
                   tabContent.jobs.map((job) => (
-                    <JobCard key={job.id} job={job} />
+                    <PersonalJobCard key={job.id} job={job} />
                   ))
                 ) : (
                   <div className="flex w-full items-center justify-center">
