@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth/next";
+import { User } from "@prisma/client";
 
 import { authOptions } from "@lib/auth";
 import { db } from "./db";
-import { ActiveUser } from "./types";
 
-export async function getCurrentUser(): Promise<ActiveUser | undefined> {
+export async function getCurrentUser(): Promise<User | undefined> {
   const session = await getServerSession(authOptions);
   const userFromNextAuth = session?.user;
   console.log("userFromNextAuth", userFromNextAuth);
@@ -16,6 +16,8 @@ export async function getCurrentUser(): Promise<ActiveUser | undefined> {
       },
     });
     console.log("userFromDb", userFromDb);
-    return { ...userFromNextAuth, ...userFromDb };
+    if (userFromDb) {
+      return { ...userFromNextAuth, ...userFromDb };
+    }
   }
 }

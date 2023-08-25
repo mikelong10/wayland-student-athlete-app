@@ -4,15 +4,6 @@ import { z } from "zod";
 
 import { buttonVariants } from "@components/ui/button";
 
-export type ActiveUser = {
-  id?: string;
-  name?: string | null;
-  image?: string | null;
-  email?: string | null;
-  emailVerified?: Date | null;
-  role?: Role;
-};
-
 export interface HeaderNavLink extends VariantProps<typeof buttonVariants> {
   url: string;
   text: string;

@@ -1,9 +1,10 @@
 import { getCurrentUser } from "@lib/session";
-import { ActiveUser, HeaderNavLink } from "@lib/types";
+import { HeaderNavLink } from "@lib/types";
 import HeaderContent from "./HeaderContent";
+import { User } from "@prisma/client";
 
 export interface NavProps {
-  user?: ActiveUser;
+  user?: User;
   headerNavLinks: HeaderNavLink[];
 }
 

@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { ActiveUser, HeaderNavLink } from "@lib/types";
+import { HeaderNavLink } from "@lib/types";
 import { cn } from "@lib/utils";
 import logo from "../../../public/logo.png";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
+import { User } from "@prisma/client";
 
 const headerNavLinks: HeaderNavLink[] = [
   {
@@ -49,7 +50,7 @@ const headerNavLinks: HeaderNavLink[] = [
   },
 ];
 
-export default function HeaderContent({ user }: { user?: ActiveUser }) {
+export default function HeaderContent({ user }: { user?: User }) {
   const [scrolled, setScrolled] = useState(false);
 
   const handleScroll = () => {
