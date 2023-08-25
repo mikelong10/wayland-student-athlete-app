@@ -40,6 +40,7 @@ export default function RequestJobForm({
       description: "",
       location: "",
       time: "",
+      estimate: "",
       contact: "",
       learn: "",
       special: "",
@@ -48,29 +49,42 @@ export default function RequestJobForm({
   });
 
   async function onSubmit(values: RequestJobFormValues) {
-    const createJobResponse = await fetch("/api/jobs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-
-    const createJobResponseBody = await createJobResponse.json();
-
-    await fetch("/api/twilio", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(createJobResponseBody),
-    });
-
     toast({
-      title: "Thank you!",
-      description: "Your job request was successfully submitted",
+      title: "Sending your job request...",
+      description: "Hope you're having a great day today!",
     });
-    setRequestSent(true);
+
+    try {
+      const createJobResponse = await fetch("/api/jobs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const createJobResponseBody = await createJobResponse.json();
+
+      await fetch("/api/twilio", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(createJobResponseBody),
+      });
+
+      toast({
+        title: "Thank you!",
+        description: "Your job request was successfully submitted",
+      });
+      setRequestSent(true);
+    } catch {
+      toast({
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request. Please try again.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -203,6 +217,26 @@ export default function RequestJobForm({
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="estimate"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  How long do you think the job will take? *
+                </FormLabel>
+                <FormDescription>
+                  {
+                    "Please provide your best estimate, but don't worry about it too much!"
+                  }
+                </FormDescription>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
         <Separator className="bg-secondary rounded-full" />
         <div className="flex flex-col gap-4">
@@ -228,7 +262,7 @@ export default function RequestJobForm({
             name="learn"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>How did you hear about us? *</FormLabel>
+                <FormLabel>How did you hear about us?</FormLabel>
                 <FormDescription>{"We would love to know :)"}</FormDescription>
                 <FormControl>
                   <Input {...field} />

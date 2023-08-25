@@ -39,39 +39,48 @@ export default function UserRoleSelect({
 
   async function onSelectChangeConfirm() {
     if (userRoleChangeTo && Object.values(Role).includes(userRoleChangeTo)) {
-      setIsSavingUserRoleUpdate(true);
+      try {
+        setIsSavingUserRoleUpdate(true);
 
-      const response = await fetch(`/api/users/${user.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          role: userRoleChangeTo,
-        }),
-      });
+        const response = await fetch(`/api/users/${user.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            role: userRoleChangeTo,
+          }),
+        });
 
-      if (!response?.ok) {
+        if (!response?.ok) {
+          setIsSavingUserRoleUpdate(false);
+          const responseMessage = await response.text();
+          return toast({
+            title: "Something went wrong.",
+            description:
+              responseMessage ??
+              `${user.name}'s user role was not updated. Please try again.`,
+            variant: "destructive",
+          });
+        }
+
+        toast({
+          title: "Successful user update!",
+          description: `${user.name}'s user role was updated from ${
+            UserRoleText[user.role]
+          } to ${UserRoleText[userRoleChangeTo]}.`,
+        });
+
+        router.refresh();
         setIsSavingUserRoleUpdate(false);
-        const responseMessage = await response.text();
-        return toast({
-          title: "Something went wrong.",
+      } catch {
+        toast({
+          title: "Uh oh! Something went wrong.",
           description:
-            responseMessage ??
-            `${user.name}'s user role was not updated. Please try again.`,
+            "There was a problem with your request. Please try again.",
           variant: "destructive",
         });
       }
-
-      toast({
-        title: "Successful user update",
-        description: `${user.name}'s user role was updated from ${
-          UserRoleText[user.role]
-        } to ${UserRoleText[userRoleChangeTo]}.`,
-      });
-
-      router.refresh();
-      setIsSavingUserRoleUpdate(false);
     } else {
       toast({
         description: "Invalid user role update. Please try again.",

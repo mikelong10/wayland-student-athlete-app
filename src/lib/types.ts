@@ -18,8 +18,9 @@ export const requestJobFormSchema = z.object({
   description: z.string().nonempty("Required"),
   location: z.string().nonempty("Required"),
   time: z.string().nonempty("Required"),
+  estimate: z.string().nonempty("Required"),
   contact: z.string().nonempty("Required"),
-  learn: z.string().nonempty("Required"),
+  learn: z.string().optional(),
   special: z.string().optional(),
   signature: z.string().nonempty("Required"),
 });

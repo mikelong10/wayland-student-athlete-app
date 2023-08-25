@@ -42,11 +42,11 @@
 
   .dark {
     --background: 12 6% 15%;
-    --background-less: 25 5% 45%;
+    --background-less: 30 6% 25%;
     --foreground: 60 9% 98%;
     --foreground-less: 60 5% 96%;
 
-    --muted: 25 5% 45%;
+    --muted: 30 6% 25%;
     --muted-foreground: 60 5% 96%;
 
     --accent: 25 5% 45%;
