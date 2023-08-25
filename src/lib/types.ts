@@ -1,4 +1,3 @@
-import { Role } from "@prisma/client";
 import { VariantProps } from "class-variance-authority";
 import { z } from "zod";
 

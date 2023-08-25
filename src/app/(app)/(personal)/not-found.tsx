@@ -1,6 +1,7 @@
-import Link from "next/link"
-import { Button } from "@components/ui/button"
-import { ChevronLeft } from "lucide-react"
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+
+import { Button } from "@components/ui/button";
 
 export default function NotFound() {
   return (
@@ -14,5 +15,5 @@ export default function NotFound() {
         </Button>
       </Link>
     </main>
-  )
+  );
 }

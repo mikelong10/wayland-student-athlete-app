@@ -3,13 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { User } from "@prisma/client";
 
 import { HeaderNavLink } from "@lib/types";
 import { cn } from "@lib/utils";
 import logo from "../../../public/logo.png";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
-import { User } from "@prisma/client";
 
 const headerNavLinks: HeaderNavLink[] = [
   {

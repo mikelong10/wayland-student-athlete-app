@@ -1,31 +1,37 @@
+import { Role } from "@prisma/client";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
-import { Role } from "@prisma/client";
 
 const routeContextSchema = z.object({
   params: z.object({
     userId: z.string(),
   }),
-})
+});
 
 const userRoleSchema = z.object({
-  role: z.nativeEnum(Role)
-})
+  role: z.nativeEnum(Role),
+});
 
-export async function PATCH(req: Request, context: z.infer<typeof routeContextSchema>) {
+export async function PATCH(
+  req: Request,
+  context: z.infer<typeof routeContextSchema>
+) {
   try {
     const { params } = routeContextSchema.parse(context);
 
     const user = await getCurrentUser();
     if (!user || user.role !== "ADMIN") {
-      return new Response(null, { status: StatusCodes.FORBIDDEN, statusText: ReasonPhrases.FORBIDDEN })
+      return new Response(null, {
+        status: StatusCodes.FORBIDDEN,
+        statusText: ReasonPhrases.FORBIDDEN,
+      });
     }
 
-    const body = await req.json()
-    const payload = userRoleSchema.parse(body)
+    const body = await req.json();
+    const payload = userRoleSchema.parse(body);
 
     const updatedUser = await db.user.update({
       where: {
@@ -34,9 +40,11 @@ export async function PATCH(req: Request, context: z.infer<typeof routeContextSc
       data: {
         role: payload.role,
       },
-    })
+    });
 
-    return new Response(JSON.stringify(updatedUser), { status: StatusCodes.OK })
+    return new Response(JSON.stringify(updatedUser), {
+      status: StatusCodes.OK,
+    });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {
@@ -45,6 +53,6 @@ export async function PATCH(req: Request, context: z.infer<typeof routeContextSc
       });
     }
 
-    return new Response(null, { status: StatusCodes.INTERNAL_SERVER_ERROR })
+    return new Response(null, { status: StatusCodes.INTERNAL_SERVER_ERROR });
   }
 }

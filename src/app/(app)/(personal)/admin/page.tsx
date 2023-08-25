@@ -1,19 +1,20 @@
-import { notFound, redirect } from "next/navigation"
-import { Separator } from "@components/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs"
-import UserCard from "@components/UserCard"
-import { db } from "@lib/db"
-import { getCurrentUser } from "@lib/session"
+import { notFound, redirect } from "next/navigation";
+
+import { db } from "@lib/db";
+import { getCurrentUser } from "@lib/session";
+import { Separator } from "@components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
+import UserCard from "@components/UserCard";
 
 export const metadata = {
   title: "Admin Dashboard",
-}
+};
 
 export default async function AdminDashboard() {
-  const user = await getCurrentUser()
+  const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/login")
+    redirect("/login");
   }
   if (user.role !== "ADMIN") {
     notFound();
@@ -23,7 +24,7 @@ export default async function AdminDashboard() {
     orderBy: {
       createdAt: "desc",
     },
-  })
+  });
   const citizens = await db.user.findMany({
     where: {
       role: "CITIZEN",
@@ -31,7 +32,7 @@ export default async function AdminDashboard() {
     orderBy: {
       createdAt: "desc",
     },
-  })
+  });
   const studentAthletes = await db.user.findMany({
     where: {
       OR: [
@@ -45,7 +46,7 @@ export default async function AdminDashboard() {
     orderBy: {
       createdAt: "desc",
     },
-  })
+  });
 
   const usersTabs = [
     {
@@ -60,7 +61,7 @@ export default async function AdminDashboard() {
       value: "student-athletes",
       users: studentAthletes,
     },
-  ]
+  ];
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center">
@@ -105,5 +106,5 @@ export default async function AdminDashboard() {
         )}
       </section>
     </main>
-  )
+  );
 }

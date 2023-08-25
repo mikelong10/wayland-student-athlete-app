@@ -1,7 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Badge } from "@components/ui/badge"
+import { useState } from "react";
+import { Role, User } from "@prisma/client";
+import { Loader2 } from "lucide-react";
+
+import { formatDate } from "@lib/utils";
+import { Badge } from "@components/ui/badge";
 import {
   Card,
   CardContent,
@@ -9,26 +13,22 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@components/ui/card"
-import { UserAvatar } from "@components/UserAvatar"
-import { formatDate } from "@lib/utils"
-import { Role, User } from "@prisma/client"
-
-import UserRoleSelect from "./UserRoleSelect"
-import { Loader2 } from "lucide-react"
+} from "@components/ui/card";
+import { UserAvatar } from "@components/UserAvatar";
+import UserRoleSelect from "./UserRoleSelect";
 
 interface UserCardProps {
-  user: User
+  user: User;
 }
 
 export const UserRoleText: Record<Role, string> = {
   ADMIN: "Admin",
   STUDENTATHLETE: "Student-Athlete",
   CITIZEN: "Citizen",
-}
+};
 
 export default function UserCard({ user }: UserCardProps) {
-  const [isSavingUserRoleUpdate, setIsSavingUserRoleUpdate] = useState(false)
+  const [isSavingUserRoleUpdate, setIsSavingUserRoleUpdate] = useState(false);
 
   return (
     <Card key={user.id} className="flex flex-col gap-4">
@@ -64,7 +64,10 @@ export default function UserCard({ user }: UserCardProps) {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <UserRoleSelect user={user} setIsSavingUserRoleUpdate={setIsSavingUserRoleUpdate} />
+            <UserRoleSelect
+              user={user}
+              setIsSavingUserRoleUpdate={setIsSavingUserRoleUpdate}
+            />
           </CardContent>
           <CardFooter>
             <p className="text-muted-foreground text-xs">
@@ -74,5 +77,5 @@ export default function UserCard({ user }: UserCardProps) {
         </>
       )}
     </Card>
-  )
+  );
 }

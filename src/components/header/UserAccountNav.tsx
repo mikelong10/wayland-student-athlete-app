@@ -1,25 +1,26 @@
-"use client"
+"use client";
 
-import { HTMLAttributes } from "react"
-import Link from "next/link"
-import { LightDarkModeToggle } from "@components/LightDarkModeToggle"
-import { Button } from "@components/ui/button"
+import Link from "next/link";
+import { HTMLAttributes } from "react";
+import { User } from "@prisma/client";
+import { CheckSquare, LogOut, Settings, User as UserIcon } from "lucide-react";
+import { signOut } from "next-auth/react";
+
+import { LightDarkModeToggle } from "@components/LightDarkModeToggle";
+import { Button } from "@components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@components/ui/dropdown-menu"
-import { Separator } from "@components/ui/separator"
-import { UserAvatar } from "@components/UserAvatar"
-import { CheckSquare, LogOut, Settings, User as UserIcon } from "lucide-react"
-import { signOut } from "next-auth/react"
-import { User } from "@prisma/client"
+} from "@components/ui/dropdown-menu";
+import { Separator } from "@components/ui/separator";
+import { UserAvatar } from "@components/UserAvatar";
 
 interface UserAccountNavProps extends HTMLAttributes<HTMLDivElement> {
-  user?: User
-  closeMobileNav: () => void
+  user?: User;
+  closeMobileNav: () => void;
 }
 
 export default function UserAccountNav({
@@ -86,10 +87,10 @@ export default function UserAccountNav({
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onSelect={(event) => {
-                  event.preventDefault()
+                  event.preventDefault();
                   signOut({
                     callbackUrl: `/`,
-                  })
+                  });
                 }}
               >
                 <LogOut className="mr-2 h-4 w-4" />
@@ -100,5 +101,5 @@ export default function UserAccountNav({
         )}
       </div>
     </div>
-  )
+  );
 }

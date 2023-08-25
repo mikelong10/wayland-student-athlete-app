@@ -1,11 +1,7 @@
-"use client"
+"use client";
 
-import { Dispatch, SetStateAction, useState } from "react"
-import { useRouter } from "next/navigation"
-import { useToast } from "@components/ui/use-toast"
-import { UserRoleText } from "@components/UserCard"
-import { Role, User } from "@prisma/client"
-
+import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,31 +11,34 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
+import { Role, User } from "@prisma/client";
+
+import { useToast } from "@components/ui/use-toast";
+import { UserRoleText } from "@components/UserCard";
 
 export default function UserRoleSelect({
   user,
   setIsSavingUserRoleUpdate,
 }: {
-  user: User
-  setIsSavingUserRoleUpdate: Dispatch<SetStateAction<boolean>>
+  user: User;
+  setIsSavingUserRoleUpdate: Dispatch<SetStateAction<boolean>>;
 }) {
-  const router = useRouter()
-  const { toast } = useToast()
+  const router = useRouter();
+  const { toast } = useToast();
 
-  const [alertDialogOpen, setAlertDialogOpen] = useState(false)
-  const [userRoleChangeTo, setUserRoleChangeTo] = useState<Role>()
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
+  const [userRoleChangeTo, setUserRoleChangeTo] = useState<Role>();
 
   async function onSelectChangeConfirm() {
-    setIsSavingUserRoleUpdate(true)
+    setIsSavingUserRoleUpdate(true);
 
     const response = await fetch(`/api/users/${user.id}`, {
       method: "PATCH",
@@ -49,25 +48,25 @@ export default function UserRoleSelect({
       body: JSON.stringify({
         role: userRoleChangeTo,
       }),
-    })
+    });
 
     if (!response?.ok) {
       return toast({
         title: "Something went wrong.",
         description: `${user.name}'s user role was not updated. Please try again.`,
         variant: "destructive",
-      })
+      });
     }
-    
+
     toast({
       title: "Successful user update",
       description: `${user.name}'s user role was updated from ${
         UserRoleText[user.role]
       } to ${UserRoleText[userRoleChangeTo as Role]}.`,
-    })
-    
-    router.refresh()
-    setIsSavingUserRoleUpdate(false)
+    });
+
+    router.refresh();
+    setIsSavingUserRoleUpdate(false);
   }
 
   return (
@@ -75,8 +74,8 @@ export default function UserRoleSelect({
       <Select
         value={user.role}
         onValueChange={(newRole: Role) => {
-          setUserRoleChangeTo(newRole)
-          setAlertDialogOpen(true)
+          setUserRoleChangeTo(newRole);
+          setAlertDialogOpen(true);
         }}
       >
         <SelectTrigger className="w-[180px]">
@@ -111,5 +110,5 @@ export default function UserRoleSelect({
         </AlertDialogContent>
       </AlertDialog>
     </>
-  )
+  );
 }

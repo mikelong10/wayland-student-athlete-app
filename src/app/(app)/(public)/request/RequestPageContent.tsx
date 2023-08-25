@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { User } from "@prisma/client";
 import { ChevronLeft, MailCheck } from "lucide-react";
 
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
 import RequestJobForm from "./RequestJobForm";
-import { User } from "@prisma/client";
 
 export default function RequestPageContent({ user }: { user?: User }) {
   const [requestSent, setRequestSent] = useState(false);
