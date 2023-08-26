@@ -68,10 +68,11 @@ export default async function MyJobs() {
           You have <span className="font-bold">{toDoJobs.length}</span>{" "}
           {toDoJobs.length === 1 ? "job" : "jobs"} that we haven&apos;t gotten
           to yet.{" "}
-          {toDoJobs.length > 0 &&
-            ` We should be getting to ${
-              toDoJobs.length === 1 ? "it" : "these"
-            } shortly!`}
+          {toDoJobs.length > 0
+            ? `We should be getting to ${
+                toDoJobs.length === 1 ? "it" : "these"
+              } shortly!`
+            : "How may we assist you?"}
         </p>
       ),
       jobs: toDoJobs,
@@ -83,7 +84,9 @@ export default async function MyJobs() {
           You have <span className="font-bold">{inProgressJobs.length}</span>{" "}
           {inProgressJobs.length === 1 ? "job" : "jobs"} that we&apos;re
           currently working with you on.{" "}
-          {inProgressJobs.length > 0 && "Looking forward to helping you out!"}
+          {inProgressJobs.length > 0
+            ? "Looking forward to helping you out!"
+            : "We hope there will be soon!"}
         </p>
       ),
       jobs: inProgressJobs,
@@ -95,7 +98,9 @@ export default async function MyJobs() {
           You have <span className="font-bold">{doneJobs.length}</span>{" "}
           {doneJobs.length === 1 ? "job" : "jobs"} that you&apos;ve requested
           and we&apos;ve completed.{" "}
-          {inProgressJobs.length > 0 && "Thanks for reaching out to us!"}
+          {doneJobs.length > 0
+            ? "Thanks for reaching out to us!"
+            : "We hope there will be soon!"}
         </p>
       ),
       jobs: doneJobs,
@@ -142,25 +147,25 @@ export default async function MyJobs() {
                 className="flex flex-col gap-4"
               >
                 {tabContent.description}
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-                  {tabContent.jobs.length ? (
-                    tabContent.jobs.map((job) => (
+                {tabContent.jobs.length ? (
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {tabContent.jobs.map((job) => (
                       <PersonalJobCard key={job.id} job={job} />
-                    ))
-                  ) : (
-                    <div className="flex w-full items-center justify-center">
-                      <Link href="/request">
-                        <Button
-                          variant={"accent"}
-                          className="flex w-40 items-center gap-2"
-                        >
-                          Request a job
-                          <MoveRight />
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex w-full items-center justify-center">
+                    <Link href="/request">
+                      <Button
+                        variant={"accent"}
+                        className="flex w-40 items-center gap-2"
+                      >
+                        Request a job
+                        <MoveRight />
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </TabsContent>
             ))}
           </Tabs>
