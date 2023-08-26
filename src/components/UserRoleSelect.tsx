@@ -54,14 +54,7 @@ export default function UserRoleSelect({
 
         if (!response?.ok) {
           setIsSavingUserRoleUpdate(false);
-          const responseMessage = await response.text();
-          return toast({
-            title: "Something went wrong.",
-            description:
-              responseMessage ??
-              `${user.name}'s user role was not updated. Please try again.`,
-            variant: "destructive",
-          });
+          throw new Error();
         }
 
         toast({
@@ -98,10 +91,10 @@ export default function UserRoleSelect({
           setAlertDialogOpen(true);
         }}
       >
-        <SelectTrigger className="w-44">
+        <SelectTrigger className="w-40">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent className="w-44">
+        <SelectContent className="w-40">
           <SelectItem value={Role.CITIZEN}>
             {UserRoleText[Role.CITIZEN]}
           </SelectItem>

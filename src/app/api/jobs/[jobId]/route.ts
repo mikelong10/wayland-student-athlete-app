@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { Role, Status } from "@prisma/client";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
@@ -11,11 +11,14 @@ const routeContextSchema = z.object({
   }),
 });
 
-const assigneeSchema = z.object({
-  assignee: z.object({
-    id: z.string(),
-    role: z.nativeEnum(Role),
-  }),
+const jobUpdateSchema = z.object({
+  assignee: z
+    .object({
+      id: z.string(),
+      role: z.nativeEnum(Role),
+    })
+    .optional(),
+  status: z.nativeEnum(Status).optional(),
 });
 
 export async function PATCH(
@@ -25,13 +28,14 @@ export async function PATCH(
   try {
     const { params } = routeContextSchema.parse(context);
     const body = await req.json();
-    const payload = assigneeSchema.parse(body);
+    const payload = jobUpdateSchema.parse(body);
 
     const user = await getCurrentUser();
     if (
       !user ||
       (user.role !== Role.ADMIN && user.role !== Role.STUDENTATHLETE) ||
-      (payload.assignee.role !== Role.ADMIN &&
+      (payload.assignee &&
+        payload.assignee.role !== Role.ADMIN &&
         payload.assignee.role !== Role.STUDENTATHLETE)
     ) {
       return new Response(null, {
@@ -45,7 +49,8 @@ export async function PATCH(
         id: params.jobId,
       },
       data: {
-        assigneeId: payload.assignee.id,
+        assigneeId: payload.assignee?.id,
+        status: payload.status,
       },
     });
     return new Response(JSON.stringify(updatedJob));

@@ -48,7 +48,7 @@ export default async function JobDashboard() {
       status: "INPROGRESS",
     },
     orderBy: {
-      updatedAt: "desc",
+      createdAt: "desc",
     },
   });
   const doneJobs = await db.job.findMany({
@@ -59,7 +59,7 @@ export default async function JobDashboard() {
       status: "DONE",
     },
     orderBy: {
-      updatedAt: "desc",
+      createdAt: "desc",
     },
   });
 

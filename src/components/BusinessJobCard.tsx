@@ -1,8 +1,9 @@
-import { Status, User } from "@prisma/client";
+"use client";
+
+import { User } from "@prisma/client";
 
 import { formatDate } from "@lib/utils";
-import { JobCardProps, JobStatusText } from "@components/PersonalJobCard";
-import { Badge } from "@components/ui/badge";
+import { JobCardProps } from "@components/PersonalJobCard";
 import {
   Card,
   CardContent,
@@ -11,8 +12,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@components/ui/card";
-import Dot from "@components/ui/dot";
 import JobCardAssign from "./JobCardAssign";
+import JobStatusSelect from "./JobStatusSelect";
+import { Separator } from "./ui/separator";
 
 export interface BusinessJobCardProps extends JobCardProps {
   currentAssignee: User | null;
@@ -30,12 +32,7 @@ export default function BusinessJobCard({
     <Card key={job.id} className="flex flex-col gap-2">
       <CardHeader className="flex flex-col gap-1">
         <div className="flex items-center justify-between">
-          <Badge variant={Status[job.status]} className="w-fit gap-2">
-            <Dot status={Status[job.status]} />
-            <p className="whitespace-nowrap font-normal">
-              {JobStatusText[job.status]}
-            </p>
-          </Badge>
+          <JobStatusSelect job={job} />
           <JobCardAssign
             job={job}
             currentAssignee={currentAssignee}
@@ -48,7 +45,8 @@ export default function BusinessJobCard({
           {job.contact}
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <Separator />
+      <CardContent className="flex flex-col gap-2">
         <p className="text-sm">{job.description}</p>
       </CardContent>
       <CardFooter>
