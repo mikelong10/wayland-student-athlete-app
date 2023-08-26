@@ -1,4 +1,3 @@
-
 export const metadata = {
   title: "Profile",
   description: "View and manage your profile.",
