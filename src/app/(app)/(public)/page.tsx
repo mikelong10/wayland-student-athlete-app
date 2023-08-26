@@ -9,7 +9,7 @@ export default function Home() {
     <main className="flex w-full flex-col items-center justify-center">
       <section
         id="landing-home"
-        className="from-secondary to-background dark:to-background flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-bl to-70% px-6 dark:from-stone-900 md:px-10 lg:px-16 xl:px-24"
+        className="from-secondary to-background dark:from-accent flex min-h-screen w-full flex-col justify-center gap-6 bg-gradient-to-tl to-70% px-6 md:px-10 lg:px-16 xl:px-24"
       >
         <div className="text-foreground xs:hidden scroll-m-20 text-4xl font-extrabold tracking-tight">
           <h1>Wayland</h1>
