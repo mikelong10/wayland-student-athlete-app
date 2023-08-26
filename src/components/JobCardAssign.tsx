@@ -17,6 +17,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { User } from "@prisma/client";
+import Fuse from "fuse.js";
 
 import { BusinessJobCardProps } from "@components/BusinessJobCard";
 import { useToast } from "@components/ui/use-toast";
@@ -35,6 +36,16 @@ export default function JobCardAssign({
   const [selectedUser, setSelectedUser] = useState<User | null>(
     currentAssignee
   );
+
+  const fuse = new Fuse(allStudentAthletes, {
+    keys: ["name"],
+  });
+
+  function searchStudentAthletes(value: string, search: string) {
+    const result = fuse.search(search);
+    const match = result.find((user) => user.item.id === value);
+    return match ? 1 : 0;
+  }
 
   async function onAssign(assigneeId: string) {
     if (assigneeId !== currentAssignee?.id) {
@@ -99,7 +110,7 @@ export default function JobCardAssign({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0" side="bottom" align="end">
-          <Command>
+          <Command filter={searchStudentAthletes}>
             <CommandInput placeholder="Assign job..." />
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>

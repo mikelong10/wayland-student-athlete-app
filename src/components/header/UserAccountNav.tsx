@@ -70,15 +70,15 @@ export default function UserAccountNav({
               <DropdownMenuSeparator />
               <DropdownMenuLabel>Personal</DropdownMenuLabel>
               <DropdownMenuItem asChild>
-                <Link href="/profile" onClick={() => closeMobileNav()}>
-                  <UserCircle2 className="mr-2 h-4 w-4" />
-                  Profile
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
                 <Link href="/jobs" onClick={() => closeMobileNav()}>
                   <CheckSquare className="mr-2 h-4 w-4" />
                   My jobs
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/profile" onClick={() => closeMobileNav()}>
+                  <UserCircle2 className="mr-2 h-4 w-4" />
+                  Profile
                 </Link>
               </DropdownMenuItem>
               {(user.role === Role.ADMIN ||
@@ -86,6 +86,12 @@ export default function UserAccountNav({
                 <>
                   <DropdownMenuSeparator />
                   <DropdownMenuLabel>Business</DropdownMenuLabel>
+                  <DropdownMenuItem asChild>
+                    <Link href="/dashboard" onClick={() => closeMobileNav()}>
+                      <KanbanSquare className="mr-2 h-4 w-4" />
+                      Dashboard
+                    </Link>
+                  </DropdownMenuItem>
                   {user.role === Role.ADMIN && (
                     <DropdownMenuItem asChild>
                       <Link href="/admin" onClick={() => closeMobileNav()}>
@@ -94,12 +100,6 @@ export default function UserAccountNav({
                       </Link>
                     </DropdownMenuItem>
                   )}
-                  <DropdownMenuItem asChild>
-                    <Link href="/dashboard" onClick={() => closeMobileNav()}>
-                      <KanbanSquare className="mr-2 h-4 w-4" />
-                      Dashboard
-                    </Link>
-                  </DropdownMenuItem>
                 </>
               )}
               <DropdownMenuSeparator />
