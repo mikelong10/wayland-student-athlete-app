@@ -30,7 +30,7 @@ export default function DesktopNav({ user, headerNavLinks }: NavProps) {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
-      <UserAccountNav user={user} closeMobileNav={() => {}} />
+      <UserAccountNav user={user} isMobile={false} closeMobileNav={() => {}} />
     </div>
   );
 }

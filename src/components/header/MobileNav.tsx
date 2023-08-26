@@ -22,7 +22,7 @@ export default function MobileNav({ user, headerNavLinks }: NavProps) {
           <Menu size={32} />
         </Button>
       </SheetTrigger>
-      <SheetContent className="flex w-full flex-col items-center gap-4 py-4">
+      <SheetContent className="flex w-full min-w-[224px] flex-col items-center gap-4 py-4">
         <div className="flex w-full items-center">
           <Link
             href={"/"}
@@ -36,6 +36,7 @@ export default function MobileNav({ user, headerNavLinks }: NavProps) {
         <div className="mt-2 flex h-full flex-col items-center justify-center">
           <UserAccountNav
             user={user}
+            isMobile={true}
             closeMobileNav={() => setNavOpen(false)}
           />
           <nav className="flex h-full flex-col items-center justify-center">

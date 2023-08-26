@@ -27,11 +27,13 @@ import { UserAvatar } from "@components/UserAvatar";
 
 interface UserAccountNavProps extends HTMLAttributes<HTMLDivElement> {
   user?: User;
+  isMobile: boolean;
   closeMobileNav: () => void;
 }
 
 export default function UserAccountNav({
   user,
+  isMobile,
   closeMobileNav,
 }: UserAccountNavProps) {
   return (
@@ -56,7 +58,7 @@ export default function UserAccountNav({
                 className="h-10 w-10"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align={isMobile ? "center" : "end"}>
               <div className="flex items-center justify-start gap-2 p-2">
                 <div className="flex flex-col gap-1 leading-5">
                   {user?.name && <p className="font-medium">{user.name}</p>}
@@ -89,7 +91,7 @@ export default function UserAccountNav({
                   <DropdownMenuItem asChild>
                     <Link href="/dashboard" onClick={() => closeMobileNav()}>
                       <KanbanSquare className="mr-2 h-4 w-4" />
-                      Dashboard
+                      Jobs
                     </Link>
                   </DropdownMenuItem>
                   {user.role === Role.ADMIN && (
