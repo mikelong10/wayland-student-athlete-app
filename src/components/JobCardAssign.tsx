@@ -88,8 +88,14 @@ export default function JobCardAssign({
     <div className="flex items-center gap-2">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" size="sm" className="w-fit justify-start">
-            {selectedUser ? <>{selectedUser.name}</> : <>+ Assign job</>}
+          <Button
+            variant="accent"
+            size="sm"
+            className="ml-2 w-fit justify-start px-2 py-1"
+          >
+            <p className="text-xs font-normal">
+              {selectedUser ? selectedUser.name : "Assign job"}
+            </p>
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0" side="bottom" align="end">

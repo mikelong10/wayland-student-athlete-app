@@ -115,7 +115,7 @@ export default async function MyJobs() {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center">
-      <section className="flex h-full w-full flex-col px-6 py-20 sm:max-w-[768px] md:px-10 lg:max-w-[960px] lg:px-16 xl:px-24">
+      <section className="flex h-full w-full max-w-[1600px] flex-col px-6 py-20 md:px-10 lg:px-16  xl:px-24">
         <div className="flex flex-col gap-6">
           <h1 className="text-4xl font-extrabold tracking-tight">My jobs</h1>
           <Separator />
@@ -141,23 +141,25 @@ export default async function MyJobs() {
                 className="flex flex-col gap-4"
               >
                 {tabContent.description}
-                {tabContent.jobs.length ? (
-                  tabContent.jobs.map((job) => (
-                    <PersonalJobCard key={job.id} job={job} />
-                  ))
-                ) : (
-                  <div className="flex w-full items-center justify-center">
-                    <Link href="/request">
-                      <Button
-                        variant={"accent"}
-                        className="flex w-40 items-center gap-2"
-                      >
-                        Request a job
-                        <MoveRight />
-                      </Button>
-                    </Link>
-                  </div>
-                )}
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {tabContent.jobs.length ? (
+                    tabContent.jobs.map((job) => (
+                      <PersonalJobCard key={job.id} job={job} />
+                    ))
+                  ) : (
+                    <div className="flex w-full items-center justify-center">
+                      <Link href="/request">
+                        <Button
+                          variant={"accent"}
+                          className="flex w-40 items-center gap-2"
+                        >
+                          Request a job
+                          <MoveRight />
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </TabsContent>
             ))}
           </Tabs>

@@ -32,7 +32,9 @@ export default function BusinessJobCard({
         <div className="flex h-8 items-center justify-between">
           <Badge variant={Status[job.status]} className="w-fit gap-2">
             <Dot status={Status[job.status]} />
-            <p className="font-normal">{JobStatusText[job.status]}</p>
+            <p className="whitespace-nowrap font-normal">
+              {JobStatusText[job.status]}
+            </p>
           </Badge>
           <JobCardAssign
             job={job}

@@ -66,7 +66,7 @@ export default async function AdminDashboard() {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center">
-      <section className="xs:max-w-[480px] flex h-full w-full flex-col px-6 py-20 sm:max-w-[600px] md:max-w-[768px] md:px-10 lg:max-w-[960px] lg:px-16 xl:max-w-[1200px] xl:px-24">
+      <section className="flex h-full w-full max-w-[1600px] flex-col px-6 py-20 md:px-10 lg:px-16  xl:px-24">
         {user.role === Role.ADMIN ? (
           <div className="flex flex-col gap-6">
             <h1 className="text-4xl font-extrabold tracking-tight">
