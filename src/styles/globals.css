@@ -4,34 +4,34 @@
 
 @layer base {
   :root {
-    --background: 60 9% 98%;
-    --background-less: 60 5% 96%;
-    --foreground: 20 14% 4%;
-    --foreground-less: 12 6% 15%;
+    --background: 60 5% 96%;
+    --background-less: 20 6% 90%;
+    --foreground: 24 10% 10%;
+    --foreground-less: 30 6% 25%;
 
     --primary: 27 96% 61%;
-    --primary-foreground: 60 9% 98%;
+    --primary-foreground: 60 5% 96%;
 
     --secondary: 34 100% 92%;
-    --secondary-foreground: 20 14% 4%;
+    --secondary-foreground: 24 10% 10%;
 
-    --accent: 20 6% 90%;
-    --accent-foreground: 20 14% 4%;
+    --accent: 0 0% 83%;
+    --accent-foreground: 24 10% 10%;
 
-    --muted: 60 5% 96%;
-    --muted-foreground: 12 6% 15%;
+    --muted: 20 6% 90%;
+    --muted-foreground: 30 6% 25%;
 
     --destructive: 0 72% 51%;
-    --destructive-foreground: 60 9% 98%;
+    --destructive-foreground: 60 5% 96%;
 
     --success: 142 76% 36%;
-    --success-foreground: 60 9% 98%;
+    --success-foreground: 60 5% 96%;
 
-    --card: 60 9% 98%;
-    --card-foreground: 20 14% 4%;
+    --card: 60 5% 96%;
+    --card-foreground: 24 10% 10%;
 
-    --popover: 60 9% 98%;
-    --popover-foreground: 20 14% 4%;
+    --popover: 60 5% 96%;
+    --popover-foreground: 24 10% 10%;
 
     --border: 24 6% 83%;
     --input: 24 6% 83%;
@@ -41,22 +41,22 @@
   }
 
   .dark {
-    --background: 20 14% 4%;
-    --background-less: 24 10% 10%;
-    --foreground: 60 9% 98%;
-    --foreground-less: 60 5% 96%;
+    --background: 24 10% 10%;
+    --background-less: 12 6% 15%;
+    --foreground: 60 5% 96%;
+    --foreground-less: 20 6% 90%;
 
-    --muted: 24 10% 10%;
-    --muted-foreground: 20 6% 90%;
+    --muted: 12 6% 15%;
+    --muted-foreground: 0 0% 83%;
 
-    --accent: 12 6% 15%;
-    --accent-foreground: 60 9% 98%;
+    --accent: 30 6% 25%;
+    --accent-foreground: 60 5% 96%;
 
-    --card: 20 14% 4%;
-    --card-foreground: 60 9% 98%;
+    --card: 24 10% 10%;
+    --card-foreground: 60 5% 96%;
 
-    --popover: 20 14% 4%;
-    --popover-foreground: 60 9% 98%;
+    --popover: 24 10% 10%;
+    --popover-foreground: 60 5% 96%;
 
     --border: 24 5% 64%;
     --input: 24 5% 64%;
