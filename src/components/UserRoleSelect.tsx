@@ -74,6 +74,7 @@ export default function UserRoleSelect({
         router.refresh();
         setIsSavingUserRoleUpdate(false);
       } catch {
+        setIsSavingUserRoleUpdate(false);
         toast({
           title: "Uh oh! Something went wrong.",
           description:

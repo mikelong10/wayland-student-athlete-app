@@ -12,30 +12,35 @@ import {
   CardTitle,
 } from "@components/ui/card";
 import Dot from "@components/ui/dot";
-import JobCardAssignSwitch from "./JobCardAssignSwitch";
-import { Separator } from "./ui/separator";
+import JobCardAssign from "./JobCardAssign";
 
-interface BusinessJobCardProps extends JobCardProps {
-  assignee: User | null;
+export interface BusinessJobCardProps extends JobCardProps {
+  currentAssignee: User | null;
   currentUser?: User;
+  allStudentAthletes: User[];
 }
 
 export default function BusinessJobCard({
   job,
-  assignee,
+  currentAssignee,
   currentUser,
+  allStudentAthletes,
 }: BusinessJobCardProps) {
   return (
-    <Card key={job.id} className="flex flex-col gap-2 pt-4">
+    <Card key={job.id} className="flex flex-col gap-2">
       <CardHeader className="flex flex-col gap-1">
-        <div className="flex h-8 items-center justify-between gap-4">
+        <div className="flex h-8 items-center justify-between">
           <Badge variant={Status[job.status]} className="w-fit gap-2">
             <Dot status={Status[job.status]} />
             <p className="font-normal">{JobStatusText[job.status]}</p>
           </Badge>
-          <JobCardAssignSwitch assignee={assignee} currentUser={currentUser} />
+          <JobCardAssign
+            job={job}
+            currentAssignee={currentAssignee}
+            currentUser={currentUser}
+            allStudentAthletes={allStudentAthletes}
+          />
         </div>
-        <Separator />
         <CardTitle className="text-xl">{`${job.adultFirstName} ${job.adultLastName}`}</CardTitle>
         <CardDescription className="border-l-2 pl-2 text-xs">
           {job.contact}

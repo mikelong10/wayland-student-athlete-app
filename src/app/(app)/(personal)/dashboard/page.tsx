@@ -1,3 +1,5 @@
+import { Role } from "@prisma/client";
+
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
 import BusinessJobCard from "@components/BusinessJobCard";
@@ -10,6 +12,21 @@ export const metadata = {
 
 export default async function JobDashboard() {
   const user = await getCurrentUser();
+
+  const allStudentAthletes = await db.user.findMany({
+    where: {
+      OR: [
+        {
+          role: Role.STUDENTATHLETE,
+        },
+
+        { role: Role.ADMIN },
+      ],
+    },
+    orderBy: {
+      name: "desc",
+    },
+  });
 
   const toDoJobs = await db.job.findMany({
     include: {
@@ -93,9 +110,10 @@ export default async function JobDashboard() {
                   tabContent.jobs.map((job) => (
                     <BusinessJobCard
                       key={job.id}
-                      currentUser={user}
                       job={job}
-                      assignee={job.assignee}
+                      currentAssignee={job.assignee}
+                      currentUser={user}
+                      allStudentAthletes={allStudentAthletes}
                     />
                   ))
                 ) : (

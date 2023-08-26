@@ -4,7 +4,7 @@ import { User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 
 interface UserAvatarProps extends AvatarProps {
-  user: { image: string | null; name: string | null };
+  user: { image?: string | null; name?: string | null };
 }
 
 export function UserAvatar({ user, ...props }: UserAvatarProps) {

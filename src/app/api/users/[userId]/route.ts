@@ -69,9 +69,7 @@ export async function PATCH(
         },
       });
 
-      return new Response(JSON.stringify(updatedUser), {
-        status: StatusCodes.OK,
-      });
+      return new Response(JSON.stringify(updatedUser));
     } else {
       return new Response(
         "Invalid request. You are currently the only admin, and there must be at least 1 admin remaining.",
