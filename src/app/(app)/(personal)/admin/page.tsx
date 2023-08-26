@@ -8,7 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import UserCard from "@components/UserCard";
 
 export const metadata = {
-  title: "Admin Dashboard",
+  title: "Manage users",
+  description: "Manage user roles and permissions.",
 };
 
 export default async function AdminDashboard() {

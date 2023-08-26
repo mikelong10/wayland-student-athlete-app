@@ -10,7 +10,8 @@ import { Separator } from "@components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
 export const metadata = {
-  title: "My jobs",
+  title: "My Jobs",
+  description: "View the jobs you've requested with us.",
 };
 
 export default async function MyJobs() {

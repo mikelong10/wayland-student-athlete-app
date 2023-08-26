@@ -2,6 +2,7 @@ import { Button } from "@components/ui/button";
 
 export const metadata = {
   title: "Profile",
+  description: "View and manage your profile.",
 };
 
 export default async function ProfilePage() {

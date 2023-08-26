@@ -7,7 +7,8 @@ import { Separator } from "@components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
 export const metadata = {
-  title: "Dashboard",
+  title: "Jobs Dashboard",
+  description: "Manage job statuses and assignees.",
 };
 
 export default async function JobDashboard() {
