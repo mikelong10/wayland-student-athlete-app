@@ -102,13 +102,14 @@ export default async function JobDashboard() {
               </TabsTrigger>
             </TabsList>
             {jobsTabs.map((tabContent) => (
-              <TabsContent
-                key={tabContent.value}
-                value={tabContent.value}
-                className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"
-              >
-                {tabContent.jobs.length ? (
-                  tabContent.jobs.map((job) => (
+              <TabsContent key={tabContent.value} value={tabContent.value}>
+                {!tabContent.jobs.length && (
+                  <div className="flex w-full items-center justify-center">
+                    <p className="text-sm">{tabContent.noneMessage}</p>
+                  </div>
+                )}
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {tabContent.jobs.map((job) => (
                     <BusinessJobCard
                       key={job.id}
                       job={job}
@@ -116,12 +117,8 @@ export default async function JobDashboard() {
                       currentUser={user}
                       allStudentAthletes={allStudentAthletes}
                     />
-                  ))
-                ) : (
-                  <div className="flex w-full items-center justify-center">
-                    <p className="text-sm">{tabContent.noneMessage}</p>
-                  </div>
-                )}
+                  ))}
+                </div>
               </TabsContent>
             ))}
           </Tabs>
