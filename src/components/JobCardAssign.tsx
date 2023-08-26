@@ -89,9 +89,9 @@ export default function JobCardAssign({
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant="accent"
+            variant="underline"
             size="sm"
-            className="ml-2 w-fit justify-start px-2 py-1"
+            className="hover:text-primary focus:text-primary ml-2 w-fit justify-start px-2 py-1 hover:bg-transparent hover:underline focus:bg-transparent"
           >
             <p className="text-xs font-normal">
               {selectedUser ? selectedUser.name : "Assign job"}

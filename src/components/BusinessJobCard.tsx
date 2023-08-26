@@ -29,7 +29,7 @@ export default function BusinessJobCard({
   return (
     <Card key={job.id} className="flex flex-col gap-2">
       <CardHeader className="flex flex-col gap-1">
-        <div className="flex h-8 items-center justify-between">
+        <div className="flex items-center justify-between">
           <Badge variant={Status[job.status]} className="w-fit gap-2">
             <Dot status={Status[job.status]} />
             <p className="whitespace-nowrap font-normal">

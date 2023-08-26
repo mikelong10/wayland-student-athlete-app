@@ -3,9 +3,11 @@ import { z } from "zod";
 
 import { buttonVariants } from "@components/ui/button";
 
-export interface HeaderNavLink extends VariantProps<typeof buttonVariants> {
+export interface HeaderNavLink {
   url: string;
   text: string;
+  mobileVariantProps: VariantProps<typeof buttonVariants>;
+  desktopVariantProps: VariantProps<typeof buttonVariants>;
   mobileStyle?: string;
   desktopStyle?: string;
 }

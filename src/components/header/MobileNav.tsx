@@ -39,14 +39,18 @@ export default function MobileNav({ user, headerNavLinks }: NavProps) {
             closeMobileNav={() => setNavOpen(false)}
           />
           <nav className="flex h-full flex-col items-center justify-center">
-            <ul className="flex flex-col items-center justify-center gap-8">
+            <ul className="flex flex-col items-center justify-center gap-10">
               {headerNavLinks.map((link) => (
                 <Link
                   key={link.url}
                   href={link.url}
                   onClick={() => setNavOpen(false)}
                 >
-                  <Button variant={link.variant} className={link.mobileStyle}>
+                  <Button
+                    variant={link.mobileVariantProps.variant}
+                    size={link.mobileVariantProps.size}
+                    className={link.mobileStyle}
+                  >
                     {link.text}
                   </Button>
                 </Link>

@@ -18,7 +18,11 @@ export default function DesktopNav({ user, headerNavLinks }: NavProps) {
           {headerNavLinks.map((link) => (
             <NavigationMenuItem key={link.url}>
               <NavigationMenuLink href={link.url}>
-                <Button variant={link.variant} className={link.desktopStyle}>
+                <Button
+                  variant={link.desktopVariantProps.variant}
+                  size={link.desktopVariantProps.size}
+                  className={link.desktopStyle}
+                >
                   {link.text}
                 </Button>
               </NavigationMenuLink>
