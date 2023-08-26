@@ -1,11 +1,13 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ChevronLeft, Command } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 import { getCurrentUser } from "@lib/session";
 import { UserAuthForm } from "@components/auth/UserAuthForm";
 import { Button } from "@components/ui/button";
+import logo from "../../../../public/logo.png";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -29,7 +31,11 @@ export default async function LoginPage() {
       </Link>
       <div className="flex w-full min-w-[280px] max-w-md flex-col justify-center space-y-6 px-6">
         <div className="flex w-full flex-col space-y-2 text-center">
-          <Command className="mx-auto h-6 w-6" />
+          <div className="flex justify-center">
+            <Link href={"/"} className="hover:animate-pulse">
+              <Image src={logo} alt={"WSA logo"} width={40} height={40} />
+            </Link>
+          </div>
           <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back
           </h1>
