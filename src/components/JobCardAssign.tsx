@@ -50,16 +50,16 @@ export default function JobCardAssign({
   async function onAssign(assigneeId: string) {
     if (assigneeId !== currentAssignee?.id) {
       console.log("assigneeId:", assigneeId);
-      setSelectedUser(
+      const newAssignee =
         allStudentAthletes.find(
           (studentAthlete) => studentAthlete.id === assigneeId
-        ) || null
-      );
+        ) || null;
+      setSelectedUser(newAssignee);
       setOpen(false);
-      console.log(job, currentAssignee, currentUser, assigneeId);
+      console.log(job, currentAssignee, currentUser, assigneeId, newAssignee);
       if (currentUser) {
         toast({
-          description: `Assigning job for ${job.adultFirstName} ${job.adultLastName} to you...`,
+          description: `Assigning job for ${job.adultFirstName} ${job.adultLastName} to ${newAssignee?.name}...`,
         });
         try {
           const response = await fetch(`/api/jobs/${job.id}`, {
@@ -80,7 +80,7 @@ export default function JobCardAssign({
           }
 
           toast({
-            description: `Successfully assigned job for ${job.adultFirstName} ${job.adultLastName} to you!`,
+            description: `Successfully assigned job for ${job.adultFirstName} ${job.adultLastName} to ${newAssignee?.name}!`,
           });
           router.refresh();
         } catch {
