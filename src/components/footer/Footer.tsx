@@ -12,7 +12,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
       )}
     >
       <div className="flex w-full flex-col items-center gap-3 sm:flex-row sm:gap-6">
-        <div className="flex flex-col items-center gap-2 text-center text-xs leading-loose sm:flex-row sm:gap-4 md:text-left">
+        <div className="flex flex-col items-center gap-2 text-center text-xs leading-loose sm:flex-row sm:gap-4 md:text-left lg:text-sm">
           <div className="flex gap-1">
             <p>Made with &hearts; by</p>
             <p>

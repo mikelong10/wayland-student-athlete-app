@@ -2,7 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { User } from "@prisma/client";
+import Fuse from "fuse.js";
+
+import { BusinessJobCardProps } from "@components/BusinessJobCard";
+import { Button } from "@components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -10,16 +14,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { User } from "@prisma/client";
-import Fuse from "fuse.js";
-
-import { BusinessJobCardProps } from "@components/BusinessJobCard";
+} from "@components/ui/popover";
 import { useToast } from "@components/ui/use-toast";
 import { UserAvatar } from "@components/UserAvatar";
 

@@ -22,11 +22,6 @@ export default async function AdminDashboard() {
     notFound();
   }
 
-  const allUsers = await db.user.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
   const citizens = await db.user.findMany({
     where: {
       role: Role.CITIZEN,
@@ -37,13 +32,15 @@ export default async function AdminDashboard() {
   });
   const studentAthletes = await db.user.findMany({
     where: {
-      OR: [
-        {
-          role: Role.STUDENTATHLETE,
-        },
-
-        { role: Role.ADMIN },
-      ],
+      role: Role.STUDENTATHLETE,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  const admins = await db.user.findMany({
+    where: {
+      role: Role.ADMIN,
     },
     orderBy: {
       createdAt: "desc",
@@ -52,16 +49,16 @@ export default async function AdminDashboard() {
 
   const usersTabs = [
     {
-      value: "all-users",
-      users: allUsers,
-    },
-    {
       value: "citizens",
       users: citizens,
     },
     {
       value: "student-athletes",
       users: studentAthletes,
+    },
+    {
+      value: "admins",
+      users: admins,
     },
   ];
 
@@ -74,16 +71,16 @@ export default async function AdminDashboard() {
               Manage users
             </h1>
             <Separator />
-            <Tabs defaultValue="all-users" className="w-full">
+            <Tabs defaultValue="admins" className="w-full">
               <TabsList className="mb-4 flex w-full">
-                <TabsTrigger value="all-users" className="flex-1">
-                  All
-                </TabsTrigger>
                 <TabsTrigger value="citizens" className="flex-1">
                   Citizens
                 </TabsTrigger>
                 <TabsTrigger value="student-athletes" className="flex-1">
                   Student-Athletes
+                </TabsTrigger>
+                <TabsTrigger value="admins" className="flex-1">
+                  Admins
                 </TabsTrigger>
               </TabsList>
               {usersTabs.map((tabContent) => (

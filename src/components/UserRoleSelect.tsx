@@ -1,7 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
+import { Role, User } from "@prisma/client";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { ChevronDown } from "lucide-react";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,26 +15,13 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Role, User } from "@prisma/client";
-
+} from "@components/ui/alert-dialog";
+import { Badge } from "@components/ui/badge";
+import { Select, SelectContent, SelectItem } from "@components/ui/select";
 import { useToast } from "@components/ui/use-toast";
 import { UserRoleText } from "@components/UserCard";
 
-export default function UserRoleSelect({
-  user,
-  setIsSavingUserRoleUpdate,
-}: {
-  user: User;
-  setIsSavingUserRoleUpdate: Dispatch<SetStateAction<boolean>>;
-}) {
+export default function UserRoleSelect({ user }: { user: User }) {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -40,7 +31,12 @@ export default function UserRoleSelect({
   async function onSelectChangeConfirm() {
     if (userRoleChangeTo && Object.values(Role).includes(userRoleChangeTo)) {
       try {
-        setIsSavingUserRoleUpdate(true);
+        toast({
+          title: "Updating user role...",
+          description: `Changing ${user.name}'s role from ${
+            UserRoleText[user.role]
+          } to ${UserRoleText[userRoleChangeTo]}.`,
+        });
 
         const response = await fetch(`/api/users/${user.id}`, {
           method: "PATCH",
@@ -53,7 +49,6 @@ export default function UserRoleSelect({
         });
 
         if (!response?.ok) {
-          setIsSavingUserRoleUpdate(false);
           throw new Error();
         }
 
@@ -65,9 +60,7 @@ export default function UserRoleSelect({
         });
 
         router.refresh();
-        setIsSavingUserRoleUpdate(false);
       } catch {
-        setIsSavingUserRoleUpdate(false);
         toast({
           title: "Uh oh! Something went wrong.",
           description:
@@ -91,9 +84,23 @@ export default function UserRoleSelect({
           setAlertDialogOpen(true);
         }}
       >
-        <SelectTrigger className="w-40">
-          <SelectValue />
-        </SelectTrigger>
+        <SelectPrimitive.Trigger>
+          <Badge
+            variant={
+              user.role === Role.ADMIN
+                ? "default"
+                : user.role === Role.STUDENTATHLETE
+                ? "secondary"
+                : "accent"
+            }
+            className="w-fit gap-2"
+          >
+            <p className="font-normal">{UserRoleText[user.role]}</p>
+            <SelectPrimitive.Icon asChild>
+              <ChevronDown className="h-4 w-4 opacity-50" />
+            </SelectPrimitive.Icon>
+          </Badge>
+        </SelectPrimitive.Trigger>
         <SelectContent className="w-40">
           <SelectItem value={Role.CITIZEN}>
             {UserRoleText[Role.CITIZEN]}

@@ -1,20 +1,21 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Select, SelectContent, SelectItem } from "@/components/ui/select";
 import { Job, Status } from "@prisma/client";
 import * as SelectPrimitive from "@radix-ui/react-select";
+import { ChevronDown } from "lucide-react";
 
+import { Badge } from "@components/ui/badge";
+import Dot from "@components/ui/dot";
+import { Select, SelectContent, SelectItem } from "@components/ui/select";
 import { useToast } from "@components/ui/use-toast";
 import { JobStatusText } from "./PersonalJobCard";
-import { Badge } from "./ui/badge";
-import Dot from "./ui/dot";
 
 export default function JobStatusSelect({ job }: { job: Job }) {
   const router = useRouter();
   const { toast } = useToast();
 
-  async function onSelectChangeConfirm(newStatus: Status) {
+  async function onSelectChange(newStatus: Status) {
     if (newStatus && Object.values(Status).includes(newStatus)) {
       try {
         toast({
@@ -63,13 +64,19 @@ export default function JobStatusSelect({ job }: { job: Job }) {
 
   return (
     <>
-      <Select value={job.status} onValueChange={onSelectChangeConfirm}>
+      <Select value={job.status} onValueChange={onSelectChange}>
         <SelectPrimitive.Trigger>
-          <Badge variant={Status[job.status]} className="w-fit gap-2">
+          <Badge
+            variant={Status[job.status]}
+            className="hover:bg-background-less dark:hover:bg-background-less w-fit gap-2"
+          >
             <Dot status={Status[job.status]} />
             <p className="whitespace-nowrap font-normal">
               {JobStatusText[job.status]}
             </p>
+            <SelectPrimitive.Icon asChild>
+              <ChevronDown className="h-4 w-4 opacity-50" />
+            </SelectPrimitive.Icon>
           </Badge>
         </SelectPrimitive.Trigger>
         <SelectContent className="w-32">
