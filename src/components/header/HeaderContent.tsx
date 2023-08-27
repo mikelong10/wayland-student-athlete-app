@@ -70,7 +70,7 @@ export default function HeaderContent({ user }: { user?: User }) {
   return (
     <header
       className={cn(
-        "fixed left-0 top-0 z-50 flex w-full items-center justify-between gap-4 bg-transparent px-6 py-4 transition-all duration-500 md:px-10 lg:gap-8 lg:px-16 xl:px-24",
+        "fixed left-0 top-0 z-50 flex w-full items-center justify-between gap-4 bg-transparent px-6 py-4 transition-all md:px-10 lg:gap-8 lg:px-16 xl:px-24",
         scrolled && "bg-background shadow-accent py-2 shadow-lg"
       )}
     >
