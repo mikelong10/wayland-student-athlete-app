@@ -117,12 +117,12 @@ export default function Home() {
         </div>
       </section>
       <section
-        id="landing-what-we-do"
-        className="from-secondary to-background flex w-full flex-col items-center justify-start gap-8 bg-gradient-to-bl to-50% px-6 py-20 dark:from-amber-950 md:px-10
+        className="from-secondary to-background relative flex w-full flex-col items-center justify-start gap-8 bg-gradient-to-bl to-50% px-6 pb-16 dark:from-amber-950 md:px-10
         lg:px-16 xl:px-24"
       >
+        <div id="landing-what-we-do" className="absolute -top-28 bg-red-500" />
         <h1 className="text-3xl font-semibold tracking-tight md:text-4xl xl:text-5xl">
-          What we do
+          Our services
         </h1>
         <div className="xs:px-6 grid w-full grid-cols-1 gap-4 sm:px-12 md:grid-cols-2 md:px-16">
           {servicesCards.map((service) => (
@@ -148,24 +148,13 @@ export default function Home() {
             </Card>
           ))}
         </div>
-        {/* <p className="text-foreground-less scroll-m-20 text-lg font-medium tracking-tight md:text-xl">
-          Simple, trustworthy, quality{" "}
-          <span className="text-primary">solutions</span> for all your{" "}
-          <span className="text-primary">odd jobs</span>.
-        </p>
-        <Link href="/request">
-          <Button className="flex w-40 items-center gap-2">
-            Request a job
-            <MoveRight />
-          </Button>
-        </Link> */}
       </section>
       <section
-        className="from-accent to-background dark:from-background-less flex w-full flex-col justify-center gap-6 bg-gradient-to-tr to-50% px-6 md:px-10
+        className="from-secondary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-tr to-50% px-6 dark:from-amber-950 md:px-10
 lg:px-16 xl:px-24"
       >
-        <h1 className="text-foreground scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl xl:text-6xl">
-          Who we are
+        <h1 className="text-3xl font-semibold tracking-tight md:text-4xl xl:text-5xl">
+          Our people
         </h1>
         <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
           Simple, trustworthy, quality{" "}
@@ -180,11 +169,25 @@ lg:px-16 xl:px-24"
         </Link>
       </section>
       <section
-        className="from-accent to-background dark:from-background-less flex w-full flex-col justify-center gap-6 bg-gradient-to-br to-50% px-6 md:px-10
+        className="from-secondary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-br to-50% px-6 dark:from-amber-950 md:px-10
 lg:px-16 xl:px-24"
       >
-        <h1 className="text-foreground scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl xl:text-6xl">
-          Reviews
+        <div className="my-16 flex w-full justify-center gap-36">
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-6xl font-bold">800+</p>
+            <p className="text-md text-muted-foreground">
+              Jobs requested and completed
+            </p>
+          </div>
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-6xl font-bold">200+</p>
+            <p className="text-md text-muted-foreground">
+              Parents, kids, and families served
+            </p>
+          </div>
+        </div>
+        <h1 className="text-3xl font-semibold tracking-tight md:text-4xl xl:text-5xl">
+          What people have said
         </h1>
         <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
           Simple, trustworthy, quality{" "}
