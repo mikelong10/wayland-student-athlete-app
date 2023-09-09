@@ -17,7 +17,6 @@ import {
   FormMessage,
 } from "@components/ui/form";
 import { Input } from "@components/ui/input";
-import { Separator } from "@components/ui/separator";
 import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
 
@@ -94,7 +93,7 @@ export default function RequestJobForm({
         className="flex w-full flex-col gap-4"
       >
         <div className="flex flex-col gap-2">
-          <h3 className="text-lg font-medium tracking-tight">Name</h3>
+          <h2 className="text-2xl font-semibold tracking-tight">Name</h2>
           <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-4">
             <FormField
               control={form.control}
@@ -162,132 +161,137 @@ export default function RequestJobForm({
             />
           </div>
         </div>
-        <Separator className="bg-secondary rounded-full" />
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold tracking-tight">Job info</h2>
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>What do you want done? *</FormLabel>
-                <FormDescription>
-                  {
-                    "(moving, sports/music lessons, yardwork, babysitting, car rides, projects, anything!)"
-                  }
-                </FormDescription>
-                <FormControl>
-                  <Textarea {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="location"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Where should we come for the job? *</FormLabel>
-                <FormDescription>
-                  Please provide an address or location
-                </FormDescription>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="time"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>When do you need the job done? *</FormLabel>
-                <FormDescription>
-                  {
-                    "Provide a date and time or frequency (ex: weekly, monthly, every Tues and Thurs)"
-                  }
-                </FormDescription>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="estimate"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  How long do you think the job will take? *
-                </FormLabel>
-                <FormDescription>
-                  {
-                    "Please provide your best estimate, but don't worry about it too much!"
-                  }
-                </FormDescription>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex w-full flex-col gap-2 sm:gap-4">
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>What do you want done? *</FormLabel>
+                  <FormDescription>
+                    {
+                      "(moving, sports/music lessons, yardwork, babysitting, car rides, projects, anything!)"
+                    }
+                  </FormDescription>
+                  <FormControl>
+                    <Textarea {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="location"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Where should we come for the job? *</FormLabel>
+                  <FormDescription>
+                    Please provide an address or location
+                  </FormDescription>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="time"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>When do you need the job done? *</FormLabel>
+                  <FormDescription>
+                    {
+                      "Provide a date and time or frequency (ex: weekly, monthly, every Tues and Thurs)"
+                    }
+                  </FormDescription>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="estimate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    How long do you think the job will take? *
+                  </FormLabel>
+                  <FormDescription>
+                    {
+                      "Please provide your best estimate, but don't worry about it too much!"
+                    }
+                  </FormDescription>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
         </div>
-        <Separator className="bg-secondary rounded-full" />
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
-          <FormField
-            control={form.control}
-            name="contact"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>What&apos;s the best way to reach you? *</FormLabel>
-                <FormDescription>
-                  Please provide us a phone number, email, etc!
-                </FormDescription>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="learn"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>How did you hear about us?</FormLabel>
-                <FormDescription>{"We would love to know :)"}</FormDescription>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="special"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Any special questions, requests, or information?
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex w-full flex-col gap-2 sm:gap-4">
+            <FormField
+              control={form.control}
+              name="contact"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    What&apos;s the best way to reach you? *
+                  </FormLabel>
+                  <FormDescription>
+                    Please provide us a phone number, email, etc!
+                  </FormDescription>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="learn"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>How did you hear about us?</FormLabel>
+                  <FormDescription>
+                    {"We would love to know :)"}
+                  </FormDescription>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="special"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Any special questions, requests, or information?
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
         </div>
-        <Separator className="bg-secondary rounded-full" />
         <div>
           <FormField
             control={form.control}
