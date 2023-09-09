@@ -7,6 +7,7 @@ import { User } from "@prisma/client";
 
 import { HeaderNavLink } from "@lib/types";
 import { cn } from "@lib/utils";
+import Container from "@components/Container";
 import logo from "../../../public/logo.png";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
@@ -68,17 +69,19 @@ export default function HeaderContent({ user }: { user?: User }) {
   }, []);
 
   return (
-    <header
+    <Container
       className={cn(
-        "fixed left-0 top-0 z-50 flex w-full items-center justify-between gap-4 bg-transparent px-6 py-4 transition-all md:px-10 lg:gap-8 lg:px-16 xl:px-24",
+        "fixed left-0 top-0 z-50 w-full bg-transparent py-4 transition-all",
         scrolled && "bg-background shadow-accent py-2 shadow-lg"
       )}
     >
-      <Link href={"/"} className="hover:animate-pulse">
-        <Image src={logo} alt={"WSA logo"} width={40} height={40} />
-      </Link>
-      <MobileNav user={user} headerNavLinks={headerNavLinks} />
-      <DesktopNav user={user} headerNavLinks={headerNavLinks} />
-    </header>
+      <header className="flex items-center justify-between gap-4 lg:gap-8">
+        <Link href={"/"} className="hover:animate-pulse">
+          <Image src={logo} alt={"WSA logo"} width={40} height={40} />
+        </Link>
+        <MobileNav user={user} headerNavLinks={headerNavLinks} />
+        <DesktopNav user={user} headerNavLinks={headerNavLinks} />
+      </header>
+    </Container>
   );
 }

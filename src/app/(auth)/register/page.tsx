@@ -5,6 +5,7 @@ import { ChevronLeft } from "lucide-react";
 
 import { getCurrentUser } from "@lib/session";
 import { UserAuthForm } from "@components/auth/UserAuthForm";
+import Container from "@components/Container";
 import { Button } from "@components/ui/button";
 import logo from "../../../../public/logo.png";
 
@@ -21,14 +22,14 @@ export default async function RegisterPage() {
   }
 
   return (
-    <div className="from-secondary to-background dark:to-background flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-bl to-70% dark:from-stone-900">
+    <Container className="from-secondary to-background dark:to-background flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-bl to-70% dark:from-stone-900">
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
         <Button variant={"ghost"} className="flex items-center gap-2 px-4">
           <ChevronLeft className="h-4 w-4" />
           Back
         </Button>
       </Link>
-      <div className="flex w-full min-w-[280px] max-w-md flex-col justify-center space-y-6 px-6">
+      <div className="flex w-full min-w-[280px] max-w-md flex-col justify-center space-y-6">
         <div className="flex w-full flex-col space-y-2 text-center">
           <div className="flex justify-center">
             <Link href={"/"} className="hover:animate-pulse">
@@ -71,6 +72,6 @@ export default async function RegisterPage() {
           </Link>
         </p>
       </div>
-    </div>
+    </Container>
   );
 }

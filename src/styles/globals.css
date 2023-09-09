@@ -62,13 +62,3 @@
     --input: 30 6% 25%;
   }
 }
-
-@layer base {
-  * {
-    @apply border-border;
-    scroll-behavior: smooth;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}

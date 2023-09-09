@@ -3,6 +3,7 @@ import { Role } from "@prisma/client";
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
 import BusinessJobCard from "@components/BusinessJobCard";
+import Container from "@components/Container";
 import { Separator } from "@components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
@@ -83,7 +84,7 @@ export default async function JobDashboard() {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center">
-      <section className="flex h-full w-full max-w-[1600px] flex-col px-6 py-20 md:px-10 lg:px-16  xl:px-24">
+      <Container className="flex h-full w-full max-w-[1600px] flex-col py-20">
         <div className="flex flex-col gap-6">
           <h1 className="text-4xl font-extrabold tracking-tight">
             Manage jobs
@@ -123,7 +124,7 @@ export default async function JobDashboard() {
             ))}
           </Tabs>
         </div>
-      </section>
+      </Container>
     </main>
   );
 }
