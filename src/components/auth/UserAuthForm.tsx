@@ -21,7 +21,7 @@ export const userAuthSchema = z.object({
   email: z
     .string()
     .email("Please provide a valid email")
-    .nonempty("Please enter your email"),
+    .min(1, "Please enter your email"),
 });
 
 type FormData = z.infer<typeof userAuthSchema>;
@@ -47,7 +47,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
     setIsLoading(false);
 
-    if (!signInResult?.ok) {
+    if (signInResult && signInResult.error) {
       return toast({
         title: "Something went wrong.",
         description: "Your sign in request failed. Please try again.",
