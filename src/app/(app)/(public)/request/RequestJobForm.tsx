@@ -1,11 +1,13 @@
 "use client";
 
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { requestJobFormSchema } from "@lib/types";
+import { cn } from "@lib/utils";
 import { Button } from "@components/ui/button";
 import {
   Form,
@@ -28,6 +30,7 @@ export default function RequestJobForm({
   setRequestSent: Dispatch<SetStateAction<boolean>>;
 }) {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<RequestJobFormValues>({
     resolver: zodResolver(requestJobFormSchema),
@@ -48,6 +51,8 @@ export default function RequestJobForm({
   });
 
   async function onSubmit(values: RequestJobFormValues) {
+    setIsSubmitting(true);
+
     toast({
       title: "Sending your job request...",
       description: "Hope you're having a great day today!",
@@ -84,6 +89,8 @@ export default function RequestJobForm({
         variant: "destructive",
       });
     }
+
+    setIsSubmitting(false);
   }
 
   return (
@@ -311,8 +318,22 @@ export default function RequestJobForm({
             )}
           />
         </div>
-        <Button type="submit" size={"lg"} className="text-md rounded-full">
-          Submit
+        <Button
+          type="submit"
+          size={"lg"}
+          className={cn(
+            "text-md rounded-full",
+            isSubmitting ? "bg-primary/70" : ""
+          )}
+        >
+          {isSubmitting ? (
+            <div className="flex items-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Submitting...
+            </div>
+          ) : (
+            "Submit"
+          )}
         </Button>
       </form>
     </Form>
