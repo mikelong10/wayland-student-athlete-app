@@ -90,8 +90,8 @@ export default function UserRoleSelect({ user }: { user: User }) {
               user.role === Role.ADMIN
                 ? "default"
                 : user.role === Role.STUDENTATHLETE
-                ? "secondary"
-                : "accent"
+                  ? "secondary"
+                  : "accent"
             }
             className="w-fit gap-2"
           >

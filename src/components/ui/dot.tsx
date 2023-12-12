@@ -14,8 +14,8 @@ export default function Dot({ status, className }: DotProps) {
           status === Status.TODO
             ? " bg-red-500"
             : status === Status.INPROGRESS
-            ? "bg-yellow-500"
-            : "bg-green-500"
+              ? "bg-yellow-500"
+              : "bg-green-500"
         }`,
         className
       )}
