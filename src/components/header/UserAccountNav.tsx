@@ -7,6 +7,7 @@ import {
   CheckSquare,
   KanbanSquare,
   LogOut,
+  Menu,
   UserCircle2,
   Users,
 } from "lucide-react";
@@ -53,10 +54,16 @@ export default function UserAccountNav({
         ) : (
           <DropdownMenu>
             <DropdownMenuTrigger className="rounded-full">
-              <UserAvatar
-                user={{ name: user.name, image: user.image }}
-                className="h-10 w-10"
-              />
+              <Button
+                variant={"outline"}
+                className="flex h-fit items-center justify-between gap-4 rounded-full px-3 py-2"
+              >
+                <Menu size={24} className="ml-1" />
+                <UserAvatar
+                  user={{ name: user.name, image: user.image }}
+                  className="h-10 w-10"
+                />
+              </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align={isMobile ? "center" : "end"}>
               <div className="flex items-center justify-start gap-2 p-2">
