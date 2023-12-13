@@ -53,8 +53,8 @@ export default function UserAccountNav({
           </div>
         ) : (
           <DropdownMenu>
-            <DropdownMenuTrigger className="rounded-full">
-              <div className="hover:bg-accent/50 focus:bg-accent/50 flex h-fit items-center justify-between gap-4 rounded-full border-2 px-3 py-2 transition-colors hover:border-transparent focus:border-transparent focus:outline-none">
+            <DropdownMenuTrigger>
+              <div className="flex h-fit items-center justify-between gap-4 rounded-full border-2 px-3 py-2 transition-shadow hover:cursor-pointer hover:shadow-md focus:shadow-md">
                 <Menu size={24} className="ml-1" />
                 <UserAvatar
                   user={{ name: user.name, image: user.image }}

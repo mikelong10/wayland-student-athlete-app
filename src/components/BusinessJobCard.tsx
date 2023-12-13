@@ -20,14 +20,14 @@ export default function BusinessJobCard({
   allStudentAthletes,
 }: BusinessJobCardProps) {
   const statusToggleAndJobAssign = (
-    <div className="flex items-center justify-between">
-      <JobStatusSelect job={job} />
+    <div className="flex items-center justify-between gap-4">
       <JobCardAssign
         job={job}
         currentAssignee={currentAssignee}
         currentUser={currentUser}
         allStudentAthletes={allStudentAthletes}
       />
+      <JobStatusSelect job={job} />
     </div>
   );
   return <BaseJobCard job={job} statusAssign={statusToggleAndJobAssign} />;

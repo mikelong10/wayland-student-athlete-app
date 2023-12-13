@@ -1,12 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { User } from "@prisma/client";
 import Fuse from "fuse.js";
+import { Check } from "lucide-react";
 
+import { cn } from "@lib/utils";
 import { BusinessJobCardProps } from "@components/BusinessJobCard";
-import { Button } from "@components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -29,7 +29,6 @@ export default function JobCardAssign({
   currentUser,
   allStudentAthletes,
 }: BusinessJobCardProps) {
-  const router = useRouter();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
@@ -48,18 +47,16 @@ export default function JobCardAssign({
   }
 
   async function onAssign(assigneeId: string) {
-    if (assigneeId !== currentAssignee?.id) {
+    if (assigneeId !== selectedUser?.id) {
       console.log("assigneeId:", assigneeId);
       const newAssignee =
         allStudentAthletes.find(
           (studentAthlete) => studentAthlete.id === assigneeId
         ) || null;
-      setSelectedUser(newAssignee);
       setOpen(false);
-      console.log(job, currentAssignee, currentUser, assigneeId, newAssignee);
       if (currentUser) {
         toast({
-          description: `Assigning job for ${job.adultFirstName} ${job.adultLastName} to ${newAssignee?.name}...`,
+          description: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}...`,
         });
         try {
           const response = await fetch(`/api/jobs/${job.id}`, {
@@ -79,10 +76,10 @@ export default function JobCardAssign({
             throw new Error();
           }
 
+          setSelectedUser(newAssignee);
           toast({
-            description: `Successfully assigned job for ${job.adultFirstName} ${job.adultLastName} to ${newAssignee?.name}!`,
+            description: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}!`,
           });
-          router.refresh();
         } catch {
           toast({
             title: "Uh oh! Something went wrong.",
@@ -96,46 +93,48 @@ export default function JobCardAssign({
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="underline"
-            size="sm"
-            className="hover:text-primary focus:text-primary ml-2 w-fit justify-start px-2 py-1 hover:bg-transparent hover:underline focus:bg-transparent"
-          >
-            <p className="text-xs font-normal">
-              {selectedUser ? selectedUser.name : "Assign job"}
-            </p>
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="p-0" side="bottom" align="end">
-          <Command filter={searchStudentAthletes}>
-            <CommandInput placeholder="Assign job..." />
-            <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
-              <CommandGroup>
-                {allStudentAthletes.map((studentAthlete) => (
-                  <CommandItem
-                    key={studentAthlete.id}
-                    value={studentAthlete.id}
-                    onSelect={onAssign}
-                  >
-                    <span>{studentAthlete.name}</span>
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
-      <UserAvatar
-        user={{
-          image: currentAssignee?.image,
-          name: currentAssignee?.name,
-        }}
-        className="h-8 w-8"
-      />
-    </div>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <div className="flex items-center gap-2 rounded-full border-2 px-3 py-2 transition-shadow hover:cursor-pointer hover:shadow-md focus:shadow-md">
+          <UserAvatar
+            user={{
+              image: selectedUser?.image,
+              name: selectedUser?.name,
+            }}
+            className="h-8 w-8"
+          />
+          <p className="overflow-auto text-center text-xs font-normal">
+            {selectedUser ? selectedUser.name : "Assign job"}
+          </p>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent className="p-0" side="bottom" align="start">
+        <Command filter={searchStudentAthletes}>
+          <CommandInput placeholder="Assign job to..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup>
+              {allStudentAthletes.map((studentAthlete) => (
+                <CommandItem
+                  key={studentAthlete.id}
+                  value={studentAthlete.id}
+                  onSelect={onAssign}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      selectedUser?.name === studentAthlete.name
+                        ? "opacity-100"
+                        : "opacity-0"
+                    )}
+                  />
+                  <span>{studentAthlete.name}</span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 }

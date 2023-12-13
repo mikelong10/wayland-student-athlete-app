@@ -71,24 +71,17 @@ export default function JobStatusSelect({ job }: { job: Job }) {
             className="hover:bg-background-less dark:hover:bg-background-less w-fit gap-2"
           >
             <Dot status={Status[job.status]} />
-            <p className="whitespace-nowrap font-normal">
-              {JobStatusText[job.status]}
-            </p>
             <SelectPrimitive.Icon asChild>
               <ChevronDown className="h-4 w-4 opacity-50" />
             </SelectPrimitive.Icon>
           </Badge>
         </SelectPrimitive.Trigger>
-        <SelectContent className="w-32">
-          <SelectItem value={Status.TODO}>
-            {JobStatusText[Status.TODO]}
-          </SelectItem>
-          <SelectItem value={Status.INPROGRESS}>
-            {JobStatusText[Status.INPROGRESS]}
-          </SelectItem>
-          <SelectItem value={Status.DONE}>
-            {JobStatusText[Status.DONE]}
-          </SelectItem>
+        <SelectContent className="w-32" align="end">
+          {Object.values(Status).map((status) => (
+            <SelectItem key={status} value={status}>
+              {JobStatusText[status]}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </>

@@ -21,12 +21,18 @@ export default function BaseJobCard({ job, statusAssign }: BaseJobCardProps) {
     <Card key={job.id} className="flex flex-col gap-4">
       <CardHeader className="flex flex-col gap-2">
         {statusAssign}
-        <CardTitle>{`${job.adultFirstName} ${job.adultLastName}`}</CardTitle>
-        <CardDescription>{job.contact}</CardDescription>
+        <div className="flex flex-col">
+          <CardTitle className="flex w-full items-center">
+            <div className="flex h-8 items-center overflow-auto whitespace-nowrap">
+              {`${job.adultFirstName} ${job.adultLastName}`}
+            </div>
+          </CardTitle>
+          <CardDescription>{job.contact}</CardDescription>
+        </div>
       </CardHeader>
       <div className="flex h-full flex-col justify-between gap-4">
         <CardContent>
-          <p className="border-l-2 pl-2 leading-7">{job.description}</p>
+          <p className="border-l-2 pl-2 italic">{job.description}</p>
         </CardContent>
         <CardFooter>
           <p className="text-muted-foreground text-xs">
