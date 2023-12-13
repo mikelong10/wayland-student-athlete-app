@@ -9,10 +9,10 @@
     --foreground: 24 10% 10%;
     --foreground-less: 12 6% 15%;
 
-    --primary: 27 96% 61%;
+    --primary: 25 95% 53%;
     --primary-foreground: 60 5% 96%;
 
-    --secondary: 32 98% 83%;
+    --secondary: 31 97% 72%;
     --secondary-foreground: 24 10% 10%;
 
     --accent: 24 6% 83%;
@@ -35,7 +35,7 @@
 
     --border: 24 6% 83%;
     --input: 25 5% 45%;
-    --ring: 32 98% 83%;
+    --ring: 31 97% 72%;
 
     --radius: 0.5rem;
   }
