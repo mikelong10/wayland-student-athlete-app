@@ -9,6 +9,16 @@ export default {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
+    fontSize: {
+      sm: '1rem',
+      base: '1.125rem',
+      lg: '1.25rem',
+      xl: '1.5rem',
+      '2xl': '1.875rem',
+      '3xl': '2.25rem',
+      '4xl': '3rem',
+      '5xl': '3.75rem',
+    },
     container: {
       center: true,
       padding: "2rem",
