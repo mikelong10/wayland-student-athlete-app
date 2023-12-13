@@ -60,7 +60,7 @@ export default function Home() {
           <span className="text-primary">odd jobs</span>.
         </p>
         <Link href="/request">
-          <Button className="flex w-40 items-center gap-2">
+          <Button className="flex items-center justify-between gap-4">
             Request a job
             <MoveRight />
           </Button>
@@ -90,7 +90,7 @@ export default function Home() {
           <span className="text-primary">odd jobs</span>.
         </p>
         <Link href="/request">
-          <Button className="flex w-40 items-center gap-2">
+          <Button className="flex items-center justify-between gap-4">
             Request a job
             <MoveRight />
           </Button>

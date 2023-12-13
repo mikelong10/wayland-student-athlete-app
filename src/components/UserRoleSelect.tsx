@@ -101,7 +101,7 @@ export default function UserRoleSelect({ user }: { user: User }) {
             </SelectPrimitive.Icon>
           </Badge>
         </SelectPrimitive.Trigger>
-        <SelectContent className="w-40">
+        <SelectContent>
           <SelectItem value={Role.CITIZEN}>
             {UserRoleText[Role.CITIZEN]}
           </SelectItem>
