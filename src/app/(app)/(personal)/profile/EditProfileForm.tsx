@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@prisma/client";
@@ -34,8 +33,9 @@ import { UserAvatar } from "@components/UserAvatar";
 type EditProfileFormValues = z.infer<typeof editProfileFormSchema>;
 
 export default function EditProfileForm({ user }: { user: User }) {
-  const router = useRouter();
   const { toast } = useToast();
+
+  const [activeUser, setActiveUser] = useState<User>(user);
   const [isSavingEdit, setIsSavingEdit] = useState(false);
 
   const form = useForm<EditProfileFormValues>({
@@ -55,7 +55,7 @@ export default function EditProfileForm({ user }: { user: User }) {
     });
 
     try {
-      const editProfileResponse = await fetch(`/api/users/${user.id}`, {
+      const editProfileResponse = await fetch(`/api/users/${activeUser.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -67,12 +67,14 @@ export default function EditProfileForm({ user }: { user: User }) {
         throw new Error();
       }
 
+      const updatedUser: User = await editProfileResponse.json();
+
       toast({
         title: "Looking good!",
         description: "Your profile was successfully updated",
       });
 
-      router.refresh();
+      setActiveUser(updatedUser);
     } catch {
       toast({
         title: "Uh oh! Something went wrong.",
@@ -88,15 +90,15 @@ export default function EditProfileForm({ user }: { user: User }) {
     <div className="my-8 flex w-full items-center justify-start gap-8">
       <UserAvatar
         user={{
-          image: user.image,
-          name: user.name,
+          image: activeUser.image,
+          name: activeUser.name,
         }}
         fallbackIconSize={16}
         className="h-24 w-24"
       />
       <div className="flex items-start gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          {user.name ?? "Your Name"}
+          {activeUser.name ?? "Your Name"}
         </h2>
         <Dialog>
           <DialogTrigger asChild>
