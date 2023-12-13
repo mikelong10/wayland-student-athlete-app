@@ -12,17 +12,27 @@ export interface HeaderNavLink {
   desktopStyle?: string;
 }
 
+export const editProfileFormSchema = z
+  .object({
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+  })
+  .refine((data) => data.firstName && data.lastName, {
+    message: "Please provide both first and last name",
+    path: ["lastName"],
+  });
+
 export const requestJobFormSchema = z.object({
-  adultFirstName: z.string().nonempty("Required"),
-  adultLastName: z.string().nonempty("Required"),
+  adultFirstName: z.string().min(1, "Required"),
+  adultLastName: z.string().min(1, "Required"),
   childFirstName: z.string().optional(),
   childLastName: z.string().optional(),
-  description: z.string().nonempty("Required"),
-  location: z.string().nonempty("Required"),
-  time: z.string().nonempty("Required"),
-  estimate: z.string().nonempty("Required"),
-  contact: z.string().nonempty("Required"),
+  description: z.string().min(1, "Required"),
+  location: z.string().min(1, "Required"),
+  time: z.string().min(1, "Required"),
+  estimate: z.string().min(1, "Required"),
+  contact: z.string().min(1, "Required"),
   learn: z.string().optional(),
   special: z.string().optional(),
-  signature: z.string().nonempty("Required"),
+  signature: z.string().min(1, "Required"),
 });

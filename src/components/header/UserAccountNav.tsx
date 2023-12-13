@@ -73,20 +73,6 @@ export default function UserAccountNav({
                   )}
                 </div>
               </div>
-              <DropdownMenuSeparator />
-              <DropdownMenuLabel>Personal</DropdownMenuLabel>
-              <DropdownMenuItem asChild>
-                <Link href="/jobs" onClick={() => closeMobileNav()}>
-                  <CheckSquare className="mr-2 h-4 w-4" />
-                  My jobs
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/profile" onClick={() => closeMobileNav()}>
-                  <UserCircle2 className="mr-2 h-4 w-4" />
-                  Profile
-                </Link>
-              </DropdownMenuItem>
               {(user.role === Role.ADMIN ||
                 user.role === Role.STUDENTATHLETE) && (
                 <>
@@ -108,6 +94,20 @@ export default function UserAccountNav({
                   )}
                 </>
               )}
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel>Personal</DropdownMenuLabel>
+              <DropdownMenuItem asChild>
+                <Link href="/jobs" onClick={() => closeMobileNav()}>
+                  <CheckSquare className="mr-2 h-4 w-4" />
+                  My jobs
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/profile" onClick={() => closeMobileNav()}>
+                  <UserCircle2 className="mr-2 h-4 w-4" />
+                  Profile
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onSelect={(event) => {
