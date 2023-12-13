@@ -77,7 +77,7 @@ export default function HeaderContent({ user }: { user?: User }) {
     >
       <header className="flex items-center justify-between gap-4 lg:gap-8">
         <Link href={"/"} className="hover:animate-pulse">
-          <Image src={logo} alt={"WSA logo"} width={40} height={40} />
+          <Image src={logo} alt={"WSA logo"} width={48} height={48} />
         </Link>
         <MobileNav user={user} headerNavLinks={headerNavLinks} />
         <DesktopNav user={user} headerNavLinks={headerNavLinks} />

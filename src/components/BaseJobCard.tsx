@@ -23,7 +23,7 @@ export default function BaseJobCard({ job, statusAssign }: BaseJobCardProps) {
         {statusAssign}
         <div className="flex flex-col">
           <CardTitle className="flex w-full items-center">
-            <div className="flex h-8 items-center overflow-auto whitespace-nowrap">
+            <div className="flex h-10 items-end overflow-auto whitespace-nowrap">
               {`${job.adultFirstName} ${job.adultLastName}`}
             </div>
           </CardTitle>

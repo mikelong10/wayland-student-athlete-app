@@ -12,11 +12,9 @@ import {
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@components/ui/card";
-import InteractiveButton from "@components/ui/InteractiveButton";
 
 type ServiceCardInfo = {
   icon: JSX.Element;
@@ -87,13 +85,6 @@ export default function ServiceCard({ info }: { info: ServiceCardInfo }) {
         <CardContent>
           <p>{info.description}</p>
         </CardContent>
-        {info.reviewSectionId && (
-          <CardFooter>
-            <InteractiveButton idScrollToElement={info.reviewSectionId}>
-              Reviews
-            </InteractiveButton>
-          </CardFooter>
-        )}
       </div>
     </Card>
   );

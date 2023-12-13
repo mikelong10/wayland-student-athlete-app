@@ -65,7 +65,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn("flex w-full flex-col gap-6", className)} {...props}>
       <div className="flex flex-col gap-2">
         <Button
-          variant="outline"
+          variant="traced"
           onClick={() => {
             setIsGoogleLoading(true);
             signIn("google");
@@ -80,7 +80,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           Google
         </Button>
         <Button
-          variant="outline"
+          variant="traced"
           onClick={() => {
             setIsFacebookLoading(true);
             signIn("facebook");
