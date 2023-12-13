@@ -28,7 +28,7 @@ export default function UserCard({ user }: UserCardProps) {
     <Card key={user.id} className="flex flex-col justify-between gap-4">
       <CardHeader className="flex flex-col items-start gap-3 overflow-hidden">
         <UserRoleSelect user={user} />
-        <CardTitle className="flex items-center gap-2 w-full">
+        <CardTitle className="flex w-full items-center gap-2">
           <UserAvatar
             user={{
               image: user.image,
@@ -36,7 +36,9 @@ export default function UserCard({ user }: UserCardProps) {
             }}
             className="h-8 w-8"
           />
-          <div className="flex items-center h-full whitespace-nowrap overflow-auto">{user.name}</div>
+          <div className="flex h-full items-center overflow-auto whitespace-nowrap">
+            {user.name}
+          </div>
         </CardTitle>
         <CardDescription className="border-l-2 pl-2 text-sm">
           {user.email}
