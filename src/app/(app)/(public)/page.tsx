@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, MoveRight } from "lucide-react";
 
-import Carousel from "@components/Carousel";
 import Container from "@components/Container";
-import ServiceCard, { servicesCards } from "@components/ServiceCard";
+import ReviewCarousel from "@components/ReviewCarousel";
+import ServicesContent from "@components/ServicesContent";
 import { Button } from "@components/ui/button";
+import { Card, CardContent, CardFooter, CardTitle } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
 import ansh from "../../../../public/ansh.jpg";
 import mike from "../../../../public/mike.jpg";
@@ -29,8 +30,8 @@ export default function Home() {
           <span className="text-primary">solutions</span> for all your{" "}
           <span className="text-primary">odd jobs</span>.
         </p>
-        <div className="w-full flex justify-center gap-4">
-          <div className="w-full flex justify-end">
+        <div className="xs:flex-row flex w-full flex-col gap-4 lg:justify-center">
+          <div className="flex lg:w-full lg:justify-end">
             <InteractiveButton
               variant={"traced"}
               className="flex items-center justify-between gap-4"
@@ -40,7 +41,7 @@ export default function Home() {
               <ArrowDown className="-mb-1 h-5 w-5 animate-bounce" />
             </InteractiveButton>
           </div>
-          <div className="w-full flex">
+          <div className="flex lg:w-full">
             <Link href="/request">
               <Button className="flex items-center justify-between gap-4">
                 Request a job
@@ -50,41 +51,56 @@ export default function Home() {
           </div>
         </div>
       </Container>
-      <Container className="from-secondary to-background relative flex w-full flex-col items-center justify-start gap-8 bg-gradient-to-bl to-50% mb-12 dark:from-amber-950">
+      <Container className="from-secondary to-background relative mb-12 flex w-full flex-col items-center justify-start gap-24 bg-gradient-to-bl to-50% dark:from-amber-950">
         <div id="landing-what-we-do" className="absolute -top-28" />
-        <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-          {servicesCards.map((info) => (
-            <ServiceCard key={info.title} info={info} />
-          ))}
-        </div>
+        <ServicesContent />
       </Container>
       <Container className="from-secondary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-tr to-50% dark:from-amber-950">
-        <div className="mb-24 flex flex-col items-center justify-center gap-6">
-          <div className="my-8 flex flex-col gap-8 sm:flex-row w-full justify-center sm:gap-8 md:gap-16 lg:gap-24">
-            <div className="flex flex-col items-center gap-4">
+        <div className="mb-24 flex w-full flex-col items-center justify-center gap-20">
+          <div className="mt-8 flex w-full flex-col justify-center gap-8 sm:flex-row sm:gap-8 md:gap-16 lg:gap-24">
+            <div className="flex flex-col items-center gap-2">
               <p className="text-6xl font-bold">800+</p>
               <p className="text-md text-muted-foreground underline underline-offset-8">
                 Jobs requested and completed
               </p>
             </div>
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-2">
               <p className="text-6xl font-bold">200+</p>
               <p className="text-md text-muted-foreground underline underline-offset-8">
                 Parents, kids, and families served
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-8 items-center">
-            <Carousel />
-          </div>
+          <Card className="flex w-fit flex-col gap-2 border-none shadow-2xl md:text-center">
+            <CardTitle>
+              How may we <span className="text-primary">assist you?</span>
+            </CardTitle>
+            <CardContent className="text-muted-foreground">
+              <p>
+                Let us know what tasks you don&apos;t have time and energy for.
+              </p>
+              <p>We&apos;ll take care of it.</p>
+            </CardContent>
+            <CardFooter className="w-full md:justify-center">
+              <Link href="/request">
+                <Button className="mt-4 flex items-center justify-between gap-4">
+                  Request a job
+                  <MoveRight />
+                </Button>
+              </Link>
+            </CardFooter>
+          </Card>
         </div>
       </Container>
       <Container className="from-secondary to-background flex w-full flex-col items-center justify-center gap-8 bg-gradient-to-br to-50% dark:from-amber-950">
-        <h1 className="text-3xl lg:text-4xl font-semibold tracking-tight">
+        <div className="mb-20 flex w-full flex-col items-center gap-8">
+          <ReviewCarousel />
+        </div>
+        <h2 className="text-3xl font-semibold tracking-tight lg:text-4xl">
           Our leaders
-        </h1>
-        <div className="flex flex-col sm:flex-row gap-12 md:gap-16 lg:gap-24">
-          <div className="flex flex-col gap-4 items-center">
+        </h2>
+        <div className="flex flex-col gap-12 sm:flex-row md:gap-16 lg:gap-24">
+          <div className="flex flex-col items-center gap-4">
             <Image
               src={ansh}
               alt={"Anshuman"}
@@ -92,14 +108,14 @@ export default function Home() {
               height={240}
               className="rounded-full"
             />
-            <div className="flex flex-col gap-1 items-center text-center">
+            <div className="flex flex-col items-center gap-1 text-center">
               <h4 className="text-xl font-semibold tracking-tight">
                 Anshuman Parulekar
               </h4>
               <p>WHS Class of 2024</p>
             </div>
           </div>
-          <div className="flex flex-col gap-4 items-center">
+          <div className="flex flex-col items-center gap-4">
             <Image
               src={mike}
               alt={"Mike"}
@@ -107,7 +123,7 @@ export default function Home() {
               height={240}
               className="rounded-full"
             />
-            <div className="flex flex-col gap-1 items-center text-center">
+            <div className="flex flex-col items-center gap-1 text-center">
               <h4 className="text-xl font-semibold tracking-tight">
                 Michael Lavelle
               </h4>
@@ -115,11 +131,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <Link href="/request">
-          <Button className="flex items-center justify-between gap-4">
-            Request a job
-            <MoveRight />
-          </Button>
+        <Link href="/what">
+          <Button variant={"accent"}>Our mission</Button>
         </Link>
       </Container>
     </main>

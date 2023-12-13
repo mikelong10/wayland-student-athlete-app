@@ -1,3 +1,4 @@
+import { createHash } from "crypto";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -11,4 +12,10 @@ export function formatDate(date: Date): string {
   const year = date.getFullYear();
 
   return `${month}/${day}/${year}`;
+}
+
+export function generateUniqueId(inputString: string) {
+  const hash = createHash("sha256");
+  hash.update(inputString);
+  return hash.digest("hex");
 }
