@@ -28,15 +28,15 @@ export default function Home() {
         <div className="flex gap-4">
           <InteractiveButton
             variant={"outline"}
-            className="flex w-36 items-center justify-between"
+            className="flex items-center justify-between gap-4"
             idScrollToElement="landing-what-we-do"
           >
             Learn more
             <ArrowDown className="-mb-1 h-5 w-5 animate-bounce" />
           </InteractiveButton>
           <Link href="/request">
-            <Button className="flex w-40 items-center justify-between">
-              Request a job
+            <Button className="flex items-center justify-between gap-4">
+              Get started
               <MoveRight />
             </Button>
           </Link>

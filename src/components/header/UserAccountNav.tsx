@@ -45,10 +45,7 @@ export default function UserAccountNav({
         {!user ? (
           <div className="flex gap-2">
             <Link href={"/login"} onClick={() => closeMobileNav()}>
-              <Button>Sign in</Button>
-            </Link>
-            <Link href={"/register"} onClick={() => closeMobileNav()}>
-              <Button variant={"outline"}>Sign up</Button>
+              <Button>Log in</Button>
             </Link>
           </div>
         ) : (

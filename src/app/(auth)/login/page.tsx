@@ -38,21 +38,32 @@ export default async function LoginPage() {
             </Link>
           </div>
           <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back
+            Welcome! Let&apos;s get started.
           </h1>
           <p className="text-muted-foreground text-sm">
-            Sign in through Google, Facebook, or Email
+            Log in through Google, Facebook, or Email
           </p>
         </div>
         <UserAuthForm />
-        <p className="text-muted-foreground px-4 text-center text-sm">
-          <Link
-            href="/register"
-            className="hover:text-brand underline underline-offset-4"
-          >
-            Don&apos;t have an account? Sign Up
-          </Link>
-        </p>
+        <div className="text-muted-foreground flex flex-col px-4 text-center text-xs">
+          <p>By continuing, you are agreeing to our </p>
+          <p>
+            <Link
+              href="/terms"
+              className="hover:text-brand underline underline-offset-4"
+            >
+              Terms of Service
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/privacy"
+              className="hover:text-brand underline underline-offset-4"
+            >
+              Privacy Policy
+            </Link>
+            .
+          </p>
+        </div>
       </div>
     </Container>
   );

@@ -98,7 +98,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       <div className="flex w-full items-center gap-1">
         <Separator className="flex flex-1" />
         <div className="flex justify-center text-xs uppercase">
-          <span className="text-muted-foreground px-2">Or continue with</span>
+          <span className="text-muted-foreground px-2">or continue with</span>
         </div>
         <Separator className="flex flex-1" />
       </div>
@@ -125,7 +125,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </div>
           <Button disabled={isLoading}>
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Sign In with Email
+            Log in
           </Button>
         </div>
       </form>
