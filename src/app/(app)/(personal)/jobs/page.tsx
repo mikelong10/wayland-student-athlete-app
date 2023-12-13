@@ -122,7 +122,7 @@ export default async function MyJobs() {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center">
-      <Container className="flex h-full w-full max-w-[1600px] flex-col py-20">
+      <Container className="flex h-full w-full max-w-[1600px] flex-col py-24">
         <div className="flex flex-col gap-6">
           <h1 className="text-4xl font-extrabold tracking-tight">My jobs</h1>
           <Separator />
