@@ -96,7 +96,7 @@ export default function UserAccountNav({
               <DropdownMenuItem asChild>
                 <Link href="/jobs" onClick={() => closeMobileNav()}>
                   <CheckSquare className="mr-2 h-4 w-4" />
-                  My jobs
+                  My Jobs
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
@@ -115,7 +115,7 @@ export default function UserAccountNav({
                 }}
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                Sign out
+                Log out
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
