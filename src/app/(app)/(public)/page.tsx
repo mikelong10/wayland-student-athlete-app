@@ -105,7 +105,7 @@ export default function Home() {
           <ReviewCarousel />
         </div>
         <h2 className="text-3xl font-semibold tracking-tight lg:text-4xl">
-          Our leaders
+          Our Leaders
         </h2>
         <div className="flex flex-col gap-12 sm:flex-row md:gap-16 lg:gap-24">
           <div className="flex flex-col items-center gap-4">

@@ -69,7 +69,7 @@ export default async function AdminDashboard() {
         {user.role === Role.ADMIN ? (
           <div className="flex flex-col gap-6">
             <h1 className="text-4xl font-extrabold tracking-tight">
-              Manage users
+              Manage Users
             </h1>
             <Separator />
             <Tabs defaultValue="admins" className="w-full">

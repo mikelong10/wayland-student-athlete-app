@@ -15,7 +15,7 @@ import MobileNav from "./MobileNav";
 const headerNavLinks: HeaderNavLink[] = [
   {
     url: "/what",
-    text: "What we do",
+    text: "What We Do",
     mobileVariantProps: { variant: "link" },
     desktopVariantProps: { variant: "link" },
     mobileStyle:
@@ -24,7 +24,7 @@ const headerNavLinks: HeaderNavLink[] = [
   },
   {
     url: "/who",
-    text: "Who we are",
+    text: "Who We Are",
     mobileVariantProps: { variant: "link" },
     desktopVariantProps: { variant: "link" },
     mobileStyle:
@@ -42,7 +42,7 @@ const headerNavLinks: HeaderNavLink[] = [
   },
   {
     url: "/request",
-    text: "Request a job",
+    text: "Request a Job",
     mobileVariantProps: { variant: "default" },
     desktopVariantProps: { variant: "underline" },
     mobileStyle: "text-lg px-6 py-3 h-auto rounded-lg",

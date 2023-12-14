@@ -169,7 +169,7 @@ export default function RequestJobForm({
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-semibold tracking-tight">Job info</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">Job Info</h2>
           <div className="flex w-full flex-col gap-2 sm:gap-4">
             <FormField
               control={form.control}

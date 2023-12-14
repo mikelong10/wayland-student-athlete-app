@@ -22,14 +22,14 @@ const cardIconStyle = "h-8 w-8 text-secondary";
 export const servicesCards: ServiceCardInfo[] = [
   {
     icon: <Armchair className={cardIconStyle} />,
-    title: "Moving jobs",
+    title: "Moving Jobs",
     description:
       "Whether it's just household furniture that needs to be rearranged or if your planning on moving, we've done it countless times before and we know how to help you out! Check out our services below for more!",
     reviewSectionId: "moving-services",
   },
   {
     icon: <Shovel className={cardIconStyle} />,
-    title: "Yard work",
+    title: "Yard Work",
     description:
       "If you don't like doing yard work, don't have time for it, or can't do it yourself, we would be glad to help you out. As student-athletes, we can handle the physical labor of mowing a lawn, raking leaves, weeding, and other landscaping tasks.",
     reviewSectionId: "yard-work-services",
@@ -48,24 +48,24 @@ export const servicesCards: ServiceCardInfo[] = [
   },
   {
     icon: <Snowflake className={cardIconStyle} />,
-    title: "Snow removal",
+    title: "Snow Removal",
     description: "Unexpected snow storm? We've got you covered.",
   },
   {
     icon: <Medal className={cardIconStyle} />,
-    title: "Sports training",
+    title: "Sports Training",
     description:
       "With athletes on the varsity soccer, basketball, baseball, tennis teams, and more, we know we can help your kid (or you!) improve.",
   },
   {
     icon: <Car className={cardIconStyle} />,
-    title: "Car rides / deliveries",
+    title: "Car Rides / Deliveries",
     description:
       "If you're not available to drive your kid to school in the morning, drop them off at their practices/games/lessons, or need a delivery done for you, we have a number of safe and responsible drivers who can do the job for you.",
   },
   {
     icon: <Wrench className={cardIconStyle} />,
-    title: "Other odd jobs",
+    title: "Other Odd Jobs",
     description:
       "From assemblies to painting, we are confident that we will be able to help you out. If it seems outside the box, ask us anyway! (These jobs are usually our favorite!)",
   },

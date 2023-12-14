@@ -124,7 +124,7 @@ export default async function MyJobs() {
     <main className="flex min-h-screen w-full flex-col items-center">
       <Container className="flex h-full w-full max-w-[1600px] flex-col py-24">
         <div className="flex flex-col gap-6">
-          <h1 className="text-4xl font-extrabold tracking-tight">My jobs</h1>
+          <h1 className="text-4xl font-extrabold tracking-tight">My Jobs</h1>
           <Separator />
           <Tabs defaultValue="to-do" className="w-full">
             <TabsList className="mb-4 flex w-full">
