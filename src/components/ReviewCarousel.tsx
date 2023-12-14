@@ -38,18 +38,19 @@ const reviewCarouselItems: ReviewCarouselItemInfo[] = [
     reviewer: "Jennifer Kaplan",
   },
 ];
-const reviewCarouselComponents = reviewCarouselItems.map((item) => (
-  <ReviewCarouselItem key={generateUniqueId(item.quote)} review={item} />
-));
+const reviewCarouselComponents = reviewCarouselItems.map((item) => ({
+  key: generateUniqueId(item.quote),
+  content: <ReviewCarouselItem review={item} />,
+}));
 
 export default function ReviewCarousel() {
   return (
     <Carousel
-      header={<Quote />}
+      header={<Quote className="text-secondary h-10 w-10" />}
       items={reviewCarouselComponents}
       footer={
         <Link href="/reviews" className="w-full">
-          <Button variant={"default"} className="w-full">
+          <Button variant={"secondary"} className="w-full">
             Read more reviews
           </Button>
         </Link>

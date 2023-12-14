@@ -7,7 +7,7 @@ export default function ReviewCarouselItem({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <blockquote className="border-secondary whitespace-normal border-l-2 pl-3">
+      <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3">
         {review.quote}
       </blockquote>
       <p className="text-muted-foreground text-xs italic">

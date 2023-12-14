@@ -3,22 +3,29 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { cn } from "@lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Progress } from "@components/ui/progress";
+
+type CarouselItem = {
+  key: string;
+  content: JSX.Element;
+};
 
 export default function Carousel({
   header,
   items,
   footer,
+  className,
 }: {
   header: JSX.Element;
-  items: JSX.Element[];
+  items: CarouselItem[];
   footer: JSX.Element;
+  className?: string;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const updateIndex = (newIndex: number) => {
     // wrap around indices
-    console.log("newIndex", newIndex);
     if (newIndex < 0) {
       newIndex = items.length - 1;
     } else if (newIndex >= items.length) {
@@ -30,12 +37,17 @@ export default function Carousel({
 
   const carouselItems = items.map((item) => (
     <div key={item.key} className="inline-flex w-full">
-      {item}
+      {item.content}
     </div>
   ));
 
   return (
-    <Card className="flex w-full max-w-3xl flex-col gap-6 overflow-hidden">
+    <Card
+      className={cn(
+        "flex w-full max-w-3xl flex-col gap-6 overflow-hidden",
+        className
+      )}
+    >
       <CardHeader>{header}</CardHeader>
       <CardContent className={"overflow-hidden"}>
         <div
@@ -55,21 +67,21 @@ export default function Carousel({
             <div className="flex gap-4">
               <ChevronLeft
                 strokeWidth={1}
-                className="border-primary text-primary hover:bg-primary rounded-full border-2 p-1 transition-colors hover:cursor-pointer hover:text-white"
+                className="bg-primary rounded-full border-2 border-none p-1 text-white transition-all hover:cursor-pointer hover:opacity-80"
                 width={48}
                 height={48}
                 onClick={() => updateIndex(activeIndex - 1)}
               />
               <ChevronRight
                 strokeWidth={1}
-                className="border-primary text-primary hover:bg-primary rounded-full border-2 p-1 transition-colors hover:cursor-pointer hover:text-white"
+                className="bg-primary rounded-full border-2 border-none p-1 text-white transition-all hover:cursor-pointer hover:opacity-80"
                 width={48}
                 height={48}
                 onClick={() => updateIndex(activeIndex + 1)}
               />
             </div>
             <div className="flex gap-2">
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm">
                 <span className="text-primary">{`0${activeIndex + 1}`}</span>
                 {` / 0${items.length}`}
               </p>
