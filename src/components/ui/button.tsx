@@ -7,24 +7,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/70",
+        default: "bg-primary text-primary-foreground hover:opacity-80",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground hover:opacity-80",
         outline:
           "text-primary border border-primary bg-background hover:bg-primary hover:text-primary-foreground",
         traced:
           "text-foreground border border-border bg-background hover:bg-accent",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/70",
-        accent: "bg-accent text-accent-foreground hover:bg-accent/70",
+        secondary: "bg-secondary text-secondary-foreground hover:opacity-80",
+        accent: "bg-accent text-accent-foreground hover:opacity-80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-foreground underline-offset-4 hover:underline",
         underline:
-          "underline underline-offset-4 hover:no-underline transition-all hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-muted/50 data-[state=open]:bg-muted/50",
+          "underline underline-offset-4 hover:no-underline transition-all hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:hover:opacity-80 data-[state=open]:hover:opacity-80",
         none: "",
       },
       size: {

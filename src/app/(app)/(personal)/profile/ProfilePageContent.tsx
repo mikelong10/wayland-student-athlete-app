@@ -11,18 +11,20 @@ import EditProfileForm from "./EditProfileForm";
 
 export default function ProfilePageContent({ user }: { user: User }) {
   return (
-    <Container className="flex h-full min-h-screen w-full flex-col justify-center gap-4 py-24 sm:max-w-[768px] lg:max-w-[960px]">
-      <h1 className="w-full scroll-m-20 text-left text-4xl font-extrabold tracking-tight">
-        Profile
-      </h1>
-      <Separator />
-      <EditProfileForm user={user} />
-      <Link href="/jobs">
-        <Button variant={"accent"} className="flex items-center gap-2">
-          My jobs
-          <MoveRight />
-        </Button>
-      </Link>
+    <Container className="flex h-full min-h-screen w-full flex-col items-center justify-center gap-4 py-24">
+      <div className="flex w-full flex-col justify-center gap-4 sm:max-w-[640px] lg:max-w-[768px]">
+        <h1 className="w-full scroll-m-20 text-left text-4xl font-extrabold tracking-tight">
+          Profile
+        </h1>
+        <Separator />
+        <EditProfileForm user={user} />
+        <Link href="/jobs">
+          <Button variant={"secondary"} className="flex items-center gap-2">
+            My jobs
+            <MoveRight />
+          </Button>
+        </Link>
+      </div>
     </Container>
   );
 }

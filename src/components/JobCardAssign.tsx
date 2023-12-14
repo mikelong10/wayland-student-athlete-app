@@ -48,7 +48,6 @@ export default function JobCardAssign({
 
   async function onAssign(assigneeId: string) {
     if (assigneeId !== selectedUser?.id) {
-      console.log("assigneeId:", assigneeId);
       const newAssignee =
         allStudentAthletes.find(
           (studentAthlete) => studentAthlete.id === assigneeId
@@ -95,7 +94,7 @@ export default function JobCardAssign({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <div className="border-border dark:hover:bg-accent/50 flex items-center gap-2 rounded-full border-2 px-3 py-2 transition-all hover:cursor-pointer hover:shadow-md focus:shadow-md">
+        <div className="border-border dark:hover:shadow-tertiary flex items-center gap-2 rounded-full border px-3 py-2 transition-all hover:cursor-pointer hover:shadow-md focus:shadow-md">
           <UserAvatar
             user={{
               image: selectedUser?.image,

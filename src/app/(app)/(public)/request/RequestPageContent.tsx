@@ -31,9 +31,7 @@ export default function RequestPageContent({ user }: { user?: User }) {
           </Link>
           {!!user && (
             <Link href="/jobs">
-              <Button variant={"secondary"} className="px-6">
-                View your jobs
-              </Button>
+              <Button className="px-6">View your jobs</Button>
             </Link>
           )}
         </div>

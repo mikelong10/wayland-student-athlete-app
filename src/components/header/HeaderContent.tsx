@@ -53,26 +53,23 @@ const headerNavLinks: HeaderNavLink[] = [
 export default function HeaderContent({ user }: { user?: User }) {
   const [scrolled, setScrolled] = useState(false);
 
-  const handleScroll = () => {
-    if (window.scrollY > 1) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
+  const checkScroll = () => {
+    setScrolled(window.scrollY > 1);
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    checkScroll();
+    window.addEventListener("scroll", checkScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", checkScroll);
     };
   }, []);
 
   return (
     <Container
       className={cn(
-        "fixed left-0 top-0 z-50 w-full bg-transparent py-4 transition-all",
-        scrolled && "bg-background shadow-accent py-2 shadow-lg"
+        "bg-background fixed left-0 top-0 z-50 w-full py-4 transition-all",
+        scrolled && "dark:shadow-tertiary py-2 shadow-lg"
       )}
     >
       <header className="flex items-center justify-between gap-4 lg:gap-8">

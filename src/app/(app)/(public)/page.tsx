@@ -16,7 +16,7 @@ export default function Home() {
     <main className="flex w-full flex-col items-center justify-center pb-20">
       <Container
         id="landing-home"
-        className="from-secondary to-background flex h-[600px] w-full flex-col justify-center gap-6 bg-gradient-to-tl to-50% dark:from-amber-950 lg:items-center"
+        className="from-tertiary to-background flex h-[600px] w-full flex-col justify-center gap-6 bg-gradient-to-tl to-50% dark:from-orange-950 lg:items-center"
       >
         <div className="text-foreground xs:hidden scroll-m-20 text-4xl font-extrabold tracking-tight">
           <h1>Wayland</h1>
@@ -51,11 +51,11 @@ export default function Home() {
           </div>
         </div>
       </Container>
-      <Container className="from-secondary to-background relative mb-12 flex w-full flex-col items-center justify-start gap-24 bg-gradient-to-bl to-50% dark:from-amber-950">
+      <Container className="from-tertiary to-background relative mb-12 flex w-full flex-col items-center justify-start gap-24 bg-gradient-to-bl to-50% dark:from-orange-950">
         <div id="landing-what-we-do" className="absolute -top-28" />
         <ServicesContent />
       </Container>
-      <Container className="from-secondary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-tr to-50% dark:from-amber-950">
+      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-tr to-50% dark:from-orange-950">
         <div className="mb-24 flex w-full flex-col items-center justify-center gap-20">
           <div className="mt-8 flex w-full flex-col justify-center gap-8 sm:flex-row sm:gap-8 md:gap-16 lg:gap-24">
             <div className="flex flex-col items-center gap-2">
@@ -71,9 +71,13 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <Card className="flex w-fit flex-col gap-2 border-none shadow-2xl md:text-center">
+          <Card
+            className={
+              "dark:shadow-tertiary flex w-fit flex-col gap-2 border-none shadow-2xl md:text-center"
+            }
+          >
             <CardTitle>
-              How may we <span className="text-primary">assist you?</span>
+              How may we <span className="text-primary">assist</span> you?
             </CardTitle>
             <CardContent className="text-muted-foreground">
               <p>
@@ -92,8 +96,12 @@ export default function Home() {
           </Card>
         </div>
       </Container>
-      <Container className="from-secondary to-background flex w-full flex-col items-center justify-center gap-8 bg-gradient-to-br to-50% dark:from-amber-950">
+      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-8 bg-gradient-to-br to-50% dark:from-orange-950">
         <div className="mb-20 flex w-full flex-col items-center gap-8">
+          <h2 className="text-3xl font-semibold tracking-tight lg:text-4xl">
+            <span className="">Trusted</span> by the{" "}
+            <span className="text-secondary italic">community</span>.
+          </h2>
           <ReviewCarousel />
         </div>
         <h2 className="text-3xl font-semibold tracking-tight lg:text-4xl">
@@ -132,7 +140,7 @@ export default function Home() {
           </div>
         </div>
         <Link href="/what">
-          <Button variant={"accent"}>Our mission</Button>
+          <Button variant={"traced"}>Our mission</Button>
         </Link>
       </Container>
     </main>

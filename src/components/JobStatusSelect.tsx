@@ -68,7 +68,7 @@ export default function JobStatusSelect({ job }: { job: Job }) {
         <SelectPrimitive.Trigger>
           <Badge
             variant={Status[job.status]}
-            className="hover:bg-background-less dark:hover:bg-background-less w-fit gap-2"
+            className="hover:bg-accent dark:hover:bg-background-less w-fit gap-2"
           >
             <Dot status={Status[job.status]} />
             <SelectPrimitive.Icon asChild>
@@ -76,7 +76,7 @@ export default function JobStatusSelect({ job }: { job: Job }) {
             </SelectPrimitive.Icon>
           </Badge>
         </SelectPrimitive.Trigger>
-        <SelectContent className="w-32" align="end">
+        <SelectContent align="end">
           {Object.values(Status).map((status) => (
             <SelectItem key={status} value={status}>
               {JobStatusText[status]}

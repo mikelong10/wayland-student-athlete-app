@@ -45,13 +45,13 @@ export default function UserAccountNav({
         {!user ? (
           <div className="flex gap-2">
             <Link href={"/login"} onClick={() => closeMobileNav()}>
-              <Button>Log in</Button>
+              <Button variant={"secondary"}>Log in</Button>
             </Link>
           </div>
         ) : (
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <div className="border-border dark:hover:bg-accent/50 flex h-fit items-center justify-between gap-4 rounded-full border px-3 py-2 transition-all hover:cursor-pointer hover:shadow-md focus:shadow-md">
+              <div className="border-border dark:hover:shadow-tertiary flex h-fit items-center justify-between gap-4 rounded-full border px-3 py-2 transition-all hover:cursor-pointer hover:shadow-md focus:shadow-md">
                 <Menu size={24} className="ml-1" />
                 <UserAvatar
                   user={{ name: user.name, image: user.image }}

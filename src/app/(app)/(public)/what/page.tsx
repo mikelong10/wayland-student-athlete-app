@@ -13,10 +13,10 @@ export const metadata = {
 
 export default function WhatWeDoPage() {
   return (
-    <Container className="bg-background-less flex h-full min-h-screen w-full max-w-[1600px] flex-col items-center pt-24">
+    <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col items-center pt-24">
       <div className="flex h-screen w-full flex-col">
         <div className="relative mt-16 flex h-fit w-full items-start sm:mt-8">
-          <Card className="absolute left-0 z-10 mt-16 flex w-2/5 min-w-[360px] flex-col gap-4 border-none p-6 shadow-2xl sm:min-w-[420px] sm:p-8  md:min-w-[480px] md:p-10 lg:min-w-[520px] lg:p-12">
+          <Card className="xs:w-4/5 dark:shadow-tertiary absolute left-0 z-10 mt-16 flex min-w-[320px] flex-col gap-4 border-none p-6 shadow-2xl sm:w-3/5 sm:min-w-[400px] sm:p-8 md:w-2/5  md:min-w-[480px] md:p-10 lg:min-w-[560px] lg:p-12">
             <CardTitle className="text-3xl font-extrabold tracking-tight sm:text-4xl">
               Our mission
             </CardTitle>
@@ -52,7 +52,7 @@ export default function WhatWeDoPage() {
               src={whs}
               alt={"Wayland High School"}
               objectFit="contain"
-              className="rounded-lg shadow-xl"
+              className="dark:shadow-tertiary rounded-lg shadow-2xl"
             />
           </div>
         </div>

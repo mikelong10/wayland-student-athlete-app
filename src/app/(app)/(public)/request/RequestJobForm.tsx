@@ -322,8 +322,8 @@ export default function RequestJobForm({
           type="submit"
           size={"lg"}
           className={cn(
-            "text-md rounded-full",
-            isSubmitting ? "bg-primary/70" : ""
+            "mt-4 rounded-full text-lg",
+            isSubmitting ? "opacity-80" : ""
           )}
         >
           {isSubmitting ? (
