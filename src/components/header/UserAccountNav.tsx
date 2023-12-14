@@ -50,7 +50,7 @@ export default function UserAccountNav({
           </div>
         ) : (
           <DropdownMenu>
-            <DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>
               <div className="border-border dark:hover:shadow-tertiary flex h-fit items-center justify-between gap-4 rounded-full border px-3 py-2 transition-all hover:cursor-pointer hover:shadow-md focus:shadow-md">
                 <Menu size={24} className="ml-1" />
                 <UserAvatar
