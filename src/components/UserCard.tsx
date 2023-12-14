@@ -20,7 +20,7 @@ interface UserCardProps {
 export const UserRoleText: Record<Role, string> = {
   ADMIN: "Admin",
   STUDENTATHLETE: "Student-Athlete",
-  CITIZEN: "Citizen",
+  CLIENT: "Client",
 };
 
 export default function UserCard({ user }: UserCardProps) {

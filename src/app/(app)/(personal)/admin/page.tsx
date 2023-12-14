@@ -23,9 +23,9 @@ export default async function AdminDashboard() {
     notFound();
   }
 
-  const citizens = await db.user.findMany({
+  const clients = await db.user.findMany({
     where: {
-      role: Role.CITIZEN,
+      role: Role.CLIENT,
     },
     orderBy: {
       createdAt: "desc",
@@ -50,8 +50,8 @@ export default async function AdminDashboard() {
 
   const usersTabs = [
     {
-      value: "citizens",
-      users: citizens,
+      value: "clients",
+      users: clients,
     },
     {
       value: "student-athletes",
@@ -74,8 +74,8 @@ export default async function AdminDashboard() {
             <Separator />
             <Tabs defaultValue="admins" className="w-full">
               <TabsList className="mb-4 flex w-full">
-                <TabsTrigger value="citizens" className="flex-1">
-                  Citizens
+                <TabsTrigger value="clients" className="flex-1">
+                  Clients
                 </TabsTrigger>
                 <TabsTrigger value="student-athletes" className="flex-1">
                   Student-Athletes

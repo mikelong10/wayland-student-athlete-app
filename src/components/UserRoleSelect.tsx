@@ -102,8 +102,8 @@ export default function UserRoleSelect({ user }: { user: User }) {
           </Badge>
         </SelectPrimitive.Trigger>
         <SelectContent>
-          <SelectItem value={Role.CITIZEN}>
-            {UserRoleText[Role.CITIZEN]}
+          <SelectItem value={Role.CLIENT}>
+            {UserRoleText[Role.CLIENT]}
           </SelectItem>
           <SelectItem value={Role.STUDENTATHLETE}>
             {UserRoleText[Role.STUDENTATHLETE]}

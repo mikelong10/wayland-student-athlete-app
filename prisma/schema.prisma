@@ -58,7 +58,7 @@ model User {
 
   requestedJobs Job[] @relation(name: "requestor_relation")
   assignedJobs  Job[] @relation(name: "assignee_relation")
-  role          Role  @default(CITIZEN)
+  role          Role  @default(CLIENT)
 
   @@map("users")
 }
@@ -111,5 +111,5 @@ enum Status {
 enum Role {
   ADMIN
   STUDENTATHLETE
-  CITIZEN
+  CLIENT
 }
