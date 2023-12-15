@@ -13,10 +13,10 @@ export const metadata = {
 
 export default function WhatWeDoPage() {
   return (
-    <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col items-center pt-24">
-      <div className="flex h-screen w-full flex-col">
-        <div className="relative mt-16 flex h-fit w-full items-start sm:mt-8">
-          <Card className="xs:w-4/5 dark:shadow-tertiary absolute left-0 z-10 mt-16 flex min-w-[320px] flex-col gap-4 border-none p-6 shadow-2xl sm:w-3/5 sm:min-w-[400px] sm:p-8 md:w-2/5  md:min-w-[480px] md:p-10 lg:min-w-[560px] lg:p-12">
+    <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col items-center">
+      <div className="flex h-screen w-full flex-col pt-24">
+        <div className="relative flex h-screen w-full items-center">
+          <Card className="xs:w-4/5 dark:shadow-tertiary absolute left-0 z-10 flex min-w-[320px] flex-col gap-4 border-none p-6 shadow-2xl sm:w-3/5 sm:min-w-[400px] sm:p-8 md:w-2/5 md:min-w-[480px] md:p-10 lg:min-w-[560px] lg:p-12">
             <CardTitle className="text-3xl font-extrabold tracking-tight sm:text-4xl">
               Our Mission
             </CardTitle>
@@ -47,7 +47,7 @@ export default function WhatWeDoPage() {
               </Link>
             </CardFooter>
           </Card>
-          <div className="absolute -top-16 left-[10%] sm:-top-8 sm:left-[30%] md:-top-4">
+          <div className="absolute left-[10%] top-4 sm:left-[30%] sm:top-8 md:top-12">
             <Image
               src={whs}
               alt={"Wayland High School"}
