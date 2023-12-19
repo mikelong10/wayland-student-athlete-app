@@ -68,7 +68,7 @@ export default async function AdminDashboard() {
       <Container className="flex h-full w-full max-w-[1600px] flex-col py-24">
         {user.role === Role.ADMIN ? (
           <div className="flex flex-col gap-6">
-            <h1 className="text-4xl font-extrabold tracking-tight">
+            <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
               Manage Users
             </h1>
             <Separator />
@@ -99,7 +99,7 @@ export default async function AdminDashboard() {
           </div>
         ) : (
           <div className="flex flex-col gap-6">
-            <h1 className="text-4xl font-extrabold tracking-tight">
+            <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
               Unauthorized
             </h1>
           </div>
