@@ -1,4 +1,3 @@
-
 import { getCurrentUser } from "@lib/session";
 import HeaderContent from "./HeaderContent";
 
