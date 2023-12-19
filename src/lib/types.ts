@@ -1,16 +1,4 @@
-import { VariantProps } from "class-variance-authority";
 import { z } from "zod";
-
-import { buttonVariants } from "@components/ui/button";
-
-export interface HeaderNavLink {
-  url: string;
-  text: string;
-  mobileVariantProps: VariantProps<typeof buttonVariants>;
-  desktopVariantProps: VariantProps<typeof buttonVariants>;
-  mobileStyle?: string;
-  desktopStyle?: string;
-}
 
 export const editProfileFormSchema = z
   .object({

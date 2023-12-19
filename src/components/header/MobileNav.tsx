@@ -9,10 +9,10 @@ import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
 import logo from "../../../public/logo.png";
-import { NavProps } from "./Header";
+import { NavProps } from "./HeaderContent";
 import UserAccountNav from "./UserAccountNav";
 
-export default function MobileNav({ user, headerNavLinks }: NavProps) {
+export default function MobileNav({ user, links }: NavProps) {
   const [navOpen, setNavOpen] = useState(false);
 
   return (
@@ -41,7 +41,7 @@ export default function MobileNav({ user, headerNavLinks }: NavProps) {
           />
           <nav className="flex h-full flex-col items-center justify-center">
             <ul className="flex flex-col items-center justify-center gap-10">
-              {headerNavLinks.map((link) => (
+              {links.map((link) => (
                 <Link
                   key={link.url}
                   href={link.url}
@@ -49,7 +49,6 @@ export default function MobileNav({ user, headerNavLinks }: NavProps) {
                 >
                   <Button
                     variant={link.mobileVariantProps.variant}
-                    size={link.mobileVariantProps.size}
                     className={link.mobileStyle}
                   >
                     {link.text}
