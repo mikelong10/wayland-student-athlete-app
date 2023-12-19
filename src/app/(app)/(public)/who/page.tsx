@@ -38,7 +38,7 @@ const StudentAthleteCard = ({
 
 export default function WhoWeArePage() {
   return (
-    <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col justify-center gap-12 pt-36 pb-24">
+    <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col justify-center gap-12 pb-24 pt-36">
       <div className="flex flex-col gap-4">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
           Our People

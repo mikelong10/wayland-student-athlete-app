@@ -50,7 +50,7 @@ const terms = [
 
 export default function PrivacyPolicy() {
   return (
-    <Container className="flex min-h-screen w-full flex-col justify-center pt-36 pb-24 gap-6">
+    <Container className="flex min-h-screen w-full flex-col justify-center gap-6 pb-24 pt-36">
       <div className="flex flex-col gap-1">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
           Terms & Conditions
@@ -66,7 +66,7 @@ export default function PrivacyPolicy() {
             Service carefully before using our website or services.
           </p>
           <p>
-            By accessing or using Wayland Student-Athlete's website and
+            By accessing or using Wayland Student-Athlete&apos;s website and
             services, you agree to comply with and be bound by these Terms of
             Service. Thank you for choosing Wayland Student-Athlete!
           </p>
@@ -74,7 +74,7 @@ export default function PrivacyPolicy() {
       </Card>
       <div className="flex flex-col gap-4">
         {terms.map((term, idx) => (
-          <div className="flex flex-col gap-1">
+          <div key={term.title} className="flex flex-col gap-1">
             <h2 className="text-xl font-bold tracking-tight">{`${idx + 1}. ${
               term.title
             }`}</h2>

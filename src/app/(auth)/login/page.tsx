@@ -23,7 +23,7 @@ export default async function LoginPage() {
   }
 
   return (
-    <Container className="from-tertiary to-background dark:to-background flex min-h-screen w-full flex-col items-center justify-center pt-36 pb-24 bg-gradient-to-bl to-70% dark:from-orange-950">
+    <Container className="from-tertiary to-background dark:to-background flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-bl to-70% pb-24 pt-36 dark:from-orange-950">
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
         <Button variant={"ghost"} className="flex items-center gap-2 px-4">
           <ChevronLeft className="h-4 w-4" />

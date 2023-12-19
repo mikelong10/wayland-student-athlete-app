@@ -122,7 +122,7 @@ export default async function MyJobs() {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center">
-      <Container className="flex h-full w-full max-w-[1600px] flex-col pt-36 pb-24">
+      <Container className="flex h-full w-full max-w-[1600px] flex-col pb-24 pt-36">
         <div className="flex flex-col gap-6">
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
             My Jobs

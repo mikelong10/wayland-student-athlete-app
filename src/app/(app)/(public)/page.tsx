@@ -16,7 +16,7 @@ export default function Home() {
     <main className="flex w-full flex-col items-center justify-center pb-20">
       <Container
         id="landing-home"
-        className="from-tertiary to-background flex h-[640px] w-full flex-col justify-center gap-6 bg-gradient-to-tl to-50% dark:from-orange-950 lg:items-center"
+        className="from-tertiary to-background flex h-[640px] w-full flex-col justify-center gap-6 bg-gradient-to-tl to-50% lg:items-center dark:from-orange-950"
       >
         <div className="text-foreground xs:hidden scroll-m-20 text-4xl font-extrabold tracking-tight">
           <h1>Wayland</h1>
