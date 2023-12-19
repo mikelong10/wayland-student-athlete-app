@@ -47,7 +47,7 @@ export default function WhatWeDoPage() {
               </Link>
             </CardFooter>
           </Card>
-          <div className="absolute left-[10%] top-4 sm:left-[30%] sm:top-8 md:top-12">
+          <div className="xs:top-4 absolute left-[10%] top-0 sm:left-[30%] sm:top-8 md:top-12">
             <Image
               src={whs}
               alt={"Wayland High School"}
