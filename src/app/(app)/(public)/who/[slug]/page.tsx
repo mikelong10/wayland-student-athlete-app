@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+import { studentAthletes } from "@lib/data";
 import Container from "@components/Container";
-import { studentAthletes } from "../page";
 
 export default function StudentAthletePage({
   params,
