@@ -20,7 +20,7 @@ export default function StudentAthletePage({
   ));
 
   return (
-    <Container className="flex min-h-screen flex-col justify-center py-24">
+    <Container className="flex min-h-screen flex-col justify-center pt-36 pb-24">
       {/* small */}
       <div className="xs:hidden flex flex-col gap-4">
         <div className="flex w-full justify-center">
