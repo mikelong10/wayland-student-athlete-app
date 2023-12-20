@@ -108,7 +108,9 @@ export default function RequestJobForm({
                 name="adultFirstName"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>First name *</FormLabel>
+                    <FormLabel>
+                      First name <span className="text-primary">*</span>
+                    </FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -121,7 +123,9 @@ export default function RequestJobForm({
                 name="adultLastName"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Last name *</FormLabel>
+                    <FormLabel>
+                      Last name <span className="text-primary">*</span>
+                    </FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -178,7 +182,10 @@ export default function RequestJobForm({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>What do you want done? *</FormLabel>
+                  <FormLabel>
+                    What do you want done?{" "}
+                    <span className="text-primary">*</span>
+                  </FormLabel>
                   <FormDescription>
                     {
                       "(moving, sports/music lessons, yardwork, babysitting, car rides, projects, anything!)"
@@ -196,7 +203,10 @@ export default function RequestJobForm({
               name="location"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Where should we come for the job? *</FormLabel>
+                  <FormLabel>
+                    Where should we come for the job?{" "}
+                    <span className="text-primary">*</span>
+                  </FormLabel>
                   <FormDescription>
                     Please provide an address or location
                   </FormDescription>
@@ -212,7 +222,10 @@ export default function RequestJobForm({
               name="time"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>When do you need the job done? *</FormLabel>
+                  <FormLabel>
+                    When do you need the job done?{" "}
+                    <span className="text-primary">*</span>
+                  </FormLabel>
                   <FormDescription>
                     {
                       "Provide a date and time or frequency (ex: weekly, monthly, every Tues and Thurs)"
@@ -231,7 +244,8 @@ export default function RequestJobForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    How long do you think the job will take? *
+                    How long do you think the job will take?{" "}
+                    <span className="text-primary">*</span>
                   </FormLabel>
                   <FormDescription>
                     {
@@ -256,7 +270,8 @@ export default function RequestJobForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    What&apos;s the best way to reach you? *
+                    What&apos;s the best way to reach you?{" "}
+                    <span className="text-primary">*</span>
                   </FormLabel>
                   <FormDescription>
                     Please provide us a phone number, email, etc!
@@ -309,7 +324,8 @@ export default function RequestJobForm({
               <FormItem>
                 <FormLabel>
                   I understand that Wayland Student-Athlete and its constituents
-                  are not liable for any injuries or damages that may occur. *
+                  are not liable for any injuries or damages that may occur.{" "}
+                  <span className="text-primary">*</span>
                 </FormLabel>
                 <FormDescription>Electronic signature</FormDescription>
                 <FormControl>
