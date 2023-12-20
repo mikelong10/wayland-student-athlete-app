@@ -21,7 +21,7 @@
 
     --cream: #FFF6EA;
     
-    --primary: #FF842C;
+    --primary: #ff7919;
     --primary-foreground: #FFFCF9;
 
     --secondary: #5C3921;
@@ -69,6 +69,8 @@
   .dark {
     --background: #1B1612;
     --foreground: #FFFCF9;
+
+    --primary: #ff852e;
     
     --secondary: #ffe1cb;
     --secondary-foreground: #1B1612;

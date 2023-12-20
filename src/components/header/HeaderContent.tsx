@@ -69,9 +69,11 @@ export default function HeaderContent({ user }: { user?: User }) {
       mobileVariantProps: { variant: "default" },
       mobileStyle:
         "text-2xl font-bold tracking-tight mt-16 px-8 py-6 h-auto rounded-full",
-      desktopVariantProps: { variant: "link" },
-      desktopStyle: `underline-offset-8 ${
-        pathname === "/request" ? "underline" : ""
+      desktopVariantProps: { variant: "default" },
+      desktopStyle: `ml-4 rounded-full underline-offset-8 ${
+        pathname === "/request"
+          ? "underline bg-transparent ml-0 text-foreground"
+          : ""
       }`,
     },
   ];
