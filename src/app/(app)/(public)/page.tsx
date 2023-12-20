@@ -13,12 +13,12 @@ import mike from "../../../../public/mike.jpg";
 
 export default function Home() {
   return (
-    <main className="flex w-full flex-col items-center justify-center pb-20">
+    <main className="flex w-full flex-col items-center justify-center pb-16">
       <Container
         id="landing-home"
-        className="from-tertiary to-background flex h-[640px] w-full flex-col justify-center gap-6 bg-gradient-to-tl to-50% lg:items-center dark:from-orange-950"
+        className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-6 bg-gradient-to-tl to-50% lg:items-center dark:from-orange-950"
       >
-        <div className="text-foreground xs:hidden scroll-m-20 text-4xl font-extrabold tracking-tight">
+        <div className="text-foreground xs:hidden scroll-m-20 text-3xl font-extrabold tracking-tight">
           <h1>Wayland</h1>
           <h1>Student-Athlete</h1>
         </div>
@@ -30,22 +30,22 @@ export default function Home() {
           <span className="text-primary">solutions</span> for all your{" "}
           <span className="text-primary">odd jobs</span>.
         </p>
-        <div className="xs:flex-row flex w-full flex-col gap-4 lg:justify-center">
+        <div className="flex w-full gap-4 lg:justify-center">
           <div className="flex lg:w-full lg:justify-end">
             <InteractiveButton
               variant={"traced"}
-              className="flex items-center justify-between gap-4"
+              className="xs:gap-4 flex items-center justify-between gap-2"
               idScrollToElement="landing-what-we-do"
             >
               Learn more
-              <ArrowDown className="-mb-1 h-5 w-5 animate-bounce" />
+              <ArrowDown className="xs:flex -mb-1 hidden h-5 w-5 animate-bounce" />
             </InteractiveButton>
           </div>
           <div className="flex lg:w-full">
             <Link href="/request">
-              <Button className="flex items-center justify-between gap-4">
+              <Button className="xs:gap-4 flex items-center justify-between gap-2">
                 Request a job
-                <MoveRight />
+                <MoveRight className="xs:flex hidden" />
               </Button>
             </Link>
           </div>

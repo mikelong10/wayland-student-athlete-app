@@ -33,14 +33,14 @@ export default function MobileNav({ user, links }: NavProps) {
           </Link>
         </div>
         <Separator />
-        <div className="mt-2 flex h-full flex-col items-center justify-center">
+        <div className="flex h-full flex-col items-center justify-between">
           <UserAccountNav
             user={user}
             isMobile={true}
             closeMobileNav={() => setNavOpen(false)}
           />
-          <nav className="flex h-full flex-col items-center justify-center">
-            <ul className="flex flex-col items-center justify-center gap-10">
+          <nav className="mb-24 flex flex-col items-center justify-center">
+            <ul className="flex flex-col items-center justify-center gap-12">
               {links.map((link) => (
                 <Link
                   key={link.url}

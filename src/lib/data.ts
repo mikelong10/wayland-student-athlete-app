@@ -20,7 +20,7 @@ studentAthletes.set("anshuman-parulekar", {
   image: ansh,
   resume: [
     "Current Co-Owner and CEO of Wayland Student Athlete",
-    "High School Senior (24')",
+    "High School Senior ('24)",
     "Enrolled in all Advanced Placement / Honors classes",
     "High Honor roll student (all four years)",
     "National Mandarin Honor Society member",

@@ -29,7 +29,7 @@ const StudentAthleteCard = ({
         className="rounded-lg transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-80 group-hover:shadow-xl"
       />
       <div className="flex flex-col items-center">
-        <h2 className="text-secondary flex-1 text-lg font-semibold">{name}</h2>
+        <h2 className="flex-1 text-lg font-semibold">{name}</h2>
         <p className="text-muted-foreground w-28">{`Class of ${year}`}</p>
       </div>
     </div>
@@ -38,7 +38,7 @@ const StudentAthleteCard = ({
 
 export default function WhoWeArePage() {
   return (
-    <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col justify-center gap-12 pb-24 pt-36">
+    <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col justify-center gap-6 pb-12 pt-24">
       <div className="flex flex-col gap-4">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
           Our People
