@@ -32,9 +32,7 @@ export default function JobCardAssign({
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
-  const [selectedUsers, setSelectedUsers] = useState<User[]>(
-    currentAssignees
-  );
+  const [selectedUsers, setSelectedUsers] = useState<User[]>(currentAssignees);
 
   const fuse = new Fuse(allStudentAthletes, {
     keys: ["name"],
