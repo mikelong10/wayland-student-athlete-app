@@ -158,24 +158,26 @@ export default function JobCardAssign({
                   ))
                   .concat(
                     <div
-                      className={`border-border group-hover:bg-muted flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${
+                      className={`border-background group-hover:bg-muted flex  items-center justify-center rounded-full border-2 transition-colors ${
                         selectedUsers.length > 0 ? "-ml-3" : ""
                       }`}
                     >
-                      <UserPlus />
+                      <UserPlus className="border-border h-9 w-9 rounded-full border p-1" />
                     </div>
                   )}
               </div>
             </PopoverTrigger>
           </TooltipTrigger>
-          <TooltipContent className="flex flex-col gap-2 p-4">
-            <p className="font-semibold tracking-tight">Assigned to...</p>
-            <ul className="ml-4 flex list-decimal flex-col gap-1 text-xs">
-              {selectedUsers.map((user) => (
-                <li key={user.id}>{user.name}</li>
-              ))}
-            </ul>
-          </TooltipContent>
+          {!!selectedUsers.length && (
+            <TooltipContent className="flex flex-col gap-2 p-4">
+              <p className="font-semibold tracking-tight">Assigned to...</p>
+              <ul className="ml-4 flex list-decimal flex-col gap-1 text-xs">
+                {selectedUsers.map((user) => (
+                  <li key={user.id}>{user.name}</li>
+                ))}
+              </ul>
+            </TooltipContent>
+          )}
         </Tooltip>
       </TooltipProvider>
       <PopoverContent className="p-0" side="bottom" align="start">
