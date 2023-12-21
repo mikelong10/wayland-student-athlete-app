@@ -1,3 +1,5 @@
+import H1 from "@components/typography/h1";
+
 export const metadata = {
   title: "Reviews",
 };
@@ -5,9 +7,7 @@ export const metadata = {
 export default function ReviewsPage() {
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center">
-      <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-        Reviews
-      </h1>
+      <H1>Reviews</H1>
     </div>
   );
 }

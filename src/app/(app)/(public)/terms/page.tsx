@@ -1,4 +1,5 @@
 import Container from "@components/Container";
+import H1 from "@components/typography/h1";
 import { Card, CardContent } from "@components/ui/card";
 
 export const metadata = {
@@ -52,9 +53,7 @@ export default function PrivacyPolicy() {
   return (
     <Container className="flex min-h-screen w-full flex-col justify-center gap-6 pb-12 pt-24 md:w-5/6 xl:w-4/6">
       <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Terms & Conditions
-        </h1>
+        <H1>Terms & Conditions</H1>
         <p className="text-muted-foreground">
           Last Updated: Tuesday, December 19, 2023
         </p>

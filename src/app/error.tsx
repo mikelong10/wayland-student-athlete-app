@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { RotateCw } from "lucide-react";
 
+import H1 from "@components/typography/h1";
 import { Button } from "@components/ui/button";
 
 export default function Error({
@@ -19,9 +20,7 @@ export default function Error({
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center gap-4">
-      <h1 className="text-2xl font-extrabold tracking-tight">
-        Something went wrong!
-      </h1>
+      <H1>Something went wrong!</H1>
       <Button
         onClick={() => reset()}
         variant={"ghost"}

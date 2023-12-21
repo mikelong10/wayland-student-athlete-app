@@ -5,6 +5,7 @@ import { ArrowDown, MoveRight } from "lucide-react";
 import Container from "@components/Container";
 import ReviewCarousel from "@components/ReviewCarousel";
 import ServicesContent from "@components/ServicesContent";
+import H1 from "@components/typography/h1";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
@@ -18,13 +19,13 @@ export default function Home() {
         id="landing-home"
         className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-6 bg-gradient-to-tl to-50% lg:items-center dark:from-orange-950"
       >
-        <div className="text-foreground xs:hidden scroll-m-20 text-3xl font-extrabold tracking-tight">
-          <h1>Wayland</h1>
-          <h1>Student-Athlete</h1>
+        <div className="xs:hidden">
+          <H1>Wayland</H1>
+          <H1>Student-Athlete</H1>
         </div>
-        <h1 className="text-foreground max-xs:hidden scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl xl:text-6xl">
+        <H1 className="max-xs:hidden xs:text-4xl xl:text-6xl">
           Wayland Student-Athlete
-        </h1>
+        </H1>
         <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
           Simple, trustworthy, quality{" "}
           <span className="text-primary">solutions</span> for all your{" "}

@@ -37,11 +37,11 @@ export default async function LoginPage() {
               <Image src={logo} alt={"WSA logo"} width={40} height={40} />
             </Link>
           </div>
-          <h1 className="text-2xl font-semibold tracking-tight">
+          <p className="text-2xl font-bold tracking-tight">
             Welcome! Let&apos;s get started.
-          </h1>
+          </p>
           <p className="text-muted-foreground text-sm">
-            Log in through Google, Facebook, or Email
+            Log in with Google, Facebook, or Email
           </p>
         </div>
         <UserAuthForm />

@@ -3,6 +3,7 @@ import { Role } from "@prisma/client";
 import { db } from "@lib/db";
 import BusinessJobCard from "@components/BusinessJobCard";
 import Container from "@components/Container";
+import H1 from "@components/typography/h1";
 import { Separator } from "@components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
@@ -97,9 +98,7 @@ export default async function JobDashboard() {
     <main className="flex min-h-screen w-full flex-col items-center">
       <Container className="flex h-full w-full max-w-[1600px] flex-col pb-12 pt-24">
         <div className="flex flex-col gap-6">
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Manage Jobs
-          </h1>
+          <H1>Manage Jobs</H1>
           <Separator />
           <Tabs defaultValue="to-do" className="w-full">
             <TabsList className="mb-4 flex w-full">

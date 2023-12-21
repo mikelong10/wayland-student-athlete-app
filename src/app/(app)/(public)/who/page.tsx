@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { studentAthletes } from "@lib/data";
 import Container from "@components/Container";
+import H1 from "@components/typography/h1";
 import { Separator } from "@components/ui/separator";
 
 export const metadata = {
@@ -43,9 +44,7 @@ export default function WhoWeArePage() {
     <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col items-center justify-center pb-12 pt-24">
       <div className="xs:w-[416px] flex w-[312px] flex-col gap-2 sm:w-[544px] md:w-[640px] lg:w-[832px] xl:w-[1024px] 2xl:w-[1144px]">
         <div className="flex flex-col gap-4">
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Our People
-          </h1>
+          <H1>Our People</H1>
           <h2 className="text-muted-foreground text-lg font-bold tracking-tight sm:text-xl">
             Meet the Student-Athletes
           </h2>

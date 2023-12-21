@@ -28,7 +28,7 @@ export default function RootLayout({
     >
       <body
         className={cn(
-          "bg-background text-foreground min-w-[360px]",
+          "bg-background text-foreground min-w-[360px] antialiased",
           inter.className
         )}
         suppressHydrationWarning
