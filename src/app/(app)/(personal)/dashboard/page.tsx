@@ -32,7 +32,11 @@ export default async function JobDashboard() {
 
   const toDoJobs = await db.job.findMany({
     include: {
-      assignee: true,
+      assignments: {
+        include: {
+          user: true,
+        },
+      },
     },
     where: {
       status: "TODO",
@@ -41,9 +45,14 @@ export default async function JobDashboard() {
       createdAt: "desc",
     },
   });
+
   const inProgressJobs = await db.job.findMany({
     include: {
-      assignee: true,
+      assignments: {
+        include: {
+          user: true,
+        },
+      },
     },
     where: {
       status: "INPROGRESS",
@@ -52,9 +61,14 @@ export default async function JobDashboard() {
       createdAt: "desc",
     },
   });
+
   const doneJobs = await db.job.findMany({
     include: {
-      assignee: true,
+      assignments: {
+        include: {
+          user: true,
+        },
+      },
     },
     where: {
       status: "DONE",
@@ -114,7 +128,9 @@ export default async function JobDashboard() {
                     <BusinessJobCard
                       key={job.id}
                       job={job}
-                      currentAssignee={job.assignee}
+                      currentAssignees={job.assignments.map(
+                        (assignment) => assignment.user
+                      )}
                       currentUser={user}
                       allStudentAthletes={allStudentAthletes}
                     />

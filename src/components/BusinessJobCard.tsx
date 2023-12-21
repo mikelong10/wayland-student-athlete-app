@@ -8,14 +8,14 @@ import JobCardAssign from "./JobCardAssign";
 import JobStatusSelect from "./JobStatusSelect";
 
 export interface BusinessJobCardProps extends JobCardProps {
-  currentAssignee: User | null;
+  currentAssignees: User[];
   currentUser?: User;
   allStudentAthletes: User[];
 }
 
 export default function BusinessJobCard({
   job,
-  currentAssignee,
+  currentAssignees,
   currentUser,
   allStudentAthletes,
 }: BusinessJobCardProps) {
@@ -23,7 +23,7 @@ export default function BusinessJobCard({
     <div className="flex items-center justify-between gap-4">
       <JobCardAssign
         job={job}
-        currentAssignee={currentAssignee}
+        currentAssignees={currentAssignees}
         currentUser={currentUser}
         allStudentAthletes={allStudentAthletes}
       />

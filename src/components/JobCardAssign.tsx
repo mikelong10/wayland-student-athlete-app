@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { User } from "@prisma/client";
 import Fuse from "fuse.js";
-import { Check } from "lucide-react";
+import { Check, UserPlus } from "lucide-react";
 
 import { cn } from "@lib/utils";
 import { BusinessJobCardProps } from "@components/BusinessJobCard";
@@ -25,15 +25,15 @@ import { UserAvatar } from "@components/UserAvatar";
 
 export default function JobCardAssign({
   job,
-  currentAssignee,
+  currentAssignees,
   currentUser,
   allStudentAthletes,
 }: BusinessJobCardProps) {
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<User | null>(
-    currentAssignee
+  const [selectedUsers, setSelectedUsers] = useState<User[]>(
+    currentAssignees
   );
 
   const fuse = new Fuse(allStudentAthletes, {
@@ -46,16 +46,17 @@ export default function JobCardAssign({
     return match ? 1 : 0;
   }
 
-  async function onAssign(assigneeId: string) {
-    if (assigneeId !== selectedUser?.id) {
-      const newAssignee =
-        allStudentAthletes.find(
-          (studentAthlete) => studentAthlete.id === assigneeId
-        ) || null;
+  async function onAssign(newAssigneeId: string) {
+    // If the user is not already assigned to this job
+    if (!selectedUsers.find((user) => user.id === newAssigneeId)) {
+      // find them in the list of all student athletes
+      const newAssignee = allStudentAthletes.find(
+        (studentAthlete) => studentAthlete.id === newAssigneeId
+      );
       setOpen(false);
-      if (currentUser) {
+      if (currentUser && newAssignee) {
         toast({
-          description: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}...`,
+          description: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee.name}...`,
         });
         try {
           const response = await fetch(`/api/jobs/${job.id}`, {
@@ -64,10 +65,8 @@ export default function JobCardAssign({
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              assignee: {
-                id: assigneeId,
-                role: currentUser.role,
-              },
+              assigneeId: newAssigneeId,
+              assignerRole: currentUser.role,
             }),
           });
 
@@ -75,7 +74,7 @@ export default function JobCardAssign({
             throw new Error();
           }
 
-          setSelectedUser(newAssignee);
+          setSelectedUsers([...selectedUsers, newAssignee]);
           toast({
             description: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}!`,
           });
@@ -94,17 +93,24 @@ export default function JobCardAssign({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <div className="border-border dark:hover:shadow-tertiary flex items-center gap-2 rounded-full border px-3 py-2 transition-all hover:cursor-pointer hover:shadow-md focus:shadow-md">
-          <UserAvatar
-            user={{
-              image: selectedUser?.image,
-              name: selectedUser?.name,
-            }}
-            className="h-8 w-8"
-          />
-          <p className="overflow-auto text-center text-xs font-normal">
-            {selectedUser ? selectedUser.name : "Assign job"}
-          </p>
+        <div className="border-border dark:hover:shadow-tertiary flex items-center rounded-full border p-2 transition-all hover:cursor-pointer hover:shadow-md focus:shadow-md">
+          {selectedUsers.length ? (
+            selectedUsers.map((user, idx) => (
+              <UserAvatar
+                key={user.id}
+                user={{
+                  image: user.image,
+                  name: user.name,
+                }}
+                className={`border-background bg-muted h-8 w-8 border-2 ${
+                  idx !== 0 ? "-ml-2" : ""
+                }`}
+                style={{ zIndex: selectedUsers.length - idx }}
+              />
+            ))
+          ) : (
+            <UserPlus className="h-8 w-8 p-1" />
+          )}
         </div>
       </PopoverTrigger>
       <PopoverContent className="p-0" side="bottom" align="start">
@@ -122,7 +128,9 @@ export default function JobCardAssign({
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      selectedUser?.name === studentAthlete.name
+                      selectedUsers.find(
+                        (user) => user.id === studentAthlete.id
+                      )
                         ? "opacity-100"
                         : "opacity-0"
                     )}

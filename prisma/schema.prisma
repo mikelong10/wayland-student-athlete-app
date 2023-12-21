@@ -45,6 +45,15 @@ model Session {
   @@map("sessions")
 }
 
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
 model User {
   id            String    @id @default(cuid())
   createdAt     DateTime  @default(now()) @map(name: "created_at")
@@ -55,51 +64,51 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  role          Role      @default(CLIENT)
 
-  requestedJobs Job[] @relation(name: "requestor_relation")
-  assignedJobs  Job[] @relation(name: "assignee_relation")
-  role          Role  @default(CLIENT)
+  requestedJobs Job[]           @relation(name: "requestor_relation")
+  assignments   JobAssignment[]
 
   @@map("users")
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-  @@map("verification_tokens")
-}
-
 model Job {
-  id        String   @id @default(cuid())
-  status    Status   @default(TODO)
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
-
-  requestor   User?   @relation(name: "requestor_relation", fields: [requestorId], references: [id])
-  requestorId String? @map(name: "requestor_id")
-
-  assignee   User?   @relation(name: "assignee_relation", fields: [assigneeId], references: [id])
-  assigneeId String? @map(name: "assignee_id")
-
-  adultFirstName String  @map(name: "adult_first_name")
-  adultLastName  String  @map(name: "adult_last_name")
-  childFirstName String? @map(name: "child_first_name")
-  childLastName  String? @map(name: "child_last_name")
-  description    String  @db.Text
-  location       String  @db.Text
-  time           String  @db.Text
-  estimate       String  @db.Text
+  id             String   @id @default(cuid())
+  status         Status   @default(TODO)
+  createdAt      DateTime @default(now()) @map(name: "created_at")
+  updatedAt      DateTime @updatedAt @map(name: "updated_at")
+  adultFirstName String   @map(name: "adult_first_name")
+  adultLastName  String   @map(name: "adult_last_name")
+  childFirstName String?  @map(name: "child_first_name")
+  childLastName  String?  @map(name: "child_last_name")
+  description    String   @db.Text
+  location       String   @db.Text
+  time           String   @db.Text
+  estimate       String   @db.Text
   contact        String
   learn          String?
-  special        String? @db.Text
+  special        String?  @db.Text
   signature      String
 
+  requestor   User?           @relation(name: "requestor_relation", fields: [requestorId], references: [id])
+  requestorId String?         @map(name: "requestor_id")
+  assignments JobAssignment[]
+
   @@index(requestorId)
-  @@index(assigneeId)
   @@map("jobs")
+}
+
+model JobAssignment {
+  job        Job      @relation(fields: [jobId], references: [id])
+  jobId      String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([jobId, userId])
+  @@index([jobId])
+  @@index([userId])
 }
 
 enum Status {
