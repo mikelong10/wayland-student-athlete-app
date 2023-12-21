@@ -20,6 +20,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@components/ui/popover";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@components/ui/tooltip";
 import { useToast } from "@components/ui/use-toast";
 import { UserAvatar } from "@components/UserAvatar";
 
@@ -54,7 +60,7 @@ export default function JobCardAssign({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          assigneeId: newAssignee.id,
+          userId: newAssignee.id,
         }),
       });
 
@@ -86,7 +92,7 @@ export default function JobCardAssign({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          unassigneeId: unassignee.id,
+          userId: unassignee.id,
         }),
       });
 
@@ -131,27 +137,47 @@ export default function JobCardAssign({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <div className="border-border dark:hover:shadow-tertiary flex items-center rounded-full border p-2 transition-all hover:cursor-pointer hover:shadow-md focus:shadow-md">
-          {selectedUsers.length ? (
-            selectedUsers.map((user, idx) => (
-              <UserAvatar
-                key={user.id}
-                user={{
-                  image: user.image,
-                  name: user.name,
-                }}
-                className={`border-background bg-accent h-8 w-8 border-2 ${
-                  idx !== 0 ? "-ml-2" : ""
-                }`}
-                style={{ zIndex: selectedUsers.length - idx }}
-              />
-            ))
-          ) : (
-            <UserPlus className="h-8 w-8 p-1" />
-          )}
-        </div>
-      </PopoverTrigger>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <PopoverTrigger asChild>
+              <div className="group flex items-center rounded-full hover:cursor-pointer">
+                {selectedUsers
+                  .map((user, idx) => (
+                    <UserAvatar
+                      key={user.id}
+                      user={{
+                        image: user.image,
+                        name: user.name,
+                      }}
+                      className={`border-background bg-accent h-10 w-10 border-2 ${
+                        idx !== 0 ? "-ml-3" : ""
+                      }`}
+                      style={{ zIndex: selectedUsers.length - idx }}
+                    />
+                  ))
+                  .concat(
+                    <div
+                      className={`border-border group-hover:bg-muted flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${
+                        selectedUsers.length > 0 ? "-ml-3" : ""
+                      }`}
+                    >
+                      <UserPlus />
+                    </div>
+                  )}
+              </div>
+            </PopoverTrigger>
+          </TooltipTrigger>
+          <TooltipContent className="flex flex-col gap-2 p-4">
+            <p className="font-semibold tracking-tight">Assigned to...</p>
+            <ul className="ml-4 flex list-decimal flex-col gap-1 text-xs">
+              {selectedUsers.map((user) => (
+                <li key={user.id}>{user.name}</li>
+              ))}
+            </ul>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <PopoverContent className="p-0" side="bottom" align="start">
         <Command filter={searchStudentAthletes}>
           <CommandInput placeholder="Assign job to..." />
