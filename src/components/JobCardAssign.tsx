@@ -26,7 +26,6 @@ import { UserAvatar } from "@components/UserAvatar";
 export default function JobCardAssign({
   job,
   currentAssignees,
-  currentUser,
   allStudentAthletes,
 }: BusinessJobCardProps) {
   const { toast } = useToast();
@@ -44,47 +43,89 @@ export default function JobCardAssign({
     return match ? 1 : 0;
   }
 
-  async function onAssign(newAssigneeId: string) {
+  async function assignJob(newAssignee: User) {
+    toast({
+      description: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee.name}...`,
+    });
+    try {
+      const response = await fetch(`/api/jobs/${job.id}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          assigneeId: newAssignee.id,
+        }),
+      });
+
+      if (!response?.ok) {
+        throw new Error();
+      }
+
+      setSelectedUsers([...selectedUsers, newAssignee]);
+      toast({
+        description: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}!`,
+      });
+    } catch {
+      toast({
+        title: "Uh oh! Something went wrong.",
+        description: "Please try again.",
+        variant: "destructive",
+      });
+    }
+  }
+
+  async function unassignJob(unassignee: User) {
+    toast({
+      description: `Unassigning ${unassignee.name} from ${job.adultFirstName} ${job.adultLastName}'s job...`,
+    });
+    try {
+      const response = await fetch(`/api/jobs/${job.id}/users`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          unassigneeId: unassignee.id,
+        }),
+      });
+
+      if (!response?.ok) {
+        throw new Error();
+      }
+
+      setSelectedUsers(
+        [...selectedUsers].filter((user) => user.id !== unassignee.id)
+      );
+      toast({
+        description: `Successfully unassigned ${unassignee?.name} from ${job.adultFirstName} ${job.adultLastName}'s job!`,
+      });
+    } catch {
+      toast({
+        title: "Uh oh! Something went wrong.",
+        description: "Please try again.",
+        variant: "destructive",
+      });
+    }
+  }
+
+  async function toggleAssign(userId: string) {
+    setOpen(false);
+    const foundUser = selectedUsers.find((user) => user.id === userId);
     // If the user is not already assigned to this job
-    if (!selectedUsers.find((user) => user.id === newAssigneeId)) {
+    if (!foundUser) {
       // find them in the list of all student athletes
       const newAssignee = allStudentAthletes.find(
-        (studentAthlete) => studentAthlete.id === newAssigneeId
+        (studentAthlete) => studentAthlete.id === userId
       );
-      setOpen(false);
-      if (currentUser && newAssignee) {
-        toast({
-          description: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee.name}...`,
-        });
-        try {
-          const response = await fetch(`/api/jobs/${job.id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              assigneeId: newAssigneeId,
-              assignerRole: currentUser.role,
-            }),
-          });
-
-          if (!response?.ok) {
-            throw new Error();
-          }
-
-          setSelectedUsers([...selectedUsers, newAssignee]);
-          toast({
-            description: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}!`,
-          });
-        } catch {
-          toast({
-            title: "Uh oh! Something went wrong.",
-            description:
-              "There was a problem with your request. Please try again.",
-            variant: "destructive",
-          });
-        }
+      // and assign them to this job
+      if (newAssignee) {
+        await assignJob(newAssignee);
       }
+      // If the user is already assigned to this job
+    } else {
+      // unassign them from this job
+      await unassignJob(foundUser);
     }
   }
 
@@ -100,7 +141,7 @@ export default function JobCardAssign({
                   image: user.image,
                   name: user.name,
                 }}
-                className={`border-background bg-muted h-8 w-8 border-2 ${
+                className={`border-background bg-accent h-8 w-8 border-2 ${
                   idx !== 0 ? "-ml-2" : ""
                 }`}
                 style={{ zIndex: selectedUsers.length - idx }}
@@ -121,7 +162,7 @@ export default function JobCardAssign({
                 <CommandItem
                   key={studentAthlete.id}
                   value={studentAthlete.id}
-                  onSelect={onAssign}
+                  onSelect={toggleAssign}
                 >
                   <Check
                     className={cn(

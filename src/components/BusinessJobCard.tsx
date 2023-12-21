@@ -9,14 +9,12 @@ import JobStatusSelect from "./JobStatusSelect";
 
 export interface BusinessJobCardProps extends JobCardProps {
   currentAssignees: User[];
-  currentUser?: User;
   allStudentAthletes: User[];
 }
 
 export default function BusinessJobCard({
   job,
   currentAssignees,
-  currentUser,
   allStudentAthletes,
 }: BusinessJobCardProps) {
   const statusToggleAndJobAssign = (
@@ -24,7 +22,6 @@ export default function BusinessJobCard({
       <JobCardAssign
         job={job}
         currentAssignees={currentAssignees}
-        currentUser={currentUser}
         allStudentAthletes={allStudentAthletes}
       />
       <JobStatusSelect job={job} />

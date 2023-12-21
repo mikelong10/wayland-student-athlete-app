@@ -1,7 +1,6 @@
 import { Role } from "@prisma/client";
 
 import { db } from "@lib/db";
-import { getCurrentUser } from "@lib/session";
 import BusinessJobCard from "@components/BusinessJobCard";
 import Container from "@components/Container";
 import { Separator } from "@components/ui/separator";
@@ -13,8 +12,6 @@ export const metadata = {
 };
 
 export default async function JobDashboard() {
-  const user = await getCurrentUser();
-
   const allStudentAthletes = await db.user.findMany({
     where: {
       OR: [
@@ -131,7 +128,6 @@ export default async function JobDashboard() {
                       currentAssignees={job.assignments.map(
                         (assignment) => assignment.user
                       )}
-                      currentUser={user}
                       allStudentAthletes={allStudentAthletes}
                     />
                   ))}
