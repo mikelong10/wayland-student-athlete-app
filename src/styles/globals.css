@@ -13,11 +13,11 @@
     light orange: FFB27B
     orange: FF842C
     brown: 5C3921
-    black: 1B1612
+    black: 160f0a
   */
   :root {
     --background: #FFFCF9;
-    --foreground: #1B1612;
+    --foreground: #160f0a;
 
     --cream: #FFF6EA;
     
@@ -28,7 +28,7 @@
     --secondary-foreground: #FFFCF9;
 
     --tertiary: #ffc59c;
-    --tertiary-foreground: #1B1612;
+    --tertiary-foreground: #160f0a;
 
     --accent: #EEEBE7;
     --accent-foreground: #302C26;
@@ -43,10 +43,10 @@
     --success-foreground: #FFFCF9;
 
     --card: #FFFCF9;
-    --card-foreground: #1B1612;
+    --card-foreground: #160f0a;
 
     --popover: #FFFCF9;
-    --popover-foreground: #1B1612;
+    --popover-foreground: #160f0a;
 
     --border: #D0C9BD;
     --input: #5D5548;
@@ -64,16 +64,16 @@
     light orange: FFB27B
     orange: FF842C
     brown: 5C3921
-    black: 1B1612
+    black: 160f0a
   */
   .dark {
-    --background: #1B1612;
+    --background: #160f0a;
     --foreground: #FFFCF9;
 
     --primary: #ff852e;
     
     --secondary: #ffe1cb;
-    --secondary-foreground: #1B1612;
+    --secondary-foreground: #160f0a;
 
     --tertiary: #5C3921;
     --tertiary-foreground: #FFFCF9;
@@ -86,10 +86,10 @@
 
     --destructive: #ff4343;
 
-    --card: #1B1612;
+    --card: #160f0a;
     --card-foreground: #FFFCF9;
 
-    --popover: #1B1612;
+    --popover: #160f0a;
     --popover-foreground: #FFFCF9;
 
     --border: #5D5548;
