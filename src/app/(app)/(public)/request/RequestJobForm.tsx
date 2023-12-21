@@ -186,14 +186,14 @@ export default function RequestJobForm({
                     What do you want done?{" "}
                     <span className="text-primary">*</span>
                   </FormLabel>
+                  <FormControl>
+                    <Textarea {...field} />
+                  </FormControl>
                   <FormDescription>
                     {
                       "(moving, sports/music lessons, yardwork, babysitting, car rides, projects, anything!)"
                     }
                   </FormDescription>
-                  <FormControl>
-                    <Textarea {...field} />
-                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -207,12 +207,12 @@ export default function RequestJobForm({
                     Where should we come for the job?{" "}
                     <span className="text-primary">*</span>
                   </FormLabel>
-                  <FormDescription>
-                    Please provide an address or location
-                  </FormDescription>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
+                  <FormDescription>
+                    Please provide an address or location
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -226,14 +226,14 @@ export default function RequestJobForm({
                     When do you need the job done?{" "}
                     <span className="text-primary">*</span>
                   </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
                   <FormDescription>
                     {
                       "Provide a date and time or frequency (ex: weekly, monthly, every Tues and Thurs)"
                     }
                   </FormDescription>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -247,14 +247,14 @@ export default function RequestJobForm({
                     How long do you think the job will take?{" "}
                     <span className="text-primary">*</span>
                   </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
                   <FormDescription>
                     {
                       "Please provide your best estimate, but don't worry about it too much!"
                     }
                   </FormDescription>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -273,12 +273,12 @@ export default function RequestJobForm({
                     What&apos;s the best way to reach you?{" "}
                     <span className="text-primary">*</span>
                   </FormLabel>
-                  <FormDescription>
-                    Please provide us a phone number, email, etc!
-                  </FormDescription>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
+                  <FormDescription>
+                    Please provide us a phone number, email, etc!
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -289,12 +289,12 @@ export default function RequestJobForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>How did you hear about us?</FormLabel>
-                  <FormDescription>
-                    {"We would love to know :)"}
-                  </FormDescription>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
+                  <FormDescription>
+                    {"We would love to know :)"}
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -327,10 +327,10 @@ export default function RequestJobForm({
                   are not liable for any injuries or damages that may occur.{" "}
                   <span className="text-primary">*</span>
                 </FormLabel>
-                <FormDescription>Electronic signature</FormDescription>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
+                <FormDescription>Electronic signature</FormDescription>
                 <FormMessage />
               </FormItem>
             )}

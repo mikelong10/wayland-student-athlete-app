@@ -19,7 +19,7 @@ export interface BaseJobCardProps {
 export default function BaseJobCard({ job, statusAssign }: BaseJobCardProps) {
   return (
     <Card key={job.id} className="flex flex-col gap-4">
-      <CardHeader className="flex flex-col gap-2">
+      <CardHeader className="flex flex-col gap-1">
         {statusAssign}
         <div className="flex flex-col">
           <CardTitle className="flex w-full items-center">
