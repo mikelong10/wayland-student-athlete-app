@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { requestJobFormSchema } from "@lib/types";
+import { requestJobFormSchema } from "@lib/schemas";
 import { cn } from "@lib/utils";
 import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";

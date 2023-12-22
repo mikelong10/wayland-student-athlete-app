@@ -49,7 +49,7 @@
     --popover-foreground: #160f0a;
 
     --border: #D0C9BD;
-    --input: #5D5548;
+    --input: #D0C9BD;
     --ring: #FFB27B;
 
     --radius: 0.5rem;
@@ -93,6 +93,6 @@
     --popover-foreground: #FFFCF9;
 
     --border: #5D5548;
-    --input: #D0C9BD;
+    --input: #5D5548;
   }
 }

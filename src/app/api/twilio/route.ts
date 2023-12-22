@@ -2,7 +2,7 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { Twilio } from "twilio";
 import { z } from "zod";
 
-import { requestJobFormSchema } from "@lib/types";
+import { requestJobFormSchema } from "@lib/schemas";
 
 export async function POST(req: Request) {
   try {

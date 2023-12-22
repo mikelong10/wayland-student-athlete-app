@@ -7,7 +7,7 @@ import { Loader2, Pencil } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { editProfileFormSchema } from "@lib/types";
+import { editProfileFormSchema } from "@lib/schemas";
 import { Button } from "@components/ui/button";
 import {
   Dialog,

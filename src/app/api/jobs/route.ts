@@ -2,8 +2,8 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
 import { db } from "@lib/db";
+import { requestJobFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
-import { requestJobFormSchema } from "@lib/types";
 
 export async function POST(req: Request) {
   try {
