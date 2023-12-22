@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { studentAthletes } from "@lib/data";
 import Container from "@components/Container";
+import H2 from "@components/typography/h2";
 
 export default function StudentAthletePage({
   params,
@@ -31,9 +32,7 @@ export default function StudentAthletePage({
           />
         </div>
         <div className="flex flex-col text-center">
-          <h2 className="text-xl font-bold tracking-tight">
-            {studentAthlete.name}
-          </h2>
+          <H2 className="text-xl">{studentAthlete.name}</H2>
           <p className="text-muted-foreground">{`Class of ${studentAthlete.year}`}</p>
         </div>
         <ul className="flex list-disc flex-col gap-1 pl-4">{resumeItems}</ul>
@@ -47,9 +46,7 @@ export default function StudentAthletePage({
             className="w-[312px] rounded-lg"
           />
           <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-              {studentAthlete.name}
-            </h2>
+            <H2 className="text-2xl md:text-3xl">{studentAthlete.name}</H2>
             <p className="text-muted-foreground">{`Class of ${studentAthlete.year}`}</p>
           </div>
         </div>
@@ -61,14 +58,12 @@ export default function StudentAthletePage({
           <Image
             src={studentAthlete.image}
             alt={studentAthlete.name}
-            className="shadow-tertiary max-w-[400px] rounded-lg shadow-2xl"
+            className="dark:shadow-tertiary max-w-[400px] rounded-lg shadow-2xl"
           />
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col xl:gap-1">
-            <h2 className="text-3xl font-bold tracking-tight xl:text-4xl">
-              {studentAthlete.name}
-            </h2>
+            <H2 className="text-3xl xl:text-4xl">{studentAthlete.name}</H2>
             <p className="text-muted-foreground text-xl font-semibold tracking-tight">{`Class of ${studentAthlete.year}`}</p>
           </div>
           <ul className="flex list-disc flex-col gap-1 pl-4">{resumeItems}</ul>

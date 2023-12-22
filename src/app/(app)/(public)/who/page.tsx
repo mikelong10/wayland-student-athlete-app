@@ -2,6 +2,8 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 import { studentAthletes } from "@lib/data";
+import { rubik } from "@lib/fonts";
+import { cn } from "@lib/utils";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import { Separator } from "@components/ui/separator";
@@ -30,9 +32,14 @@ const StudentAthleteCard = ({
         className="rounded-lg transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-80 group-hover:shadow-xl"
       />
       <div className="flex flex-col items-center">
-        <h2 className="w-full flex-1 text-center text-lg font-semibold">
+        <p
+          className={cn(
+            "w-full flex-1 text-center text-lg font-semibold",
+            rubik.className
+          )}
+        >
           {name}
-        </h2>
+        </p>
         <p className="text-muted-foreground w-full text-center">{`Class of ${year}`}</p>
       </div>
     </div>
@@ -45,9 +52,9 @@ export default function WhoWeArePage() {
       <div className="xs:w-[416px] flex w-[312px] flex-col gap-2 sm:w-[544px] md:w-[640px] lg:w-[832px] xl:w-[1024px] 2xl:w-[1144px]">
         <div className="flex flex-col gap-4">
           <H1>Our People</H1>
-          <h2 className="text-muted-foreground text-lg font-bold tracking-tight sm:text-xl">
+          <p className="text-muted-foreground text-lg font-semibold tracking-tight sm:text-xl">
             Meet the Student-Athletes
-          </h2>
+          </p>
         </div>
         <Separator />
         <div className="mt-6 flex flex-col items-center">

@@ -71,6 +71,7 @@ export default function JobCardAssign({
       setSelectedUsers([...selectedUsers, newAssignee]);
       toast({
         description: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}!`,
+        variant: "success",
       });
     } catch {
       toast({
@@ -105,6 +106,7 @@ export default function JobCardAssign({
       );
       toast({
         description: `Successfully unassigned ${unassignee?.name} from ${job.adultFirstName} ${job.adultLastName}'s job!`,
+        variant: "success",
       });
     } catch {
       toast({

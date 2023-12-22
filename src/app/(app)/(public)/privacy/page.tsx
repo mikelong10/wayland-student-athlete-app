@@ -1,6 +1,7 @@
 import { generateUniqueId } from "@lib/utils";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
+import H2 from "@components/typography/h2";
 import { Card, CardContent } from "@components/ui/card";
 
 export const metadata = {
@@ -88,9 +89,9 @@ export default function PrivacyPolicy() {
       <div className="flex flex-col gap-4">
         {privacyPolicyData.map((bullet, idx) => (
           <div key={bullet.title} className="flex flex-col gap-3">
-            <h2 className="text-xl font-bold tracking-tight">{`${idx + 1}. ${
+            <H2 className="text-xl md:text-2xl">{`${idx + 1}. ${
               bullet.title
-            }`}</h2>
+            }`}</H2>
             <ul className="flex flex-col gap-2">
               {bullet.information.map((info) => (
                 <li

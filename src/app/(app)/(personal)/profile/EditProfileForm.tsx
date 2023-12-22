@@ -97,9 +97,9 @@ export default function EditProfileForm({ user }: { user: User }) {
         className="h-24 w-24"
       />
       <div className="flex items-center gap-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        <p className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
           {activeUser.name ?? "Your Name"}
-        </h2>
+        </p>
         <Dialog>
           <DialogTrigger asChild>
             <Button size={"icon"} variant={"ghost"}>

@@ -8,6 +8,7 @@ import * as z from "zod";
 
 import { requestJobFormSchema } from "@lib/types";
 import { cn } from "@lib/utils";
+import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
 import {
   Form,
@@ -99,84 +100,89 @@ export default function RequestJobForm({
         onSubmit={form.handleSubmit(onSubmit)}
         className="mt-4 flex w-full flex-col gap-8"
       >
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-semibold tracking-tight">Name</h2>
-            <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-4">
-              <FormField
-                control={form.control}
-                name="adultFirstName"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>
-                      First name <span className="text-primary">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="adultLastName"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>
-                      Last name <span className="text-primary">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col">
-              <h3 className="text-lg font-medium tracking-tight">
-                Child&apos;s name
+        <div className="flex flex-col gap-4">
+          <H2>Name</H2>
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <h3 className="text-accent-foreground text-lg font-medium tracking-tight">
+                Adult&apos;s name
               </h3>
-              <FormDescription>
-                {"(if applicable for tutoring, sports/music lesson, etc.)"}
-              </FormDescription>
+              <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-4">
+                <FormField
+                  control={form.control}
+                  name="adultFirstName"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>
+                        First name <span className="text-primary">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="adultLastName"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>
+                        Last name <span className="text-primary">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
-            <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-4">
-              <FormField
-                control={form.control}
-                name="childFirstName"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>First name</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="childLastName"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Last name</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col">
+                <h3 className="text-accent-foreground text-lg font-medium tracking-tight">
+                  Child&apos;s name
+                </h3>
+                <FormDescription>
+                  {"(if applicable for tutoring, sports/music lesson, etc.)"}
+                </FormDescription>
+              </div>
+              <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-4">
+                <FormField
+                  control={form.control}
+                  name="childFirstName"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>First name</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="childLastName"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Last name</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
           </div>
         </div>
         <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-semibold tracking-tight">Job Info</h2>
-          <div className="flex w-full flex-col gap-6">
+          <H2>Job Info</H2>
+          <div className="flex w-full flex-col gap-4">
             <FormField
               control={form.control}
               name="description"
@@ -262,8 +268,8 @@ export default function RequestJobForm({
           </div>
         </div>
         <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
-          <div className="flex w-full flex-col gap-6">
+          <H2>Contact</H2>
+          <div className="flex w-full flex-col gap-4">
             <FormField
               control={form.control}
               name="contact"

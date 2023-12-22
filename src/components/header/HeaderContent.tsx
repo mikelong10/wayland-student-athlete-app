@@ -40,7 +40,7 @@ export default function HeaderContent({ user }: { user?: User }) {
       mobileStyle: "text-2xl font-bold tracking-tight",
       desktopVariantProps: { variant: "link" },
       desktopStyle: `underline-offset-4 ${
-        pathname === "/what" ? "underline text-muted-foreground" : ""
+        pathname === "/what" ? "underline text-accent-foreground" : ""
       }`,
     },
     {
@@ -50,7 +50,7 @@ export default function HeaderContent({ user }: { user?: User }) {
       mobileStyle: "text-2xl font-bold tracking-tight",
       desktopVariantProps: { variant: "link" },
       desktopStyle: `underline-offset-4 ${
-        pathname === "/who" ? "underline text-muted-foreground" : ""
+        pathname === "/who" ? "underline text-accent-foreground" : ""
       }`,
     },
     {
@@ -60,7 +60,7 @@ export default function HeaderContent({ user }: { user?: User }) {
       mobileStyle: "text-2xl font-bold tracking-tight",
       desktopVariantProps: { variant: "link" },
       desktopStyle: `underline-offset-4 ${
-        pathname === "/reviews" ? "underline text-muted-foreground" : ""
+        pathname === "/reviews" ? "underline text-accent-foreground" : ""
       }`,
     },
     {
@@ -72,7 +72,7 @@ export default function HeaderContent({ user }: { user?: User }) {
       desktopVariantProps: { variant: "default" },
       desktopStyle: `ml-4 rounded-full underline-offset-4 ${
         pathname === "/request"
-          ? "underline bg-transparent border-border border text-muted-foreground"
+          ? "underline bg-transparent border-border border text-accent-foreground"
           : ""
       }`,
     },

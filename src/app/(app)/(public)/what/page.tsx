@@ -38,7 +38,7 @@ export default function WhatWeDoPage() {
                 the job for you!
               </p>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="mt-2">
               <Link href="/request">
                 <Button className="flex items-center justify-between gap-4">
                   Request a job

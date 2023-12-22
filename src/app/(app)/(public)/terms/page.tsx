@@ -1,5 +1,6 @@
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
+import H2 from "@components/typography/h2";
 import { Card, CardContent } from "@components/ui/card";
 
 export const metadata = {
@@ -75,9 +76,9 @@ export default function PrivacyPolicy() {
       <div className="flex flex-col gap-4">
         {terms.map((term, idx) => (
           <div key={term.title} className="flex flex-col gap-1">
-            <h2 className="text-xl font-bold tracking-tight">{`${idx + 1}. ${
+            <H2 className="text-xl md:text-2xl">{`${idx + 1}. ${
               term.title
-            }`}</h2>
+            }`}</H2>
             <p className="text-accent-foreground pl-6">{term.description}</p>
           </div>
         ))}

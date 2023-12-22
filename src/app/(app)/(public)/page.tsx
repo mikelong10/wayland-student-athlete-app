@@ -6,6 +6,7 @@ import Container from "@components/Container";
 import ReviewCarousel from "@components/ReviewCarousel";
 import ServicesContent from "@components/ServicesContent";
 import H1 from "@components/typography/h1";
+import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
@@ -60,13 +61,13 @@ export default function Home() {
         <div className="mb-24 flex w-full flex-col items-center justify-center gap-20">
           <div className="mt-8 flex w-full flex-col justify-center gap-8 sm:flex-row sm:gap-8 md:gap-16 lg:gap-24">
             <div className="flex flex-col items-center gap-2">
-              <p className="text-6xl font-bold">800+</p>
+              <H2 className="text-6xl sm:text-6xl">800+</H2>
               <p className="text-md text-muted-foreground underline underline-offset-8">
                 Jobs requested and completed
               </p>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <p className="text-6xl font-bold">200+</p>
+              <H2 className="text-6xl sm:text-6xl">200+</H2>
               <p className="text-md text-muted-foreground underline underline-offset-8">
                 Parents, kids, and families served
               </p>
@@ -99,15 +100,13 @@ export default function Home() {
       </Container>
       <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-8 bg-gradient-to-br to-50% dark:from-orange-950">
         <div className="mb-20 flex w-full flex-col items-center gap-8">
-          <h2 className="text-3xl font-semibold tracking-tight lg:text-4xl">
+          <H2 className="text-3xl lg:text-4xl">
             <span className="">Trusted</span> by the{" "}
             <span className="text-secondary italic">community</span>.
-          </h2>
+          </H2>
           <ReviewCarousel />
         </div>
-        <h2 className="text-3xl font-semibold tracking-tight lg:text-4xl">
-          Our Leaders
-        </h2>
+        <H2 className="text-3xl lg:text-4xl">Our Leaders</H2>
         <div className="flex flex-col gap-12 sm:flex-row md:gap-16 lg:gap-24">
           <div className="flex flex-col items-center gap-4">
             <Image
