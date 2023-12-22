@@ -95,7 +95,7 @@ export default function UserRoleSelect({ user }: { user: User }) {
             }
             className="w-fit gap-2"
           >
-            <p className="font-normal">{UserRoleText[user.role]}</p>
+            <p className="font-semibold">{UserRoleText[user.role]}</p>
             <SelectPrimitive.Icon asChild>
               <ChevronDown className="h-4 w-4 opacity-50" />
             </SelectPrimitive.Icon>
