@@ -57,6 +57,7 @@ export default function UserRoleSelect({ user }: { user: User }) {
           description: `${user.name}'s user role was updated from ${
             UserRoleText[user.role]
           } to ${UserRoleText[userRoleChangeTo]}.`,
+          variant: "success",
         });
 
         router.refresh();
@@ -71,6 +72,7 @@ export default function UserRoleSelect({ user }: { user: User }) {
     } else {
       toast({
         description: "Invalid user role update. Please try again.",
+        variant: "destructive",
       });
     }
   }

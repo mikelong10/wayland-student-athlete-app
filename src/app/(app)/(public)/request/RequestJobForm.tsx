@@ -81,6 +81,7 @@ export default function RequestJobForm({
       toast({
         title: "Thank you!",
         description: "Your job request was successfully submitted",
+        variant: "success",
       });
       setRequestSent(true);
     } catch {

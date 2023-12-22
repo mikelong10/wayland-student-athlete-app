@@ -44,6 +44,7 @@ export default function JobStatusSelect({ job }: { job: Job }) {
           description: `${job.adultFirstName}'s job was moved from ${
             JobStatusText[job.status]
           } to ${JobStatusText[newStatus]}.`,
+          variant: "success",
         });
 
         router.refresh();
@@ -58,6 +59,7 @@ export default function JobStatusSelect({ job }: { job: Job }) {
     } else {
       toast({
         description: "Invalid job role update. Please try again.",
+        variant: "destructive",
       });
     }
   }

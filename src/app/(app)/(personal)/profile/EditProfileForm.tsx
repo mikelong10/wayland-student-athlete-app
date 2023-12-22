@@ -72,6 +72,7 @@ export default function EditProfileForm({ user }: { user: User }) {
       toast({
         title: "Looking good!",
         description: "Your profile was successfully updated",
+        variant: "success",
       });
 
       setActiveUser(updatedUser);
