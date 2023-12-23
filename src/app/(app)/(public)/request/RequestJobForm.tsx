@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { requestJobFormSchema } from "@lib/schemas";
-import { cn } from "@lib/utils";
+import { cn, scrollToTop } from "@lib/utils";
 import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
 import {
@@ -70,7 +70,8 @@ export default function RequestJobForm({
 
       const createJobResponseBody = await createJobResponse.json();
 
-      await fetch("/api/twilio", {
+      // send email notification with nodemailer
+      await fetch("/api/email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,6 +79,16 @@ export default function RequestJobForm({
         body: JSON.stringify(createJobResponseBody),
       });
 
+      // // send text notification through Twilio
+      // await fetch("/api/twilio", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(createJobResponseBody),
+      // });
+
+      scrollToTop();
       toast({
         title: "Thank you!",
         description: "Your job request was successfully submitted",

@@ -39,3 +39,17 @@ export function formatPhoneNumber(input: string): string {
 
   return formattedNumber;
 }
+
+const isBrowser = () => typeof window !== "undefined";
+
+export function scrollToTop() {
+  if (!isBrowser()) return;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+export function scrollToElement(id: string) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+}
