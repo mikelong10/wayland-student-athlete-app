@@ -1,5 +1,6 @@
 "use client";
 
+import { scrollToElement } from "@lib/utils";
 import { Button, ButtonProps } from "@components/ui/button";
 
 interface InteractiveButtonProps extends ButtonProps {
@@ -16,12 +17,6 @@ export default function InteractiveButton({
   children,
   ...props
 }: InteractiveButtonProps) {
-  function scrollToElement(id: string) {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  }
   if (idScrollToElement)
     return (
       <Button

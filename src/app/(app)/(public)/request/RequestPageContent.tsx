@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { User } from "@prisma/client";
-import { ChevronLeft, MailCheck } from "lucide-react";
+import { ChevronLeft, MailCheck, Redo2 } from "lucide-react";
 
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
@@ -23,18 +23,27 @@ export default function RequestPageContent({ user }: { user?: User }) {
         <p className="text-center">
           Thanks for submitting your job request! We will get to it shortly.
         </p>
-        <div className="flex gap-2">
-          <Link href="/">
-            <Button variant={"ghost"} className="flex items-center gap-1 pr-6">
-              <ChevronLeft className="h-4 w-4" />
-              Back to home
-            </Button>
-          </Link>
-          {!!user && (
-            <Link href="/jobs">
-              <Button className="px-6">View your jobs</Button>
+        <div className="flex flex-col items-center gap-4">
+          <Button className="flex gap-2" onClick={() => setRequestSent(false)}>
+            <Redo2 />
+            Request another
+          </Button>
+          <div className="flex gap-2">
+            <Link href="/">
+              <Button
+                variant={"ghost"}
+                className="flex items-center gap-1 pr-6"
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Back to home
+              </Button>
             </Link>
-          )}
+            {!!user && (
+              <Link href="/jobs">
+                <Button className="px-6">View your jobs</Button>
+              </Link>
+            )}
+          </div>
         </div>
       </Container>
     );

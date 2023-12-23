@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
+import { formatPhoneNumber } from "@lib/utils";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -14,6 +15,7 @@ const routeContextSchema = z.object({
 const userEditSchema = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
+  phone: z.string().optional(),
   role: z.nativeEnum(Role).optional(),
 });
 
@@ -85,8 +87,8 @@ export async function PATCH(
           }
         );
       }
-      // if this is a request to edit a user's name
-    } else if (payload.firstName && payload.lastName) {
+      // if this is a request to edit a user's name or phone number
+    } else if ((payload.firstName && payload.lastName) || payload.phone) {
       // invalid if the user is not logged in or the user is not the user they are trying to edit
       if (!user || user.id !== params.userId) {
         return new Response(null, {
@@ -107,14 +109,21 @@ export async function PATCH(
           statusText: ReasonPhrases.UNAUTHORIZED,
         });
       }
-      // update the user's name
+      // formulate data to update
+      const dataToUpdate: { name?: string; phone?: string } = {};
+      if (payload.firstName && payload.lastName) {
+        dataToUpdate["name"] = `${payload.firstName} ${payload.lastName}`;
+      }
+      if (payload.phone) {
+        const updatedPhone = formatPhoneNumber(payload.phone);
+        dataToUpdate["phone"] = updatedPhone;
+      }
+      // update the user
       const updatedUser = await db.user.update({
         where: {
           id: params.userId,
         },
-        data: {
-          name: `${payload.firstName} ${payload.lastName}`,
-        },
+        data: dataToUpdate,
       });
       return new Response(JSON.stringify(updatedUser));
     }
