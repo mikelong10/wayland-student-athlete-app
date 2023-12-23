@@ -1,6 +1,8 @@
 import { z } from "zod";
 
-export const editProfileFormSchema = z
+import { phoneRegex } from "@lib/utils";
+
+export const editUserNameSchema = z
   .object({
     firstName: z.string().optional(),
     lastName: z.string().optional(),
@@ -9,6 +11,10 @@ export const editProfileFormSchema = z
     message: "Please provide both first and last name",
     path: ["lastName"],
   });
+
+export const editUserPhoneSchema = z.object({
+  phone: z.string().regex(phoneRegex, "Please enter a vaild US phone number"),
+});
 
 export const requestJobFormSchema = z.object({
   adultFirstName: z.string().min(1, "Required"),
