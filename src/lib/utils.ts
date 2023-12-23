@@ -19,3 +19,37 @@ export function generateUniqueId(inputString: string) {
   hash.update(inputString);
   return hash.digest("hex");
 }
+
+export const phoneRegex = new RegExp(
+  /^(\+?0?1\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
+);
+
+export function formatPhoneNumber(input: string): string {
+  // Extract digits from the input string
+  const digits = input.replace(/\D/g, "");
+
+  let formattedNumber = "";
+  // given number already has US country code
+  if (digits.length > 10) {
+    formattedNumber = "+" + digits;
+  } else {
+    // Append the country code "+1" to the extracted digits
+    formattedNumber = "+1" + digits;
+  }
+
+  return formattedNumber;
+}
+
+const isBrowser = () => typeof window !== "undefined";
+
+export function scrollToTop() {
+  if (!isBrowser()) return;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+export function scrollToElement(id: string) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+}

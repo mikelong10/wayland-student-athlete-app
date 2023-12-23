@@ -1,5 +1,6 @@
 import { Footer } from "@components/footer/Footer";
 import Header from "@components/header/Header";
+import ScrollToTopButton from "@components/ScrollToTopButton";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       <Header />
       {children}
       <Footer />
+      <ScrollToTopButton />
     </div>
   );
 }
