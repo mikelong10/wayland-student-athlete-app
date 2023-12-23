@@ -44,10 +44,8 @@ export async function POST(req: Request) {
         <h2>Contact</h2>
         <h3>Contact Info</h3>
         <p>${job.contact}</p>
-        <h3>Source</h3>
-        <p>${job.learn}</p>
-        <h3>Special Requests</h3>
-        <p>${job.special}</p>
+        ${job.learn ? `<h3>Source</h3><p>${job.learn}</p>` : ""}
+        ${job.special ? `<h3>Special Requests</h3><p>${job.special}</p>` : ""}
         <h3>Electronic Signature</h3>
         <p>${job.signature}</p>
         `;
