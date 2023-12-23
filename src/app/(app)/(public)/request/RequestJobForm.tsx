@@ -54,11 +54,6 @@ export default function RequestJobForm({
   async function onSubmit(values: RequestJobFormValues) {
     setIsSubmitting(true);
 
-    toast({
-      title: "Sending your job request...",
-      description: "Hope you're having a great day today!",
-    });
-
     try {
       const createJobResponse = await fetch("/api/jobs", {
         method: "POST",
@@ -89,11 +84,6 @@ export default function RequestJobForm({
       // });
 
       scrollToTop();
-      toast({
-        title: "Thank you!",
-        description: "Your job request was successfully submitted",
-        variant: "success",
-      });
       setRequestSent(true);
     } catch {
       toast({
