@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       const newJob = await db.job.create({
         data: body,
       });
-      console.log("Created new job WITHOUT user:", newJob);
+
       return new Response(JSON.stringify(newJob), {
         status: StatusCodes.CREATED,
         statusText: ReasonPhrases.CREATED,
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
         requestorId: user.id,
       },
     });
-    console.log("Created new job WITH user:", newJob);
+
     return new Response(JSON.stringify(newJob), {
       status: StatusCodes.CREATED,
       statusText: ReasonPhrases.CREATED,

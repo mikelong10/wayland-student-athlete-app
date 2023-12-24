@@ -4,9 +4,8 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
-import { requestJobFormSchema } from "@lib/schemas";
+import { requestJobFormSchema, RequestJobFormValues } from "@lib/schemas";
 import { cn, scrollToTop } from "@lib/utils";
 import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
@@ -22,8 +21,6 @@ import {
 import { Input } from "@components/ui/input";
 import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
-
-type RequestJobFormValues = z.infer<typeof requestJobFormSchema>;
 
 export default function RequestJobForm({
   setRequestSent,

@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
+import { EmailLoginFormValues, emailLoginSchema } from "@lib/schemas";
 import { cn } from "@lib/utils";
 import { FacebookLogo, GoogleLogo } from "@components/icons";
 import { Button } from "@components/ui/button";
@@ -17,28 +17,19 @@ import { toast } from "@components/ui/use-toast";
 
 interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
 
-export const userAuthSchema = z.object({
-  email: z
-    .string()
-    .email("Please provide a valid email")
-    .min(1, "Please enter your email"),
-});
-
-type FormData = z.infer<typeof userAuthSchema>;
-
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(userAuthSchema),
+  } = useForm<EmailLoginFormValues>({
+    resolver: zodResolver(emailLoginSchema),
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [isFacebookLoading, setIsFacebookLoading] = useState(false);
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: EmailLoginFormValues) {
     setIsLoading(true);
 
     const signInResult = await signIn("email", {
