@@ -71,7 +71,7 @@ export default function JobCompleteForm({
         numPeople: numPeople.toString(),
         manHours: ((Number(values.timeTaken) * numPeople) / 60).toString(),
       };
-      await fetch("/api/spreadsheet", {
+      await fetch(`/api/jobs/${job.id}/spreadsheet`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
