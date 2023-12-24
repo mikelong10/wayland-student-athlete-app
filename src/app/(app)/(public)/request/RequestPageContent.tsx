@@ -23,11 +23,12 @@ export default function RequestPageContent({ user }: { user?: User }) {
         <p className="text-center">
           Thanks for submitting your job request! We will get to it shortly.
         </p>
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-6">
           <Button className="flex gap-2" onClick={() => setRequestSent(false)}>
             <Redo2 />
             Request another
           </Button>
+          <Separator className="w-16" />
           <div className="flex gap-2">
             <Link href="/">
               <Button
@@ -40,7 +41,9 @@ export default function RequestPageContent({ user }: { user?: User }) {
             </Link>
             {!!user && (
               <Link href="/jobs">
-                <Button className="px-6">View your jobs</Button>
+                <Button className="px-6" variant={"secondary"}>
+                  View your jobs
+                </Button>
               </Link>
             )}
           </div>
