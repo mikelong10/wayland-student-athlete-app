@@ -5,9 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@prisma/client";
 import { Loader2, Pencil } from "lucide-react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
-import { editUserNameSchema } from "@lib/schemas";
+import { EditUserNameFormValues, editUserNameSchema } from "@lib/schemas";
 import { Button } from "@components/ui/button";
 import {
   Dialog,
@@ -29,15 +28,13 @@ import {
 import { Input } from "@components/ui/input";
 import { useToast } from "@components/ui/use-toast";
 
-type EditProfileFormValues = z.infer<typeof editUserNameSchema>;
-
 export default function EditUserNameForm({ user }: { user: User }) {
   const { toast } = useToast();
 
   const [activeUser, setActiveUser] = useState<User>(user);
   const [isSavingEdit, setIsSavingEdit] = useState(false);
 
-  const form = useForm<EditProfileFormValues>({
+  const form = useForm<EditUserNameFormValues>({
     resolver: zodResolver(editUserNameSchema),
     defaultValues: {
       firstName: "",
@@ -45,7 +42,7 @@ export default function EditUserNameForm({ user }: { user: User }) {
     },
   });
 
-  async function onSubmit(values: EditProfileFormValues) {
+  async function onSubmit(values: EditUserNameFormValues) {
     setIsSavingEdit(true);
 
     toast({

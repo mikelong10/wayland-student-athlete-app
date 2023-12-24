@@ -5,9 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@prisma/client";
 import { Loader2, Pencil } from "lucide-react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
-import { editUserPhoneSchema } from "@lib/schemas";
+import { EditUserPhoneFormValues, editUserPhoneSchema } from "@lib/schemas";
 import { Button } from "@components/ui/button";
 import {
   Dialog,
@@ -28,8 +27,6 @@ import {
 } from "@components/ui/form";
 import { Input } from "@components/ui/input";
 import { useToast } from "@components/ui/use-toast";
-
-type EditUserPhoneFormValues = z.infer<typeof editUserPhoneSchema>;
 
 export default function EditUserNameForm({ user }: { user: User }) {
   const { toast } = useToast();

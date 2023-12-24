@@ -14,9 +14,14 @@ import {
 export interface BaseJobCardProps {
   job: Job;
   statusAssign: ReactNode;
+  jobCompleteForm?: ReactNode;
 }
 
-export default function BaseJobCard({ job, statusAssign }: BaseJobCardProps) {
+export default function BaseJobCard({
+  job,
+  statusAssign,
+  jobCompleteForm,
+}: BaseJobCardProps) {
   return (
     <Card key={job.id} className="flex flex-col gap-4">
       <CardHeader className="flex flex-col gap-1">
@@ -34,10 +39,11 @@ export default function BaseJobCard({ job, statusAssign }: BaseJobCardProps) {
         <CardContent>
           <p className="border-l-2 pl-2">{job.description}</p>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex items-end justify-between">
           <p className="text-muted-foreground text-xs italic">
             Requested: {formatDate(job.createdAt)}
           </p>
+          {jobCompleteForm}
         </CardFooter>
       </div>
     </Card>

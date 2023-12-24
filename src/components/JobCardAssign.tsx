@@ -51,7 +51,7 @@ export default function JobCardAssign({
 
   async function assignJob(newAssignee: User) {
     toast({
-      description: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee.name}...`,
+      title: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee.name}...`,
     });
     try {
       const response = await fetch(`/api/jobs/${job.id}/users`, {
@@ -70,7 +70,7 @@ export default function JobCardAssign({
 
       setSelectedUsers([...selectedUsers, newAssignee]);
       toast({
-        description: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}!`,
+        title: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}!`,
         variant: "success",
       });
     } catch {
@@ -84,7 +84,7 @@ export default function JobCardAssign({
 
   async function unassignJob(unassignee: User) {
     toast({
-      description: `Unassigning ${unassignee.name} from ${job.adultFirstName} ${job.adultLastName}'s job...`,
+      title: `Unassigning ${unassignee.name} from ${job.adultFirstName} ${job.adultLastName}'s job...`,
     });
     try {
       const response = await fetch(`/api/jobs/${job.id}/users`, {
@@ -105,7 +105,7 @@ export default function JobCardAssign({
         [...selectedUsers].filter((user) => user.id !== unassignee.id)
       );
       toast({
-        description: `Successfully unassigned ${unassignee?.name} from ${job.adultFirstName} ${job.adultLastName}'s job!`,
+        title: `Successfully unassigned ${unassignee?.name} from ${job.adultFirstName} ${job.adultLastName}'s job!`,
         variant: "success",
       });
     } catch {
@@ -160,6 +160,7 @@ export default function JobCardAssign({
                   ))
                   .concat(
                     <div
+                      key="add-user"
                       className={`border-background group-hover:bg-muted flex  items-center justify-center rounded-full border-2 transition-colors ${
                         selectedUsers.length > 0 ? "-ml-3" : ""
                       }`}

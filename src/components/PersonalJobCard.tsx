@@ -18,7 +18,7 @@ export default function PersonalJobCard({ job }: JobCardProps) {
   const statusBadge = (
     <Badge variant={Status[job.status]} className="w-fit select-none gap-2">
       <Dot status={Status[job.status]} />
-      <p className="text-muted-foreground font-semibold">
+      <p className="text-accent-foreground font-semibold">
         {JobStatusText[job.status]}
       </p>
     </Badge>

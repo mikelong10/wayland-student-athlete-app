@@ -63,19 +63,6 @@ export default function HeaderContent({ user }: { user?: User }) {
         pathname === "/reviews" ? "underline text-accent-foreground" : ""
       }`,
     },
-    {
-      url: "/request",
-      text: "Request a Job",
-      mobileVariantProps: { variant: "default" },
-      mobileStyle:
-        "text-2xl font-bold tracking-tight mt-16 px-8 py-6 h-auto rounded-full",
-      desktopVariantProps: { variant: "default" },
-      desktopStyle: `ml-4 rounded-full underline-offset-4 ${
-        pathname === "/request"
-          ? "underline bg-transparent border-border border text-accent-foreground"
-          : ""
-      }`,
-    },
   ];
 
   const checkScroll = () => {

@@ -1,10 +1,11 @@
 "use client";
 
-import { User } from "@prisma/client";
+import { Status, User } from "@prisma/client";
 
 import { JobCardProps } from "@components/PersonalJobCard";
 import BaseJobCard from "./BaseJobCard";
 import JobCardAssign from "./JobCardAssign";
+import JobCompleteForm from "./JobCompleteForm";
 import JobStatusSelect from "./JobStatusSelect";
 
 export interface BusinessJobCardProps extends JobCardProps {
@@ -27,5 +28,15 @@ export default function BusinessJobCard({
       <JobStatusSelect job={job} />
     </div>
   );
-  return <BaseJobCard job={job} statusAssign={statusToggleAndJobAssign} />;
+  return (
+    <BaseJobCard
+      job={job}
+      statusAssign={statusToggleAndJobAssign}
+      jobCompleteForm={
+        job.status === Status.DONE && (
+          <JobCompleteForm job={job} currentAssignees={currentAssignees} />
+        )
+      }
+    />
+  );
 }

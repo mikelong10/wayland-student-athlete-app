@@ -3,16 +3,22 @@ import { GoogleSpreadsheet } from "google-spreadsheet";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-import { db } from "@lib/db";
-import { requestJobFormSchema } from "@lib/schemas";
-import { getCurrentUser } from "@lib/session";
+import { completeJobGoogleSheetSchema } from "@lib/schemas";
 
-export async function POST(req: Request) {
+const routeContextSchema = z.object({
+  params: z.object({
+    jobId: z.string(),
+  }),
+});
+
+export async function POST(
+  req: Request,
+  context: z.infer<typeof routeContextSchema>
+) {
   try {
-    const user = await getCurrentUser();
-
+    routeContextSchema.parse(context);
     const json = await req.json();
-    const jobRequestBody = requestJobFormSchema.parse(json);
+    const jobCompleteBody = completeJobGoogleSheetSchema.parse(json);
 
     // initialize auth
     const serviceAccountAuth = new JWT({
@@ -26,33 +32,14 @@ export async function POST(req: Request) {
       serviceAccountAuth
     );
     await doc.loadInfo(); // loads document properties and worksheets
-    const sheet = doc.sheetsByIndex[1]; // get job requests sheet
-    // append row to google sheet
-    await sheet.addRow(jobRequestBody);
+    const sheet = doc.sheetsByIndex[0]; // get completed jobs sheet
 
-    // create job for non-logged in users
-    if (!user) {
-      const newJob = await db.job.create({
-        data: jobRequestBody,
-      });
+    // append rows
+    const { completedBy, ...rest } = jobCompleteBody;
+    const newRow = Object.values(rest).concat(completedBy.split(", "));
+    await sheet.addRow(newRow);
 
-      return new Response(JSON.stringify(newJob), {
-        status: StatusCodes.CREATED,
-        statusText: ReasonPhrases.CREATED,
-      });
-    }
-    // create job for logged in users
-    const newJob = await db.job.create({
-      data: {
-        ...jobRequestBody,
-        requestorId: user.id,
-      },
-    });
-
-    return new Response(JSON.stringify(newJob), {
-      status: StatusCodes.CREATED,
-      statusText: ReasonPhrases.CREATED,
-    });
+    return new Response();
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {
@@ -60,7 +47,8 @@ export async function POST(req: Request) {
         statusText: ReasonPhrases.UNPROCESSABLE_ENTITY,
       });
     }
-    console.log("Error in POST /api/jobs", error);
+
+    console.log("Error in POST /api/jobs/[jobId]/spreadsheet", error);
     const err = error as Error;
     return new Response(JSON.stringify(err), {
       status: StatusCodes.INTERNAL_SERVER_ERROR,

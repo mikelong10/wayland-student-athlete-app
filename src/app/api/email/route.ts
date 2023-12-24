@@ -2,14 +2,13 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 
-import { requestJobFormSchema } from "@lib/schemas";
+import { requestJobFormSchema, RequestJobFormValues } from "@lib/schemas";
 
 export async function POST(req: Request) {
   try {
     const json = await req.json();
     const requestedJobBody = requestJobFormSchema.parse(json);
 
-    console.log("EMAIL REQUEST BODY", requestedJobBody);
     const message = `NEW JOB ALERT!\nFrom: ${requestedJobBody.adultFirstName} ${requestedJobBody.adultLastName}\nDescription: ${requestedJobBody.description}\nContact: ${requestedJobBody.contact}`;
 
     const transporter = nodemailer.createTransport({
@@ -22,7 +21,7 @@ export async function POST(req: Request) {
       },
     });
 
-    const emailHTML = (job: z.infer<typeof requestJobFormSchema>) => {
+    const emailHTML = (job: RequestJobFormValues) => {
       return `
         <h2>Name</h2>
         <h3>Adult's Name</h3>
