@@ -39,8 +39,8 @@ export default function MobileNav({ user, links }: NavProps) {
             isMobile={true}
             closeMobileNav={() => setNavOpen(false)}
           />
-          <nav className="mb-24 flex flex-col items-center justify-center">
-            <ul className="flex flex-col items-center justify-center gap-12">
+          <nav className="flex flex-col items-center justify-center">
+            <ul className="flex flex-col items-center justify-between gap-12">
               {links.map((link) => (
                 <Link
                   key={link.url}
@@ -57,6 +57,11 @@ export default function MobileNav({ user, links }: NavProps) {
               ))}
             </ul>
           </nav>
+          <Link href={"/request"} onClick={() => setNavOpen(false)}>
+            <Button className="mb-16 h-auto rounded-full px-8 py-6 text-2xl font-bold tracking-tight">
+              Request a Job
+            </Button>
+          </Link>
         </div>
       </SheetContent>
     </Sheet>
