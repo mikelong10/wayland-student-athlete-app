@@ -112,6 +112,26 @@ model JobAssignment {
   @@index([userId])
 }
 
+model JobReview {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now()) @map(name: "created_at")
+  updatedAt    DateTime @updatedAt @map(name: "updated_at")
+  reviewerName String   @map(name: "reviewer_name")
+  reviewText   String   @map(name: "review_text")
+  reviewImages Image[]  @relation(name: "review_images")
+}
+
+model Image {
+  id         String      @id @default(cuid())
+  uploadedAt DateTime    @default(now()) @map(name: "uploaded_at")
+  updatedAt  DateTime    @updatedAt @map(name: "updated_at")
+  url        String
+  jobReview  JobReview   @relation(name: "review_images", fields: [jobReviewId], references: [id])
+  jobReviewId String     @map(name: "job_review_id")
+
+  @@index([jobReviewId])
+}
+
 enum Status {
   TODO
   INPROGRESS

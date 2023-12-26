@@ -33,6 +33,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@uploadthing/react": "^6.0.2",
     "@vercel/analytics": "^1.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
@@ -54,6 +55,7 @@
     "tailwindcss": "3.4.0",
     "tailwindcss-animate": "^1.0.7",
     "twilio": "^4.20.0",
+    "uploadthing": "^6.1.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
