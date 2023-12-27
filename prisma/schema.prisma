@@ -118,8 +118,10 @@ model JobReview {
   createdAt    DateTime @default(now()) @map(name: "created_at")
   updatedAt    DateTime @updatedAt @map(name: "updated_at")
   reviewerName String   @map(name: "reviewer_name")
+  reviewBlurb  String   @map(name: "review_blurb")
   reviewText   String   @map(name: "review_text") @db.Text
   reviewImages Image[]  @relation(name: "review_images")
+  order        Int      @unique @default(autoincrement())
 
   @@map("job_reviews")
 }

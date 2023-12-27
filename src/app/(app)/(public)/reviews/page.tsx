@@ -15,6 +15,9 @@ export default async function ReviewsPage() {
     include: {
       reviewImages: true,
     },
+    orderBy: {
+      order: "asc",
+    },
   });
 
   return (
@@ -30,9 +33,10 @@ export default async function ReviewsPage() {
         <ReviewSection
           key={review.id}
           images={review.reviewImages}
+          reviewBlurb={review.reviewBlurb}
           reviewText={review.reviewText}
           reviewerName={review.reviewerName}
-          variant={idx % 2 === 0 ? "left" : "right"}
+          variant={idx % 3 === 0 ? "left" : "right"}
           bgColor={
             idx % 3 === 0
               ? "bg-background"

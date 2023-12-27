@@ -48,7 +48,7 @@ export default function Carousel({
         className
       )}
     >
-      <CardHeader>{header}</CardHeader>
+      {!!header && <CardHeader>{header}</CardHeader>}
       <CardContent className={"overflow-hidden"}>
         <div
           style={{ transform: `translate(-${activeIndex * 100}%)` }}
