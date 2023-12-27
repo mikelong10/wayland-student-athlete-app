@@ -7,6 +7,7 @@ import { Loader2, Pencil } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { EditUserPhoneFormValues, editUserPhoneSchema } from "@lib/schemas";
+import { formatPhoneNumberForClient } from "@lib/utils";
 import { Button } from "@components/ui/button";
 import {
   Dialog,
@@ -85,7 +86,9 @@ export default function EditUserNameForm({ user }: { user: User }) {
   return (
     <div className="flex items-center gap-4">
       <p className="text-muted-foreground scroll-m-20 text-lg font-semibold tracking-tight">
-        {activeUser.phone ?? "(***) ***-****"}
+        {activeUser.phone
+          ? formatPhoneNumberForClient(activeUser.phone)
+          : "(***) ***-****"}
       </p>
       <Dialog>
         <DialogTrigger asChild>

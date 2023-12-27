@@ -121,7 +121,7 @@ model JobReview {
   reviewBlurb  String   @map(name: "review_blurb")
   reviewText   String   @map(name: "review_text") @db.Text
   reviewImages Image[]  @relation(name: "review_images")
-  order        Int      @unique @default(autoincrement())
+  order        Int      
 
   @@map("job_reviews")
 }

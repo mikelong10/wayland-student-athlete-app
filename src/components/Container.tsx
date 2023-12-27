@@ -13,8 +13,8 @@ export default function Container({
     <section
       id={id}
       className={cn(
-        className,
-        "xs:px-8 w-full px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32"
+        "xs:px-8 w-full px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32",
+        className
       )}
     >
       {children}

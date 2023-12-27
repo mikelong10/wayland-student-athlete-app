@@ -18,20 +18,22 @@ export default function Home() {
     <main className="flex w-full flex-col items-center justify-center pb-16">
       <Container
         id="landing-home"
-        className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-6 bg-gradient-to-tl to-50% lg:items-center dark:from-orange-950"
+        className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-10 bg-gradient-to-tl to-50% lg:items-center dark:from-orange-950"
       >
-        <div className="xs:hidden">
-          <H1>Wayland</H1>
-          <H1>Student-Athlete</H1>
+        <div className="flex w-full flex-col gap-4 lg:items-center">
+          <div className="xs:hidden">
+            <H1>Wayland</H1>
+            <H1>Student-Athlete</H1>
+          </div>
+          <H1 className="max-xs:hidden xs:text-4xl xl:text-6xl">
+            Wayland Student-Athlete
+          </H1>
+          <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
+            Simple, trustworthy, quality{" "}
+            <span className="text-primary">solutions</span> for all your{" "}
+            <span className="text-primary">odd jobs</span>.
+          </p>
         </div>
-        <H1 className="max-xs:hidden xs:text-4xl xl:text-6xl">
-          Wayland Student-Athlete
-        </H1>
-        <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
-          Simple, trustworthy, quality{" "}
-          <span className="text-primary">solutions</span> for all your{" "}
-          <span className="text-primary">odd jobs</span>.
-        </p>
         <div className="flex w-full gap-4 lg:justify-center">
           <div className="flex lg:w-full lg:justify-end">
             <InteractiveButton
