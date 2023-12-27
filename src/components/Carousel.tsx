@@ -18,9 +18,9 @@ export default function Carousel({
   footer,
   className,
 }: {
-  header: JSX.Element;
+  header?: JSX.Element;
   items: CarouselItem[];
-  footer: JSX.Element;
+  footer?: JSX.Element;
   className?: string;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);

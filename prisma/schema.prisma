@@ -110,6 +110,7 @@ model JobAssignment {
   @@id([jobId, userId])
   @@index([jobId])
   @@index([userId])
+  @@map("job_assignments")
 }
 
 model JobReview {
@@ -117,19 +118,25 @@ model JobReview {
   createdAt    DateTime @default(now()) @map(name: "created_at")
   updatedAt    DateTime @updatedAt @map(name: "updated_at")
   reviewerName String   @map(name: "reviewer_name")
-  reviewText   String   @map(name: "review_text")
+  reviewText   String   @map(name: "review_text") @db.Text
   reviewImages Image[]  @relation(name: "review_images")
+
+  @@map("job_reviews")
 }
 
 model Image {
-  id         String      @id @default(cuid())
-  uploadedAt DateTime    @default(now()) @map(name: "uploaded_at")
-  updatedAt  DateTime    @updatedAt @map(name: "updated_at")
-  url        String
-  jobReview  JobReview   @relation(name: "review_images", fields: [jobReviewId], references: [id])
-  jobReviewId String     @map(name: "job_review_id")
+  id          String    @id @default(cuid())
+  uploadedAt  DateTime  @default(now()) @map(name: "uploaded_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+  src         String
+  alt         String
+  width       Int
+  height      Int
+  jobReview   JobReview @relation(name: "review_images", fields: [jobReviewId], references: [id])
+  jobReviewId String    @map(name: "job_review_id")
 
   @@index([jobReviewId])
+  @@map("images")
 }
 
 enum Status {

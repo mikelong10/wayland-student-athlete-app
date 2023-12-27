@@ -1,11 +1,10 @@
+import { Role } from "@prisma/client";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
 
 const f = createUploadthing();
-
-// const auth = (req: Request) => ({ id: "fakeId" }); // Fake auth function
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
@@ -42,13 +41,15 @@ export const ourFileRouter = {
       };
     }),
   jobReviewImage: f({ image: { maxFileSize: "4MB" } })
-    // Set permissions and file types for this FileRoute
     .middleware(async () => {
-      // This code runs on your server before upload
       const user = await getCurrentUser();
 
-      // If you throw, the user will not be able to upload
-      if (!user) throw new Error("Unauthorized");
+      // Only admins and SAs will be adding reviews
+      if (
+        !user ||
+        (user.role !== Role.ADMIN && user.role !== Role.STUDENTATHLETE)
+      )
+        throw new Error("Unauthorized");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
