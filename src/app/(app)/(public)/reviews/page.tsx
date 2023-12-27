@@ -1,4 +1,3 @@
-
 import { db } from "@lib/db";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
