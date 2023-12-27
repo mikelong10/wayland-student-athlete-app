@@ -15,7 +15,7 @@ import { Separator } from "@components/ui/separator";
 
 export default function VerifyEmailPage() {
   return (
-    <Container className="bg-accent flex min-h-screen w-full flex-col items-center justify-center pb-12 pt-24">
+    <Container className="bg-accent flex min-h-screen w-full flex-col items-center justify-center pb-12 pt-32">
       <div className="sm:w-7/8 flex flex-col gap-6 md:w-3/4 lg:w-2/3 xl:w-1/2">
         <Card className="shadow-tertiary flex flex-col gap-4 border-none shadow-2xl">
           <CardHeader className="flex flex-col gap-2 text-center">

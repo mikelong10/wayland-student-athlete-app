@@ -10,7 +10,7 @@ const H2 = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      "text-accent-foreground scroll-m-20 text-2xl font-semibold tracking-tight sm:text-3xl",
+      "text-accent-foreground xs:text-2xl scroll-m-20 text-xl font-semibold tracking-tight sm:text-3xl",
       rubik.className,
       className
     )}

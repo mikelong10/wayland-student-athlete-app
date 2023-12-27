@@ -9,37 +9,32 @@ import { Separator } from "@components/ui/separator";
 export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <Container className="bg-background border-border w-full border-t py-4 transition-all">
-      <footer
-        className={cn(
-          className,
-          "flex w-full flex-col items-center sm:flex-row"
-        )}
-      >
-        <div className="flex w-full flex-col items-center justify-between gap-4 text-center text-xs leading-loose md:flex-row md:text-left lg:text-sm">
-          <div className="flex flex-col items-center gap-4 text-sm md:flex-row md:gap-8">
+      <footer className={cn(className, "flex w-full flex-col items-center")}>
+        <div className="flex w-full flex-col items-center justify-between gap-4 text-center text-xs leading-loose md:text-left lg:flex-row lg:text-sm">
+          <div className="flex flex-col items-center gap-4 text-sm sm:flex-row sm:gap-8">
             <Link
               href={"https://www.facebook.com/waylandstudentathlete/"}
               target="_blank"
             >
               <FacebookLogo className="h-8 w-8" />
             </Link>
-            <div className="flex h-auto flex-col items-center gap-2 md:flex-row">
+            <div className="flex h-auto flex-col items-center gap-2 sm:flex-row sm:gap-4">
               <a
                 className="font-medium underline-offset-4 hover:underline"
                 href="mailto:waylandstudentathlete@gmail.com"
               >
                 waylandstudentathlete@gmail.com
               </a>
-              <Separator className="w-4 md:hidden" />
+              <Separator className="w-4 sm:hidden" />
               <Separator
                 orientation="vertical"
-                className="hidden h-6 md:block"
+                className="hidden h-6 sm:block"
               />
               <a
                 className="hover:text-input font-medium transition-colors"
-                href="tel:+1857-488-9299"
+                href="tel:+1781-266-8116"
               >
-                (857) 488-9299
+                (781) 266-8116
               </a>
             </div>
           </div>

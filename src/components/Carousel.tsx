@@ -18,9 +18,9 @@ export default function Carousel({
   footer,
   className,
 }: {
-  header: JSX.Element;
+  header?: JSX.Element;
   items: CarouselItem[];
-  footer: JSX.Element;
+  footer?: JSX.Element;
   className?: string;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -48,7 +48,7 @@ export default function Carousel({
         className
       )}
     >
-      <CardHeader>{header}</CardHeader>
+      {!!header && <CardHeader>{header}</CardHeader>}
       <CardContent className={"overflow-hidden"}>
         <div
           style={{ transform: `translate(-${activeIndex * 100}%)` }}

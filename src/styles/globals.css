@@ -4,95 +4,97 @@
 
 @layer base {
   /* 
-    white: FFFCF9
-    cream: FFF6EA
-    light grey: EEEBE7
-    grey: D0C9BD
-    dark grey: 5D5548
-    darker grey: 302C26
+    white: fffcf9
+    cream: fff7ed
+    light grey: eeeeee
+    grey: d0d0d0
+    dark grey: 4d4d4d
+    darker grey: 262626
     light orange: FFB27B
     orange: FF842C
-    brown: 5C3921
-    black: 160f0a
+    brown: 492c18
+    black: 171310
   */
   :root {
-    --background: #FFFCF9;
-    --foreground: #160f0a;
+    --background: #fffcf9;
+    --foreground: #171310;
 
-    --cream: #FFF6EA;
+    --cream: #fbf4eb;
     
     --primary: #ff7919;
-    --primary-foreground: #FFFCF9;
+    --primary-foreground: #fffcf9;
 
-    --secondary: #5C3921;
-    --secondary-foreground: #FFFCF9;
+    --secondary: #492c18;
+    --secondary-foreground: #fffcf9;
 
     --tertiary: #ffc59c;
-    --tertiary-foreground: #160f0a;
+    --tertiary-foreground: #171310;
 
-    --accent: #EEEBE7;
-    --accent-foreground: #302C26;
+    --accent: #eeeeee;
+    --accent-foreground: #292929;
 
-    --muted: #D0C9BD;
-    --muted-foreground: #5D5548;
+    --muted: #d0d0d0;
+    --muted-foreground: #4d4d4d;
 
     --destructive: #DC2828;
-    --destructive-foreground: #FFFCF9;
+    --destructive-foreground: #fffcf9;
 
     --success: #16A249;
     --success-foreground: #ffffff;
 
-    --card: #FFFCF9;
-    --card-foreground: #160f0a;
+    --card: #fffcf9;
+    --card-foreground: #171310;
 
-    --popover: #FFFCF9;
-    --popover-foreground: #160f0a;
+    --popover: #fffcf9;
+    --popover-foreground: #171310;
 
-    --border: #D0C9BD;
-    --input: #D0C9BD;
+    --border: #d0d0d0;
+    --input: #d0d0d0;
     --ring: #FFB27B;
 
     --radius: 0.5rem;
   }
   /* 
-    white: FFFCF9
-    cream: FFF6EA
-    light grey: EEEBE7
-    grey: D0C9BD
-    dark grey: 5D5548
-    darker grey: 302C26
+    white: fffcf9
+    cream: fff7ed
+    light grey: eeeeee
+    grey: d0d0d0
+    dark grey: 4d4d4d
+    darker grey: 262626
     light orange: FFB27B
     orange: FF842C
-    brown: 5C3921
-    black: 160f0a
+    brown: 492c18
+    black: 171310
   */
   .dark {
-    --background: #160f0a;
-    --foreground: #FFFCF9;
+    --background: #171310;
+    --foreground: #fffcf9;
+
+    --cream: #1d1c1b;
 
     --primary: #ff8e3e;
     
     --secondary: #ffe1cb;
-    --secondary-foreground: #160f0a;
+    --secondary-foreground: #171310;
 
-    --tertiary: #5C3921;
-    --tertiary-foreground: #FFFCF9;
+    --tertiary: #492c18;
+    --tertiary-foreground: #fffcf9;
 
-    --accent: #302C26;
-    --accent-foreground: #EEEBE7;
+    --accent: #262626;
+    --accent-foreground: #eeeeee;
 
-    --muted: #5D5548;
-    --muted-foreground: #D0C9BD;
+    --muted: #4d4d4d;
+    --muted-foreground: #d0d0d0;
 
     --destructive: #ff4343;
 
-    --card: #160f0a;
-    --card-foreground: #FFFCF9;
+    --card: #171310;
+    --card-foreground: #fffcf9;
 
-    --popover: #160f0a;
-    --popover-foreground: #FFFCF9;
+    --popover: #171310;
+    --popover-foreground: #fffcf9;
 
-    --border: #5D5548;
-    --input: #5D5548;
+    --border: #4d4d4d;
+    --input: #4d4d4d;
   }
 }
