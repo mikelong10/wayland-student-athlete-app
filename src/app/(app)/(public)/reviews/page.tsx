@@ -23,7 +23,7 @@ export default async function ReviewsPage() {
         <div className="flex w-full flex-col gap-2 text-center">
           <H1>Reviews</H1>
           <H2>Hear what others are saying</H2>
-          <Separator className="mt-8" />
+          <Separator className="mt-6" />
         </div>
       </Container>
       {reviews.map((review, idx) => (

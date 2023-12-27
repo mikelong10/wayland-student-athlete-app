@@ -43,7 +43,7 @@ function ReviewSection({
           items={carouselItems}
           footer={
             <div className="flex w-full flex-col gap-2">
-              <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 md:text-lg">
+              <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 leading-6 md:text-lg md:leading-8">
                 {`"${reviewText}"`}
               </blockquote>
               <p className="text-muted-foreground text-xs italic md:text-sm">
@@ -69,7 +69,7 @@ function ReviewSection({
               className="rounded-lg lg:w-1/2"
             />
             <div className="flex w-full flex-col gap-2 lg:w-1/2">
-              <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 md:text-lg">
+              <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 leading-6 md:text-lg md:leading-8">
                 {`"${reviewText}"`}
               </blockquote>
               <p className="text-muted-foreground text-xs italic md:text-sm">
@@ -91,7 +91,7 @@ function ReviewSection({
               className="rounded-lg lg:hidden lg:w-1/2"
             />
             <div className="flex w-full flex-col gap-2 lg:w-1/2">
-              <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 md:text-lg">
+              <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 leading-6 md:text-lg md:leading-8">
                 {`"${reviewText}"`}
               </blockquote>
               <p className="text-muted-foreground text-xs italic md:text-sm">
@@ -115,7 +115,7 @@ function ReviewSection({
         <Card className="flex w-full flex-col gap-4 p-8">
           <Quote className="text-secondary h-10 w-10" />
           <div className="flex w-full flex-col gap-2">
-            <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 md:text-lg">
+            <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 leading-6 md:text-lg md:leading-8">
               {`"${reviewText}"`}
             </blockquote>
             <p className="text-muted-foreground text-xs italic md:text-sm">

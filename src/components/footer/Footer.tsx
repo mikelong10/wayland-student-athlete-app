@@ -18,7 +18,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
             >
               <FacebookLogo className="h-8 w-8" />
             </Link>
-            <div className="flex h-auto flex-col items-center gap-2 sm:flex-row">
+            <div className="flex h-auto flex-col items-center gap-2 sm:flex-row sm:gap-4">
               <a
                 className="font-medium underline-offset-4 hover:underline"
                 href="mailto:waylandstudentathlete@gmail.com"
