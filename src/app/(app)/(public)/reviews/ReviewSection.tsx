@@ -34,6 +34,7 @@ function ReviewSection({
             width={img.width}
             height={img.height}
             style={{ objectFit: "contain" }}
+            priority={true}
           />
         </div>
       ),
