@@ -52,7 +52,7 @@ const terms = [
 
 export default function PrivacyPolicy() {
   return (
-    <Container className="flex min-h-screen w-full flex-col justify-center gap-6 pb-12 pt-24 md:w-5/6 xl:w-4/6">
+    <Container className="flex min-h-screen w-full flex-col justify-center gap-6 pb-12 pt-32 md:w-5/6 xl:w-4/6">
       <div className="flex flex-col gap-1">
         <H1>Terms & Conditions</H1>
         <p className="text-muted-foreground">
