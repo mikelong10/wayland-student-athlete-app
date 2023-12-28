@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { MessageSquareQuote } from "lucide-react";
+import {
+  Quote,
+} from "lucide-react";
 
 import { cn } from "@lib/utils";
 import Container from "@components/Container";
@@ -31,7 +33,7 @@ function MultiReviewCarousel({
       )}
     >
       <div className="flex items-center gap-4">
-        <MessageSquareQuote className="text-secondary h-10 w-10" />
+        <Quote className="text-secondary h-10 w-10" />
         <H2>{reviews[0].reviewBlurb}</H2>
       </div>
       <Carousel

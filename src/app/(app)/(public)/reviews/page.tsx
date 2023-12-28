@@ -58,7 +58,7 @@ export default async function ReviewsPage() {
           <div className="flex w-full flex-col items-center gap-8">
             <div className="flex flex-col gap-2">
               <H1>Reviews</H1>
-              <H2>Hear what others are saying</H2>
+              <H2>Hear what others are saying!</H2>
             </div>
             {user?.role === Role.ADMIN && (
               <Button asChild variant={"outline"}>

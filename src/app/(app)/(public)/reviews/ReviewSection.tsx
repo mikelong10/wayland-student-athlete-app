@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { Image as ReviewImage } from "@prisma/client";
-import { MessageSquareQuote } from "lucide-react";
+import {
+  MessageSquareHeart,
+  MessageSquareMore,
+  MessageSquareQuote,
+  MessageSquareText,
+} from "lucide-react";
 
 import { cn } from "@lib/utils";
 import Carousel from "@components/Carousel";
@@ -45,7 +50,7 @@ function ReviewSection({
         <Carousel
           header={
             <div className="flex items-center gap-4">
-              <MessageSquareQuote className="text-secondary h-10 w-10" />
+              <MessageSquareHeart className="text-secondary h-10 w-10" />
               <H2>{reviewBlurb}</H2>
             </div>
           }
@@ -79,7 +84,7 @@ function ReviewSection({
             />
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
               <div className="flex items-center gap-4">
-                <MessageSquareQuote className="text-secondary h-10 w-10" />
+                <MessageSquareMore className="text-secondary h-10 w-10" />
                 <H2>{reviewBlurb}</H2>
               </div>
               <div className="flex flex-col gap-2">
@@ -107,7 +112,7 @@ function ReviewSection({
             />
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
               <div className="flex items-center gap-4">
-                <MessageSquareQuote className="text-secondary h-10 w-10" />
+                <MessageSquareText className="text-secondary h-10 w-10" />
                 <H2>{reviewBlurb}</H2>
               </div>
               <div className="flex flex-col gap-2">
