@@ -42,6 +42,15 @@ export const requestJobFormSchema = z.object({
   signature: z.string().min(1, "Required"),
 });
 
+export type AddReviewFormValues = z.infer<typeof addReviewFormSchema>;
+export const addReviewFormSchema = z.object({
+  reviewerName: z.string().min(1, "Required"),
+  reviewBlurb: z.string().min(1, "Required"),
+  reviewText: z.string().min(1, "Required"),
+  reviewImages: z.array(z.string()).optional(),
+  order: z.string().min(1, "Required"),
+});
+
 export type JobCompleteFormValues = z.infer<typeof jobCompleteFormSchema>;
 export const jobCompleteFormSchema = z.object({
   client: z.string().min(1, "Required"),

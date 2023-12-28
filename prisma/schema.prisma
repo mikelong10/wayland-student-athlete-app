@@ -132,8 +132,8 @@ model Image {
   updatedAt   DateTime  @updatedAt @map(name: "updated_at")
   src         String
   alt         String
-  width       Int
-  height      Int
+  width       Int       @default(800)
+  height      Int       @default(800)
   jobReview   JobReview @relation(name: "review_images", fields: [jobReviewId], references: [id])
   jobReviewId String    @map(name: "job_review_id")
 

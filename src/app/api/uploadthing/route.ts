@@ -1,8 +1,7 @@
+import { wsaFileRouter } from "@app/api/uploadthing/core";
 import { createNextRouteHandler } from "uploadthing/next";
-
-import { ourFileRouter } from "./core";
 
 // Export routes for Next App Router
 export const { GET, POST } = createNextRouteHandler({
-  router: ourFileRouter,
+  router: wsaFileRouter,
 });

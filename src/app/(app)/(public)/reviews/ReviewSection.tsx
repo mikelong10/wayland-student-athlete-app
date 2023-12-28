@@ -68,8 +68,8 @@ function ReviewSection({
     const img = images[0];
     if (variant === "left") {
       return (
-        <Container className={bgColor}>
-          <section className="flex w-full flex-col items-center gap-12 py-16 lg:flex-row lg:gap-16 xl:gap-20">
+        <Container className={cn("flex justify-center", bgColor)}>
+          <section className="flex w-full max-w-6xl flex-col items-center justify-center gap-12 py-16 lg:flex-row lg:gap-16 xl:gap-20">
             <Image
               src={img.src}
               alt={img.alt}
@@ -96,8 +96,8 @@ function ReviewSection({
       );
     } else {
       return (
-        <Container className={bgColor}>
-          <section className="flex w-full flex-col items-center gap-12 py-16 lg:flex-row lg:gap-16 xl:gap-20">
+        <Container className={cn("flex justify-center", bgColor)}>
+          <section className="flex w-full max-w-6xl flex-col items-center justify-center gap-12 py-16 lg:flex-row lg:gap-16 xl:gap-20">
             <Image
               src={img.src}
               alt={img.alt}
@@ -132,9 +132,9 @@ function ReviewSection({
     }
   } else {
     return (
-      <Container className={cn("py-16", bgColor)}>
-        <Card className="flex w-full flex-col gap-4 p-8">
-          <div className="flex w-full flex-col gap-6 lg:w-1/2">
+      <Container className={cn("flex justify-center py-16", bgColor)}>
+        <Card className="flex w-full max-w-4xl flex-col gap-4 p-8">
+          <div className="flex w-full flex-col gap-6">
             <div className="flex items-center gap-4">
               <MessageSquareQuote className="text-secondary h-10 w-10" />
               <H2>{reviewBlurb}</H2>

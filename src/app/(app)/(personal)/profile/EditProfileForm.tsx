@@ -4,11 +4,13 @@ import { useState } from "react";
 import { User } from "@prisma/client";
 
 import { UploadButton } from "@lib/uploadthing";
+import { useToast } from "@components/ui/use-toast";
 import { UserAvatar } from "@components/UserAvatar";
 import EditUserNameForm from "./EditUserNameForm";
 import EditUserPhoneForm from "./EditUserPhoneForm";
 
 export default function EditProfileForm({ user }: { user: User }) {
+  const { toast } = useToast();
   const [activeUser, setActiveUser] = useState<User>(user);
 
   return (
@@ -20,8 +22,11 @@ export default function EditProfileForm({ user }: { user: User }) {
             setActiveUser((prev) => ({ ...prev, image: res[0].url }));
           }}
           onUploadError={(error: Error) => {
-            // Do something with the error.
-            alert(`ERROR! ${error.message}`);
+            toast({
+              title: "Uh oh! Something went wrong.",
+              description: `${error.message}. Please try again.`,
+              variant: "destructive",
+            });
           }}
           content={{
             button() {

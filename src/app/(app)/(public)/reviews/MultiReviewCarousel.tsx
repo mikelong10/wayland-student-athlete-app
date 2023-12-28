@@ -46,16 +46,18 @@ function MultiReviewCarousel({
             <CarouselItem key={review.id} className="md:basis-1/2">
               <div className="p-1">
                 <Card className="flex flex-col gap-6">
-                  <CardContent className="flex items-center justify-center">
-                    <Image
-                      src={review.reviewImages[0].src}
-                      alt={review.reviewImages[0].alt}
-                      width={review.reviewImages[0].width}
-                      height={review.reviewImages[0].height}
-                      style={{ objectFit: "contain" }}
-                      priority={true}
-                    />
-                  </CardContent>
+                  {review.reviewImages.length > 0 && (
+                    <CardContent className="flex items-center justify-center">
+                      <Image
+                        src={review.reviewImages[0].src}
+                        alt={review.reviewImages[0].alt}
+                        width={review.reviewImages[0].width}
+                        height={review.reviewImages[0].height}
+                        style={{ objectFit: "contain" }}
+                        priority={true}
+                      />
+                    </CardContent>
+                  )}
                   <CardFooter>
                     <div className="flex flex-col gap-2">
                       <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 leading-6 md:text-lg md:leading-8">
