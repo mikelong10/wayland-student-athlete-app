@@ -9,7 +9,7 @@
     light grey: eeeeee
     grey: d0d0d0
     dark grey: 4d4d4d
-    darker grey: 262626
+    darker grey: 1c1a18
     light orange: FFB27B
     orange: FF842C
     brown: 492c18
@@ -60,7 +60,7 @@
     light grey: eeeeee
     grey: d0d0d0
     dark grey: 4d4d4d
-    darker grey: 262626
+    darker grey: 1c1a18
     light orange: FFB27B
     orange: FF842C
     brown: 492c18
@@ -80,7 +80,7 @@
     --tertiary: #492c18;
     --tertiary-foreground: #fffcf9;
 
-    --accent: #262626;
+    --accent: #1c1a18;
     --accent-foreground: #eeeeee;
 
     --muted: #4d4d4d;

@@ -4,10 +4,12 @@ import { notFound } from "next/navigation";
 import { Pencil } from "lucide-react";
 
 import { db } from "@lib/db";
+import { AdminActions } from "@components/AdminActions";
 import Container from "@components/Container";
 import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
+import DeleteStudentAthleteProfileDialog from "./DeleteStudentAthleteProfileDialog";
 
 export default async function StudentAthletePage({
   params,
@@ -19,11 +21,7 @@ export default async function StudentAthletePage({
       slug: params.slug,
     },
     include: {
-      resume: {
-        select: {
-          text: true,
-        },
-      },
+      resume: true,
     },
   });
 
@@ -45,7 +43,7 @@ export default async function StudentAthletePage({
             alt={`Student-Athlete profile image for ${studentAthlete.name}`}
             width={800}
             height={800}
-            className="max-w-[312px] rounded-lg"
+            className="max-w-[312px] rounded-md"
           />
         </div>
         <div className="flex flex-col items-center gap-1">
@@ -88,7 +86,7 @@ export default async function StudentAthletePage({
             alt={`Student-Athlete profile image for ${studentAthlete.name}`}
             width={800}
             height={800}
-            className="dark:shadow-tertiary max-w-[400px] rounded-lg shadow-2xl"
+            className="dark:shadow-tertiary max-w-[400px] rounded-xl shadow-2xl"
           />
         </div>
         <div className="flex flex-col gap-4">
@@ -105,12 +103,20 @@ export default async function StudentAthletePage({
           <ul className="flex list-disc flex-col gap-1 pl-4">{resumeItems}</ul>
         </div>
       </div>
-      <Button asChild variant={"accent"} className="mt-8">
-        <Link href={`/who/${params.slug}/edit`} className="flex gap-3">
-          <Pencil className="h-5 w-5" />
-          Edit profile
-        </Link>
-      </Button>
+      <AdminActions
+        title="Manage profile"
+        className="bg-accent mt-10 w-[256px]"
+      >
+        <div className="flex w-full items-center justify-center gap-4">
+          <Button asChild variant={"traced"}>
+            <Link href={`/who/${params.slug}/edit`} className="flex gap-3">
+              <Pencil className="text-secondary h-5 w-5" />
+              Edit
+            </Link>
+          </Button>
+          <DeleteStudentAthleteProfileDialog studentAthlete={studentAthlete} />
+        </div>
+      </AdminActions>
     </Container>
   );
 }

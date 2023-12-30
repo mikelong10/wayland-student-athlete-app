@@ -51,8 +51,8 @@ export default function WhatWeDoPage() {
             <Image
               src={whs}
               alt={"Wayland High School"}
-              objectFit="contain"
-              className="dark:shadow-tertiary rounded-lg shadow-2xl"
+              style={{ objectFit: "contain" }}
+              className="dark:shadow-tertiary rounded-md shadow-2xl"
             />
           </div>
         </div>

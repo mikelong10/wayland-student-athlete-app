@@ -34,7 +34,7 @@ const StudentAthleteCard = ({
         width={400}
         height={400}
         style={{ objectFit: "cover" }}
-        className="rounded-lg transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-80 group-hover:shadow-xl sm:h-[256px] md:h-[304px] lg:h-[256px] xl:h-[320px] 2xl:h-[262px]"
+        className="rounded-md transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-80 group-hover:shadow-xl sm:h-[256px] md:h-[304px] lg:h-[256px] xl:h-[320px] 2xl:h-[262px]"
       />
       <div className="flex flex-col items-center">
         <H2 className="xs:text-xl w-full flex-1 text-center text-xl font-semibold sm:text-xl">
@@ -61,7 +61,7 @@ export default async function WhoWeArePage() {
           <H2>Meet the Student-Athletes</H2>
           {user?.role === Role.ADMIN && (
             <Button asChild variant={"outline"} className="w-fit">
-              <Link href={"/who/new"} className="flex gap-2">
+              <Link href={"/who/add"} className="flex gap-2">
                 <SquareUser />
                 Add profile
               </Link>

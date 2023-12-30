@@ -82,7 +82,7 @@ function ReviewSection({
                 width={img.width}
                 height={img.height}
                 style={{ objectFit: "contain" }}
-                className="max-h-[480px] w-fit rounded-lg"
+                className="max-h-[480px] w-fit rounded-md"
               />
             </div>
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
@@ -112,7 +112,7 @@ function ReviewSection({
               width={img.width}
               height={img.height}
               style={{ objectFit: "contain" }}
-              className="max-h-[480px] w-fit rounded-lg lg:hidden"
+              className="max-h-[480px] w-fit rounded-md lg:hidden"
             />
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
               <div className="flex items-center gap-4">
@@ -135,7 +135,7 @@ function ReviewSection({
                 width={img.width}
                 height={img.height}
                 style={{ objectFit: "contain" }}
-                className="max-h-[480px] w-fit rounded-lg"
+                className="max-h-[480px] w-fit rounded-md"
               />
             </div>
           </section>

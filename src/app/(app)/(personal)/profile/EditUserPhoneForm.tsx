@@ -96,7 +96,7 @@ export default function EditUserNameForm({ user }: { user: User }) {
             <Pencil />
           </Button>
         </DialogTrigger>
-        <DialogContent className="xs:max-w-[400px] max-w-full rounded-lg sm:max-w-[480px] md:max-w-[576px]">
+        <DialogContent className="xs:max-w-[400px] max-w-full rounded-xl sm:max-w-[480px] md:max-w-[576px]">
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
