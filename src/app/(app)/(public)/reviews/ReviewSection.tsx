@@ -32,13 +32,13 @@ function ReviewSection({
     const carouselItems = images.map((img) => ({
       key: img.id,
       content: (
-        <div className="flex max-h-[520px] items-center overflow-hidden">
+        <div className="flex max-h-[480px] items-center overflow-hidden">
           <Image
             src={img.src}
             alt={img.alt}
             width={img.width}
             height={img.height}
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: "cover", objectPosition: "center" }}
             priority={true}
           />
         </div>
@@ -75,13 +75,16 @@ function ReviewSection({
       return (
         <Container className={cn("flex justify-center", bgColor)}>
           <section className="flex w-full max-w-6xl flex-col items-center justify-center gap-12 py-16 lg:flex-row lg:gap-16 xl:gap-20">
-            <Image
-              src={img.src}
-              alt={img.alt}
-              width={img.width}
-              height={img.height}
-              className="rounded-lg lg:w-1/2"
-            />
+            <div className="w-fit lg:flex lg:w-1/2 lg:justify-center">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                style={{ objectFit: "contain" }}
+                className="max-h-[480px] w-fit rounded-lg"
+              />
+            </div>
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
               <div className="flex items-center gap-4">
                 <MessageSquareMore className="text-secondary h-10 w-10" />
@@ -108,7 +111,8 @@ function ReviewSection({
               alt={img.alt}
               width={img.width}
               height={img.height}
-              className="rounded-lg lg:hidden lg:w-1/2"
+              style={{ objectFit: "contain" }}
+              className="max-h-[480px] w-fit rounded-lg lg:hidden"
             />
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
               <div className="flex items-center gap-4">
@@ -124,13 +128,16 @@ function ReviewSection({
                 </p>
               </div>
             </div>
-            <Image
-              src={img.src}
-              alt={img.alt}
-              width={img.width}
-              height={img.height}
-              className="hidden rounded-lg lg:block lg:w-1/2"
-            />
+            <div className="hidden w-fit lg:flex lg:w-1/2 lg:justify-center">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                style={{ objectFit: "contain" }}
+                className="max-h-[480px] w-fit rounded-lg"
+              />
+            </div>
           </section>
         </Container>
       );

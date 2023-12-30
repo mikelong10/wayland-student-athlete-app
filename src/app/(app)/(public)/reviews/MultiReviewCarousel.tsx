@@ -43,7 +43,7 @@ function MultiReviewCarousel({
       >
         <CarouselContent>
           {reviews.map((review) => (
-            <CarouselItem key={review.id} className="md:basis-1/2">
+            <CarouselItem key={review.id} className="lg:basis-1/2">
               <div className="p-1">
                 <Card className="flex flex-col gap-6">
                   {review.reviewImages.length > 0 && (
@@ -55,6 +55,7 @@ function MultiReviewCarousel({
                         height={review.reviewImages[0].height}
                         style={{ objectFit: "contain" }}
                         priority={true}
+                        className="max-h-[480px]"
                       />
                     </CardContent>
                   )}
