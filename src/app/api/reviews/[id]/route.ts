@@ -3,9 +3,8 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
 import { db } from "@lib/db";
-import { studentAthleteProfileFormSchema } from "@lib/schemas";
+import { reviewFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
-import { nameToSlug } from "@lib/utils";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -20,7 +19,7 @@ export async function PATCH(
   try {
     const user = await getCurrentUser();
     if (!user || user.role !== Role.ADMIN) {
-      return new Response("Only Admins can edit student-athlete profiles", {
+      return new Response("Only Admins can edit reviews", {
         status: StatusCodes.FORBIDDEN,
         statusText: ReasonPhrases.FORBIDDEN,
       });
@@ -28,55 +27,60 @@ export async function PATCH(
 
     const { params } = routeContextSchema.parse(context);
     const json = await req.json();
-    const updateProfileRequestBody =
-      studentAthleteProfileFormSchema.parse(json);
+    const updateReviewRequestBody = reviewFormSchema.parse(json);
+    const { reviewImages, ...reviewData } = updateReviewRequestBody;
 
-    const { graduationYear, firstName, lastName, resumeItems, ...profileData } =
-      updateProfileRequestBody;
+    const allReviews = await db.jobReview.findMany({
+      orderBy: {
+        order: "desc",
+      },
+    });
+    const highestOrderReview = allReviews[0];
 
-    const updatedStudentAthleteProfile = await db.studentAthleteProfile.update({
+    const updatedJobReview = await db.jobReview.update({
       where: { id: params.id },
       data: {
-        ...profileData,
-        name: `${firstName} ${lastName}`,
-        graduationYear: parseInt(graduationYear),
-        slug: nameToSlug(`${firstName} ${lastName}`),
+        ...reviewData,
+        order:
+          reviewData.order === "new"
+            ? highestOrderReview.order + 1
+            : parseInt(reviewData.order),
       },
     });
 
-    const currentResumeItems = await db.studentAthleteResumeItem.findMany({
-      where: { studentAthleteId: updatedStudentAthleteProfile.id },
+    const currentImages = await db.image.findMany({
+      where: { jobReviewId: updatedJobReview.id },
     });
-    const newResumeItemTexts = resumeItems.map((item) => item.text) ?? [];
-    // all current resume items that are not in the new list
-    const resumeItemsToDelete = currentResumeItems.filter(
-      (item) => !newResumeItemTexts.includes(item.text)
+    const currentImageUrls = currentImages.map((image) => image.src);
+    const newImageUrls = reviewImages ?? [];
+    const imagesToDelete = currentImageUrls.filter(
+      (url) => !newImageUrls.includes(url)
     );
-    // all new resume items that are not in the current list
-    const resumeItemsToAdd = newResumeItemTexts.filter(
-      (text) => !currentResumeItems.map((item) => item.text).includes(text)
+    const imagesToAdd = newImageUrls.filter(
+      (url) => !currentImageUrls.includes(url)
     );
-    // delete resumeItems
-    for (const item of resumeItemsToDelete) {
-      await db.studentAthleteResumeItem.delete({
-        where: { id: item.id },
+    // delete images
+    for (const url of imagesToDelete) {
+      await db.image.delete({
+        where: { src: url },
       });
     }
-    // add resumeItems
-    for (const text of resumeItemsToAdd) {
-      await db.studentAthleteResumeItem.create({
+    // add images
+    for (const url of imagesToAdd) {
+      await db.image.create({
         data: {
-          text: text,
-          studentAthlete: {
+          src: url,
+          alt: `Image for review by ${reviewData.reviewerName}`,
+          jobReview: {
             connect: {
-              id: updatedStudentAthleteProfile.id,
+              id: updatedJobReview.id,
             },
           },
         },
       });
     }
 
-    return new Response(JSON.stringify(updatedStudentAthleteProfile));
+    return new Response(JSON.stringify(updatedJobReview));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {
@@ -84,7 +88,7 @@ export async function PATCH(
         statusText: ReasonPhrases.UNPROCESSABLE_ENTITY,
       });
     }
-    console.log("Error in PATCH /api/student-athletes/id", error);
+    console.log("Error in PATCH /api/reviews/id", error);
     const err = error as Error;
     return new Response(JSON.stringify(err), {
       status: StatusCodes.INTERNAL_SERVER_ERROR,
@@ -100,21 +104,21 @@ export async function DELETE(
   try {
     const user = await getCurrentUser();
     if (!user || user.role !== Role.ADMIN) {
-      return new Response("Only Admins can delete student-athlete profiles", {
+      return new Response("Only Admins can delete reviews", {
         status: StatusCodes.FORBIDDEN,
         statusText: ReasonPhrases.FORBIDDEN,
       });
     }
 
     const { params } = routeContextSchema.parse(context);
-    await db.studentAthleteResumeItem.deleteMany({
-      where: { studentAthleteId: params.id },
+    await db.image.deleteMany({
+      where: { jobReviewId: params.id },
     });
-    const deletedProfile = await db.studentAthleteProfile.delete({
+    const deletedReview = await db.jobReview.delete({
       where: { id: params.id },
     });
 
-    return new Response(JSON.stringify(deletedProfile));
+    return new Response(JSON.stringify(deletedReview));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {

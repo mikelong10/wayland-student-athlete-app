@@ -37,9 +37,9 @@ import { useToast } from "@components/ui/use-toast";
 import { JobReviewWithImages } from "../page";
 
 export default function AddReviewForm({
-  groupedReviews,
+  groupedReviewsArray,
 }: {
-  groupedReviews: Map<number, JobReviewWithImages[]>;
+  groupedReviewsArray: JobReviewWithImages[][];
 }) {
   const router = useRouter();
   const { toast } = useToast();
@@ -153,9 +153,11 @@ export default function AddReviewForm({
                         Review content <span className="text-primary">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Textarea {...field} />
+                        <Textarea className="min-h-[160px]" {...field} />
                       </FormControl>
-                      <FormDescription>What the person said</FormDescription>
+                      <FormDescription>
+                        {"The client's review!"}
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -178,20 +180,18 @@ export default function AddReviewForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="max-h-80">
-                          {Array.from(groupedReviews.values()).map(
-                            (reviews) => (
-                              <SelectItem
-                                key={reviews[0].order}
-                                value={reviews[0].order.toString()}
-                              >
-                                {`${reviews[0].order} - ${
-                                  reviews[0].reviewBlurb
-                                } (${reviews
-                                  .map((r) => r.reviewerName)
-                                  .join(", ")})`}
-                              </SelectItem>
-                            )
-                          )}
+                          {groupedReviewsArray.map((reviews) => (
+                            <SelectItem
+                              key={reviews[0].order}
+                              value={reviews[0].order.toString()}
+                            >
+                              {`${reviews[0].order} - ${
+                                reviews[0].reviewBlurb
+                              } (${reviews
+                                .map((r) => r.reviewerName)
+                                .join(", ")})`}
+                            </SelectItem>
+                          ))}
                           <SelectItem value="new">New review group</SelectItem>
                         </SelectContent>
                       </Select>
@@ -227,56 +227,58 @@ export default function AddReviewForm({
           </div>
           <div className="flex flex-col gap-4">
             <H2>Images</H2>
-            <UploadDropzone
-              endpoint={"jobReviewImage"}
-              className="border-border ut-label:xs:text-lg ut-label:w-full ut-label:text-primary ut-allowed-content:text-muted-foreground ut-upload-icon:text-muted ut-button:bg-primary ut-button:after:bg-tertiary hover:ut-button:opacity-80 ut-button:transition-all hover:cursor-pointer"
-              onUploadBegin={() => {
-                setSubmitDisabled(true);
-              }}
-              onClientUploadComplete={(res) => {
-                setSubmitDisabled(false);
-                const imageUrls = res.map((r) => r.url);
-                setNumFilesUploaded(imageUrls.length);
-                setFilesUploaded(true);
-                form.setValue("reviewImages", imageUrls);
-              }}
-              onUploadError={(error: Error) => {
-                toast({
-                  title: `Uh oh! ${error.message}.`,
-                  description: "Please try again.",
-                  variant: "destructive",
-                });
-              }}
-              content={{
-                uploadIcon() {
-                  if (filesUploaded) {
-                    return <FileCheck className="text-muted h-14 w-14" />;
-                  }
-                  return <ImagePlus className="text-muted h-14 w-14" />;
-                },
-                label() {
-                  if (filesUploaded) {
-                    return (
-                      <span>
-                        {numFilesUploaded} file
-                        {numFilesUploaded === 1 ? "" : "s"} uploaded
-                      </span>
-                    );
-                  }
-                  return <span>Click to choose or drag and drop here</span>;
-                },
-              }}
-            />
-            <FormDescription>
-              Upload images for the review here. You can upload 0, 1, or more
-              images—just make sure to choose or drag+drop all of them in one
-              go.
-            </FormDescription>
+            <div className="flex flex-col gap-2">
+              <UploadDropzone
+                endpoint={"jobReviewImage"}
+                className="border-border ut-label:xs:text-lg ut-label:w-full ut-label:text-primary ut-allowed-content:text-muted-foreground ut-upload-icon:text-muted ut-button:bg-primary ut-button:after:bg-tertiary hover:ut-button:opacity-80 ut-button:transition-all hover:cursor-pointer"
+                onUploadBegin={() => {
+                  setSubmitDisabled(true);
+                }}
+                onClientUploadComplete={(res) => {
+                  setSubmitDisabled(false);
+                  const imageUrls = res.map((r) => r.url);
+                  setNumFilesUploaded(imageUrls.length);
+                  setFilesUploaded(true);
+                  form.setValue("reviewImages", imageUrls);
+                }}
+                onUploadError={(error: Error) => {
+                  toast({
+                    title: `Uh oh! ${error.message}.`,
+                    description: "Please try again.",
+                    variant: "destructive",
+                  });
+                }}
+                content={{
+                  uploadIcon() {
+                    if (filesUploaded) {
+                      return <FileCheck className="text-muted h-14 w-14" />;
+                    }
+                    return <ImagePlus className="text-muted h-14 w-14" />;
+                  },
+                  label() {
+                    if (filesUploaded) {
+                      return (
+                        <span>
+                          {numFilesUploaded} file
+                          {numFilesUploaded === 1 ? "" : "s"} uploaded
+                        </span>
+                      );
+                    }
+                    return <span>Click to choose or drag and drop here</span>;
+                  },
+                }}
+              />
+              <FormDescription>
+                Upload images for the review here. You can upload 0, 1, or more
+                images—just make sure to choose or drag+drop all of them in one
+                go.
+              </FormDescription>
+            </div>
           </div>
           <Button
             type="submit"
             disabled={submitDisabled}
-            className={cn("mt-4", isSubmitting ? "opacity-80" : "")}
+            className={cn("mt-2", isSubmitting ? "opacity-80" : "")}
           >
             {isSubmitting ? (
               <div className="flex items-center">

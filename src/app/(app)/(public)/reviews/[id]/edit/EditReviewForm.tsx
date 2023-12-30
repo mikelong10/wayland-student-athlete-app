@@ -3,15 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { StudentAthleteProfile } from "@prisma/client";
+import { JobReview } from "@prisma/client";
 import _ from "lodash";
-import { FileCheck, ImagePlus, Loader2, Plus, Trash2 } from "lucide-react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { FileCheck, ImagePlus, Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
 
-import {
-  studentAthleteProfileFormSchema,
-  StudentAthleteProfileFormValues,
-} from "@lib/schemas";
+import { reviewFormSchema, ReviewFormValues } from "@lib/schemas";
 import { UploadDropzone } from "@lib/uploadthing";
 import { cn } from "@lib/utils";
 import Container from "@components/Container";
@@ -36,19 +33,16 @@ import {
   SelectValue,
 } from "@components/ui/select";
 import { Separator } from "@components/ui/separator";
+import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
+import { JobReviewWithImages } from "../../page";
 
-export type StudentAthleteProfileWithResume = StudentAthleteProfile & {
-  resume: {
-    id: string;
-    text: string;
-  }[];
-};
-
-export default function EditStudentAthleteProfileForm({
-  studentAthlete,
+export default function EditReviewForm({
+  review,
+  groupedReviewsArray,
 }: {
-  studentAthlete: StudentAthleteProfileWithResume;
+  review: JobReviewWithImages;
+  groupedReviewsArray: JobReviewWithImages[][];
 }) {
   const router = useRouter();
   const { toast } = useToast();
@@ -56,39 +50,30 @@ export default function EditStudentAthleteProfileForm({
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const [filesUploaded, setFilesUploaded] = useState(
-    !!studentAthlete.displayImage
+    !!review.reviewImages.length
   );
   const [numFilesUploaded, setNumFilesUploaded] = useState(
-    studentAthlete.displayImage ? 1 : 0
+    review.reviewImages.length
   );
 
-  const [firstName, lastName] = studentAthlete.name.split(" ", 2);
   const defaultValues = {
-    firstName: firstName,
-    lastName: lastName,
-    title: studentAthlete.title,
-    graduationYear: studentAthlete.graduationYear.toString(),
-    resumeItems: studentAthlete.resume,
-    displayImage: studentAthlete.displayImage,
+    reviewerName: review.reviewerName,
+    reviewBlurb: review.reviewBlurb,
+    reviewText: review.reviewText,
+    order: review.order.toString(),
+    reviewImages: review.reviewImages.map((img) => img.src),
   };
 
-  const form = useForm<StudentAthleteProfileFormValues>({
-    resolver: zodResolver(studentAthleteProfileFormSchema),
+  const form = useForm<ReviewFormValues>({
+    resolver: zodResolver(reviewFormSchema),
     defaultValues: defaultValues,
   });
-  const { fields, append, remove } = useFieldArray({
-    control: form.control,
-    name: "resumeItems",
-    rules: {
-      required: "Add some resume items",
-    },
-  });
 
-  async function onSubmit(values: StudentAthleteProfileFormValues) {
+  async function onSubmit(values: ReviewFormValues) {
     if (_.isEqual(values, defaultValues)) {
       toast({
         title: "No changes detected",
-        description: "No changes were made to this profile.",
+        description: "No changes were made to this review.",
       });
       return;
     }
@@ -98,31 +83,28 @@ export default function EditStudentAthleteProfileForm({
 
     try {
       toast({
-        title: "Updating profile...",
+        title: "Updating review...",
         description: "This may take a moment",
       });
 
-      const updateProfileResponse = await fetch(
-        `/api/student-athletes/${studentAthlete.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
+      const updatedReviewResponse = await fetch(`/api/reviews/${review.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
 
-      const updateProfileResponseBody: StudentAthleteProfile =
-        await updateProfileResponse.json();
+      const updatedReviewResponseBody: JobReview =
+        await updatedReviewResponse.json();
 
       toast({
-        title: "Profile successfully updated!",
-        description: `Updated profile for ${updateProfileResponseBody.name}`,
+        title: "Review successfully updated!",
+        description: `Updated ${updatedReviewResponseBody.reviewerName}'s review.`,
         variant: "success",
       });
 
-      router.push("/who");
+      router.push("/reviews");
       router.refresh();
     } catch {
       toast({
@@ -138,7 +120,7 @@ export default function EditStudentAthleteProfileForm({
 
   return (
     <Container className="flex h-full min-h-screen w-full flex-col justify-center gap-4 pb-12 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
-      <H1 className="w-full text-left">{`Edit ${firstName}'s Profile`}</H1>
+      <H1 className="w-full text-left">Edit Review</H1>
       <Separator />
       <Form {...form}>
         <form
@@ -146,54 +128,22 @@ export default function EditStudentAthleteProfileForm({
           className="mt-4 flex w-full flex-col gap-8"
         >
           <div className="flex flex-col gap-4">
-            <H2>Profile Info</H2>
+            <H2>Review Info</H2>
             <div className="flex flex-col gap-8">
-              <div className="xs:flex-row flex flex-col gap-4">
+              <div className="flex flex-col gap-4">
                 <FormField
                   control={form.control}
-                  name="firstName"
+                  name="reviewerName"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>
-                        First name <span className="text-primary">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <FormLabel>
-                        Last name <span className="text-primary">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="xs:flex-row flex w-full flex-col justify-between gap-4">
-                <FormField
-                  control={form.control}
-                  name="title"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <FormLabel>
-                        Title <span className="text-primary">*</span>
+                        Reviewer name <span className="text-primary">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
                       <FormDescription>
-                        (Co-owner, CFO, Team Member, etc.)
+                        Person who left the review
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -201,11 +151,48 @@ export default function EditStudentAthleteProfileForm({
                 />
                 <FormField
                   control={form.control}
-                  name="graduationYear"
+                  name="reviewBlurb"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>
-                        Graduation year <span className="text-primary">*</span>
+                        Job blurb <span className="text-primary">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Brief description of what kind of job it was (Snow
+                        Removal, Moving Furniture, etc.)
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="reviewText"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Review content <span className="text-primary">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea className="min-h-[160px]" {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        {"The client's review!"}
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="order"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Group <span className="text-primary">*</span>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
@@ -213,69 +200,48 @@ export default function EditStudentAthleteProfileForm({
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue />
+                            <SelectValue placeholder="New review group" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="max-h-80">
-                          {Array.from(
-                            { length: 5 },
-                            (_, index) => new Date().getFullYear() + index
-                          ).map((year) => (
-                            <SelectItem key={year} value={year.toString()}>
-                              {year}
+                          {groupedReviewsArray.map((reviews) => (
+                            <SelectItem
+                              key={reviews[0].order}
+                              value={reviews[0].order.toString()}
+                            >
+                              {`${reviews[0].order} - ${
+                                reviews[0].reviewBlurb
+                              } (${reviews
+                                .map((r) => r.reviewerName)
+                                .join(", ")})`}
                             </SelectItem>
                           ))}
+                          <SelectItem value="new">New review group</SelectItem>
                         </SelectContent>
                       </Select>
+                      <FormDescription className="flex flex-col">
+                        <span>
+                          Choose a review group to move this review to.
+                        </span>
+                        <span>
+                          - &quot;
+                          <span className="font-semibold">
+                            New review group
+                          </span>
+                          &quot; will create a new review section at the bottom
+                          of the reviews page.
+                        </span>
+                        <span>
+                          - Moving this review to an existing review group will
+                          append this review to the multi-review carousel or
+                          turn it into a multi-review carousel if it isn&apos;t
+                          already one.
+                        </span>
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-              </div>
-              <div className="flex flex-col gap-3">
-                <FormLabel>
-                  Resume items<span className="text-primary">*</span>
-                </FormLabel>
-                {fields.map((field, index) => (
-                  <div key={field.id} className="flex gap-2">
-                    <FormField
-                      control={form.control}
-                      name={`resumeItems.${index}.text`}
-                      render={({ field }) => (
-                        <FormItem className="flex flex-1 flex-col">
-                          <FormControl>
-                            <Input {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      variant={"ghost"}
-                      size={"icon"}
-                      className="h-10 w-10"
-                      onClick={() => remove(index)}
-                    >
-                      <Trash2 />
-                    </Button>
-                  </div>
-                ))}
-                <Button
-                  type="button"
-                  variant="accent"
-                  className="flex items-center gap-1"
-                  onClick={() => {
-                    append({ text: "" });
-                  }}
-                >
-                  <Plus />
-                  Add item
-                </Button>
-                {form.formState.errors.resumeItems?.root?.message && (
-                  <span className="text-primary">
-                    {form.formState.errors.resumeItems?.root?.message}
-                  </span>
-                )}
               </div>
             </div>
           </div>
@@ -283,7 +249,7 @@ export default function EditStudentAthleteProfileForm({
             <H2>Images</H2>
             <div className="flex flex-col gap-2">
               <UploadDropzone
-                endpoint={"studentAthleteProfileImage"}
+                endpoint={"jobReviewImage"}
                 className="border-border ut-label:xs:text-lg ut-label:w-full ut-label:text-primary ut-allowed-content:text-muted-foreground ut-upload-icon:text-muted ut-button:bg-primary ut-button:after:bg-tertiary hover:ut-button:opacity-80 ut-button:transition-all hover:cursor-pointer"
                 onUploadBegin={() => {
                   setSubmitDisabled(true);
@@ -293,7 +259,7 @@ export default function EditStudentAthleteProfileForm({
                   const imageUrls = res.map((r) => r.url);
                   setNumFilesUploaded(imageUrls.length);
                   setFilesUploaded(true);
-                  form.setValue("displayImage", imageUrls[0]);
+                  form.setValue("reviewImages", imageUrls);
                 }}
                 onUploadError={(error: Error) => {
                   toast({
@@ -323,9 +289,11 @@ export default function EditStudentAthleteProfileForm({
                 }}
               />
               <FormDescription>
-                Upload the image for the student-athlete profile here.{" "}
+                Upload images for the review here. You can upload 0, 1, or more
+                images—just make sure to choose or drag+drop all of them in one
+                go.{" "}
                 <span className="font-semibold">
-                  This will replace the previously uploaded image.
+                  Images you upload will replace any previously uploaded images.
                 </span>
               </FormDescription>
             </div>

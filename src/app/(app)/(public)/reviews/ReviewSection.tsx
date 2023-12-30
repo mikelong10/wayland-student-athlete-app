@@ -12,8 +12,10 @@ import Carousel from "@components/Carousel";
 import Container from "@components/Container";
 import H2 from "@components/typography/h2";
 import { Card } from "@components/ui/card";
+import AdminManageReviewActions from "./AdminManageReviewActions";
 
 function ReviewSection({
+  reviewId,
   images,
   reviewBlurb,
   reviewText,
@@ -21,6 +23,7 @@ function ReviewSection({
   variant,
   bgColor,
 }: {
+  reviewId: string;
   images: ReviewImage[];
   reviewBlurb: string;
   reviewText: string;
@@ -46,7 +49,12 @@ function ReviewSection({
     }));
 
     return (
-      <Container className={cn("flex w-full justify-center", bgColor)}>
+      <Container
+        className={cn(
+          "flex w-full flex-col items-center justify-center py-16",
+          bgColor
+        )}
+      >
         <Carousel
           header={
             <div className="flex items-center gap-4">
@@ -65,7 +73,10 @@ function ReviewSection({
               </p>
             </div>
           }
-          className="my-16"
+        />
+        <AdminManageReviewActions
+          reviewId={reviewId}
+          reviewerName={reviewerName}
         />
       </Container>
     );
@@ -73,8 +84,13 @@ function ReviewSection({
     const img = images[0];
     if (variant === "left") {
       return (
-        <Container className={cn("flex justify-center", bgColor)}>
-          <section className="flex w-full max-w-6xl flex-col items-center justify-center gap-12 py-16 lg:flex-row lg:gap-16 xl:gap-20">
+        <Container
+          className={cn(
+            "flex w-full flex-col items-center justify-center py-16",
+            bgColor
+          )}
+        >
+          <section className="flex w-full max-w-6xl flex-col items-center justify-center gap-12 lg:flex-row lg:gap-16 xl:gap-20">
             <div className="w-fit lg:flex lg:w-1/2 lg:justify-center">
               <Image
                 src={img.src}
@@ -100,12 +116,21 @@ function ReviewSection({
               </div>
             </div>
           </section>
+          <AdminManageReviewActions
+            reviewId={reviewId}
+            reviewerName={reviewerName}
+          />
         </Container>
       );
     } else {
       return (
-        <Container className={cn("flex justify-center", bgColor)}>
-          <section className="flex w-full max-w-6xl flex-col items-center justify-center gap-12 py-16 lg:flex-row lg:gap-16 xl:gap-20">
+        <Container
+          className={cn(
+            "flex w-full flex-col items-center justify-center py-16",
+            bgColor
+          )}
+        >
+          <section className="flex w-full max-w-6xl flex-col items-center justify-center gap-12 lg:flex-row lg:gap-16 xl:gap-20">
             <Image
               src={img.src}
               alt={img.alt}
@@ -139,6 +164,10 @@ function ReviewSection({
               />
             </div>
           </section>
+          <AdminManageReviewActions
+            reviewId={reviewId}
+            reviewerName={reviewerName}
+          />
         </Container>
       );
     }

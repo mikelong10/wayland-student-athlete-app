@@ -14,6 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@components/ui/carousel";
+import AdminManageReviewActions from "./AdminManageReviewActions";
 import { JobReviewWithImages } from "./page";
 
 function MultiReviewCarousel({
@@ -43,7 +44,10 @@ function MultiReviewCarousel({
       >
         <CarouselContent>
           {reviews.map((review) => (
-            <CarouselItem key={review.id} className="lg:basis-1/2">
+            <CarouselItem
+              key={review.id}
+              className="flex flex-col items-center lg:basis-1/2"
+            >
               <div className="p-1">
                 <Card className="flex flex-col gap-6">
                   {review.reviewImages.length > 0 && (
@@ -71,6 +75,10 @@ function MultiReviewCarousel({
                   </CardFooter>
                 </Card>
               </div>
+              <AdminManageReviewActions
+                reviewId={review.id}
+                reviewerName={review.reviewerName}
+              />
             </CarouselItem>
           ))}
         </CarouselContent>

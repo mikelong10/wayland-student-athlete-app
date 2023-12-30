@@ -156,7 +156,7 @@ model Image {
   id          String    @id @default(cuid())
   uploadedAt  DateTime  @default(now()) @map(name: "uploaded_at")
   updatedAt   DateTime  @updatedAt @map(name: "updated_at")
-  src         String
+  src         String    @unique
   alt         String
   width       Int       @default(800)
   height      Int       @default(800)

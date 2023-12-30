@@ -2,7 +2,7 @@ import Link from "next/link";
 import { JobReview, Role } from "@prisma/client";
 import { MessageSquarePlus } from "lucide-react";
 
-import { db } from "@lib/db";
+import { getReviews } from "@lib/data";
 import { getCurrentUser } from "@lib/session";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
@@ -33,23 +33,9 @@ export type JobReviewWithImages = JobReview & {
 export default async function ReviewsPage() {
   const user = await getCurrentUser();
 
-  const reviews = await db.jobReview.findMany({
-    include: {
-      reviewImages: true,
-    },
-    orderBy: {
-      order: "asc",
-    },
-  });
-  const groupedReviews = new Map<number, JobReviewWithImages[]>();
-  reviews.forEach((review) => {
-    const reviewGroup = groupedReviews.get(review.order);
-    if (!reviewGroup) {
-      groupedReviews.set(review.order, [review]);
-    } else {
-      reviewGroup.push(review);
-    }
-  });
+  const groupedReviewsArray = (await getReviews(
+    true
+  )) as JobReviewWithImages[][];
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center pt-32">
@@ -72,12 +58,13 @@ export default async function ReviewsPage() {
           <Separator className="mt-6" />
         </div>
       </Container>
-      {Array.from(groupedReviews.values()).map((reviews, idx) => {
+      {groupedReviewsArray.map((reviews, idx) => {
         if (reviews.length === 1) {
           const review = reviews[0];
           return (
             <ReviewSection
               key={review.id}
+              reviewId={review.id}
               images={review.reviewImages}
               reviewBlurb={review.reviewBlurb}
               reviewText={review.reviewText}

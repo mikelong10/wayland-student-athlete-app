@@ -251,54 +251,56 @@ export default function AddStudentAthleteProfileForm() {
           </div>
           <div className="flex flex-col gap-4">
             <H2>Images</H2>
-            <UploadDropzone
-              endpoint={"studentAthleteProfileImage"}
-              className="border-border ut-label:xs:text-lg ut-label:w-full ut-label:text-primary ut-allowed-content:text-muted-foreground ut-upload-icon:text-muted ut-button:bg-primary ut-button:after:bg-tertiary hover:ut-button:opacity-80 ut-button:transition-all hover:cursor-pointer"
-              onUploadBegin={() => {
-                setSubmitDisabled(true);
-              }}
-              onClientUploadComplete={(res) => {
-                setSubmitDisabled(false);
-                const imageUrls = res.map((r) => r.url);
-                setNumFilesUploaded(imageUrls.length);
-                setFilesUploaded(true);
-                form.setValue("displayImage", imageUrls[0]);
-              }}
-              onUploadError={(error: Error) => {
-                toast({
-                  title: `Uh oh! ${error.message}.`,
-                  description: "Please try again.",
-                  variant: "destructive",
-                });
-              }}
-              content={{
-                uploadIcon() {
-                  if (filesUploaded) {
-                    return <FileCheck className="text-muted h-14 w-14" />;
-                  }
-                  return <ImagePlus className="text-muted h-14 w-14" />;
-                },
-                label() {
-                  if (filesUploaded) {
-                    return (
-                      <span>
-                        {numFilesUploaded} file
-                        {numFilesUploaded === 1 ? "" : "s"} uploaded
-                      </span>
-                    );
-                  }
-                  return <span>Click to choose or drag and drop here</span>;
-                },
-              }}
-            />
-            <FormDescription>
-              Upload the image for the student-athlete profile here
-            </FormDescription>
+            <div className="flex flex-col gap-2">
+              <UploadDropzone
+                endpoint={"studentAthleteProfileImage"}
+                className="border-border ut-label:xs:text-lg ut-label:w-full ut-label:text-primary ut-allowed-content:text-muted-foreground ut-upload-icon:text-muted ut-button:bg-primary ut-button:after:bg-tertiary hover:ut-button:opacity-80 ut-button:transition-all hover:cursor-pointer"
+                onUploadBegin={() => {
+                  setSubmitDisabled(true);
+                }}
+                onClientUploadComplete={(res) => {
+                  setSubmitDisabled(false);
+                  const imageUrls = res.map((r) => r.url);
+                  setNumFilesUploaded(imageUrls.length);
+                  setFilesUploaded(true);
+                  form.setValue("displayImage", imageUrls[0]);
+                }}
+                onUploadError={(error: Error) => {
+                  toast({
+                    title: `Uh oh! ${error.message}.`,
+                    description: "Please try again.",
+                    variant: "destructive",
+                  });
+                }}
+                content={{
+                  uploadIcon() {
+                    if (filesUploaded) {
+                      return <FileCheck className="text-muted h-14 w-14" />;
+                    }
+                    return <ImagePlus className="text-muted h-14 w-14" />;
+                  },
+                  label() {
+                    if (filesUploaded) {
+                      return (
+                        <span>
+                          {numFilesUploaded} file
+                          {numFilesUploaded === 1 ? "" : "s"} uploaded
+                        </span>
+                      );
+                    }
+                    return <span>Click to choose or drag and drop here</span>;
+                  },
+                }}
+              />
+              <FormDescription>
+                Upload the image for the student-athlete profile here
+              </FormDescription>
+            </div>
           </div>
           <Button
             type="submit"
             disabled={submitDisabled}
-            className={cn("mt-4", isSubmitting ? "opacity-80" : "")}
+            className={cn("mt-2", isSubmitting ? "opacity-80" : "")}
           >
             {isSubmitting ? (
               <div className="flex items-center">
