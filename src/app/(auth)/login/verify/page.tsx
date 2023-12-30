@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
+import { getCurrentUser } from "@lib/session";
 import Container from "@components/Container";
 import { Button } from "@components/ui/button";
 import {
@@ -13,7 +15,13 @@ import {
 } from "@components/ui/card";
 import { Separator } from "@components/ui/separator";
 
-export default function VerifyEmailPage() {
+export default async function VerifyEmailPage() {
+  const user = await getCurrentUser();
+
+  if (user) {
+    redirect("/");
+  }
+
   return (
     <Container className="bg-accent flex min-h-screen w-full flex-col items-center justify-center pb-12 pt-32">
       <div className="sm:w-7/8 flex flex-col gap-6 md:w-3/4 lg:w-2/3 xl:w-1/2">

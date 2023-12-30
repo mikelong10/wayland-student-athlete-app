@@ -17,14 +17,14 @@ export default function EditProfileForm({ user }: { user: User }) {
     <div className="xs:flex-row xs:items-center my-4 flex w-full flex-col gap-16">
       <div className="flex flex-col items-center">
         <UploadButton
-          endpoint="profilePicture"
+          endpoint="userProfilePicture"
           onClientUploadComplete={(res) => {
             setActiveUser((prev) => ({ ...prev, image: res[0].url }));
           }}
           onUploadError={(error: Error) => {
             toast({
-              title: "Uh oh! Something went wrong.",
-              description: `${error.message}. Please try again.`,
+              title: `Uh oh! ${error.message}.`,
+              description: "Please try again.",
               variant: "destructive",
             });
           }}
@@ -41,8 +41,9 @@ export default function EditProfileForm({ user }: { user: User }) {
               );
             },
             allowedContent({ isUploading }) {
-              if (isUploading) return <p>Uploading...</p>;
-              return <p>Choose image</p>;
+              if (isUploading)
+                return <p className="text-muted-foreground">Uploading...</p>;
+              return <p className="text-muted-foreground">Choose image</p>;
             },
           }}
           className="ut-button:rounded-full ut-button:w-fit ut-button:h-fit ut-button:mb-1 ut-button:bg-accent ut-button:text-accent-foreground ut-button:hover:opacity-70 ut-button:transition-all ut-button:focus-within:ring-ring ut-button:after:bg-primary ut-allowed-content:text-sm ut-upload-icon:bg-accent h-full w-full"

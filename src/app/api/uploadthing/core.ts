@@ -8,7 +8,7 @@ const f = createUploadthing();
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const wsaFileRouter = {
-  profilePicture: f({ image: { maxFileSize: "4MB" } })
+  userProfilePicture: f({ image: { maxFileSize: "4MB" } })
     // Set permissions and file types for this FileRoute
     .middleware(async () => {
       // This code runs on your server before upload
@@ -37,6 +37,21 @@ export const wsaFileRouter = {
       const user = await getCurrentUser();
 
       // Only admins will be adding reviews
+      if (!user || user.role !== Role.ADMIN) throw new Error("Unauthorized");
+
+      // Whatever is returned here is accessible in onUploadComplete as `metadata`
+      return { userId: user.id };
+    })
+    .onUploadComplete(async ({ metadata }) => {
+      return { uploadedBy: metadata.userId };
+    }),
+  studentAthleteProfileImage: f({
+    image: { maxFileSize: "4MB", maxFileCount: 1 },
+  })
+    .middleware(async () => {
+      const user = await getCurrentUser();
+
+      // Only admins will be adding student athlete profiles
       if (!user || user.role !== Role.ADMIN) throw new Error("Unauthorized");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`

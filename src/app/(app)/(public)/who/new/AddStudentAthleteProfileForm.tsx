@@ -3,11 +3,14 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { JobReview } from "@prisma/client";
-import { FileCheck, ImagePlus, Loader2 } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { StudentAthleteProfile } from "@prisma/client";
+import { FileCheck, ImagePlus, Loader2, Plus, Trash2 } from "lucide-react";
+import { useFieldArray, useForm } from "react-hook-form";
 
-import { reviewFormSchema, ReviewFormValues } from "@lib/schemas";
+import {
+  studentAthleteProfileFormSchema,
+  StudentAthleteProfileFormValues,
+} from "@lib/schemas";
 import { UploadDropzone } from "@lib/uploadthing";
 import { cn } from "@lib/utils";
 import Container from "@components/Container";
@@ -32,15 +35,9 @@ import {
   SelectValue,
 } from "@components/ui/select";
 import { Separator } from "@components/ui/separator";
-import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
-import { JobReviewWithImages } from "../page";
 
-export default function AddReviewForm({
-  groupedReviews,
-}: {
-  groupedReviews: Map<number, JobReviewWithImages[]>;
-}) {
+export default function AddStudentAthleteProfileForm() {
   const router = useRouter();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,22 +46,36 @@ export default function AddReviewForm({
   const [filesUploaded, setFilesUploaded] = useState(false);
   const [numFilesUploaded, setNumFilesUploaded] = useState(0);
 
-  const form = useForm<ReviewFormValues>({
-    resolver: zodResolver(reviewFormSchema),
+  const form = useForm<StudentAthleteProfileFormValues>({
+    resolver: zodResolver(studentAthleteProfileFormSchema),
     defaultValues: {
-      reviewerName: "",
-      reviewBlurb: "",
-      reviewText: "",
-      order: "new",
+      firstName: "",
+      lastName: "",
+      title: "",
+      graduationYear: new Date().getFullYear().toString(),
+      resumeItems: [{ text: "" }],
+      displayImage: "",
+    },
+  });
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "resumeItems",
+    rules: {
+      required: "Add some resume items",
     },
   });
 
-  async function onSubmit(values: ReviewFormValues) {
+  async function onSubmit(values: StudentAthleteProfileFormValues) {
     setIsSubmitting(true);
     setSubmitDisabled(true);
 
     try {
-      const addReviewResponse = await fetch("/api/reviews", {
+      toast({
+        title: "Creating profile...",
+        description: "This may take a few moments",
+      });
+
+      const addProfileResponse = await fetch("/api/student-athletes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,15 +83,16 @@ export default function AddReviewForm({
         body: JSON.stringify(values),
       });
 
-      const addReviewResponseBody: JobReview = await addReviewResponse.json();
+      const addProfileResponseBody: StudentAthleteProfile =
+        await addProfileResponse.json();
 
       toast({
-        title: "Review successfully added!",
-        description: `Added to review group ${addReviewResponseBody.order}`,
+        title: "Profile successfully added!",
+        description: `Added profile for ${addProfileResponseBody.name}`,
         variant: "success",
       });
 
-      router.push("/reviews");
+      router.push("/who");
       router.refresh();
     } catch {
       toast({
@@ -96,7 +108,7 @@ export default function AddReviewForm({
 
   return (
     <Container className="flex h-full min-h-screen w-full flex-col justify-center gap-4 pb-12 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
-      <H1 className="w-full text-left">Add Review</H1>
+      <H1 className="w-full text-left">Add Profile</H1>
       <Separator />
       <Form {...form}>
         <form
@@ -104,22 +116,54 @@ export default function AddReviewForm({
           className="mt-4 flex w-full flex-col gap-8"
         >
           <div className="flex flex-col gap-4">
-            <H2>Review Info</H2>
+            <H2>Profile Info</H2>
             <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-4">
+              <div className="xs:flex-row flex flex-col gap-4">
                 <FormField
                   control={form.control}
-                  name="reviewerName"
+                  name="firstName"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>
-                        Reviewer name <span className="text-primary">*</span>
+                        First name <span className="text-primary">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>
+                        Last name <span className="text-primary">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="xs:flex-row flex w-full flex-col justify-between gap-4">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>
+                        Title <span className="text-primary">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
                       <FormDescription>
-                        Person who left the review
+                        (Co-owner, CFO, Team Member, etc.)
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -127,46 +171,11 @@ export default function AddReviewForm({
                 />
                 <FormField
                   control={form.control}
-                  name="reviewBlurb"
+                  name="graduationYear"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>
-                        Job blurb <span className="text-primary">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        Brief description of what kind of job it was (Snow
-                        Removal, Moving Furniture, etc.)
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="reviewText"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Review content <span className="text-primary">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea {...field} />
-                      </FormControl>
-                      <FormDescription>What the person said</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="order"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Group <span className="text-primary">*</span>
+                        Graduation year <span className="text-primary">*</span>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
@@ -174,61 +183,76 @@ export default function AddReviewForm({
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="New review group" />
+                            <SelectValue />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="max-h-80">
-                          {Array.from(groupedReviews.values()).map(
-                            (reviews) => (
-                              <SelectItem
-                                key={reviews[0].order}
-                                value={reviews[0].order.toString()}
-                              >
-                                {`${reviews[0].order} - ${
-                                  reviews[0].reviewBlurb
-                                } (${reviews
-                                  .map((r) => r.reviewerName)
-                                  .join(", ")})`}
-                              </SelectItem>
-                            )
-                          )}
-                          <SelectItem value="new">New review group</SelectItem>
+                          {Array.from(
+                            { length: 5 },
+                            (_, index) => new Date().getFullYear() + index
+                          ).map((year) => (
+                            <SelectItem key={year} value={year.toString()}>
+                              {year}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
-                      <FormDescription className="flex flex-col">
-                        <span>
-                          Choose a review group to add this review to.
-                        </span>
-                        <span>
-                          -{" "}
-                          <span className="underline underline-offset-2">
-                            In most cases
-                          </span>
-                          , you should choose &quot;
-                          <span className="font-semibold">
-                            New review group
-                          </span>
-                          &quot;, which will create a new review section at the
-                          bottom of the reviews page.
-                        </span>
-                        <span>
-                          - Adding a review to an existing review group will
-                          append this review to the multi-review carousel or
-                          turn it into a multi-review carousel if it isn&apos;t
-                          already one.
-                        </span>
-                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+              </div>
+              <div className="flex flex-col gap-3">
+                <FormLabel>
+                  Resume items<span className="text-primary">*</span>
+                </FormLabel>
+                {fields.map((field, index) => (
+                  <div key={field.id} className="flex gap-2">
+                    <FormField
+                      control={form.control}
+                      name={`resumeItems.${index}.text`}
+                      render={({ field }) => (
+                        <FormItem className="flex flex-1 flex-col">
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button
+                      variant={"ghost"}
+                      size={"icon"}
+                      className="h-10 w-10"
+                      onClick={() => remove(index)}
+                    >
+                      <Trash2 />
+                    </Button>
+                  </div>
+                ))}
+                <Button
+                  type="button"
+                  variant="accent"
+                  className="flex items-center gap-1"
+                  onClick={() => {
+                    append({ text: "" });
+                  }}
+                >
+                  <Plus />
+                  Add item
+                </Button>
+                {form.formState.errors.resumeItems?.root?.message && (
+                  <span className="text-primary">
+                    {form.formState.errors.resumeItems?.root?.message}
+                  </span>
+                )}
               </div>
             </div>
           </div>
           <div className="flex flex-col gap-4">
             <H2>Images</H2>
             <UploadDropzone
-              endpoint={"jobReviewImage"}
+              endpoint={"studentAthleteProfileImage"}
               className="border-border ut-label:xs:text-lg ut-label:w-full ut-label:text-primary ut-allowed-content:text-muted-foreground ut-upload-icon:text-muted ut-button:bg-primary ut-button:after:bg-tertiary hover:ut-button:opacity-80 ut-button:transition-all hover:cursor-pointer"
               onUploadBegin={() => {
                 setSubmitDisabled(true);
@@ -238,7 +262,7 @@ export default function AddReviewForm({
                 const imageUrls = res.map((r) => r.url);
                 setNumFilesUploaded(imageUrls.length);
                 setFilesUploaded(true);
-                form.setValue("reviewImages", imageUrls);
+                form.setValue("displayImage", imageUrls[0]);
               }}
               onUploadError={(error: Error) => {
                 toast({
@@ -268,9 +292,7 @@ export default function AddReviewForm({
               }}
             />
             <FormDescription>
-              Upload images for the review here. You can upload 0, 1, or more
-              images—just make sure to choose or drag+drop all of them in one
-              go.
+              Upload the image for the student-athlete profile here
             </FormDescription>
           </div>
           <Button
@@ -281,10 +303,10 @@ export default function AddReviewForm({
             {isSubmitting ? (
               <div className="flex items-center">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Adding review...
+                Adding profile...
               </div>
             ) : (
-              "Add review"
+              "Add profile"
             )}
           </Button>
         </form>

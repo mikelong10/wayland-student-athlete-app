@@ -51,6 +51,14 @@ export function formatPhoneNumberForClient(phoneNumber: string): string {
   }
 }
 
+export function nameToSlug(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, "") // remove non-alphanumeric characters
+    .split(" ")
+    .join("-");
+}
+
 const isBrowser = () => typeof window !== "undefined";
 
 export function scrollToTop() {

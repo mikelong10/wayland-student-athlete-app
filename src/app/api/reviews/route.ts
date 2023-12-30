@@ -3,7 +3,7 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
 import { db } from "@lib/db";
-import { addReviewFormSchema } from "@lib/schemas";
+import { reviewFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
 
 export async function POST(req: Request) {
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     const json = await req.json();
-    const addReviewRequestBody = addReviewFormSchema.parse(json);
+    const addReviewRequestBody = reviewFormSchema.parse(json);
 
     const allReviews = await db.jobReview.findMany({
       orderBy: {
