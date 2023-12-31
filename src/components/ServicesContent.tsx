@@ -73,7 +73,7 @@ export const servicesCards: ServiceCardInfo[] = [
 
 export default function ServicesContent() {
   return (
-    <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="grid w-full max-w-6xl grid-cols-1 gap-4 md:grid-cols-2">
       {servicesCards.map((info) => (
         <ServiceCard key={info.title} info={info} />
       ))}

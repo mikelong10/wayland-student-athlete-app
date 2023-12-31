@@ -24,7 +24,8 @@ export const phoneRegex = new RegExp(
   /^(\+?0?1\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
 );
 
-export function formatPhoneNumber(input: string): string {
+// takes any phone number and turns it into +1XXXXXXXXXX
+export function formatPhoneNumberForServer(input: string): string {
   // Extract digits from the input string
   const digits = input.replace(/\D/g, "");
 
@@ -38,6 +39,24 @@ export function formatPhoneNumber(input: string): string {
   }
 
   return formattedNumber;
+}
+
+// takes +1XXXXXXXXXX and turns it into (XXX) XXX-XXXX
+export function formatPhoneNumberForClient(phoneNumber: string): string {
+  const match = phoneNumber.match(/^(\+\d{1})?(\d{3})(\d{3})(\d{4})$/);
+  if (match) {
+    return `(${match[2]}) ${match[3]}-${match[4]}`;
+  } else {
+    return phoneNumber;
+  }
+}
+
+export function nameToSlug(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, "") // remove non-alphanumeric characters
+    .split(" ")
+    .join("-");
 }
 
 const isBrowser = () => typeof window !== "undefined";

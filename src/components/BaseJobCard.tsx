@@ -37,9 +37,9 @@ export default function BaseJobCard({
       </CardHeader>
       <div className="flex h-full flex-col justify-between gap-4">
         <CardContent>
-          <p className="border-l-2 pl-2">{job.description}</p>
+          <p className="border-border border-l-2 pl-2">{job.description}</p>
         </CardContent>
-        <CardFooter className="flex items-end justify-between">
+        <CardFooter className="flex items-center justify-between">
           <p className="text-muted-foreground text-xs italic">
             Requested: {formatDate(job.createdAt)}
           </p>

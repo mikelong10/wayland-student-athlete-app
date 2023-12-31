@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { db } from "@lib/db";
 import { getCurrentUser } from "@lib/session";
-import { formatPhoneNumber } from "@lib/utils";
+import { formatPhoneNumberForServer } from "@lib/utils";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -115,7 +115,7 @@ export async function PATCH(
         dataToUpdate["name"] = `${payload.firstName} ${payload.lastName}`;
       }
       if (payload.phone) {
-        const updatedPhone = formatPhoneNumber(payload.phone);
+        const updatedPhone = formatPhoneNumberForServer(payload.phone);
         dataToUpdate["phone"] = updatedPhone;
       }
       // update the user

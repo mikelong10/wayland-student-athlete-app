@@ -2,15 +2,14 @@ import { z } from "zod";
 
 import { phoneRegex } from "@lib/utils";
 
-export type EmailLoginFormValues = z.infer<typeof emailLoginSchema>;
 export const emailLoginSchema = z.object({
   email: z
     .string()
     .email("Please provide a valid email")
     .min(1, "Please enter your email"),
 });
+export type EmailLoginFormValues = z.infer<typeof emailLoginSchema>;
 
-export type EditUserNameFormValues = z.infer<typeof editUserNameSchema>;
 export const editUserNameSchema = z
   .object({
     firstName: z.string().optional(),
@@ -20,13 +19,13 @@ export const editUserNameSchema = z
     message: "Please provide both first and last name",
     path: ["lastName"],
   });
+export type EditUserNameFormValues = z.infer<typeof editUserNameSchema>;
 
-export type EditUserPhoneFormValues = z.infer<typeof editUserPhoneSchema>;
 export const editUserPhoneSchema = z.object({
   phone: z.string().regex(phoneRegex, "Please enter a vaild US phone number"),
 });
+export type EditUserPhoneFormValues = z.infer<typeof editUserPhoneSchema>;
 
-export type RequestJobFormValues = z.infer<typeof requestJobFormSchema>;
 export const requestJobFormSchema = z.object({
   adultFirstName: z.string().min(1, "Required"),
   adultLastName: z.string().min(1, "Required"),
@@ -41,8 +40,31 @@ export const requestJobFormSchema = z.object({
   special: z.string().optional(),
   signature: z.string().min(1, "Required"),
 });
+export type RequestJobFormValues = z.infer<typeof requestJobFormSchema>;
 
-export type JobCompleteFormValues = z.infer<typeof jobCompleteFormSchema>;
+export const reviewFormSchema = z.object({
+  reviewerName: z.string().min(1, "Required"),
+  reviewBlurb: z.string().min(1, "Required"),
+  reviewText: z.string().min(1, "Required"),
+  reviewImages: z.array(z.string()).optional(),
+  order: z.string().min(1, "Required"),
+});
+export type ReviewFormValues = z.infer<typeof reviewFormSchema>;
+
+export const studentAthleteProfileFormSchema = z.object({
+  firstName: z.string().min(1, "Required"),
+  lastName: z.string().min(1, "Required"),
+  title: z.string().min(1, "Required"),
+  graduationYear: z.string().min(1, "Required"),
+  resumeItems: z
+    .array(z.object({ text: z.string().min(1, "Cannot be empty") }))
+    .min(1, "Add some resume items"),
+  displayImage: z.string(),
+});
+export type StudentAthleteProfileFormValues = z.infer<
+  typeof studentAthleteProfileFormSchema
+>;
+
 export const jobCompleteFormSchema = z.object({
   client: z.string().min(1, "Required"),
   jobType: z.string().min(1, "Required"),
@@ -51,10 +73,8 @@ export const jobCompleteFormSchema = z.object({
   cutTaken: z.string().min(1, "Required"),
   completedBy: z.string().min(1, "Required"),
 });
+export type JobCompleteFormValues = z.infer<typeof jobCompleteFormSchema>;
 
-export type CompleteJobGoogleSheetValues = z.infer<
-  typeof completeJobGoogleSheetSchema
->;
 export const completeJobGoogleSheetSchema = z.object({
   client: z.string().min(1, "Required"),
   jobType: z.string().min(1, "Required"),
@@ -65,3 +85,6 @@ export const completeJobGoogleSheetSchema = z.object({
   manHours: z.string().min(1, "Required"),
   completedBy: z.string().min(1, "Required"),
 });
+export type CompleteJobGoogleSheetValues = z.infer<
+  typeof completeJobGoogleSheetSchema
+>;

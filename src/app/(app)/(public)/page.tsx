@@ -1,37 +1,36 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, MoveRight } from "lucide-react";
+import { ArrowDown, HeartHandshake, MoveRight } from "lucide-react";
 
 import Container from "@components/Container";
-import ReviewCarousel from "@components/ReviewCarousel";
+import HomePageReviewCarousel from "@components/HomePageReviewCarousel";
 import ServicesContent from "@components/ServicesContent";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
-import { Card, CardContent, CardFooter, CardTitle } from "@components/ui/card";
+import { Card, CardContent, CardFooter } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
-import ansh from "../../../../public/ansh.jpg";
-import mike from "../../../../public/mike.jpg";
 
 export default function Home() {
   return (
-    <main className="flex w-full flex-col items-center justify-center pb-16">
+    <main className="flex w-full flex-col items-center justify-center">
       <Container
         id="landing-home"
-        className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-6 bg-gradient-to-tl to-50% lg:items-center dark:from-orange-950"
+        className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-10 bg-gradient-to-tl to-50% lg:items-center"
       >
-        <div className="xs:hidden">
-          <H1>Wayland</H1>
-          <H1>Student-Athlete</H1>
+        <div className="flex w-full flex-col gap-4 lg:items-center">
+          <div className="xs:hidden">
+            <H1>Wayland</H1>
+            <H1>Student-Athlete</H1>
+          </div>
+          <H1 className="max-xs:hidden xs:text-4xl xl:text-6xl">
+            Wayland Student-Athlete
+          </H1>
+          <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
+            Simple, trustworthy, quality{" "}
+            <span className="text-primary">solutions</span> for all your{" "}
+            <span className="text-primary">odd jobs</span>.
+          </p>
         </div>
-        <H1 className="max-xs:hidden xs:text-4xl xl:text-6xl">
-          Wayland Student-Athlete
-        </H1>
-        <p className="text-foreground-less scroll-m-20 text-xl font-medium tracking-tight md:text-2xl">
-          Simple, trustworthy, quality{" "}
-          <span className="text-primary">solutions</span> for all your{" "}
-          <span className="text-primary">odd jobs</span>.
-        </p>
         <div className="flex w-full gap-4 lg:justify-center">
           <div className="flex lg:w-full lg:justify-end">
             <InteractiveButton
@@ -53,95 +52,67 @@ export default function Home() {
           </div>
         </div>
       </Container>
-      <Container className="from-tertiary to-background relative mb-12 flex w-full flex-col items-center justify-start gap-24 bg-gradient-to-bl to-50% dark:from-orange-950">
+      <Container className="from-tertiary to-background relative flex w-full flex-col items-center justify-start gap-24 bg-gradient-to-bl to-50%">
         <div id="landing-what-we-do" className="absolute -top-28" />
         <ServicesContent />
       </Container>
-      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-tr to-50% dark:from-orange-950">
-        <div className="mb-24 flex w-full flex-col items-center justify-center gap-20">
+      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-tr to-50% pt-20">
+        <div className="flex w-full flex-col items-center justify-center gap-32">
           <div className="mt-8 flex w-full flex-col justify-center gap-8 sm:flex-row sm:gap-8 md:gap-16 lg:gap-24">
-            <div className="flex flex-col items-center gap-2">
-              <H2 className="text-6xl sm:text-6xl">800+</H2>
-              <p className="text-md text-muted-foreground underline underline-offset-8">
+            <div className="flex flex-col items-center gap-2 text-center">
+              <H2 className="xs:text-6xl text-5xl sm:text-6xl">
+                800<span className="text-primary">+</span>
+              </H2>
+              <p className="text-accent-foreground text-lg font-semibold underline underline-offset-8">
                 Jobs requested and completed
               </p>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <H2 className="text-6xl sm:text-6xl">200+</H2>
-              <p className="text-md text-muted-foreground underline underline-offset-8">
+            <div className="flex flex-col items-center gap-2 text-center">
+              <H2 className="xs:text-6xl text-5xl sm:text-6xl">
+                200<span className="text-primary">+</span>
+              </H2>
+              <p className="text-accent-foreground text-lg font-semibold underline underline-offset-8">
                 Parents, kids, and families served
               </p>
             </div>
           </div>
-          <Card
-            className={
-              "dark:shadow-tertiary flex w-fit flex-col gap-2 border-none shadow-2xl md:text-center"
-            }
-          >
-            <CardTitle>
-              How may we <span className="text-primary">assist</span> you?
-            </CardTitle>
-            <CardContent className="text-muted-foreground">
-              <p>
-                Let us know what tasks you don&apos;t have time and energy for.
-              </p>
-              <p>We&apos;ll take care of it.</p>
-            </CardContent>
-            <CardFooter className="w-full md:justify-center">
-              <Link href="/request">
-                <Button className="mt-4 flex items-center justify-between gap-4">
-                  Request a job
-                  <MoveRight />
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
+          <div className="flex w-full flex-col items-center gap-8">
+            <H2 className="xs:text-3xl text-center text-3xl md:text-4xl">
+              <span className="">Trusted</span> by the{" "}
+              <span className="text-secondary italic">community</span>.
+            </H2>
+            <HomePageReviewCarousel />
+          </div>
         </div>
       </Container>
-      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-8 bg-gradient-to-br to-50% dark:from-orange-950">
-        <div className="mb-20 flex w-full flex-col items-center gap-8">
-          <H2 className="text-3xl lg:text-4xl">
-            <span className="">Trusted</span> by the{" "}
-            <span className="text-secondary italic">community</span>.
-          </H2>
-          <ReviewCarousel />
-        </div>
-        <H2 className="text-3xl lg:text-4xl">Our Leaders</H2>
-        <div className="flex flex-col gap-12 sm:flex-row md:gap-16 lg:gap-24">
-          <div className="flex flex-col items-center gap-4">
-            <Image
-              src={ansh}
-              alt={"Anshuman"}
-              width={240}
-              height={240}
-              className="rounded-full"
-            />
-            <div className="flex flex-col items-center gap-1 text-center">
-              <h4 className="text-xl font-semibold tracking-tight">
-                Anshuman Parulekar
-              </h4>
-              <p>WHS Class of 2024</p>
-            </div>
+      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-8 bg-gradient-to-br to-50% py-32">
+        <Card
+          className={
+            "bg-secondary xs:p-10 flex w-fit flex-col items-center gap-2 border-none p-8 text-center md:p-12 lg:p-14 xl:p-16"
+          }
+        >
+          <div className="flex flex-col items-center gap-2">
+            <HeartHandshake className="text-tertiary h-12 w-12" />
+            <H2 className="text-background">
+              How may we <span className="text-primary italic">assist</span>{" "}
+              you?
+            </H2>
           </div>
-          <div className="flex flex-col items-center gap-4">
-            <Image
-              src={mike}
-              alt={"Mike"}
-              width={240}
-              height={240}
-              className="rounded-full"
-            />
-            <div className="flex flex-col items-center gap-1 text-center">
-              <h4 className="text-xl font-semibold tracking-tight">
-                Michael Lavelle
-              </h4>
-              <p>WHS Class of 2024</p>
-            </div>
-          </div>
-        </div>
-        <Link href="/what">
-          <Button variant={"traced"}>Our mission</Button>
-        </Link>
+          <CardContent className="text-accent">
+            <p>
+              Let us know what tasks you don&apos;t have time and energy for.
+            </p>
+            <p>We&apos;ll take care of it.</p>
+          </CardContent>
+          <CardFooter>
+            <Link href="/request">
+              <Button className="mt-4 flex items-center justify-between gap-4">
+                Request a job
+                <MoveRight />
+              </Button>
+            </Link>
+          </CardFooter>
+        </Card>
       </Container>
     </main>
   );

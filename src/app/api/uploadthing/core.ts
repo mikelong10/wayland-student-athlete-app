@@ -7,8 +7,8 @@ import { getCurrentUser } from "@lib/session";
 const f = createUploadthing();
 
 // FileRouter for your app, can contain multiple FileRoutes
-export const ourFileRouter = {
-  profilePicture: f({ image: { maxFileSize: "4MB" } })
+export const wsaFileRouter = {
+  userProfilePicture: f({ image: { maxFileSize: "4MB" } })
     // Set permissions and file types for this FileRoute
     .middleware(async () => {
       // This code runs on your server before upload
@@ -21,48 +21,45 @@ export const ourFileRouter = {
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      // This code RUNS ON YOUR SERVER after upload
-      console.log(
-        "Profile picture upload complete for userId:",
-        metadata.userId
-      );
-
-      console.log("file url", file.url);
       const updatedUser = await db.user.update({
         where: { id: metadata.userId },
         data: { image: file.url },
       });
 
-      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       return {
         uploadedBy: metadata.userId,
         newProfilePicture: file.url,
         updatedUser: JSON.stringify(updatedUser),
       };
     }),
-  jobReviewImage: f({ image: { maxFileSize: "4MB" } })
+  jobReviewImage: f({ image: { maxFileSize: "4MB", maxFileCount: 8 } })
     .middleware(async () => {
       const user = await getCurrentUser();
 
-      // Only admins and SAs will be adding reviews
-      if (
-        !user ||
-        (user.role !== Role.ADMIN && user.role !== Role.STUDENTATHLETE)
-      )
-        throw new Error("Unauthorized");
+      // Only admins will be adding reviews
+      if (!user || user.role !== Role.ADMIN) throw new Error("Unauthorized");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
     })
-    .onUploadComplete(async ({ metadata, file }) => {
-      // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
+    .onUploadComplete(async ({ metadata }) => {
+      return { uploadedBy: metadata.userId };
+    }),
+  studentAthleteProfileImage: f({
+    image: { maxFileSize: "4MB", maxFileCount: 1 },
+  })
+    .middleware(async () => {
+      const user = await getCurrentUser();
 
-      console.log("file url", file.url);
+      // Only admins will be adding student athlete profiles
+      if (!user || user.role !== Role.ADMIN) throw new Error("Unauthorized");
 
-      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
+      // Whatever is returned here is accessible in onUploadComplete as `metadata`
+      return { userId: user.id };
+    })
+    .onUploadComplete(async ({ metadata }) => {
       return { uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;
 
-export type OurFileRouter = typeof ourFileRouter;
+export type WSAFileRouter = typeof wsaFileRouter;

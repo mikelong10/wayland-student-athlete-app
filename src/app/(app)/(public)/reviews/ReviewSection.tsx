@@ -1,14 +1,22 @@
 import Image from "next/image";
-import { Image as ReviewImage } from "@prisma/client";
-import { MessageSquareQuote } from "lucide-react";
+import { Image as ReviewImage, Role, User } from "@prisma/client";
+import {
+  MessageSquareHeart,
+  MessageSquareMore,
+  MessageSquareQuote,
+  MessageSquareText,
+} from "lucide-react";
 
 import { cn } from "@lib/utils";
 import Carousel from "@components/Carousel";
 import Container from "@components/Container";
 import H2 from "@components/typography/h2";
 import { Card } from "@components/ui/card";
+import AdminManageReviewActions from "./AdminManageReviewActions";
 
-function ReviewSection({
+export default function ReviewSection({
+  user,
+  reviewId,
   images,
   reviewBlurb,
   reviewText,
@@ -16,6 +24,8 @@ function ReviewSection({
   variant,
   bgColor,
 }: {
+  user: User | undefined;
+  reviewId: string;
   images: ReviewImage[];
   reviewBlurb: string;
   reviewText: string;
@@ -27,13 +37,13 @@ function ReviewSection({
     const carouselItems = images.map((img) => ({
       key: img.id,
       content: (
-        <div className="flex max-h-[520px] items-center overflow-hidden">
+        <div className="flex max-h-[480px] items-center overflow-hidden">
           <Image
             src={img.src}
             alt={img.alt}
             width={img.width}
             height={img.height}
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: "cover", objectPosition: "center" }}
             priority={true}
           />
         </div>
@@ -41,11 +51,16 @@ function ReviewSection({
     }));
 
     return (
-      <Container className={cn("flex w-full justify-center", bgColor)}>
+      <Container
+        className={cn(
+          "flex w-full flex-col items-center justify-center py-16",
+          bgColor
+        )}
+      >
         <Carousel
           header={
             <div className="flex items-center gap-4">
-              <MessageSquareQuote className="text-secondary h-10 w-10" />
+              <MessageSquareHeart className="text-secondary h-10 w-10" />
               <H2>{reviewBlurb}</H2>
             </div>
           }
@@ -60,26 +75,39 @@ function ReviewSection({
               </p>
             </div>
           }
-          className="my-16"
         />
+        {user?.role === Role.ADMIN && (
+          <AdminManageReviewActions
+            reviewId={reviewId}
+            reviewerName={reviewerName}
+          />
+        )}
       </Container>
     );
   } else if (images.length === 1) {
     const img = images[0];
     if (variant === "left") {
       return (
-        <Container className={bgColor}>
-          <section className="flex w-full flex-col items-center gap-12 py-16 lg:flex-row lg:gap-16 xl:gap-20">
-            <Image
-              src={img.src}
-              alt={img.alt}
-              width={img.width}
-              height={img.height}
-              className="rounded-lg lg:w-1/2"
-            />
+        <Container
+          className={cn(
+            "flex w-full flex-col items-center justify-center py-16",
+            bgColor
+          )}
+        >
+          <section className="flex w-full max-w-6xl flex-col items-center justify-center gap-12 lg:flex-row lg:gap-16 xl:gap-20">
+            <div className="w-fit lg:flex lg:w-1/2 lg:justify-center">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                style={{ objectFit: "contain" }}
+                className="max-h-[480px] w-fit rounded-md"
+              />
+            </div>
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
               <div className="flex items-center gap-4">
-                <MessageSquareQuote className="text-secondary h-10 w-10" />
+                <MessageSquareMore className="text-secondary h-10 w-10" />
                 <H2>{reviewBlurb}</H2>
               </div>
               <div className="flex flex-col gap-2">
@@ -92,22 +120,34 @@ function ReviewSection({
               </div>
             </div>
           </section>
+          {user?.role === Role.ADMIN && (
+            <AdminManageReviewActions
+              reviewId={reviewId}
+              reviewerName={reviewerName}
+            />
+          )}
         </Container>
       );
     } else {
       return (
-        <Container className={bgColor}>
-          <section className="flex w-full flex-col items-center gap-12 py-16 lg:flex-row lg:gap-16 xl:gap-20">
+        <Container
+          className={cn(
+            "flex w-full flex-col items-center justify-center py-16",
+            bgColor
+          )}
+        >
+          <section className="flex w-full max-w-6xl flex-col items-center justify-center gap-12 lg:flex-row lg:gap-16 xl:gap-20">
             <Image
               src={img.src}
               alt={img.alt}
               width={img.width}
               height={img.height}
-              className="rounded-lg lg:hidden lg:w-1/2"
+              style={{ objectFit: "contain" }}
+              className="max-h-[480px] w-fit rounded-md lg:hidden"
             />
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
               <div className="flex items-center gap-4">
-                <MessageSquareQuote className="text-secondary h-10 w-10" />
+                <MessageSquareText className="text-secondary h-10 w-10" />
                 <H2>{reviewBlurb}</H2>
               </div>
               <div className="flex flex-col gap-2">
@@ -119,22 +159,31 @@ function ReviewSection({
                 </p>
               </div>
             </div>
-            <Image
-              src={img.src}
-              alt={img.alt}
-              width={img.width}
-              height={img.height}
-              className="hidden rounded-lg lg:block lg:w-1/2"
-            />
+            <div className="hidden w-fit lg:flex lg:w-1/2 lg:justify-center">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                style={{ objectFit: "contain" }}
+                className="max-h-[480px] w-fit rounded-md"
+              />
+            </div>
           </section>
+          {user?.role === Role.ADMIN && (
+            <AdminManageReviewActions
+              reviewId={reviewId}
+              reviewerName={reviewerName}
+            />
+          )}
         </Container>
       );
     }
   } else {
     return (
-      <Container className={cn("py-16", bgColor)}>
-        <Card className="flex w-full flex-col gap-4 p-8">
-          <div className="flex w-full flex-col gap-6 lg:w-1/2">
+      <Container className={cn("flex justify-center py-16", bgColor)}>
+        <Card className="flex w-full max-w-4xl flex-col gap-4 p-8">
+          <div className="flex w-full flex-col gap-6">
             <div className="flex items-center gap-4">
               <MessageSquareQuote className="text-secondary h-10 w-10" />
               <H2>{reviewBlurb}</H2>
@@ -153,5 +202,3 @@ function ReviewSection({
     );
   }
 }
-
-export default ReviewSection;

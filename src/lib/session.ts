@@ -8,10 +8,10 @@ export async function getCurrentUser(): Promise<User | undefined> {
   const session = await getServerSession(authOptions);
   const userFromNextAuth = session?.user;
 
-  if (userFromNextAuth) {
+  if (userFromNextAuth && userFromNextAuth.email) {
     const userFromDb = await db.user.findFirst({
       where: {
-        email: userFromNextAuth.email ?? undefined,
+        email: userFromNextAuth.email,
       },
     });
 

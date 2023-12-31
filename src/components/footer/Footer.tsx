@@ -31,7 +31,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
                 className="hidden h-6 sm:block"
               />
               <a
-                className="hover:text-input font-medium transition-colors"
+                className="hover:text-muted-foreground font-medium transition-colors"
                 href="tel:+1781-266-8116"
               >
                 (781) 266-8116

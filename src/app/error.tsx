@@ -19,7 +19,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-center gap-4 text-center">
+    <main className="flex min-h-screen w-full flex-col items-center justify-center gap-8 text-center">
       <H1>Something went wrong!</H1>
       <Button
         onClick={() => reset()}

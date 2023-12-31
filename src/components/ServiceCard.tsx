@@ -4,7 +4,7 @@ import { Separator } from "@components/ui/separator";
 
 export default function ServiceCard({ info }: { info: ServiceCardInfo }) {
   return (
-    <Card className="border-border flex flex-col gap-4 border">
+    <Card className="dark:shadow-tertiary flex flex-col gap-4 border-none shadow-xl">
       <div className="flex flex-col gap-2">
         <CardHeader className="flex gap-4">
           {info.icon}

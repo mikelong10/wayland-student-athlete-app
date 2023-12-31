@@ -73,6 +73,32 @@ model User {
   @@map("users")
 }
 
+model StudentAthleteProfile {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now()) @map(name: "created_at")
+  updatedAt      DateTime @updatedAt @map(name: "updated_at")
+  name           String
+  slug           String
+  title          String
+  graduationYear Int      @map(name: "graduation_year")
+  displayImage   String   @map(name: "display_image")
+  resume         StudentAthleteResumeItem[]
+
+  @@map("student_athlete_profiles")
+}
+
+model StudentAthleteResumeItem {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now()) @map(name: "created_at")
+  updatedAt      DateTime @updatedAt @map(name: "updated_at")
+  text           String
+  studentAthlete StudentAthleteProfile @relation(fields: [studentAthleteId], references: [id])
+  studentAthleteId String @map(name: "student_athlete_id")
+
+  @@index([studentAthleteId])
+  @@map("student_athlete_resume_items")
+}
+
 model Job {
   id             String   @id @default(cuid())
   status         Status   @default(TODO)
@@ -101,11 +127,11 @@ model Job {
 
 model JobAssignment {
   job        Job      @relation(fields: [jobId], references: [id])
-  jobId      String
+  jobId      String   @map(name: "job_id")
   user       User     @relation(fields: [userId], references: [id])
-  userId     String
-  assignedAt DateTime @default(now())
-  assignedBy String
+  userId     String   @map(name: "user_id")
+  assignedAt DateTime @default(now()) @map(name: "assigned_at")
+  assignedBy String   @map(name: "assigned_by")
 
   @@id([jobId, userId])
   @@index([jobId])
@@ -121,7 +147,7 @@ model JobReview {
   reviewBlurb  String   @map(name: "review_blurb")
   reviewText   String   @map(name: "review_text") @db.Text
   reviewImages Image[]  @relation(name: "review_images")
-  order        Int      @unique @default(autoincrement())
+  order        Int      
 
   @@map("job_reviews")
 }
@@ -130,10 +156,10 @@ model Image {
   id          String    @id @default(cuid())
   uploadedAt  DateTime  @default(now()) @map(name: "uploaded_at")
   updatedAt   DateTime  @updatedAt @map(name: "updated_at")
-  src         String
+  src         String    @unique
   alt         String
-  width       Int
-  height      Int
+  width       Int       @default(800)
+  height      Int       @default(800)
   jobReview   JobReview @relation(name: "review_images", fields: [jobReviewId], references: [id])
   jobReviewId String    @map(name: "job_review_id")
 
