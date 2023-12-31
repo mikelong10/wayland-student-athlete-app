@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Role } from "@prisma/client";
 import { Pencil } from "lucide-react";
 
 import { db } from "@lib/db";
+import { getCurrentUser } from "@lib/session";
 import { AdminActions } from "@components/AdminActions";
 import Container from "@components/Container";
 import H2 from "@components/typography/h2";
@@ -16,6 +18,8 @@ export default async function StudentAthletePage({
 }: {
   params: { slug: string };
 }) {
+  const user = await getCurrentUser();
+
   const studentAthlete = await db.studentAthleteProfile.findFirst({
     where: {
       slug: params.slug,
@@ -103,20 +107,24 @@ export default async function StudentAthletePage({
           <ul className="flex list-disc flex-col gap-1 pl-4">{resumeItems}</ul>
         </div>
       </div>
-      <AdminActions
-        title="Manage profile"
-        className="bg-accent mt-10 w-[256px]"
-      >
-        <div className="flex w-full items-center justify-center gap-4">
-          <Button asChild variant={"traced"}>
-            <Link href={`/who/${params.slug}/edit`} className="flex gap-3">
-              <Pencil className="text-secondary h-5 w-5" />
-              Edit
-            </Link>
-          </Button>
-          <DeleteStudentAthleteProfileDialog studentAthlete={studentAthlete} />
-        </div>
-      </AdminActions>
+      {user?.role === Role.ADMIN && (
+        <AdminActions
+          title="Manage profile"
+          className="bg-accent mt-10 w-[256px]"
+        >
+          <div className="flex w-full items-center justify-center gap-4">
+            <Button asChild variant={"traced"}>
+              <Link href={`/who/${params.slug}/edit`} className="flex gap-3">
+                <Pencil className="text-secondary h-5 w-5" />
+                Edit
+              </Link>
+            </Button>
+            <DeleteStudentAthleteProfileDialog
+              studentAthlete={studentAthlete}
+            />
+          </div>
+        </AdminActions>
+      )}
     </Container>
   );
 }

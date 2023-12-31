@@ -66,7 +66,7 @@ export default function WhatWeDoPage() {
             <BookMarked className="text-tertiary -ml-1 h-12 w-10 sm:h-14 sm:w-12 lg:h-16 lg:w-14" />
             <H1 className="text-background">Our Story</H1>
           </div>
-          <Separator className="bg-tertiary" />
+          <Separator className="bg-tertiary mb-4" />
           <CardContent>
             <div className="flex flex-col-reverse items-center gap-4 lg:flex-row lg:gap-8">
               <div className="flex flex-col gap-2">

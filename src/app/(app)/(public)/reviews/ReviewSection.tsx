@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Image as ReviewImage } from "@prisma/client";
+import { Image as ReviewImage, Role, User } from "@prisma/client";
 import {
   MessageSquareHeart,
   MessageSquareMore,
@@ -14,7 +14,8 @@ import H2 from "@components/typography/h2";
 import { Card } from "@components/ui/card";
 import AdminManageReviewActions from "./AdminManageReviewActions";
 
-function ReviewSection({
+export default function ReviewSection({
+  user,
   reviewId,
   images,
   reviewBlurb,
@@ -23,6 +24,7 @@ function ReviewSection({
   variant,
   bgColor,
 }: {
+  user: User | undefined;
   reviewId: string;
   images: ReviewImage[];
   reviewBlurb: string;
@@ -74,10 +76,12 @@ function ReviewSection({
             </div>
           }
         />
-        <AdminManageReviewActions
-          reviewId={reviewId}
-          reviewerName={reviewerName}
-        />
+        {user?.role === Role.ADMIN && (
+          <AdminManageReviewActions
+            reviewId={reviewId}
+            reviewerName={reviewerName}
+          />
+        )}
       </Container>
     );
   } else if (images.length === 1) {
@@ -116,10 +120,12 @@ function ReviewSection({
               </div>
             </div>
           </section>
-          <AdminManageReviewActions
-            reviewId={reviewId}
-            reviewerName={reviewerName}
-          />
+          {user?.role === Role.ADMIN && (
+            <AdminManageReviewActions
+              reviewId={reviewId}
+              reviewerName={reviewerName}
+            />
+          )}
         </Container>
       );
     } else {
@@ -164,10 +170,12 @@ function ReviewSection({
               />
             </div>
           </section>
-          <AdminManageReviewActions
-            reviewId={reviewId}
-            reviewerName={reviewerName}
-          />
+          {user?.role === Role.ADMIN && (
+            <AdminManageReviewActions
+              reviewId={reviewId}
+              reviewerName={reviewerName}
+            />
+          )}
         </Container>
       );
     }
@@ -194,5 +202,3 @@ function ReviewSection({
     );
   }
 }
-
-export default ReviewSection;

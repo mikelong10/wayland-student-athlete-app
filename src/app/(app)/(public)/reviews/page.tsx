@@ -64,6 +64,7 @@ export default async function ReviewsPage() {
           return (
             <ReviewSection
               key={review.id}
+              user={user}
               reviewId={review.id}
               images={review.reviewImages}
               reviewBlurb={review.reviewBlurb}
@@ -83,6 +84,7 @@ export default async function ReviewsPage() {
           return (
             <MultiReviewCarousel
               key={reviews[0].order}
+              user={user}
               reviews={reviews}
               bgColor={
                 idx % 3 === 0

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Role, User } from "@prisma/client";
 import { Quote } from "lucide-react";
 
 import { cn } from "@lib/utils";
@@ -18,9 +19,11 @@ import AdminManageReviewActions from "./AdminManageReviewActions";
 import { JobReviewWithImages } from "./page";
 
 export default function MultiReviewCarousel({
+  user,
   reviews,
   bgColor,
 }: {
+  user: User | undefined;
   reviews: JobReviewWithImages[];
   bgColor: string;
 }) {
@@ -75,10 +78,12 @@ export default function MultiReviewCarousel({
                   </CardFooter>
                 </Card>
               </div>
-              <AdminManageReviewActions
-                reviewId={review.id}
-                reviewerName={review.reviewerName}
-              />
+              {user?.role === Role.ADMIN && (
+                <AdminManageReviewActions
+                  reviewId={review.id}
+                  reviewerName={review.reviewerName}
+                />
+              )}
             </CarouselItem>
           ))}
         </CarouselContent>
