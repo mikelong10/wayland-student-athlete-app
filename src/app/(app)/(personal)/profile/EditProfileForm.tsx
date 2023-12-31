@@ -28,6 +28,7 @@ export default function EditProfileForm({ user }: { user: User }) {
               variant: "destructive",
             });
           }}
+          className="ut-button:rounded-full ut-button:w-fit ut-button:h-fit ut-button:mb-1 ut-button:bg-accent ut-button:text-accent-foreground ut-button:hover:opacity-70 ut-button:transition-all ut-button:focus-within:ring-ring ut-button:after:bg-tertiary ut-allowed-content:text-sm ut-upload-icon:bg-accent h-full w-full"
           content={{
             button() {
               return (
@@ -46,7 +47,6 @@ export default function EditProfileForm({ user }: { user: User }) {
               return <p className="text-muted-foreground">Choose image</p>;
             },
           }}
-          className="ut-button:rounded-full ut-button:w-fit ut-button:h-fit ut-button:mb-1 ut-button:bg-accent ut-button:text-accent-foreground ut-button:hover:opacity-70 ut-button:transition-all ut-button:focus-within:ring-ring ut-button:after:bg-primary ut-allowed-content:text-sm ut-upload-icon:bg-accent h-full w-full"
         />
       </div>
       <div className="flex flex-col gap-4">

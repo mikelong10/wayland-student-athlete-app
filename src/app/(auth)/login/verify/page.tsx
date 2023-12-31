@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+import { Mailbox } from "lucide-react";
 
 import { getCurrentUser } from "@lib/session";
 import Container from "@components/Container";
@@ -23,11 +24,14 @@ export default async function VerifyEmailPage() {
   }
 
   return (
-    <Container className="bg-accent flex min-h-screen w-full flex-col items-center justify-center pb-12 pt-32">
+    <Container className="bg-accent flex min-h-screen w-full flex-col items-center justify-center py-32">
       <div className="sm:w-7/8 flex flex-col gap-6 md:w-3/4 lg:w-2/3 xl:w-1/2">
-        <Card className="shadow-tertiary flex flex-col gap-4 border-none shadow-2xl">
-          <CardHeader className="flex flex-col gap-2 text-center">
-            <CardTitle className="text-2xl sm:text-3xl">
+        <Card className="dark:shadow-tertiary flex flex-col gap-4 rounded-2xl border-none p-10 shadow-2xl">
+          <CardHeader className="flex flex-col items-center gap-2 text-center">
+            <div className="bg-success h-12 w-12 rounded-full p-3">
+              <Mailbox color="white" />
+            </div>
+            <CardTitle className="text-2xl sm:text-3xl md:text-4xl">
               Check your email
             </CardTitle>
             <CardDescription className="text-muted-foreground text-xl font-semibold">
@@ -51,7 +55,7 @@ export default async function VerifyEmailPage() {
           </CardContent>
           <CardFooter className="flex justify-center">
             <Link href={"/login"}>
-              <Button variant={"accent"}>Back to login</Button>
+              <Button variant={"traced"}>Back to login</Button>
             </Link>
           </CardFooter>
         </Card>
