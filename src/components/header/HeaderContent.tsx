@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,8 +8,8 @@ import { VariantProps } from "class-variance-authority";
 
 import { cn } from "@lib/utils";
 import Container from "@components/Container";
+import { WSALogo } from "@components/icons";
 import { buttonVariants } from "@components/ui/button";
-import logo from "../../../public/logo.png";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
@@ -85,8 +84,9 @@ export default function HeaderContent({ user }: { user?: User }) {
       )}
     >
       <header className="flex items-center justify-between gap-4 lg:gap-8">
-        <Link href={"/"} className="hover:animate-pulse">
-          <Image src={logo} alt={"WSA logo"} width={48} height={48} />
+        <Link href={"/"} className="flex h-full hover:animate-pulse">
+          <WSALogo className="h-12 w-12" />
+          {/* <Image src={logo} alt={"WSA logo"} width={64} height={64} /> */}
         </Link>
         <MobileNav user={user} links={headerNavLinks} />
         <DesktopNav user={user} links={headerNavLinks} />

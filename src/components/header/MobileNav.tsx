@@ -1,14 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu } from "lucide-react";
 
+import { WSALogo } from "@components/icons";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
-import logo from "../../../public/logo.png";
 import { NavProps } from "./HeaderContent";
 import UserAccountNav from "./UserAccountNav";
 
@@ -29,7 +28,7 @@ export default function MobileNav({ user, links }: NavProps) {
             className="hover:animate-pulse"
             onClick={() => setNavOpen(false)}
           >
-            <Image src={logo} alt={"WSA logo"} width={40} height={40} />
+            <WSALogo className="h-12 w-12" />
           </Link>
         </div>
         <Separator />
