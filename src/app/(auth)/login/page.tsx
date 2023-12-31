@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
@@ -7,8 +6,8 @@ import { ChevronLeft } from "lucide-react";
 import { getCurrentUser } from "@lib/session";
 import { UserAuthForm } from "@components/auth/UserAuthForm";
 import Container from "@components/Container";
+import { WSALogo } from "@components/icons";
 import { Button } from "@components/ui/button";
-import logo from "../../../../public/logo.png";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -23,7 +22,7 @@ export default async function LoginPage() {
   }
 
   return (
-    <Container className="from-tertiary to-background dark:to-background flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-bl to-70% pb-12 pt-32">
+    <Container className="from-tertiary to-background dark:to-background flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-bl to-70% py-12">
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
         <Button variant={"ghost"} className="flex items-center gap-2 px-4">
           <ChevronLeft className="h-4 w-4" />
@@ -34,7 +33,7 @@ export default async function LoginPage() {
         <div className="flex w-full flex-col space-y-2 text-center">
           <div className="flex justify-center">
             <Link href={"/"} className="hover:animate-pulse">
-              <Image src={logo} alt={"WSA logo"} width={40} height={40} />
+              <WSALogo className="h-12 w-12" />
             </Link>
           </div>
           <p className="text-2xl font-bold tracking-tight">
