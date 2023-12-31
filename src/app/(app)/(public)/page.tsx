@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { ArrowDown, HeartHandshake, MoveRight } from "lucide-react";
+import { ArrowDown, HeartHandshake, MoveRight, Sparkles } from "lucide-react";
 
 import Container from "@components/Container";
 import HomePageReviewCarousel from "@components/HomePageReviewCarousel";
 import ServicesContent from "@components/ServicesContent";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
+import { Badge } from "@components/ui/badge";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
@@ -18,6 +19,15 @@ export default function Home() {
         className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-10 bg-gradient-to-tl to-50% lg:items-center"
       >
         <div className="flex w-full flex-col gap-4 lg:items-center">
+          <Badge className=" bg-accent text-accent-foreground h-auto w-fit px-4 py-1 hover:opacity-100">
+            <div className="flex items-center gap-3 font-semibold tracking-tight">
+              <p>🎉</p>
+              <p className="w-fit">
+                {"We've updated our website. Enjoy the new experience!"}
+              </p>
+              <Sparkles className="text-primary h-5 w-5" />
+            </div>
+          </Badge>
           <div className="xs:hidden">
             <H1>Wayland</H1>
             <H1>Student-Athlete</H1>
