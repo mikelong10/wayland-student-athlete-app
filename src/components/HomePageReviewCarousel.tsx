@@ -43,14 +43,15 @@ const reviewCarouselComponents = reviewCarouselItems.map((item) => ({
   content: <ReviewCarouselItem review={item} />,
 }));
 
-export default function ReviewCarousel() {
+export default function HomePageReviewCarousel() {
   return (
     <Carousel
+      className="dark:shadow-tertiary border-none shadow-xl md:p-10 lg:p-12"
       header={<Quote className="text-secondary h-10 w-10" />}
       items={reviewCarouselComponents}
       footer={
         <Link href="/reviews" className="w-full">
-          <Button variant={"secondary"} className="w-full">
+          <Button variant={"accent"} className="w-full">
             Read more reviews
           </Button>
         </Link>

@@ -17,7 +17,7 @@ import {
 import AdminManageReviewActions from "./AdminManageReviewActions";
 import { JobReviewWithImages } from "./page";
 
-function MultiReviewCarousel({
+export default function MultiReviewCarousel({
   reviews,
   bgColor,
 }: {
@@ -88,5 +88,3 @@ function MultiReviewCarousel({
     </Container>
   );
 }
-
-export default MultiReviewCarousel;

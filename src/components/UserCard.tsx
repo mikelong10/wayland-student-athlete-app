@@ -40,7 +40,7 @@ export default function UserCard({ user }: UserCardProps) {
             {user.name}
           </div>
         </CardTitle>
-        <CardDescription className="border-l-2 pl-2 text-sm">
+        <CardDescription className="border-border border-l-2 pl-2 text-sm">
           {user.email}
         </CardDescription>
       </CardHeader>
