@@ -23,7 +23,9 @@ export default function Home() {
             <div className="flex items-center gap-3 font-semibold tracking-tight">
               <p>🎉</p>
               <p className="w-fit">
-                {"We've updated our website. Enjoy the new experience!"}
+                {
+                  "We've updated our website. Log in and enjoy the new experience!"
+                }
               </p>
               <Sparkles className="text-foreground xs:h-5 xs:w-5 h-6 w-6" />
             </div>
