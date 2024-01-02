@@ -46,7 +46,7 @@ const reviewCarouselComponents = reviewCarouselItems.map((item) => ({
 export default function HomePageReviewCarousel() {
   return (
     <Carousel
-      className="dark:shadow-tertiary border-none shadow-xl md:p-10 lg:p-12"
+      className="dark:shadow-tertiary border-none shadow-2xl md:p-10 lg:p-12"
       header={<Quote className="text-secondary h-10 w-10" />}
       items={reviewCarouselComponents}
       footer={

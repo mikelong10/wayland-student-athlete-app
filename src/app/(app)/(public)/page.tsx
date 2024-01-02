@@ -16,7 +16,7 @@ export default function Home() {
     <main className="flex w-full flex-col items-center justify-center">
       <Container
         id="landing-home"
-        className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-10 bg-gradient-to-tl to-50% lg:items-center"
+        className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-10 bg-gradient-to-tl to-50% py-10 lg:items-center"
       >
         <div className="flex w-full flex-col gap-4 lg:items-center">
           <Badge className=" bg-accent text-accent-foreground h-auto w-fit px-3 py-1 hover:opacity-100">
@@ -62,11 +62,11 @@ export default function Home() {
           </div>
         </div>
       </Container>
-      <Container className="from-tertiary to-background relative flex w-full flex-col items-center justify-start gap-24 bg-gradient-to-bl to-50%">
+      <Container className="from-tertiary to-background relative flex w-full flex-col items-center justify-start gap-24 bg-gradient-to-bl to-50% py-10">
         <div id="landing-what-we-do" className="absolute -top-28" />
         <ServicesContent />
       </Container>
-      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-tr to-50% pt-20">
+      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-tr to-50% py-20">
         <div className="flex w-full flex-col items-center justify-center gap-32">
           <div className="mt-8 flex w-full flex-col justify-center gap-8 sm:flex-row sm:gap-8 md:gap-16 lg:gap-24">
             <div className="flex flex-col items-center gap-2 text-center">
@@ -95,10 +95,10 @@ export default function Home() {
           </div>
         </div>
       </Container>
-      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-8 bg-gradient-to-br to-50% py-32">
+      <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-8 bg-gradient-to-br to-50% pb-32 pt-16">
         <Card
           className={
-            "bg-secondary xs:p-10 flex w-fit flex-col items-center gap-2 border-none p-8 text-center md:p-12 lg:p-14 xl:p-16"
+            "bg-secondary xs:p-10 flex w-fit flex-col items-center gap-2 border-none p-8 text-center shadow-2xl md:p-12 lg:p-14 xl:p-16"
           }
         >
           <div className="flex flex-col items-center gap-2">
