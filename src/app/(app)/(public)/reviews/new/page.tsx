@@ -1,12 +1,18 @@
+import { notFound } from "next/navigation";
+import { Role } from "@prisma/client";
+
 import { getReviews } from "@lib/data";
+import { getCurrentUser } from "@lib/session";
 import { JobReviewWithImages } from "../page";
 import AddReviewForm from "./AddReviewForm";
 
-export const metadata = {
-  title: "Request a job",
-};
-
 export default async function AddReviewPage() {
+  const user = await getCurrentUser();
+
+  if (user?.role !== Role.ADMIN) {
+    notFound();
+  }
+
   const groupedReviewsArray = (await getReviews(
     true
   )) as JobReviewWithImages[][];

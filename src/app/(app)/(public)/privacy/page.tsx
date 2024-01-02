@@ -5,7 +5,9 @@ import H2 from "@components/typography/h2";
 import { Card, CardContent } from "@components/ui/card";
 
 export const metadata = {
-  title: "Privacy Policy",
+  title: "Privacy Policy | Wayland Student-Athlete",
+  description:
+    "Learn about how we manage and respect your personal information.",
 };
 
 const privacyPolicyData = [
@@ -39,12 +41,6 @@ const privacyPolicyData = [
     ],
   },
   {
-    title: "Cookies and Tracking Technologies",
-    information: [
-      "We use cookies and similar tracking technologies to enhance your experience on our website. You can adjust your browser settings to disable cookies, but this may affect the functionality of the site.",
-    ],
-  },
-  {
     title: "Third-Party Links",
     information: [
       "Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these sites.",
@@ -64,7 +60,7 @@ const privacyPolicyData = [
   },
 ];
 
-export default function PrivacyPolicy() {
+export default function PrivacyPolicyPage() {
   return (
     <Container className="flex min-h-screen w-full flex-col justify-center gap-6 pb-12 pt-32 md:w-5/6 xl:w-4/6">
       <div className="flex flex-col gap-1">

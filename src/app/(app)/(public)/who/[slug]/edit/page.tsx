@@ -1,17 +1,21 @@
 import { notFound } from "next/navigation";
+import { Role } from "@prisma/client";
 
 import { db } from "@lib/db";
+import { getCurrentUser } from "@lib/session";
 import EditStudentAthleteProfileForm from "./EditStudentAthleteProfileForm";
 
-export const metadata = {
-  title: "Edit Student-Athlete Profile",
-};
-
-export default async function AddReviewPage({
+export default async function EditStudentAthleteProfilePage({
   params,
 }: {
   params: { slug: string };
 }) {
+  const user = await getCurrentUser();
+
+  if (user?.role !== Role.ADMIN) {
+    notFound();
+  }
+
   const studentAthlete = await db.studentAthleteProfile.findFirst({
     where: {
       slug: params.slug,

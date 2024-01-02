@@ -1,6 +1,8 @@
+import { notFound } from "next/navigation";
 import { Role } from "@prisma/client";
 
 import { db } from "@lib/db";
+import { getCurrentUser } from "@lib/session";
 import BusinessJobCard from "@components/BusinessJobCard";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
@@ -8,11 +10,17 @@ import { Separator } from "@components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
 export const metadata = {
-  title: "Jobs Dashboard",
+  title: "Jobs Dashboard | Wayland Student-Athlete",
   description: "Manage job statuses and assignees.",
 };
 
 export default async function JobDashboard() {
+  const user = await getCurrentUser();
+
+  if (!(user?.role === Role.ADMIN || user?.role === Role.STUDENTATHLETE)) {
+    notFound();
+  }
+
   const allStudentAthletes = await db.user.findMany({
     where: {
       OR: [

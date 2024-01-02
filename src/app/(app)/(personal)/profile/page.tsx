@@ -4,8 +4,8 @@ import { getCurrentUser } from "@lib/session";
 import ProfilePageContent from "./ProfilePageContent";
 
 export const metadata = {
-  title: "Profile",
-  description: "View and manage your profile.",
+  title: "My Profile | Wayland Student-Athlete",
+  description: "View and manage your WSA account information.",
 };
 
 export default async function ProfilePage() {

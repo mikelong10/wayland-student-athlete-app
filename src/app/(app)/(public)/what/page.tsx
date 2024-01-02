@@ -11,7 +11,8 @@ import whs from "../../../../../public/whs.jpg";
 import wooHigh from "../../../../../public/woo-high-l.jpg";
 
 export const metadata = {
-  title: "What we do",
+  title: "What We Do | Wayland Student-Athlete",
+  description: "Learn about our mission and story of how we got started.",
 };
 
 export default function WhatWeDoPage() {

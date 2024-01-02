@@ -1,19 +1,23 @@
 import { notFound } from "next/navigation";
+import { Role } from "@prisma/client";
 
 import { getReviews } from "@lib/data";
 import { db } from "@lib/db";
+import { getCurrentUser } from "@lib/session";
 import { JobReviewWithImages } from "../../page";
 import EditReviewForm from "./EditReviewForm";
-
-export const metadata = {
-  title: "Edit Review",
-};
 
 export default async function EditReviewPage({
   params,
 }: {
   params: { id: string };
 }) {
+  const user = await getCurrentUser();
+
+  if (user?.role !== Role.ADMIN) {
+    notFound();
+  }
+
   const review = await db.jobReview.findFirst({
     where: {
       id: params.id,

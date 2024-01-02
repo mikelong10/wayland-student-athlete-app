@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 
 import "@styles/globals.css";
@@ -8,9 +7,11 @@ import { cn } from "@lib/utils";
 import { ThemeProvider } from "@components/ThemeProvider";
 import { Toaster } from "@components/ui/toaster";
 
-export const metadata: Metadata = {
-  title: "Wayland Student-Athlete",
-  description: "Simple, trustworthy, quality solutions for all your odd jobs.",
+export const metadata = {
+  title:
+    "Wayland Student-Athlete | Simple, trustworthy, quality solutions for all your odd jobs",
+  description:
+    "Let us know what tasks you don't have time and energy for. We'll take care of it.",
 };
 
 export default function RootLayout({
