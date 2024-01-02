@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Role } from "@prisma/client";
 
 import { db } from "@lib/db";
@@ -10,17 +10,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import UserCard from "@components/UserCard";
 
 export const metadata = {
-  title: "Manage users",
+  title: "Admin Panel | Wayland Student-Athlete",
   description: "Manage user roles and permissions.",
 };
 
 export default async function AdminDashboard() {
   const user = await getCurrentUser();
 
-  if (!user) {
-    redirect("/login");
-  }
-  if (user.role !== Role.ADMIN) {
+  if (user?.role !== Role.ADMIN) {
     notFound();
   }
 

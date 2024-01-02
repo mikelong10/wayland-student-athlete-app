@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
@@ -8,11 +7,6 @@ import { UserAuthForm } from "@components/auth/UserAuthForm";
 import Container from "@components/Container";
 import { WSALogo } from "@components/icons";
 import { Button } from "@components/ui/button";
-
-export const metadata: Metadata = {
-  title: "Login",
-  description: "Login to your account",
-};
 
 export default async function LoginPage() {
   const user = await getCurrentUser();

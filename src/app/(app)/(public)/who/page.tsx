@@ -12,7 +12,9 @@ import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
 
 export const metadata = {
-  title: "Who we are",
+  title: "Who We Are | Wayland Student-Athlete",
+  description:
+    "Meet the phenomenal team of Student-Athletes providing you with the best service possible.",
 };
 
 const StudentAthleteCard = ({

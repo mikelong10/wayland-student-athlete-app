@@ -4,7 +4,8 @@ import H2 from "@components/typography/h2";
 import { Card, CardContent } from "@components/ui/card";
 
 export const metadata = {
-  title: "Terms of Service",
+  title: "Terms & Conditions | Wayland Student-Athlete",
+  description: "Learn about our terms and conditions of service.",
 };
 
 const terms = [
@@ -50,7 +51,7 @@ const terms = [
   },
 ];
 
-export default function PrivacyPolicy() {
+export default function TermsAndConditionsPage() {
   return (
     <Container className="flex min-h-screen w-full flex-col justify-center gap-6 pb-12 pt-32 md:w-5/6 xl:w-4/6">
       <div className="flex flex-col gap-1">

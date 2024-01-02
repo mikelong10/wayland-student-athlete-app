@@ -12,8 +12,8 @@ import { Separator } from "@components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
 export const metadata = {
-  title: "My Jobs",
-  description: "View the jobs you've requested with us.",
+  title: "My Jobs | Wayland Student-Athlete",
+  description: "View and track the jobs you've requested with us.",
 };
 
 export default async function MyJobs() {
@@ -158,10 +158,7 @@ export default async function MyJobs() {
                 ) : (
                   <div className="flex w-full items-center justify-center">
                     <Link href="/request">
-                      <Button
-                        variant={"accent"}
-                        className="flex w-40 items-center gap-2"
-                      >
+                      <Button className="mt-4 flex items-center gap-2">
                         Request a job
                         <MoveRight />
                       </Button>

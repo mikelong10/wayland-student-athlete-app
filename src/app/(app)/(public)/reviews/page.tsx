@@ -13,8 +13,9 @@ import MultiReviewCarousel from "./MultiReviewCarousel";
 import ReviewSection from "./ReviewSection";
 
 export const metadata = {
-  title: "Reviews",
-  description: "Hear what others are saying",
+  title: "Reviews | Wayland Student-Athlete",
+  description:
+    "We've built up a strong reputation over the years with our hard work and friendly service. Hear what others are saying about WSA and how we can help you!",
 };
 
 export type JobReviewWithImages = JobReview & {
