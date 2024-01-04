@@ -16,7 +16,7 @@ export default function RequestPageContent({ user }: { user?: User }) {
 
   if (requestSent) {
     return (
-      <Container className="flex h-full min-h-screen w-full flex-col items-center justify-center gap-4 pb-12 pt-32 sm:max-w-[768px] lg:max-w-[960px]">
+      <Container className="flex h-full min-h-screen w-full flex-col items-center justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] lg:max-w-[960px]">
         <div className="bg-success h-12 w-12 rounded-full p-3">
           <MailCheck color="white" />
         </div>
@@ -53,10 +53,10 @@ export default function RequestPageContent({ user }: { user?: User }) {
   }
 
   return (
-    <Container className="flex h-full min-h-screen w-full flex-col justify-center gap-4 pb-12 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
+    <Container className="flex h-full min-h-screen w-full flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
       <H1 className="w-full text-left">Request a Job</H1>
       <Separator />
-      <RequestJobForm setRequestSent={setRequestSent} />
+      <RequestJobForm user={user} setRequestSent={setRequestSent} />
     </Container>
   );
 }

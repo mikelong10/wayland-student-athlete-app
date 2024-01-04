@@ -2,11 +2,12 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { requestJobFormSchema, RequestJobFormValues } from "@lib/schemas";
-import { cn, scrollToTop } from "@lib/utils";
+import { cn, formatPhoneNumberForClient, scrollToTop } from "@lib/utils";
 import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
 import {
@@ -23,29 +24,39 @@ import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
 
 export default function RequestJobForm({
+  user,
   setRequestSent,
 }: {
+  user?: User;
   setRequestSent: Dispatch<SetStateAction<boolean>>;
 }) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [firstName, lastName] =
+    user && user.name ? user.name.split(" ", 2) : ["", ""];
+  const defaultValues = {
+    adultFirstName: firstName,
+    adultLastName: lastName,
+    childFirstName: "",
+    childLastName: "",
+    description: "",
+    location: "",
+    time: "",
+    estimate: "",
+    contact: user
+      ? user.phone
+        ? formatPhoneNumberForClient(user.phone)
+        : user.email ?? ""
+      : "",
+    learn: "",
+    special: "",
+    signature: "",
+  };
+
   const form = useForm<RequestJobFormValues>({
     resolver: zodResolver(requestJobFormSchema),
-    defaultValues: {
-      adultFirstName: "",
-      adultLastName: "",
-      childFirstName: "",
-      childLastName: "",
-      description: "",
-      location: "",
-      time: "",
-      estimate: "",
-      contact: "",
-      learn: "",
-      special: "",
-      signature: "",
-    },
+    defaultValues: defaultValues,
   });
 
   async function onSubmit(values: RequestJobFormValues) {
@@ -345,7 +356,7 @@ export default function RequestJobForm({
           type="submit"
           size={"lg"}
           className={cn(
-            "mt-4 rounded-full text-lg",
+            "rounded-full text-lg",
             isSubmitting ? "opacity-80" : ""
           )}
         >
