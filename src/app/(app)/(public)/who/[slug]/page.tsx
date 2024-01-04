@@ -38,7 +38,7 @@ export default async function StudentAthletePage({
   ));
 
   return (
-    <Container className="flex min-h-screen flex-col items-center justify-center pb-12 pt-32">
+    <Container className="flex min-h-screen flex-col items-center justify-center pb-20 pt-32">
       {/* small */}
       <div className="flex flex-col gap-4 sm:hidden">
         <div className="flex w-full justify-center">

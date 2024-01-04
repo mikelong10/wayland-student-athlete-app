@@ -19,7 +19,7 @@ export default function WhatWeDoPage() {
   return (
     <>
       <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col items-center">
-        <div className="flex h-screen w-full flex-col pb-12 pt-32">
+        <div className="flex h-screen w-full flex-col pb-20 pt-32">
           <div className="relative h-screen w-full">
             <Card className="xs:w-4/5 dark:shadow-tertiary xs:bottom-4 absolute bottom-0 left-0 z-10 flex min-w-[320px] flex-col gap-4 border-none p-6 shadow-2xl sm:bottom-8 sm:w-3/5 sm:min-w-[400px] sm:p-8 md:bottom-12 md:w-2/5 md:min-w-[480px] md:p-10 lg:bottom-16 lg:min-w-[560px] lg:p-12 xl:bottom-20">
               <H1>Our Mission</H1>

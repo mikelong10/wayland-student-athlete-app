@@ -137,7 +137,7 @@ export default function EditStudentAthleteProfileForm({
   }
 
   return (
-    <Container className="flex h-full min-h-screen w-full flex-col justify-center gap-4 pb-12 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
+    <Container className="flex h-full min-h-screen w-full flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
       <H1 className="w-full text-left">{`Edit ${firstName}'s Profile`}</H1>
       <Separator />
       <Form {...form}>
