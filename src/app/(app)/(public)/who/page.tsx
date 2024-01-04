@@ -54,7 +54,7 @@ export default async function WhoWeArePage() {
   const studentAthleteProfiles = await db.studentAthleteProfile.findMany();
 
   return (
-    <Container className="flex h-full min-h-screen w-full flex-col items-center justify-center pb-12 pt-32">
+    <Container className="flex h-full min-h-screen w-full flex-col items-center justify-center pb-20 pt-32">
       <div className="xs:w-[416px] flex w-[312px] flex-col gap-6 sm:w-[544px] md:w-[640px] lg:w-[832px] xl:w-[1024px] 2xl:w-[1144px]">
         <div className="flex flex-col gap-4">
           <H1>Our People</H1>
