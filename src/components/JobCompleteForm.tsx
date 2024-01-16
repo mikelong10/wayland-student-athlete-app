@@ -83,7 +83,7 @@ export default function JobCompleteForm({
         title: "Data successfully sent to Google Sheet!",
         variant: "success",
       });
-    } catch {
+    } catch (error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description:

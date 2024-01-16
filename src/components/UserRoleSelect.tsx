@@ -61,7 +61,7 @@ export default function UserRoleSelect({ user }: { user: User }) {
         });
 
         router.refresh();
-      } catch {
+      } catch (error) {
         toast({
           title: "Uh oh! Something went wrong.",
           description:

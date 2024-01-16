@@ -48,7 +48,7 @@ export default function JobStatusSelect({ job }: { job: Job }) {
         });
 
         router.refresh();
-      } catch {
+      } catch (error) {
         toast({
           title: "Uh oh! Something went wrong.",
           description:

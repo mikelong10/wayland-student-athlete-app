@@ -72,7 +72,7 @@ export default function EditUserNameForm({ user }: { user: User }) {
       });
 
       setActiveUser(updatedUser);
-    } catch {
+    } catch (error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description:

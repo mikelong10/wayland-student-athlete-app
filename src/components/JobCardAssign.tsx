@@ -73,7 +73,7 @@ export default function JobCardAssign({
         title: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}!`,
         variant: "success",
       });
-    } catch {
+    } catch (error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "Please try again.",
@@ -108,7 +108,7 @@ export default function JobCardAssign({
         title: `Successfully unassigned ${unassignee?.name} from ${job.adultFirstName} ${job.adultLastName}'s job!`,
         variant: "success",
       });
-    } catch {
+    } catch (error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "Please try again.",

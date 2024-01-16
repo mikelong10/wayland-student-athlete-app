@@ -106,7 +106,7 @@ export default function EditReviewForm({
 
       router.push("/reviews");
       router.refresh();
-    } catch {
+    } catch (error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request. Please try again.",

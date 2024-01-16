@@ -93,7 +93,7 @@ export default function RequestJobForm({
 
       scrollToTop();
       setRequestSent(true);
-    } catch {
+    } catch (error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request. Please try again.",
