@@ -50,7 +50,7 @@ export default function WhatWeDoPage() {
                 </Link>
               </CardFooter>
             </Card>
-            <div className="xs:top-4 absolute -top-4 left-[10%] sm:left-[30%] sm:top-8 md:top-12">
+            <div className="xs:-top-2 absolute -top-4 left-[10%] sm:left-[30%] sm:top-0">
               <Image
                 src={whs}
                 alt={"Wayland High School"}
@@ -61,7 +61,7 @@ export default function WhatWeDoPage() {
           </div>
         </div>
       </Container>
-      <Container className="bg-cream flex h-full min-h-screen w-full max-w-[1600px] flex-col items-center justify-center py-12">
+      <Container className="bg-cream flex h-full min-h-screen w-full flex-col items-center justify-center py-12">
         <Card className="bg-secondary text-background dark:shadow-tertiary flex w-full max-w-6xl flex-col gap-4 border-none shadow-2xl sm:p-10 md:p-12 lg:p-14 xl:p-16">
           <div className="flex items-end gap-4">
             <BookMarked className="text-tertiary -ml-1 h-12 w-10 sm:h-14 sm:w-12 lg:h-16 lg:w-14" />

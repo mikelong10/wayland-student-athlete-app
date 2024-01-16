@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     const notification = await transporter.sendMail({
       from: process.env.EMAIL_SERVER_USER,
       to: process.env.EMAIL_SERVER_USER,
-      subject: "🔔🔔🔔 NEW JOB REQUEST 🔔🔔🔔",
+      subject: "🔔 NEW JOB REQUEST 🔔",
       text: message,
       html: emailHTML(requestedJobBody),
     });
