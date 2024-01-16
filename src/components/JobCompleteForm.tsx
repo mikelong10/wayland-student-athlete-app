@@ -69,6 +69,7 @@ export default function JobCompleteForm({
       const completedJobData: CompleteJobGoogleSheetValues = {
         ...values,
         numPeople: numPeople.toString(),
+        cost: `$${values.cost}`,
         manHours: ((parseInt(values.timeTaken) * numPeople) / 60).toString(),
       };
       await fetch(`/api/jobs/${job.id}/spreadsheet`, {
