@@ -59,7 +59,7 @@ export default function EditUserNameForm({ user }: { user: User }) {
         body: JSON.stringify(values),
       });
 
-      if (!editProfileResponse?.ok) {
+      if (!editProfileResponse.ok) {
         throw new Error();
       }
 

@@ -72,6 +72,10 @@ export default function AddReviewForm({
         body: JSON.stringify(values),
       });
 
+      if (!addReviewResponse.ok) {
+        throw new Error();
+      }
+
       const addReviewResponseBody: JobReview = await addReviewResponse.json();
 
       toast({

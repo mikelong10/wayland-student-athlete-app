@@ -72,13 +72,17 @@ export default function JobCompleteForm({
         cost: `$${values.cost}`,
         manHours: ((parseInt(values.timeTaken) * numPeople) / 60).toString(),
       };
-      await fetch(`/api/jobs/${job.id}/spreadsheet`, {
+      const response = await fetch(`/api/jobs/${job.id}/spreadsheet`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(completedJobData),
       });
+
+      if (!response.ok) {
+        throw new Error();
+      }
 
       toast({
         title: "Data successfully sent to Google Sheet!",
@@ -88,7 +92,7 @@ export default function JobCompleteForm({
       toast({
         title: "Uh oh! Something went wrong.",
         description:
-          "There was a problem with your name update. Please try again.",
+          "There was a problem syncing with Google Sheets. Please try again.",
         variant: "destructive",
       });
     }

@@ -83,6 +83,10 @@ export default function AddStudentAthleteProfileForm() {
         body: JSON.stringify(values),
       });
 
+      if (!addProfileResponse.ok) {
+        throw new Error();
+      }
+
       const addProfileResponseBody: StudentAthleteProfile =
         await addProfileResponse.json();
 

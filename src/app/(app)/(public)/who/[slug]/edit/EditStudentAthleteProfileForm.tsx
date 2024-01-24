@@ -113,6 +113,10 @@ export default function EditStudentAthleteProfileForm({
         }
       );
 
+      if (!updateProfileResponse.ok) {
+        throw new Error();
+      }
+
       const updateProfileResponseBody: StudentAthleteProfile =
         await updateProfileResponse.json();
 

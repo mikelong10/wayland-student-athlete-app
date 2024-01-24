@@ -95,6 +95,10 @@ export default function EditReviewForm({
         body: JSON.stringify(values),
       });
 
+      if (!updatedReviewResponse.ok) {
+        throw new Error();
+      }
+
       const updatedReviewResponseBody: JobReview =
         await updatedReviewResponse.json();
 

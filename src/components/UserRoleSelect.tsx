@@ -48,7 +48,7 @@ export default function UserRoleSelect({ user }: { user: User }) {
           }),
         });
 
-        if (!response?.ok) {
+        if (!response.ok) {
           throw new Error();
         }
 

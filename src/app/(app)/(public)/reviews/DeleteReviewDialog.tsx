@@ -43,7 +43,7 @@ export default function DeleteReviewDialog({
         },
       });
 
-      if (!deleteReviewResponse?.ok) {
+      if (!deleteReviewResponse.ok) {
         throw new Error();
       }
 

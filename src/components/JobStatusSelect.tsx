@@ -35,7 +35,7 @@ export default function JobStatusSelect({ job }: { job: Job }) {
           }),
         });
 
-        if (!response?.ok) {
+        if (!response.ok) {
           throw new Error();
         }
 

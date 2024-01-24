@@ -1,19 +1,15 @@
 import { JWT } from "google-auth-library";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import nodemailer from "nodemailer";
 import { z } from "zod";
 
 import { db } from "@lib/db";
-import { requestJobFormSchema } from "@lib/schemas";
+import { requestJobFormSchema, RequestJobFormValues } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
 
-export async function POST(req: Request) {
+async function sendToGoogleSheet(jobRequestBody: RequestJobFormValues) {
   try {
-    const user = await getCurrentUser();
-
-    const json = await req.json();
-    const jobRequestBody = requestJobFormSchema.parse(json);
-
     // initialize auth
     const serviceAccountAuth = new JWT({
       email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -29,25 +25,95 @@ export async function POST(req: Request) {
     const sheet = doc.sheetsByIndex[1]; // get job requests sheet
     // append row to google sheet
     await sheet.addRow(jobRequestBody);
+  } catch (error) {
+    console.log("Failed to send new job request to Google sheet", error);
+  }
+}
 
-    // create job for non-logged in users
-    if (!user) {
-      const newJob = await db.job.create({
-        data: jobRequestBody,
-      });
+async function sendEmailNotification(jobRequestBody: RequestJobFormValues) {
+  try {
+    const message = `NEW JOB ALERT!\nFrom: ${jobRequestBody.adultFirstName} ${jobRequestBody.adultLastName}\nDescription: ${jobRequestBody.description}\nContact: ${jobRequestBody.contact}`;
 
-      return new Response(JSON.stringify(newJob), {
-        status: StatusCodes.CREATED,
-        statusText: ReasonPhrases.CREATED,
-      });
-    }
-    // create job for logged in users
-    const newJob = await db.job.create({
-      data: {
-        ...jobRequestBody,
-        requestorId: user.id,
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_SERVER_HOST,
+      port: Number(process.env.EMAIL_SERVER_PORT),
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_SERVER_USER,
+        pass: process.env.EMAIL_SERVER_PASSWORD,
       },
     });
+
+    const emailHTML = (job: RequestJobFormValues) => {
+      return `
+        <h2>Name</h2>
+        <h3>Adult's Name</h3>
+        <p>${job.adultFirstName} ${job.adultLastName}</p>
+        ${
+          job.childFirstName
+            ? `<h3>Child's Name</h3><p>${job.childFirstName} ${job.childLastName}</p>`
+            : ""
+        }
+        <h2>Job Info</h2>
+        <h3>Description</h3>
+        <p>${job.description}</p>
+        <h3>Address</h3>
+        <p>${job.location}</p>
+        <h3>Time</h3>
+        <p>${job.time}</p>
+        <h3>Estimate</h3>
+        <p>${job.estimate}</p>
+        <h2>Contact</h2>
+        <h3>Contact Info</h3>
+        <p>${job.contact}</p>
+        ${job.learn ? `<h3>Source</h3><p>${job.learn}</p>` : ""}
+        ${job.special ? `<h3>Special Requests</h3><p>${job.special}</p>` : ""}
+        <h4>Electronic Signature</h4>
+        <p>${job.signature}</p>
+        `;
+    };
+    const notification = await transporter.sendMail({
+      from: process.env.EMAIL_SERVER_USER,
+      to: process.env.EMAIL_SERVER_USER,
+      subject: "🔔 NEW JOB REQUEST 🔔",
+      text: message,
+      html: emailHTML(jobRequestBody),
+    });
+
+    return new Response(JSON.stringify(notification));
+  } catch (error) {
+    console.log("Failed to send new job request email notification", error);
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const user = await getCurrentUser();
+
+    const json = await req.json();
+    const jobRequestBody = requestJobFormSchema.parse(json);
+
+    // create job for non-logged in users
+    let newJob;
+    if (!user) {
+      newJob = await db.job.create({
+        data: jobRequestBody,
+      });
+    } else {
+      // create job with logged in user id
+      newJob = await db.job.create({
+        data: {
+          ...jobRequestBody,
+          requestorId: user.id,
+        },
+      });
+    }
+
+    // send job request to google sheet
+    await sendToGoogleSheet(jobRequestBody);
+
+    // send email notification
+    await sendEmailNotification(jobRequestBody);
 
     return new Response(JSON.stringify(newJob), {
       status: StatusCodes.CREATED,

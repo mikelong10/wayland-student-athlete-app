@@ -46,7 +46,7 @@ export default function DeleteStudentAthleteProfileDialog({
         }
       );
 
-      if (!deleteProfileResponse?.ok) {
+      if (!deleteProfileResponse.ok) {
         throw new Error();
       }
 

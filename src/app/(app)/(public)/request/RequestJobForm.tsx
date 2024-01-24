@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "@prisma/client";
+import { Job, User } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 
@@ -62,6 +62,11 @@ export default function RequestJobForm({
   async function onSubmit(values: RequestJobFormValues) {
     setIsSubmitting(true);
 
+    toast({
+      title: "Thanks for your request!",
+      description: "Just a moment...",
+    });
+
     try {
       const createJobResponse = await fetch("/api/jobs", {
         method: "POST",
@@ -71,25 +76,17 @@ export default function RequestJobForm({
         body: JSON.stringify(values),
       });
 
-      const createJobResponseBody = await createJobResponse.json();
+      if (!createJobResponse.ok) {
+        throw new Error();
+      }
 
-      // send email notification with nodemailer
-      await fetch("/api/email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(createJobResponseBody),
+      const createJobResponseBody: Job = await createJobResponse.json();
+
+      toast({
+        title: "Your request was successfully submitted!",
+        description: `Hope we can help you out, ${createJobResponseBody.adultFirstName}!`,
+        variant: "success",
       });
-
-      // // send text notification through Twilio
-      // await fetch("/api/twilio", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(createJobResponseBody),
-      // });
 
       scrollToTop();
       setRequestSent(true);

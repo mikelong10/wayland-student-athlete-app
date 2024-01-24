@@ -54,7 +54,7 @@ export default function JobCardAssign({
       title: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee.name}...`,
     });
     try {
-      const response = await fetch(`/api/jobs/${job.id}/users`, {
+      const assignJobResponse = await fetch(`/api/jobs/${job.id}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export default function JobCardAssign({
         }),
       });
 
-      if (!response?.ok) {
+      if (!assignJobResponse.ok) {
         throw new Error();
       }
 
@@ -87,7 +87,7 @@ export default function JobCardAssign({
       title: `Unassigning ${unassignee.name} from ${job.adultFirstName} ${job.adultLastName}'s job...`,
     });
     try {
-      const response = await fetch(`/api/jobs/${job.id}/users`, {
+      const unassignJobResponse = await fetch(`/api/jobs/${job.id}/users`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export default function JobCardAssign({
         }),
       });
 
-      if (!response?.ok) {
+      if (!unassignJobResponse.ok) {
         throw new Error();
       }
 
