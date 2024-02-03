@@ -14,13 +14,13 @@ import {
 export interface BaseJobCardProps {
   job: Job;
   statusAssign: ReactNode;
-  jobCompleteForm?: ReactNode;
+  footerActions?: ReactNode;
 }
 
 export default function BaseJobCard({
   job,
   statusAssign,
-  jobCompleteForm,
+  footerActions,
 }: BaseJobCardProps) {
   return (
     <Card key={job.id} className="flex flex-col gap-4">
@@ -43,7 +43,7 @@ export default function BaseJobCard({
           <p className="text-muted-foreground text-xs italic">
             Requested: {formatDate(job.createdAt)}
           </p>
-          {jobCompleteForm}
+          {footerActions}
         </CardFooter>
       </div>
     </Card>

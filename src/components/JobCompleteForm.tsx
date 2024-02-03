@@ -102,7 +102,7 @@ export default function JobCompleteForm({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"traced"} className="flex gap-2 text-xs" size={"sm"}>
+        <Button variant={"accent"} className="flex gap-2 text-xs" size={"sm"}>
           Sync
           <Table2 className="h-4 w-4" />
         </Button>
