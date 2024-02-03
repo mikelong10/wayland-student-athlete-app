@@ -63,3 +63,38 @@ export async function PATCH(
     return new Response(null, { status: StatusCodes.INTERNAL_SERVER_ERROR });
   }
 }
+
+export async function DELETE(
+  _req: Request,
+  context: z.infer<typeof routeContextSchema>
+) {
+  try {
+    const user = await getCurrentUser();
+    if (!user || user.role !== Role.ADMIN) {
+      return new Response("Only Admins can delete jobs", {
+        status: StatusCodes.FORBIDDEN,
+        statusText: ReasonPhrases.FORBIDDEN,
+      });
+    }
+
+    const { params } = routeContextSchema.parse(context);
+    const deletedJob = await db.job.delete({
+      where: { id: params.jobId },
+    });
+
+    return new Response(JSON.stringify(deletedJob));
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return new Response(JSON.stringify(error.issues), {
+        status: StatusCodes.UNPROCESSABLE_ENTITY,
+        statusText: ReasonPhrases.UNPROCESSABLE_ENTITY,
+      });
+    }
+    console.log("Error in DELETE /api/jobs/id", error);
+    const err = error as Error;
+    return new Response(JSON.stringify(err), {
+      status: StatusCodes.INTERNAL_SERVER_ERROR,
+      statusText: ReasonPhrases.INTERNAL_SERVER_ERROR,
+    });
+  }
+}

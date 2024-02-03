@@ -1,5 +1,6 @@
 "use client";
 
+import DeleteJobDialog from "@app/(app)/(personal)/dashboard/DeleteJobDialog";
 import { Status, User } from "@prisma/client";
 
 import { JobCardProps } from "@components/PersonalJobCard";
@@ -28,14 +29,18 @@ export default function BusinessJobCard({
       <JobStatusSelect job={job} />
     </div>
   );
+
   return (
     <BaseJobCard
       job={job}
       statusAssign={statusToggleAndJobAssign}
-      jobCompleteForm={
-        job.status === Status.DONE && (
-          <JobCompleteForm job={job} currentAssignees={currentAssignees} />
-        )
+      footerActions={
+        <>
+          {job.status === Status.DONE && (
+            <JobCompleteForm job={job} currentAssignees={currentAssignees} />
+          )}
+          <DeleteJobDialog job={job} />
+        </>
       }
     />
   );
