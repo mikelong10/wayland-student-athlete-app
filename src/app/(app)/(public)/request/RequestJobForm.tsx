@@ -93,7 +93,18 @@ export default function RequestJobForm({
     } catch (error) {
       toast({
         title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request. Please try again.",
+        description: (
+          <p>
+            Please try again. If the issue persists, contact us directly at{" "}
+            <a
+              className="text-destructive-foreground hover:text-accent font-medium underline underline-offset-4 transition-colors"
+              href="mailto:waylandstudentathlete@gmail.com"
+            >
+              waylandstudentathlete@gmail.com
+            </a>{" "}
+            with your job request :)
+          </p>
+        ),
         variant: "destructive",
       });
     }
