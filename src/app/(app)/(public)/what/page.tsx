@@ -18,7 +18,7 @@ export const metadata = {
 export default function WhatWeDoPage() {
   return (
     <>
-      <Container className="flex h-full min-h-screen w-full max-w-[1600px] flex-col items-center">
+      <Container className="flex size-full min-h-screen max-w-[1600px] flex-col items-center">
         <div className="flex h-screen w-full flex-col pb-20 pt-32">
           <div className="relative h-screen w-full">
             <Card className="xs:w-4/5 dark:shadow-tertiary xs:bottom-4 absolute bottom-0 left-0 z-10 flex min-w-[320px] flex-col gap-4 border-none p-6 shadow-2xl sm:bottom-8 sm:w-3/5 sm:min-w-[400px] sm:p-8 md:bottom-12 md:w-2/5 md:min-w-[480px] md:p-10 lg:bottom-16 lg:min-w-[560px] lg:p-12 xl:bottom-20">
@@ -61,7 +61,7 @@ export default function WhatWeDoPage() {
           </div>
         </div>
       </Container>
-      <Container className="bg-cream flex h-full min-h-screen w-full flex-col items-center justify-center py-12">
+      <Container className="bg-cream flex size-full min-h-screen flex-col items-center justify-center py-12">
         <Card className="bg-secondary text-background dark:shadow-tertiary flex w-full max-w-6xl flex-col gap-4 border-none shadow-2xl sm:p-10 md:p-12 lg:p-14 xl:p-16">
           <div className="flex items-end gap-4">
             <BookMarked className="text-tertiary -ml-1 h-12 w-10 sm:h-14 sm:w-12 lg:h-16 lg:w-14" />

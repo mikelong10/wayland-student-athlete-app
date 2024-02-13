@@ -30,12 +30,12 @@ export default function MultiReviewCarousel({
   return (
     <Container
       className={cn(
-        "xs:px-20 bg-accent flex w-full flex-col items-center justify-center gap-6 p-16 sm:px-20 md:px-24 lg:px-24 xl:px-32",
+        "bg-accent flex w-full flex-col items-center justify-center gap-6 pb-24 pt-16 sm:px-20 md:px-24 lg:px-28 xl:px-32",
         bgColor
       )}
     >
       <div className="flex items-center gap-4">
-        <Quote className="text-secondary h-10 w-10" />
+        <Quote className="text-secondary size-10" />
         <H2>{reviews[0].reviewBlurb}</H2>
       </div>
       <Carousel
@@ -43,7 +43,7 @@ export default function MultiReviewCarousel({
           align: "start",
           loop: true,
         }}
-        className="w-full max-w-5xl"
+        className="w-full max-w-prose lg:max-w-5xl"
       >
         <CarouselContent>
           {reviews.map((review) => (

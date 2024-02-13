@@ -13,7 +13,7 @@ export function UserAvatar({ user, ...props }: UserAvatarProps) {
       <AvatarImage alt="Picture" src={user.image ?? undefined} />
       <AvatarFallback>
         <span className="sr-only">{user.name}</span>
-        <User className="h-full w-full" />
+        <User className="size-full" />
       </AvatarFallback>
     </Avatar>
   );

@@ -74,7 +74,7 @@ export default function JobStatusSelect({ job }: { job: Job }) {
           >
             <Dot status={Status[job.status]} />
             <SelectPrimitive.Icon asChild>
-              <ChevronDown className="h-4 w-4 opacity-50" />
+              <ChevronDown className="size-4 opacity-50" />
             </SelectPrimitive.Icon>
           </Badge>
         </SelectPrimitive.Trigger>

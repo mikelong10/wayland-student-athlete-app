@@ -63,7 +63,7 @@ export default async function AdminDashboard() {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center">
-      <Container className="flex h-full w-full max-w-[1600px] flex-col pb-20 pt-32">
+      <Container className="flex size-full max-w-[1600px] flex-col pb-20 pt-32">
         {user.role === Role.ADMIN ? (
           <div className="flex flex-col gap-6">
             <H1>Manage Users</H1>

@@ -16,7 +16,7 @@ export default function DesktopNav({ user, links }: NavProps) {
   const pathname = usePathname();
 
   return (
-    <div className="hidden h-full w-full items-center justify-between gap-3 lg:flex">
+    <div className="hidden size-full items-center justify-between gap-3 lg:flex">
       <NavigationMenu>
         <NavigationMenuList>
           {links.map((link) => (

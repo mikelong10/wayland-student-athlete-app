@@ -28,7 +28,7 @@ export default async function VerifyEmailPage() {
       <Card className="dark:shadow-tertiary flex max-w-3xl flex-col gap-4 rounded-2xl border-none shadow-2xl sm:p-10 md:p-12 lg:p-14 xl:p-16">
         <CardHeader className="flex flex-col items-center gap-2 text-center">
           <div className="bg-success rounded-full p-3 md:p-4">
-            <Mailbox color="white" className="h-10 w-10 md:h-12 md:w-12" />
+            <Mailbox color="white" className="size-10 md:size-12" />
           </div>
           <CardTitle className="text-2xl sm:text-3xl md:text-4xl">
             Check your email

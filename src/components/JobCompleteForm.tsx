@@ -104,7 +104,7 @@ export default function JobCompleteForm({
       <DialogTrigger asChild>
         <Button variant={"accent"} className="flex gap-2 text-xs" size={"sm"}>
           Sync
-          <Table2 className="h-4 w-4" />
+          <Table2 className="size-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -219,7 +219,7 @@ export default function JobCompleteForm({
           <Button type="submit" form="edit-profile-form">
             {isUpdatingSheet ? (
               <div className="flex items-center">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 size-4 animate-spin" />
                 Uploading...
               </div>
             ) : (

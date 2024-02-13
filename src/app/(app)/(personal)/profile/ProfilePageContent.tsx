@@ -12,7 +12,7 @@ import EditProfileForm from "./EditProfileForm";
 
 export default function ProfilePageContent({ user }: { user: User }) {
   return (
-    <Container className="flex h-full min-h-screen w-full flex-col items-center justify-center gap-4 pb-20 pt-32">
+    <Container className="flex size-full min-h-screen flex-col items-center justify-center gap-4 pb-20 pt-32">
       <div className="flex w-full flex-col justify-center gap-4 sm:max-w-[640px] lg:max-w-[768px]">
         <H1 className="w-full scroll-m-20 text-left">Profile</H1>
         <Separator />

@@ -27,7 +27,7 @@ export default function Home() {
                   "We've updated our website. Log in and enjoy the new experience!"
                 }
               </p>
-              <Sparkles className="text-foreground xs:h-5 xs:w-5 h-6 w-6" />
+              <Sparkles className="text-foreground xs:size-5 size-6" />
             </div>
           </Badge>
           <div className="xs:hidden">
@@ -51,7 +51,7 @@ export default function Home() {
               idScrollToElement="landing-what-we-do"
             >
               Learn more
-              <ArrowDown className="xs:flex -mb-1 hidden h-5 w-5 animate-bounce" />
+              <ArrowDown className="xs:flex -mb-1 hidden size-5 animate-bounce" />
             </InteractiveButton>
           </div>
           <div className="flex lg:w-full">
@@ -104,7 +104,7 @@ export default function Home() {
           }
         >
           <div className="flex flex-col items-center gap-2">
-            <HeartHandshake className="text-tertiary h-12 w-12" />
+            <HeartHandshake className="text-tertiary size-12" />
             <H2 className="text-background">
               How may we <span className="text-primary italic">assist</span>{" "}
               you?

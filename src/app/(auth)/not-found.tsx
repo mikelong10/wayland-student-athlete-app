@@ -11,7 +11,7 @@ export default function NotFound() {
       <p>The page you&apos;re looking for doesn&apos;t exist.</p>
       <Link href="/">
         <Button variant={"ghost"} className="flex items-center gap-1 pr-6">
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="size-4" />
           Back to home
         </Button>
       </Link>

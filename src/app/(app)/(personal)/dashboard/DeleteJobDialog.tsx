@@ -63,10 +63,10 @@ export default function DeleteJobDialog({ job }: { job: Job }) {
       <Button
         variant={"traced"}
         size={"icon"}
-        className="h-10 w-10"
+        className="size-10"
         onClick={() => setDeleteDialogOpen(true)}
       >
-        <Trash2 className="h-5 w-5" />
+        <Trash2 className="size-5" />
       </Button>
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>

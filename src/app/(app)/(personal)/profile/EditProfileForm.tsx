@@ -28,7 +28,7 @@ export default function EditProfileForm({ user }: { user: User }) {
               variant: "destructive",
             });
           }}
-          className="ut-button:rounded-full ut-button:w-fit ut-button:h-fit ut-button:mb-1 ut-button:bg-accent ut-button:text-accent-foreground ut-button:hover:opacity-70 ut-button:transition-all ut-button:focus-within:ring-ring ut-button:after:bg-tertiary ut-allowed-content:text-sm ut-upload-icon:bg-accent h-full w-full"
+          className="ut-button:rounded-full ut-button:size-fit ut-button:mb-1 ut-button:bg-accent ut-button:text-accent-foreground ut-button:hover:opacity-70 ut-button:transition-all ut-button:focus-within:ring-ring ut-button:after:bg-tertiary ut-allowed-content:text-sm ut-upload-icon:bg-accent size-full"
           content={{
             button() {
               return (
@@ -37,7 +37,7 @@ export default function EditProfileForm({ user }: { user: User }) {
                     image: activeUser.image,
                     name: activeUser.name,
                   }}
-                  className="h-40 w-40"
+                  className="size-40"
                 />
               );
             },

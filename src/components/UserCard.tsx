@@ -34,7 +34,7 @@ export default function UserCard({ user }: UserCardProps) {
               image: user.image,
               name: user.name,
             }}
-            className="h-8 w-8"
+            className="size-8"
           />
           <div className="flex h-full items-center overflow-auto whitespace-nowrap">
             {user.name}
