@@ -13,7 +13,7 @@
     "lint": "next lint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" && eslint --fix \"**/*.{js,jsx,ts,tsx}\"",
     "prisma": "npx prisma db push && npx prisma generate && npx prisma studio",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
