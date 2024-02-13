@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" && eslint --fix \"**/*.{js,jsx,ts,tsx}\"",
-    "prisma": "npx prisma db push && npx prisma generate && npx prisma studio"
+    "prisma": "npx prisma db push && npx prisma generate && npx prisma studio",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -79,10 +80,16 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-tailwindcss": "^3.13.0",
     "eslint-plugin-unused-imports": "^3.0.0",
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.2",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.3",
     "prisma": "^5.7.1",
     "typescript": "^5.3.3"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "**/*.{js,jsx,ts,tsx,json,md}": "prettier --write"
   }
 }
