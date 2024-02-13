@@ -85,7 +85,7 @@ export default function HeaderContent({ user }: { user?: User }) {
     >
       <header className="flex items-center justify-between gap-4 lg:gap-8">
         <Link href={"/"} className="flex h-full hover:animate-pulse">
-          <WSALogo className="h-12 w-12" />
+          <WSALogo className="size-12" />
           {/* <Image src={logo} alt={"WSA logo"} width={64} height={64} /> */}
         </Link>
         <MobileNav user={user} links={headerNavLinks} />

@@ -26,7 +26,7 @@ export default function Error({
         variant={"ghost"}
         className="flex items-center gap-1 pr-6"
       >
-        <RotateCw className="h-4 w-4" />
+        <RotateCw className="size-4" />
         Try again
       </Button>
     </main>

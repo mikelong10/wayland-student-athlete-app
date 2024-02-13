@@ -99,7 +99,7 @@ export default function UserRoleSelect({ user }: { user: User }) {
           >
             <p className="font-semibold">{UserRoleText[user.role]}</p>
             <SelectPrimitive.Icon asChild>
-              <ChevronDown className="h-4 w-4 opacity-50" />
+              <ChevronDown className="size-4 opacity-50" />
             </SelectPrimitive.Icon>
           </Badge>
         </SelectPrimitive.Trigger>

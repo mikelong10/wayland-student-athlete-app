@@ -55,7 +55,7 @@ export default function UserAccountNav({
                 <Menu size={24} className="ml-1" />
                 <UserAvatar
                   user={{ name: user.name, image: user.image }}
-                  className="h-10 w-10"
+                  className="size-10"
                 />
               </div>
             </DropdownMenuTrigger>
@@ -77,14 +77,14 @@ export default function UserAccountNav({
                   <DropdownMenuLabel>Business</DropdownMenuLabel>
                   <DropdownMenuItem asChild>
                     <Link href="/dashboard" onClick={() => closeMobileNav()}>
-                      <KanbanSquare className="mr-2 h-4 w-4" />
+                      <KanbanSquare className="mr-2 size-4" />
                       Jobs
                     </Link>
                   </DropdownMenuItem>
                   {user.role === Role.ADMIN && (
                     <DropdownMenuItem asChild>
                       <Link href="/admin" onClick={() => closeMobileNav()}>
-                        <Users className="mr-2 h-4 w-4" />
+                        <Users className="mr-2 size-4" />
                         Users
                       </Link>
                     </DropdownMenuItem>
@@ -95,13 +95,13 @@ export default function UserAccountNav({
               <DropdownMenuLabel>Personal</DropdownMenuLabel>
               <DropdownMenuItem asChild>
                 <Link href="/jobs" onClick={() => closeMobileNav()}>
-                  <CheckSquare className="mr-2 h-4 w-4" />
+                  <CheckSquare className="mr-2 size-4" />
                   My Jobs
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/profile" onClick={() => closeMobileNav()}>
-                  <UserCircle2 className="mr-2 h-4 w-4" />
+                  <UserCircle2 className="mr-2 size-4" />
                   Profile
                 </Link>
               </DropdownMenuItem>
@@ -114,7 +114,7 @@ export default function UserAccountNav({
                   });
                 }}
               >
-                <LogOut className="mr-2 h-4 w-4" />
+                <LogOut className="mr-2 size-4" />
                 Log out
               </DropdownMenuItem>
             </DropdownMenuContent>

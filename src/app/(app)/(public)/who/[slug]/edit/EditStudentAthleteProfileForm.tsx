@@ -141,7 +141,7 @@ export default function EditStudentAthleteProfileForm({
   }
 
   return (
-    <Container className="flex h-full min-h-screen w-full flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
+    <Container className="flex size-full min-h-screen flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
       <H1 className="w-full text-left">{`Edit ${firstName}'s Profile`}</H1>
       <Separator />
       <Form {...form}>
@@ -257,7 +257,7 @@ export default function EditStudentAthleteProfileForm({
                     <Button
                       variant={"ghost"}
                       size={"icon"}
-                      className="h-10 w-10"
+                      className="size-10"
                       onClick={() => remove(index)}
                     >
                       <Trash2 />
@@ -309,9 +309,9 @@ export default function EditStudentAthleteProfileForm({
                 content={{
                   uploadIcon() {
                     if (filesUploaded) {
-                      return <FileCheck className="text-muted h-14 w-14" />;
+                      return <FileCheck className="text-muted size-14" />;
                     }
-                    return <ImagePlus className="text-muted h-14 w-14" />;
+                    return <ImagePlus className="text-muted size-14" />;
                   },
                   label() {
                     if (filesUploaded) {
@@ -341,7 +341,7 @@ export default function EditStudentAthleteProfileForm({
           >
             {isSubmitting ? (
               <div className="flex items-center">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 size-4 animate-spin" />
                 Saving changes...
               </div>
             ) : (

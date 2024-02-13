@@ -162,7 +162,7 @@ export default function JobCardAssign({
                         image: user.image,
                         name: user.name,
                       }}
-                      className={`border-background bg-accent h-10 w-10 border-2 ${
+                      className={`border-background bg-accent size-10 border-2 ${
                         idx !== 0 ? "-ml-3" : ""
                       }`}
                       style={{ zIndex: selectedUsers.length - idx }}
@@ -175,7 +175,7 @@ export default function JobCardAssign({
                         selectedUsers.length > 0 ? "-ml-3" : ""
                       }`}
                     >
-                      <UserPlus className="border-border h-9 w-9 rounded-full border p-1" />
+                      <UserPlus className="border-border size-9 rounded-full border p-1" />
                     </div>
                   )}
               </div>
@@ -207,7 +207,7 @@ export default function JobCardAssign({
                 >
                   <Check
                     className={cn(
-                      "mr-2 h-4 w-4",
+                      "mr-2 size-4",
                       selectedUsers.find(
                         (user) => user.id === studentAthlete.id
                       )

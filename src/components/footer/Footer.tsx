@@ -16,7 +16,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
               href={"https://www.facebook.com/waylandstudentathlete/"}
               target="_blank"
             >
-              <FacebookLogo className="h-8 w-8" />
+              <FacebookLogo className="size-8" />
             </Link>
             <div className="flex h-auto flex-col items-center gap-2 sm:flex-row sm:gap-4">
               <a

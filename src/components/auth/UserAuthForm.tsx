@@ -64,9 +64,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           disabled={isLoading || isGoogleLoading}
         >
           {isGoogleLoading ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 className="mr-2 size-4 animate-spin" />
           ) : (
-            <GoogleLogo className="mr-2 h-5 w-5" />
+            <GoogleLogo className="mr-2 size-5" />
           )}
           Google
         </Button>
@@ -79,9 +79,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           disabled={isLoading || isFacebookLoading}
         >
           {isFacebookLoading ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 className="mr-2 size-4 animate-spin" />
           ) : (
-            <FacebookLogo className="mr-2 h-5 w-5" />
+            <FacebookLogo className="mr-2 size-5" />
           )}
           Facebook
         </Button>
@@ -115,7 +115,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             )}
           </div>
           <Button disabled={isLoading}>
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
             Log in
           </Button>
         </div>

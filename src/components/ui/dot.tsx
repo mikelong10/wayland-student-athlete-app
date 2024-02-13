@@ -10,7 +10,7 @@ export default function Dot({ status, className }: DotProps) {
   return (
     <div
       className={cn(
-        `h-2 w-2 rounded-full ${
+        `size-2 rounded-full ${
           status === Status.TODO
             ? " bg-red-500"
             : status === Status.INPROGRESS

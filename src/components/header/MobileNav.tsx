@@ -28,7 +28,7 @@ export default function MobileNav({ user, links }: NavProps) {
             className="hover:animate-pulse"
             onClick={() => setNavOpen(false)}
           >
-            <WSALogo className="h-12 w-12" />
+            <WSALogo className="size-12" />
           </Link>
         </div>
         <Separator />

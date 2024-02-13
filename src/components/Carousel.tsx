@@ -81,7 +81,7 @@ export default function Carousel({
               />
             </div>
             <div className="flex gap-2">
-              <p className="text-sm">
+              <p className="select-none text-sm">
                 <span className="text-primary">{`0${activeIndex + 1}`}</span>
                 {` / 0${items.length}`}
               </p>

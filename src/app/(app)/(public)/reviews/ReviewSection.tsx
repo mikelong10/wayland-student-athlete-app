@@ -60,7 +60,7 @@ export default function ReviewSection({
         <Carousel
           header={
             <div className="flex items-center gap-4">
-              <MessageSquareHeart className="text-secondary h-10 w-10" />
+              <MessageSquareHeart className="text-secondary size-10" />
               <H2>{reviewBlurb}</H2>
             </div>
           }
@@ -107,7 +107,7 @@ export default function ReviewSection({
             </div>
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
               <div className="flex items-center gap-4">
-                <MessageSquareMore className="text-secondary h-10 w-10" />
+                <MessageSquareMore className="text-secondary size-10" />
                 <H2>{reviewBlurb}</H2>
               </div>
               <div className="flex flex-col gap-2">
@@ -147,7 +147,7 @@ export default function ReviewSection({
             />
             <div className="flex w-full flex-col gap-6 lg:w-1/2">
               <div className="flex items-center gap-4">
-                <MessageSquareText className="text-secondary h-10 w-10" />
+                <MessageSquareText className="text-secondary size-10" />
                 <H2>{reviewBlurb}</H2>
               </div>
               <div className="flex flex-col gap-2">
@@ -185,7 +185,7 @@ export default function ReviewSection({
         <Card className="flex w-full max-w-4xl flex-col gap-4 p-8">
           <div className="flex w-full flex-col gap-6">
             <div className="flex items-center gap-4">
-              <MessageSquareQuote className="text-secondary h-10 w-10" />
+              <MessageSquareQuote className="text-secondary size-10" />
               <H2>{reviewBlurb}</H2>
             </div>
             <div className="flex flex-col gap-2">

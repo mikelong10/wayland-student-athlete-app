@@ -71,7 +71,7 @@ export default function DeleteReviewDialog({
         className="flex gap-3"
         onClick={() => setDeleteDialogOpen(true)}
       >
-        <Trash2 className="text-destructive h-5 w-5" />
+        <Trash2 className="text-destructive size-5" />
         Delete
       </Button>
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>

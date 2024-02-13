@@ -18,7 +18,7 @@ export default function AdminManageReviewActions({
       <div className="flex w-full items-center justify-center gap-4">
         <Button asChild variant={"traced"}>
           <Link href={`/reviews/${reviewId}/edit`} className="flex gap-3">
-            <Pencil className="text-secondary h-5 w-5" />
+            <Pencil className="text-secondary size-5" />
             Edit
           </Link>
         </Button>
