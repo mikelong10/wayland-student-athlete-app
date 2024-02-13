@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { User } from "@prisma/client";
 import Fuse from "fuse.js";
@@ -34,6 +35,7 @@ export default function JobCardAssign({
   currentAssignees,
   allStudentAthletes,
 }: BusinessJobCardProps) {
+  const router = useRouter();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
@@ -51,7 +53,8 @@ export default function JobCardAssign({
 
   async function assignJob(newAssignee: User) {
     toast({
-      title: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee.name}...`,
+      title: `Making moves... 🚀`,
+      description: `Assigning ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee.name}...`,
     });
     try {
       const assignJobResponse = await fetch(`/api/jobs/${job.id}/users`, {
@@ -70,9 +73,12 @@ export default function JobCardAssign({
 
       setSelectedUsers([...selectedUsers, newAssignee]);
       toast({
-        title: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}!`,
+        title: "Let's get this bread 🍞",
+        description: `Successfully assigned ${job.adultFirstName} ${job.adultLastName}'s job to ${newAssignee?.name}.`,
         variant: "success",
       });
+
+      router.refresh();
     } catch (error) {
       toast({
         title: "Uh oh! Something went wrong.",
@@ -84,7 +90,8 @@ export default function JobCardAssign({
 
   async function unassignJob(unassignee: User) {
     toast({
-      title: `Unassigning ${unassignee.name} from ${job.adultFirstName} ${job.adultLastName}'s job...`,
+      title: "Shuffling things around... 🃏",
+      description: `Unassigning ${unassignee.name} from ${job.adultFirstName} ${job.adultLastName}'s job...`,
     });
     try {
       const unassignJobResponse = await fetch(`/api/jobs/${job.id}/users`, {
@@ -105,9 +112,12 @@ export default function JobCardAssign({
         [...selectedUsers].filter((user) => user.id !== unassignee.id)
       );
       toast({
-        title: `Successfully unassigned ${unassignee?.name} from ${job.adultFirstName} ${job.adultLastName}'s job!`,
+        title: "All done 🎉",
+        description: `Successfully unassigned ${unassignee?.name} from ${job.adultFirstName} ${job.adultLastName}'s job.`,
         variant: "success",
       });
+
+      router.refresh();
     } catch (error) {
       toast({
         title: "Uh oh! Something went wrong.",
