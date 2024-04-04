@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Role } from "@prisma/client";
+import { db } from "@db";
+import { studentAthleteProfiles } from "@db/schema/content";
 import { SquareUser } from "lucide-react";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
@@ -53,7 +54,9 @@ const StudentAthleteCard = ({
 export default async function WhoWeArePage() {
   const user = await getCurrentUser();
 
-  const studentAthleteProfiles = await db.studentAthleteProfile.findMany();
+  const studentAthleteProfileItems = await db
+    .select()
+    .from(studentAthleteProfiles);
 
   return (
     <Container className="flex size-full min-h-screen flex-col items-center justify-center pb-20 pt-32">
@@ -73,7 +76,7 @@ export default async function WhoWeArePage() {
         <Separator />
         <div className="mt-6 flex flex-col items-center">
           <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-            {studentAthleteProfiles.map((studentAthleteProfile) => (
+            {studentAthleteProfileItems.map((studentAthleteProfile) => (
               <StudentAthleteCard
                 key={studentAthleteProfile.id}
                 name={studentAthleteProfile.name}

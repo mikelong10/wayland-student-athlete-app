@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
-import { Role } from "@prisma/client";
+import { getUsersByRole } from "@db/queries";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
@@ -21,30 +21,9 @@ export default async function AdminDashboard() {
     notFound();
   }
 
-  const clients = await db.user.findMany({
-    where: {
-      role: Role.CLIENT,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  const studentAthletes = await db.user.findMany({
-    where: {
-      role: Role.STUDENTATHLETE,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  const admins = await db.user.findMany({
-    where: {
-      role: Role.ADMIN,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  const clients = await getUsersByRole(Role.CLIENT);
+  const studentAthletes = await getUsersByRole(Role.STUDENT_ATHLETE);
+  const admins = await getUsersByRole(Role.ADMIN);
 
   const usersTabs = [
     {

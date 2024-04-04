@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { JobReviewWithImages } from "@db/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { JobReview } from "@prisma/client";
 import { FileCheck, ImagePlus, Loader2 } from "lucide-react";
@@ -34,7 +35,6 @@ import {
 import { Separator } from "@components/ui/separator";
 import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
-import { JobReviewWithImages } from "../page";
 
 export default function AddReviewForm({
   groupedReviewsArray,
@@ -184,15 +184,15 @@ export default function AddReviewForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="max-h-80">
-                          {groupedReviewsArray.map((reviews) => (
+                          {groupedReviewsArray.map((jobReviews) => (
                             <SelectItem
-                              key={reviews[0].order}
-                              value={reviews[0].order.toString()}
+                              key={jobReviews[0].review.order}
+                              value={jobReviews[0].review.order.toString()}
                             >
-                              {`${reviews[0].order} - ${
-                                reviews[0].reviewBlurb
-                              } (${reviews
-                                .map((r) => r.reviewerName)
+                              {`${jobReviews[0].review.order} - ${
+                                jobReviews[0].review.reviewBlurb
+                              } (${jobReviews
+                                .map((r) => r.review.reviewerName)
                                 .join(", ")})`}
                             </SelectItem>
                           ))}

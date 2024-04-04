@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Image as ReviewImage, Role, User } from "@prisma/client";
+import { JobReviewImage, User } from "@db/types";
 import {
   MessageSquareHeart,
   MessageSquareMore,
@@ -7,6 +7,7 @@ import {
   MessageSquareText,
 } from "lucide-react";
 
+import { Role } from "@lib/enums";
 import { cn } from "@lib/utils";
 import Carousel from "@components/Carousel";
 import Container from "@components/Container";
@@ -26,7 +27,7 @@ export default function ReviewSection({
 }: {
   user: User | undefined;
   reviewId: string;
-  images: ReviewImage[];
+  images: JobReviewImage[];
   reviewBlurb: string;
   reviewText: string;
   reviewerName: string;

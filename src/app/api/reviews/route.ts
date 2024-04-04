@@ -1,8 +1,10 @@
-import { Role } from "@prisma/client";
+import { db } from "@db";
+import { jobReviewImages, jobReviews } from "@db/schema/content";
+import { desc } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { reviewFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
 
@@ -19,31 +21,26 @@ export async function POST(req: Request) {
     const json = await req.json();
     const addReviewRequestBody = reviewFormSchema.parse(json);
 
-    const allReviews = await db.jobReview.findMany({
-      orderBy: {
-        order: "desc",
-      },
-    });
+    const allReviews = await db
+      .select()
+      .from(jobReviews)
+      .orderBy(desc(jobReviews.order));
+
     if (allReviews.length === 0) {
       const { reviewImages, ...reviewData } = addReviewRequestBody;
-      const newReview = await db.jobReview.create({
-        data: {
+      const newReview = await db
+        .insert(jobReviews)
+        .values({
           ...reviewData,
           order: 1,
-        },
-      });
+        })
+        .returning({ id: jobReviews.id });
 
       for (const url of reviewImages ?? []) {
-        await db.image.create({
-          data: {
-            src: url,
-            alt: `Image for review by ${reviewData.reviewerName}`,
-            jobReview: {
-              connect: {
-                id: newReview.id,
-              },
-            },
-          },
+        await db.insert(jobReviewImages).values({
+          src: url,
+          alt: `Image for review by ${reviewData.reviewerName}`,
+          jobReviewId: newReview[0].id,
         });
       }
 
@@ -56,27 +53,22 @@ export async function POST(req: Request) {
 
       const { reviewImages, ...reviewData } = addReviewRequestBody;
 
-      const newReview = await db.jobReview.create({
-        data: {
+      const newReview = await db
+        .insert(jobReviews)
+        .values({
           ...reviewData,
           order:
             reviewData.order === "new"
               ? highestOrderReview.order + 1
               : parseInt(reviewData.order),
-        },
-      });
+        })
+        .returning({ id: jobReviews.id });
 
       for (const url of reviewImages ?? []) {
-        await db.image.create({
-          data: {
-            src: url,
-            alt: `Image for review by ${reviewData.reviewerName}`,
-            jobReview: {
-              connect: {
-                id: newReview.id,
-              },
-            },
-          },
+        await db.insert(jobReviewImages).values({
+          src: url,
+          alt: `Image for review by ${reviewData.reviewerName}`,
+          jobReviewId: newReview[0].id,
         });
       }
 

@@ -1,7 +1,10 @@
 import { notFound } from "next/navigation";
-import { Role } from "@prisma/client";
+import { db } from "@db";
+import { getJobsByStatus } from "@db/queries";
+import { users } from "@db/schema/auth";
+import { asc, eq, or } from "drizzle-orm";
 
-import { db } from "@lib/db";
+import { Role, Status } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import BusinessJobCard from "@components/BusinessJobCard";
 import Container from "@components/Container";
@@ -17,72 +20,19 @@ export const metadata = {
 export default async function JobDashboard() {
   const user = await getCurrentUser();
 
-  if (!(user?.role === Role.ADMIN || user?.role === Role.STUDENTATHLETE)) {
+  if (!(user?.role === Role.ADMIN || user?.role === Role.STUDENT_ATHLETE)) {
     notFound();
   }
 
-  const allStudentAthletes = await db.user.findMany({
-    where: {
-      OR: [
-        {
-          role: Role.STUDENTATHLETE,
-        },
+  const allStudentAthletes = await db
+    .select()
+    .from(users)
+    .where(or(eq(users.role, Role.ADMIN), eq(users.role, Role.STUDENT_ATHLETE)))
+    .orderBy(asc(users.name));
 
-        { role: Role.ADMIN },
-      ],
-    },
-    orderBy: {
-      name: "asc",
-    },
-  });
-
-  const toDoJobs = await db.job.findMany({
-    include: {
-      assignments: {
-        include: {
-          user: true,
-        },
-      },
-    },
-    where: {
-      status: "TODO",
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  const inProgressJobs = await db.job.findMany({
-    include: {
-      assignments: {
-        include: {
-          user: true,
-        },
-      },
-    },
-    where: {
-      status: "INPROGRESS",
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  const doneJobs = await db.job.findMany({
-    include: {
-      assignments: {
-        include: {
-          user: true,
-        },
-      },
-    },
-    where: {
-      status: "DONE",
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  const toDoJobs = await getJobsByStatus(Status.TODO);
+  const inProgressJobs = await getJobsByStatus(Status.IN_PROGRESS);
+  const doneJobs = await getJobsByStatus(Status.DONE);
 
   const jobsTabs = [
     {
@@ -130,11 +80,9 @@ export default async function JobDashboard() {
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
                   {tabContent.jobs.map((job) => (
                     <BusinessJobCard
-                      key={job.id}
-                      job={job}
-                      currentAssignees={job.assignments.map(
-                        (assignment) => assignment.user
-                      )}
+                      key={job.job.id}
+                      job={job.job}
+                      currentAssignees={job.users}
                       allStudentAthletes={allStudentAthletes}
                     />
                   ))}

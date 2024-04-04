@@ -1,7 +1,9 @@
-import { Role } from "@prisma/client";
+import { db } from "@db";
+import { users } from "@db/schema/auth";
+import { eq } from "drizzle-orm";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 
 const f = createUploadthing();
@@ -21,15 +23,16 @@ export const wsaFileRouter = {
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      const updatedUser = await db.user.update({
-        where: { id: metadata.userId },
-        data: { image: file.url },
-      });
+      const updatedUser = await db
+        .update(users)
+        .set({ image: file.url })
+        .where(eq(users.id, metadata.userId))
+        .returning();
 
       return {
         uploadedBy: metadata.userId,
         newProfilePicture: file.url,
-        updatedUser: JSON.stringify(updatedUser),
+        updatedUser: JSON.stringify(updatedUser[0]),
       };
     }),
   jobReviewImage: f({ image: { maxFileSize: "4MB", maxFileCount: 8 } })

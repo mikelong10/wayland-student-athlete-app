@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Role } from "@prisma/client";
+import { getStudentAthleteProfileBySlug } from "@db/queries";
 import { Pencil } from "lucide-react";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import { AdminActions } from "@components/AdminActions";
 import Container from "@components/Container";
@@ -20,14 +20,7 @@ export default async function StudentAthletePage({
 }) {
   const user = await getCurrentUser();
 
-  const studentAthlete = await db.studentAthleteProfile.findFirst({
-    where: {
-      slug: params.slug,
-    },
-    include: {
-      resume: true,
-    },
-  });
+  const studentAthlete = await getStudentAthleteProfileBySlug(params.slug);
 
   if (!studentAthlete) {
     notFound();
@@ -43,21 +36,21 @@ export default async function StudentAthletePage({
       <div className="flex flex-col gap-4 sm:hidden">
         <div className="flex w-full justify-center">
           <Image
-            src={studentAthlete.displayImage}
-            alt={`Student-Athlete profile image for ${studentAthlete.name}`}
+            src={studentAthlete.profile.displayImage}
+            alt={`Student-Athlete profile image for ${studentAthlete.profile.name}`}
             width={800}
             height={800}
             className="max-w-[312px] rounded-md"
           />
         </div>
         <div className="flex flex-col items-center gap-1">
-          <H2 className="text-xl">{studentAthlete.name}</H2>
+          <H2 className="text-xl">{studentAthlete.profile.name}</H2>
           <div className="flex items-center gap-2">
             <p className="text-accent-foreground text-lg font-semibold">
-              {studentAthlete.title}
+              {studentAthlete.profile.title}
             </p>
             <Separator orientation="vertical" className="h-6" />
-            <p className="text-muted-foreground font-semibold">{`c/o ${studentAthlete.graduationYear}`}</p>
+            <p className="text-muted-foreground font-semibold">{`c/o ${studentAthlete.profile.graduationYear}`}</p>
           </div>
         </div>
         <ul className="flex list-disc flex-col gap-1 pl-4">{resumeItems}</ul>
@@ -66,18 +59,20 @@ export default async function StudentAthletePage({
       <div className="hidden flex-col gap-4 sm:flex lg:hidden">
         <div className="flex items-center gap-8">
           <Image
-            src={studentAthlete.displayImage}
-            alt={`Student-Athlete profile image for ${studentAthlete.name}`}
+            src={studentAthlete.profile.displayImage}
+            alt={`Student-Athlete profile image for ${studentAthlete.profile.name}`}
             width={800}
             height={800}
             className="max-w-[360px] rounded-lg"
           />
           <div className="flex flex-col gap-2">
-            <H2 className="text-2xl md:text-3xl">{studentAthlete.name}</H2>
+            <H2 className="text-2xl md:text-3xl">
+              {studentAthlete.profile.name}
+            </H2>
             <p className="text-accent-foreground text-xl font-semibold">
-              {studentAthlete.title}
+              {studentAthlete.profile.title}
             </p>
-            <p className="text-muted-foreground text-lg font-semibold">{`c/o ${studentAthlete.graduationYear}`}</p>
+            <p className="text-muted-foreground text-lg font-semibold">{`c/o ${studentAthlete.profile.graduationYear}`}</p>
           </div>
         </div>
         <ul className="flex list-disc flex-col gap-1 pl-4">{resumeItems}</ul>
@@ -86,8 +81,8 @@ export default async function StudentAthletePage({
       <div className="hidden gap-16 lg:flex lg:items-center">
         <div className="flex items-center">
           <Image
-            src={studentAthlete.displayImage}
-            alt={`Student-Athlete profile image for ${studentAthlete.name}`}
+            src={studentAthlete.profile.displayImage}
+            alt={`Student-Athlete profile image for ${studentAthlete.profile.name}`}
             width={800}
             height={800}
             className="dark:shadow-tertiary max-w-[400px] rounded-xl shadow-2xl"
@@ -95,13 +90,13 @@ export default async function StudentAthletePage({
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <H2 className="lg:text-4xl">{studentAthlete.name}</H2>
+            <H2 className="lg:text-4xl">{studentAthlete.profile.name}</H2>
             <div className="flex items-end gap-3">
               <p className="text-accent-foreground w-fit text-2xl font-semibold">
-                {studentAthlete.title}
+                {studentAthlete.profile.title}
               </p>
               <Separator orientation="vertical" className="h-8" />
-              <p className="text-muted-foreground w-28 text-nowrap text-xl font-semibold tracking-tight">{`c/o ${studentAthlete.graduationYear}`}</p>
+              <p className="text-muted-foreground w-28 text-nowrap text-xl font-semibold tracking-tight">{`c/o ${studentAthlete.profile.graduationYear}`}</p>
             </div>
           </div>
           <ul className="flex list-disc flex-col gap-1 pl-4">{resumeItems}</ul>

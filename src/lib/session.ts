@@ -1,18 +1,16 @@
-import { User } from "@prisma/client";
-import { getServerSession } from "next-auth/next";
+import { db } from "@db";
+import { users } from "@db/schema/auth";
+import { eq } from "drizzle-orm";
 
-import { authOptions } from "@lib/auth";
-import { db } from "./db";
+import { auth } from "./auth";
 
-export async function getCurrentUser(): Promise<User | undefined> {
-  const session = await getServerSession(authOptions);
+export async function getCurrentUser() {
+  const session = await auth();
   const userFromNextAuth = session?.user;
 
   if (userFromNextAuth && userFromNextAuth.email) {
-    const userFromDb = await db.user.findFirst({
-      where: {
-        email: userFromNextAuth.email,
-      },
+    const userFromDb = await db.query.users.findFirst({
+      where: eq(users.email, userFromNextAuth.email),
     });
 
     if (userFromDb) {

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
+import { Status } from "@lib/enums";
 import { cn } from "@lib/utils";
 
 const badgeVariants = cva(
@@ -21,9 +22,10 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive hover:opacity-80 text-destructive-foreground",
         outline: "text-foreground",
-        TODO: "border-transparent bg-red-50 dark:bg-red-950",
-        INPROGRESS: "border-transparent bg-yellow-50 dark:bg-yellow-950",
-        DONE: "border-transparent bg-green-50 dark:bg-green-950",
+        [Status.TODO]: "border-transparent bg-red-50 dark:bg-red-950",
+        [Status.IN_PROGRESS]:
+          "border-transparent bg-yellow-50 dark:bg-yellow-950",
+        [Status.DONE]: "border-transparent bg-green-50 dark:bg-green-950",
       },
     },
     defaultVariants: {

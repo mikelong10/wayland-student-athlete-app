@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { JobReviewWithImages } from "@db/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { JobReview } from "@prisma/client";
 import _ from "lodash";
@@ -35,33 +36,30 @@ import {
 import { Separator } from "@components/ui/separator";
 import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
-import { JobReviewWithImages } from "../../page";
 
 export default function EditReviewForm({
-  review,
+  jobReview,
   groupedReviewsArray,
 }: {
-  review: JobReviewWithImages;
+  jobReview: JobReviewWithImages;
   groupedReviewsArray: JobReviewWithImages[][];
 }) {
+  const { review, images } = jobReview;
+
   const router = useRouter();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
-  const [filesUploaded, setFilesUploaded] = useState(
-    !!review.reviewImages.length
-  );
-  const [numFilesUploaded, setNumFilesUploaded] = useState(
-    review.reviewImages.length
-  );
+  const [filesUploaded, setFilesUploaded] = useState(!!images.length);
+  const [numFilesUploaded, setNumFilesUploaded] = useState(images.length);
 
   const defaultValues = {
     reviewerName: review.reviewerName,
     reviewBlurb: review.reviewBlurb,
     reviewText: review.reviewText,
     order: review.order.toString(),
-    reviewImages: review.reviewImages.map((img) => img.src),
+    reviewImages: images.map((img) => img.src),
   };
 
   const form = useForm<ReviewFormValues>({
@@ -210,13 +208,13 @@ export default function EditReviewForm({
                         <SelectContent className="max-h-80">
                           {groupedReviewsArray.map((reviews) => (
                             <SelectItem
-                              key={reviews[0].order}
-                              value={reviews[0].order.toString()}
+                              key={reviews[0].review.order}
+                              value={reviews[0].review.order.toString()}
                             >
-                              {`${reviews[0].order} - ${
-                                reviews[0].reviewBlurb
+                              {`${reviews[0].review.order} - ${
+                                reviews[0].review.reviewBlurb
                               } (${reviews
-                                .map((r) => r.reviewerName)
+                                .map((r) => r.review.reviewerName)
                                 .join(", ")})`}
                             </SelectItem>
                           ))}

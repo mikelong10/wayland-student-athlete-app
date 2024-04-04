@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation";
-import { Role } from "@prisma/client";
+import { getAllReviewsGroupedByOrder, getReviewById } from "@db/queries";
 
-import { getReviews } from "@lib/data";
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
-import { JobReviewWithImages } from "../../page";
 import EditReviewForm from "./EditReviewForm";
 
 export default async function EditReviewPage({
@@ -18,24 +16,18 @@ export default async function EditReviewPage({
     notFound();
   }
 
-  const review = await db.jobReview.findFirst({
-    where: {
-      id: params.id,
-    },
-    include: {
-      reviewImages: true,
-    },
-  });
+  const jobReview = await getReviewById(params.id);
 
-  if (!review) {
+  if (!jobReview) {
     notFound();
   }
 
-  const groupedReviewsArray = (await getReviews(
-    true
-  )) as JobReviewWithImages[][];
+  const groupedReviewsArray = await getAllReviewsGroupedByOrder();
 
   return (
-    <EditReviewForm review={review} groupedReviewsArray={groupedReviewsArray} />
+    <EditReviewForm
+      jobReview={jobReview}
+      groupedReviewsArray={groupedReviewsArray}
+    />
   );
 }

@@ -1,5 +1,6 @@
-import { Job, Status } from "@prisma/client";
+import { Job } from "@db/types";
 
+import { Status } from "@lib/enums";
 import { Badge } from "@components/ui/badge";
 import Dot from "@components/ui/dot";
 import BaseJobCard from "./BaseJobCard";
@@ -9,15 +10,15 @@ export interface JobCardProps {
 }
 
 export const JobStatusText: Record<Status, string> = {
-  TODO: "To-do",
-  INPROGRESS: "In progress",
-  DONE: "Done",
+  [Status.TODO]: "To-do",
+  [Status.IN_PROGRESS]: "In progress",
+  [Status.DONE]: "Done",
 };
 
 export default function PersonalJobCard({ job }: JobCardProps) {
   const statusBadge = (
-    <Badge variant={Status[job.status]} className="w-fit select-none gap-2">
-      <Dot status={Status[job.status]} />
+    <Badge variant={job.status as Status} className="w-fit select-none gap-2">
+      <Dot status={job.status as Status} />
       <p className="text-accent-foreground font-semibold">
         {JobStatusText[job.status]}
       </p>
