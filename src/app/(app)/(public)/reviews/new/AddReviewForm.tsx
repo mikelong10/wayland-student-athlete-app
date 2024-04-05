@@ -2,9 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { JobReviewWithImages } from "@db/types";
+import { JobReview, JobReviewWithImages } from "@db/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { JobReview } from "@prisma/client";
 import { FileCheck, ImagePlus, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 

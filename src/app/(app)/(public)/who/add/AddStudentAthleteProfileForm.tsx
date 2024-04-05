@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { StudentAthleteProfile } from "@db/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { StudentAthleteProfile } from "@prisma/client";
 import { FileCheck, ImagePlus, Loader2, Plus, Trash2 } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { User } from "@prisma/client";
+import { User } from "@db/types";
 import { ChevronLeft, MailCheck, Redo2 } from "lucide-react";
 
 import Container from "@components/Container";

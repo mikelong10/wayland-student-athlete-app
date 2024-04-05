@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { User } from "@prisma/client";
+import { User } from "@db/types";
 import { MoveRight } from "lucide-react";
 
 import Container from "@components/Container";
