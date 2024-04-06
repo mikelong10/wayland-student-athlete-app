@@ -111,7 +111,7 @@ export default function AddStudentAthleteProfileForm() {
   }
 
   return (
-    <Container className="flex size-full min-h-screen flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
+    <Container className="flex size-full min-h-screen flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-screen-md md:items-center lg:max-w-[960px]">
       <H1 className="w-full text-left">Add Profile</H1>
       <Separator />
       <Form {...form}>
