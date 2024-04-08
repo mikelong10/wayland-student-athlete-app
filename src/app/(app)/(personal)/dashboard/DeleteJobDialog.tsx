@@ -62,7 +62,7 @@ export default function DeleteJobDialog({ job }: { job: Job }) {
     <div>
       <Button
         variant={"traced"}
-        className="size-10 p-0"
+        size={"smIcon"}
         onClick={() => setDeleteDialogOpen(true)}
       >
         <Trash2 className="text-destructive size-5" />
