@@ -102,7 +102,7 @@ export default function JobCompleteForm({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="size-10 p-0">
+        <Button size={"smIcon"}>
           <Table2 className="size-5" />
         </Button>
       </DialogTrigger>
