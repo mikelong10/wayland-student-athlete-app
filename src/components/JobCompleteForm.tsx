@@ -102,7 +102,7 @@ export default function JobCompleteForm({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="flex gap-2 text-xs" size={"sm"}>
+        <Button className="size-10 p-0">
           <Table2 className="size-5" />
         </Button>
       </DialogTrigger>
