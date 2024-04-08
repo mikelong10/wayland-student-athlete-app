@@ -1,5 +1,5 @@
 import { db } from "@db";
-import { jobs } from "@db/schema/jobs";
+import { jobAssignments, jobs } from "@db/schema/jobs";
 import { eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
@@ -86,6 +86,10 @@ export async function DELETE(
     }
 
     const { params } = routeContextSchema.parse(context);
+    // delete all job assignments for the job
+    await db
+      .delete(jobAssignments)
+      .where(eq(jobAssignments.jobId, params.jobId));
     const deletedJob = await db
       .delete(jobs)
       .where(eq(jobs.id, params.jobId))
