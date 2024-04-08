@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Job } from "@prisma/client";
+import { Job } from "@db/types";
 import { Trash2 } from "lucide-react";
 
 import {

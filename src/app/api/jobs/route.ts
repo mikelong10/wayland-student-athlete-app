@@ -1,10 +1,12 @@
+import { db } from "@db";
+import { jobs } from "@db/schema/jobs";
+import { Job } from "@db/types";
 import { JWT } from "google-auth-library";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 
-import { db } from "@lib/db";
 import { requestJobFormSchema, RequestJobFormValues } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
 
@@ -94,19 +96,23 @@ export async function POST(req: Request) {
     const jobRequestBody = requestJobFormSchema.parse(json);
 
     // create job for non-logged in users
-    let newJob;
+    let newJob: Job;
     if (!user) {
-      newJob = await db.job.create({
-        data: jobRequestBody,
-      });
+      const createdJob = await db
+        .insert(jobs)
+        .values(jobRequestBody)
+        .returning();
+      newJob = createdJob[0];
     } else {
       // create job with logged in user id
-      newJob = await db.job.create({
-        data: {
+      const createdJob = await db
+        .insert(jobs)
+        .values({
           ...jobRequestBody,
           requestorId: user.id,
-        },
-      });
+        })
+        .returning();
+      newJob = createdJob[0];
     }
 
     // send job request to google sheet

@@ -2,10 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Role, User } from "@prisma/client";
+import { User } from "@db/types";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 
+import { Role } from "@lib/enums";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -91,7 +92,7 @@ export default function UserRoleSelect({ user }: { user: User }) {
             variant={
               user.role === Role.ADMIN
                 ? "default"
-                : user.role === Role.STUDENTATHLETE
+                : user.role === Role.STUDENT_ATHLETE
                   ? "secondary"
                   : "accent"
             }
@@ -107,8 +108,8 @@ export default function UserRoleSelect({ user }: { user: User }) {
           <SelectItem value={Role.CLIENT}>
             {UserRoleText[Role.CLIENT]}
           </SelectItem>
-          <SelectItem value={Role.STUDENTATHLETE}>
-            {UserRoleText[Role.STUDENTATHLETE]}
+          <SelectItem value={Role.STUDENT_ATHLETE}>
+            {UserRoleText[Role.STUDENT_ATHLETE]}
           </SelectItem>
           <SelectItem value={Role.ADMIN}>{UserRoleText[Role.ADMIN]}</SelectItem>
         </SelectContent>

@@ -1,8 +1,13 @@
-import { Role } from "@prisma/client";
+import { db } from "@db";
+import {
+  studentAthleteProfiles,
+  studentAthleteResumeItems,
+} from "@db/schema/content";
+import { eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { studentAthleteProfileFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
 import { nameToSlug } from "@lib/utils";
@@ -34,19 +39,26 @@ export async function PATCH(
     const { graduationYear, firstName, lastName, resumeItems, ...profileData } =
       updateProfileRequestBody;
 
-    const updatedStudentAthleteProfile = await db.studentAthleteProfile.update({
-      where: { id: params.id },
-      data: {
+    const updatedStudentAthleteProfile = await db
+      .update(studentAthleteProfiles)
+      .set({
         ...profileData,
         name: `${firstName} ${lastName}`,
         graduationYear: parseInt(graduationYear),
         slug: nameToSlug(`${firstName} ${lastName}`),
-      },
-    });
+      })
+      .where(eq(studentAthleteProfiles.id, params.id))
+      .returning();
 
-    const currentResumeItems = await db.studentAthleteResumeItem.findMany({
-      where: { studentAthleteId: updatedStudentAthleteProfile.id },
-    });
+    const currentResumeItems = await db
+      .select()
+      .from(studentAthleteResumeItems)
+      .where(
+        eq(
+          studentAthleteResumeItems.studentAthleteId,
+          updatedStudentAthleteProfile[0].id
+        )
+      );
     const newResumeItemTexts = resumeItems.map((item) => item.text) ?? [];
     // all current resume items that are not in the new list
     const resumeItemsToDelete = currentResumeItems.filter(
@@ -58,25 +70,19 @@ export async function PATCH(
     );
     // delete resumeItems
     for (const item of resumeItemsToDelete) {
-      await db.studentAthleteResumeItem.delete({
-        where: { id: item.id },
-      });
+      await db
+        .delete(studentAthleteResumeItems)
+        .where(eq(studentAthleteResumeItems.id, item.id));
     }
     // add resumeItems
     for (const text of resumeItemsToAdd) {
-      await db.studentAthleteResumeItem.create({
-        data: {
-          text: text,
-          studentAthlete: {
-            connect: {
-              id: updatedStudentAthleteProfile.id,
-            },
-          },
-        },
+      await db.insert(studentAthleteResumeItems).values({
+        text: text,
+        studentAthleteId: updatedStudentAthleteProfile[0].id,
       });
     }
 
-    return new Response(JSON.stringify(updatedStudentAthleteProfile));
+    return new Response(JSON.stringify(updatedStudentAthleteProfile[0]));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {
@@ -107,14 +113,15 @@ export async function DELETE(
     }
 
     const { params } = routeContextSchema.parse(context);
-    await db.studentAthleteResumeItem.deleteMany({
-      where: { studentAthleteId: params.id },
-    });
-    const deletedProfile = await db.studentAthleteProfile.delete({
-      where: { id: params.id },
-    });
+    await db
+      .delete(studentAthleteResumeItems)
+      .where(eq(studentAthleteResumeItems.studentAthleteId, params.id));
+    const deletedProfile = await db
+      .delete(studentAthleteProfiles)
+      .where(eq(studentAthleteProfiles.id, params.id))
+      .returning();
 
-    return new Response(JSON.stringify(deletedProfile));
+    return new Response(JSON.stringify(deletedProfile[0]));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {

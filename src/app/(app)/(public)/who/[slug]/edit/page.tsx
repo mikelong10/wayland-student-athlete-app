@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
-import { Role } from "@prisma/client";
+import { getStudentAthleteProfileBySlug } from "@db/queries";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import EditStudentAthleteProfileForm from "./EditStudentAthleteProfileForm";
 
@@ -16,19 +16,7 @@ export default async function EditStudentAthleteProfilePage({
     notFound();
   }
 
-  const studentAthlete = await db.studentAthleteProfile.findFirst({
-    where: {
-      slug: params.slug,
-    },
-    include: {
-      resume: {
-        select: {
-          id: true,
-          text: true,
-        },
-      },
-    },
-  });
+  const studentAthlete = await getStudentAthleteProfileBySlug(params.slug);
 
   if (!studentAthlete) {
     notFound();

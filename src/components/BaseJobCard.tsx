@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Job } from "@prisma/client";
+import { Job } from "@db/types";
 
 import { formatDate } from "@lib/utils";
 import {

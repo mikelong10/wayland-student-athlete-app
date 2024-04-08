@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { User } from "@prisma/client";
+import { User } from "@db/types";
 import Fuse from "fuse.js";
 import { Check, UserPlus } from "lucide-react";
 

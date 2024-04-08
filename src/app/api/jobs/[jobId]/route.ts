@@ -1,8 +1,10 @@
-import { Role, Status } from "@prisma/client";
+import { db } from "@db";
+import { jobAssignments, jobs } from "@db/schema/jobs";
+import { eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-import { db } from "@lib/db";
+import { Role, Status } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 
 const routeContextSchema = z.object({
@@ -28,7 +30,7 @@ export async function PATCH(
     // if the user is not an admin/SA
     if (
       !user ||
-      (user.role !== Role.ADMIN && user.role !== Role.STUDENTATHLETE)
+      (user.role !== Role.ADMIN && user.role !== Role.STUDENT_ATHLETE)
     ) {
       return new Response(null, {
         status: StatusCodes.FORBIDDEN,
@@ -38,15 +40,21 @@ export async function PATCH(
 
     // if updating the job status
     if (payload.status) {
-      const updatedJob = await db.job.update({
-        where: {
-          id: params.jobId,
-        },
-        data: {
-          status: payload.status,
-        },
-      });
-      return new Response(JSON.stringify(updatedJob));
+      // const updatedJob = await db.job.update({
+      //   where: {
+      //     id: params.jobId,
+      //   },
+      //   data: {
+      //     status: payload.status,
+      //   },
+      // });
+      const updatedJob = await db
+        .update(jobs)
+        .set({ status: payload.status })
+        .where(eq(jobs.id, params.jobId))
+        .returning();
+
+      return new Response(JSON.stringify(updatedJob[0]));
     }
 
     return new Response("Unsupported request", {
@@ -78,11 +86,16 @@ export async function DELETE(
     }
 
     const { params } = routeContextSchema.parse(context);
-    const deletedJob = await db.job.delete({
-      where: { id: params.jobId },
-    });
+    // delete all job assignments for the job
+    await db
+      .delete(jobAssignments)
+      .where(eq(jobAssignments.jobId, params.jobId));
+    const deletedJob = await db
+      .delete(jobs)
+      .where(eq(jobs.id, params.jobId))
+      .returning();
 
-    return new Response(JSON.stringify(deletedJob));
+    return new Response(JSON.stringify(deletedJob[0]));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {

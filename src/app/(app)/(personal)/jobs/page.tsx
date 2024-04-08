@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Job } from "@prisma/client";
+import { getJobsByRequestor } from "@db/queries";
+import { Job } from "@db/types";
 import { MoveRight } from "lucide-react";
 
-import { db } from "@lib/db";
+import { Status } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import Container from "@components/Container";
 import PersonalJobCard from "@components/PersonalJobCard";
@@ -25,41 +26,10 @@ export default async function MyJobs() {
   let doneJobs: Job[] = [];
 
   if (user) {
-    allJobs = await db.job.findMany({
-      where: {
-        requestorId: user.id,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-    toDoJobs = await db.job.findMany({
-      where: {
-        requestorId: user.id,
-        status: "TODO",
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-    inProgressJobs = await db.job.findMany({
-      where: {
-        requestorId: user.id,
-        status: "INPROGRESS",
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-    doneJobs = await db.job.findMany({
-      where: {
-        requestorId: user.id,
-        status: "DONE",
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+    allJobs = await getJobsByRequestor(user.id);
+    toDoJobs = await getJobsByRequestor(user.id, Status.TODO);
+    inProgressJobs = await getJobsByRequestor(user.id, Status.IN_PROGRESS);
+    doneJobs = await getJobsByRequestor(user.id, Status.DONE);
   }
 
   const jobsTabs = [

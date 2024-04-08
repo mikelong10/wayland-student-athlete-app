@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { Role } from "@prisma/client";
 
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import AddStudentAthleteProfileForm from "./AddStudentAthleteProfileForm";
 

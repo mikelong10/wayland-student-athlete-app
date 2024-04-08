@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { JobReview, JobReviewWithImages } from "@db/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { JobReview } from "@prisma/client";
 import { FileCheck, ImagePlus, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 
@@ -34,7 +34,6 @@ import {
 import { Separator } from "@components/ui/separator";
 import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
-import { JobReviewWithImages } from "../page";
 
 export default function AddReviewForm({
   groupedReviewsArray,
@@ -99,7 +98,7 @@ export default function AddReviewForm({
   }
 
   return (
-    <Container className="flex size-full min-h-screen flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
+    <Container className="flex size-full min-h-screen flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-screen-md md:items-center lg:max-w-[960px]">
       <H1 className="w-full text-left">Add Review</H1>
       <Separator />
       <Form {...form}>
@@ -184,15 +183,15 @@ export default function AddReviewForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="max-h-80">
-                          {groupedReviewsArray.map((reviews) => (
+                          {groupedReviewsArray.map((jobReviews) => (
                             <SelectItem
-                              key={reviews[0].order}
-                              value={reviews[0].order.toString()}
+                              key={jobReviews[0].review.order}
+                              value={jobReviews[0].review.order.toString()}
                             >
-                              {`${reviews[0].order} - ${
-                                reviews[0].reviewBlurb
-                              } (${reviews
-                                .map((r) => r.reviewerName)
+                              {`${jobReviews[0].review.order} - ${
+                                jobReviews[0].review.reviewBlurb
+                              } (${jobReviews
+                                .map((r) => r.review.reviewerName)
                                 .join(", ")})`}
                             </SelectItem>
                           ))}

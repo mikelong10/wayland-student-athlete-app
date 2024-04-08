@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { User } from "@db/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "@prisma/client";
 import { Loader2, Pencil } from "lucide-react";
 import { useForm } from "react-hook-form";
 

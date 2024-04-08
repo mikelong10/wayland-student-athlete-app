@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { User } from "@prisma/client";
+import { User } from "@db/types";
 import { MoveRight } from "lucide-react";
 
 import Container from "@components/Container";
@@ -13,7 +13,7 @@ import EditProfileForm from "./EditProfileForm";
 export default function ProfilePageContent({ user }: { user: User }) {
   return (
     <Container className="flex size-full min-h-screen flex-col items-center justify-center gap-4 pb-20 pt-32">
-      <div className="flex w-full flex-col justify-center gap-4 sm:max-w-[640px] lg:max-w-[768px]">
+      <div className="sm:max-w-screen-sm, flex w-full flex-col justify-center gap-4 lg:max-w-screen-md">
         <H1 className="w-full scroll-m-20 text-left">Profile</H1>
         <Separator />
         <EditProfileForm user={user} />

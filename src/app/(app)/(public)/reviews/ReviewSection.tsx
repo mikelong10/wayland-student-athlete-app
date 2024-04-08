@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Image as ReviewImage, Role, User } from "@prisma/client";
+import { JobReviewImage, User } from "@db/types";
 import {
   MessageSquareHeart,
   MessageSquareMore,
@@ -7,6 +7,7 @@ import {
   MessageSquareText,
 } from "lucide-react";
 
+import { Role } from "@lib/enums";
 import { cn } from "@lib/utils";
 import Carousel from "@components/Carousel";
 import Container from "@components/Container";
@@ -26,7 +27,7 @@ export default function ReviewSection({
 }: {
   user: User | undefined;
   reviewId: string;
-  images: ReviewImage[];
+  images: JobReviewImage[];
   reviewBlurb: string;
   reviewText: string;
   reviewerName: string;
@@ -181,7 +182,12 @@ export default function ReviewSection({
     }
   } else {
     return (
-      <Container className={cn("flex justify-center py-16", bgColor)}>
+      <Container
+        className={cn(
+          "flex w-full flex-col items-center justify-center py-16",
+          bgColor
+        )}
+      >
         <Card className="flex w-full max-w-4xl flex-col gap-4 p-8">
           <div className="flex w-full flex-col gap-6">
             <div className="flex items-center gap-4">
@@ -198,6 +204,12 @@ export default function ReviewSection({
             </div>
           </div>
         </Card>
+        {user?.role === Role.ADMIN && (
+          <AdminManageReviewActions
+            reviewId={reviewId}
+            reviewerName={reviewerName}
+          />
+        )}
       </Container>
     );
   }

@@ -1,8 +1,8 @@
 "use client";
 
 import { Dispatch, SetStateAction, useState } from "react";
+import { Job, User } from "@db/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Job, User } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 

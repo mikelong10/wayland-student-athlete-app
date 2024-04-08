@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { JobReview, Role } from "@prisma/client";
+import { getAllReviewsGroupedByOrder } from "@db/queries";
 import { MessageSquarePlus } from "lucide-react";
 
-import { getReviews } from "@lib/data";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
@@ -18,25 +18,10 @@ export const metadata = {
     "We've built up a strong reputation over the years with our hard work and friendly service. Hear what others are saying about WSA and how we can help you!",
 };
 
-export type JobReviewWithImages = JobReview & {
-  reviewImages: {
-    id: string;
-    uploadedAt: Date;
-    updatedAt: Date;
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-    jobReviewId: string;
-  }[];
-};
-
 export default async function ReviewsPage() {
   const user = await getCurrentUser();
 
-  const groupedReviewsArray = (await getReviews(
-    true
-  )) as JobReviewWithImages[][];
+  const groupedReviewsArray = await getAllReviewsGroupedByOrder();
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center pt-32">
@@ -59,18 +44,18 @@ export default async function ReviewsPage() {
           <Separator className="mt-6" />
         </div>
       </Container>
-      {groupedReviewsArray.map((reviews, idx) => {
-        if (reviews.length === 1) {
-          const review = reviews[0];
+      {groupedReviewsArray.map((jobReviews, idx) => {
+        if (jobReviews.length === 1) {
+          const jobReview = jobReviews[0];
           return (
             <ReviewSection
-              key={review.id}
+              key={jobReview.review.id}
               user={user}
-              reviewId={review.id}
-              images={review.reviewImages}
-              reviewBlurb={review.reviewBlurb}
-              reviewText={review.reviewText}
-              reviewerName={review.reviewerName}
+              reviewId={jobReview.review.id}
+              images={jobReview.images}
+              reviewBlurb={jobReview.review.reviewBlurb}
+              reviewText={jobReview.review.reviewText}
+              reviewerName={jobReview.review.reviewerName}
               variant={idx % 3 === 0 ? "left" : "right"}
               bgColor={
                 idx % 3 === 0
@@ -84,9 +69,9 @@ export default async function ReviewsPage() {
         } else {
           return (
             <MultiReviewCarousel
-              key={reviews[0].order}
+              key={jobReviews[0].review.order}
               user={user}
-              reviews={reviews}
+              jobReviews={jobReviews}
               bgColor={
                 idx % 3 === 0
                   ? "bg-background"

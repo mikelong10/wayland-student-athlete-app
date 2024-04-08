@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { User } from "@prisma/client";
+import { User } from "@db/types";
 
 import { UploadButton } from "@lib/uploadthing";
 import { useToast } from "@components/ui/use-toast";

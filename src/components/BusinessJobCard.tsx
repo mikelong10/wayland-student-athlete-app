@@ -1,8 +1,9 @@
 "use client";
 
 import DeleteJobDialog from "@app/(app)/(personal)/dashboard/DeleteJobDialog";
-import { Status, User } from "@prisma/client";
+import { User } from "@db/types";
 
+import { Status } from "@lib/enums";
 import { JobCardProps } from "@components/PersonalJobCard";
 import BaseJobCard from "./BaseJobCard";
 import JobCardAssign from "./JobCardAssign";

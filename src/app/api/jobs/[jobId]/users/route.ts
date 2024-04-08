@@ -1,8 +1,11 @@
-import { Role } from "@prisma/client";
+import { db } from "@db";
+import { users } from "@db/schema/auth";
+import { jobAssignments } from "@db/schema/jobs";
+import { and, eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 
 const routeContextSchema = z.object({
@@ -12,7 +15,7 @@ const routeContextSchema = z.object({
 });
 
 const toggleAssignSchema = z.object({
-  userId: z.string().optional(),
+  userId: z.string(),
 });
 
 export async function POST(
@@ -24,19 +27,18 @@ export async function POST(
     const body = await req.json();
     const payload = toggleAssignSchema.parse(body);
 
-    const assignee = await db.user.findUnique({
-      where: {
-        id: payload.userId,
-      },
-    });
+    const assignee = (
+      await db.select().from(users).where(eq(users.id, payload.userId))
+    ).pop();
+
     const user = await getCurrentUser();
     // if the user is not an admin/SA or the assignee is not an admin/SA
     if (
       !user ||
-      (user.role !== Role.ADMIN && user.role !== Role.STUDENTATHLETE) ||
+      (user.role !== Role.ADMIN && user.role !== Role.STUDENT_ATHLETE) ||
       (assignee &&
         assignee.role !== Role.ADMIN &&
-        assignee.role !== Role.STUDENTATHLETE)
+        assignee.role !== Role.STUDENT_ATHLETE)
     ) {
       return new Response(null, {
         status: StatusCodes.FORBIDDEN,
@@ -46,14 +48,15 @@ export async function POST(
 
     // updating the job assignee
     if (assignee?.id) {
-      const newAssignment = await db.jobAssignment.create({
-        data: {
+      const newAssignment = await db
+        .insert(jobAssignments)
+        .values({
           jobId: params.jobId,
           userId: assignee.id,
           assignedBy: user.id,
-        },
-      });
-      return new Response(JSON.stringify(newAssignment));
+        })
+        .returning();
+      return new Response(JSON.stringify(newAssignment[0]));
     }
 
     return new Response(null, {
@@ -80,16 +83,15 @@ export async function DELETE(
     const body = await req.json();
     const payload = toggleAssignSchema.parse(body);
 
-    const unassignee = await db.user.findUnique({
-      where: {
-        id: payload.userId,
-      },
-    });
+    const unassignee = (
+      await db.select().from(users).where(eq(users.id, payload.userId))
+    ).pop();
+
     const user = await getCurrentUser();
     // if the user is not an admin/SA
     if (
       !user ||
-      (user.role !== Role.ADMIN && user.role !== Role.STUDENTATHLETE)
+      (user.role !== Role.ADMIN && user.role !== Role.STUDENT_ATHLETE)
     ) {
       return new Response(null, {
         status: StatusCodes.FORBIDDEN,
@@ -99,15 +101,16 @@ export async function DELETE(
 
     // removing the job assignee
     if (unassignee?.id) {
-      const deletedAssignment = await db.jobAssignment.delete({
-        where: {
-          jobId_userId: {
-            jobId: params.jobId,
-            userId: unassignee.id,
-          },
-        },
-      });
-      return new Response(JSON.stringify(deletedAssignment));
+      const deletedAssignment = await db
+        .delete(jobAssignments)
+        .where(
+          and(
+            eq(jobAssignments.jobId, params.jobId),
+            eq(jobAssignments.userId, unassignee.id)
+          )
+        )
+        .returning();
+      return new Response(JSON.stringify(deletedAssignment[0]));
     }
 
     return new Response(null, {

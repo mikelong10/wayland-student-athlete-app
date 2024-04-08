@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { User } from "@prisma/client";
+import { User } from "@db/types";
 import { VariantProps } from "class-variance-authority";
 
 import { cn } from "@lib/utils";

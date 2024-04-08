@@ -1,8 +1,10 @@
-import { Role } from "@prisma/client";
+import { db } from "@db";
+import { jobReviewImages, jobReviews } from "@db/schema/content";
+import { desc, eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { reviewFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
 
@@ -30,27 +32,28 @@ export async function PATCH(
     const updateReviewRequestBody = reviewFormSchema.parse(json);
     const { reviewImages, ...reviewData } = updateReviewRequestBody;
 
-    const allReviews = await db.jobReview.findMany({
-      orderBy: {
-        order: "desc",
-      },
-    });
-    const highestOrderReview = allReviews[0];
+    const highestOrderReview = await db
+      .select({ order: jobReviews.order })
+      .from(jobReviews)
+      .orderBy(desc(jobReviews.order))
+      .limit(1);
 
-    const updatedJobReview = await db.jobReview.update({
-      where: { id: params.id },
-      data: {
+    const updatedJobReview = await db
+      .update(jobReviews)
+      .set({
         ...reviewData,
         order:
           reviewData.order === "new"
-            ? highestOrderReview.order + 1
+            ? highestOrderReview[0].order + 1
             : parseInt(reviewData.order),
-      },
-    });
+      })
+      .where(eq(jobReviews.id, params.id))
+      .returning();
 
-    const currentImages = await db.image.findMany({
-      where: { jobReviewId: updatedJobReview.id },
-    });
+    const currentImages = await db
+      .select()
+      .from(jobReviewImages)
+      .where(eq(jobReviewImages.jobReviewId, updatedJobReview[0].id));
     const currentImageUrls = currentImages.map((image) => image.src);
     const newImageUrls = reviewImages ?? [];
     const imagesToDelete = currentImageUrls.filter(
@@ -61,26 +64,18 @@ export async function PATCH(
     );
     // delete images
     for (const url of imagesToDelete) {
-      await db.image.delete({
-        where: { src: url },
-      });
+      await db.delete(jobReviewImages).where(eq(jobReviewImages.src, url));
     }
     // add images
     for (const url of imagesToAdd) {
-      await db.image.create({
-        data: {
-          src: url,
-          alt: `Image for review by ${reviewData.reviewerName}`,
-          jobReview: {
-            connect: {
-              id: updatedJobReview.id,
-            },
-          },
-        },
+      await db.insert(jobReviewImages).values({
+        src: url,
+        alt: `Image for review by ${reviewData.reviewerName}`,
+        jobReviewId: updatedJobReview[0].id,
       });
     }
 
-    return new Response(JSON.stringify(updatedJobReview));
+    return new Response(JSON.stringify(updatedJobReview[0]));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {
@@ -111,14 +106,15 @@ export async function DELETE(
     }
 
     const { params } = routeContextSchema.parse(context);
-    await db.image.deleteMany({
-      where: { jobReviewId: params.id },
-    });
-    const deletedReview = await db.jobReview.delete({
-      where: { id: params.id },
-    });
+    await db
+      .delete(jobReviewImages)
+      .where(eq(jobReviewImages.jobReviewId, params.id));
+    const deletedReview = await db
+      .delete(jobReviews)
+      .where(eq(jobReviews.id, params.id))
+      .returning();
 
-    return new Response(JSON.stringify(deletedReview));
+    return new Response(JSON.stringify(deletedReview[0]));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {

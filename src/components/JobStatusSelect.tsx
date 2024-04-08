@@ -1,10 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Job, Status } from "@prisma/client";
+import { Job } from "@db/types";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 
+import { Status } from "@lib/enums";
 import { Badge } from "@components/ui/badge";
 import Dot from "@components/ui/dot";
 import { Select, SelectContent, SelectItem } from "@components/ui/select";
@@ -69,10 +70,10 @@ export default function JobStatusSelect({ job }: { job: Job }) {
       <Select value={job.status} onValueChange={onSelectChange}>
         <SelectPrimitive.Trigger>
           <Badge
-            variant={Status[job.status]}
+            variant={job.status as Status}
             className="hover:bg-accent dark:hover:bg-background-less w-fit gap-2"
           >
-            <Dot status={Status[job.status]} />
+            <Dot status={job.status as Status} />
             <SelectPrimitive.Icon asChild>
               <ChevronDown className="size-4 opacity-50" />
             </SelectPrimitive.Icon>

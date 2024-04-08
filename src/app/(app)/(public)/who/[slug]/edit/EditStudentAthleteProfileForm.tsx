@@ -2,8 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import {
+  StudentAthleteProfile,
+  StudentAthleteProfileWithResume,
+} from "@db/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { StudentAthleteProfile } from "@prisma/client";
 import _ from "lodash";
 import { FileCheck, ImagePlus, Loader2, Plus, Trash2 } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -38,13 +41,6 @@ import {
 import { Separator } from "@components/ui/separator";
 import { useToast } from "@components/ui/use-toast";
 
-export type StudentAthleteProfileWithResume = StudentAthleteProfile & {
-  resume: {
-    id: string;
-    text: string;
-  }[];
-};
-
 export default function EditStudentAthleteProfileForm({
   studentAthlete,
 }: {
@@ -56,20 +52,20 @@ export default function EditStudentAthleteProfileForm({
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const [filesUploaded, setFilesUploaded] = useState(
-    !!studentAthlete.displayImage
+    !!studentAthlete.profile.displayImage
   );
   const [numFilesUploaded, setNumFilesUploaded] = useState(
-    studentAthlete.displayImage ? 1 : 0
+    studentAthlete.profile.displayImage ? 1 : 0
   );
 
-  const [firstName, lastName] = studentAthlete.name.split(" ", 2);
+  const [firstName, lastName] = studentAthlete.profile.name.split(" ", 2);
   const defaultValues = {
     firstName: firstName,
     lastName: lastName,
-    title: studentAthlete.title,
-    graduationYear: studentAthlete.graduationYear.toString(),
+    title: studentAthlete.profile.title,
+    graduationYear: studentAthlete.profile.graduationYear.toString(),
     resumeItems: studentAthlete.resume,
-    displayImage: studentAthlete.displayImage,
+    displayImage: studentAthlete.profile.displayImage,
   };
 
   const form = useForm<StudentAthleteProfileFormValues>({
@@ -103,7 +99,7 @@ export default function EditStudentAthleteProfileForm({
       });
 
       const updateProfileResponse = await fetch(
-        `/api/student-athletes/${studentAthlete.id}`,
+        `/api/student-athletes/${studentAthlete.profile.id}`,
         {
           method: "PATCH",
           headers: {
@@ -141,7 +137,7 @@ export default function EditStudentAthleteProfileForm({
   }
 
   return (
-    <Container className="flex size-full min-h-screen flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
+    <Container className="flex size-full min-h-screen flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-screen-md md:items-center lg:max-w-[960px]">
       <H1 className="w-full text-left">{`Edit ${firstName}'s Profile`}</H1>
       <Separator />
       <Form {...form}>

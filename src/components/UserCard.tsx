@@ -1,7 +1,8 @@
 "use client";
 
-import { Role, User } from "@prisma/client";
+import { User } from "@db/types";
 
+import { Role } from "@lib/enums";
 import { formatDate } from "@lib/utils";
 import {
   Card,
@@ -13,17 +14,13 @@ import {
 import { UserAvatar } from "@components/UserAvatar";
 import UserRoleSelect from "./UserRoleSelect";
 
-interface UserCardProps {
-  user: User;
-}
-
 export const UserRoleText: Record<Role, string> = {
-  ADMIN: "Admin",
-  STUDENTATHLETE: "Student-Athlete",
-  CLIENT: "Client",
+  [Role.ADMIN]: "Admin",
+  [Role.STUDENT_ATHLETE]: "Student-Athlete",
+  [Role.CLIENT]: "Client",
 };
 
-export default function UserCard({ user }: UserCardProps) {
+export default function UserCard({ user }: { user: User }) {
   return (
     <Card key={user.id} className="flex flex-col justify-between gap-4">
       <CardHeader className="flex flex-col items-start gap-3 overflow-hidden">

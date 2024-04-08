@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
-import { Role } from "@prisma/client";
+import { getAllReviewsGroupedByOrder } from "@db/queries";
 
-import { getReviews } from "@lib/data";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
-import { JobReviewWithImages } from "../page";
 import AddReviewForm from "./AddReviewForm";
 
 export default async function AddReviewPage() {
@@ -13,9 +12,7 @@ export default async function AddReviewPage() {
     notFound();
   }
 
-  const groupedReviewsArray = (await getReviews(
-    true
-  )) as JobReviewWithImages[][];
+  const groupedReviewsArray = await getAllReviewsGroupedByOrder();
 
   return <AddReviewForm groupedReviewsArray={groupedReviewsArray} />;
 }

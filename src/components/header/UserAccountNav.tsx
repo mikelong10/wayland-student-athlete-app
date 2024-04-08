@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { HTMLAttributes } from "react";
-import { Role, User } from "@prisma/client";
+import { User } from "@db/types";
 import {
   CheckSquare,
   KanbanSquare,
@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 
+import { Role } from "@lib/enums";
 import { LightDarkModeToggle } from "@components/LightDarkModeToggle";
 import { Button } from "@components/ui/button";
 import {
@@ -71,7 +72,7 @@ export default function UserAccountNav({
                 </div>
               </div>
               {(user.role === Role.ADMIN ||
-                user.role === Role.STUDENTATHLETE) && (
+                user.role === Role.STUDENT_ATHLETE) && (
                 <>
                   <DropdownMenuSeparator />
                   <DropdownMenuLabel>Business</DropdownMenuLabel>

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { StudentAthleteProfileWithResume } from "@db/types";
 import { Trash2 } from "lucide-react";
 
 import {
@@ -16,7 +17,6 @@ import {
 } from "@components/ui/alert-dialog";
 import { Button } from "@components/ui/button";
 import { useToast } from "@components/ui/use-toast";
-import { StudentAthleteProfileWithResume } from "./edit/EditStudentAthleteProfileForm";
 
 export default function DeleteStudentAthleteProfileDialog({
   studentAthlete,
@@ -32,12 +32,12 @@ export default function DeleteStudentAthleteProfileDialog({
     console.log("studentAthlete", studentAthlete);
     try {
       toast({
-        title: `Deleting ${studentAthlete.name}'s profile...`,
+        title: `Deleting ${studentAthlete.profile.name}'s profile...`,
         description: "See ya later, alligator!",
       });
 
       const deleteProfileResponse = await fetch(
-        `/api/student-athletes/${studentAthlete.id}`,
+        `/api/student-athletes/${studentAthlete.profile.id}`,
         {
           method: "DELETE",
           headers: {
@@ -51,7 +51,7 @@ export default function DeleteStudentAthleteProfileDialog({
       }
 
       toast({
-        title: `Successfully deleted ${studentAthlete.name}'s profile.`,
+        title: `Successfully deleted ${studentAthlete.profile.name}'s profile.`,
         description: `Click "Add Profile" to add them back.`,
         variant: "success",
       });
@@ -82,7 +82,7 @@ export default function DeleteStudentAthleteProfileDialog({
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              {`This will delete ${studentAthlete.name}'s profile. You will have to add them back again manually if you change your mind.`}
+              {`This will delete ${studentAthlete.profile.name}'s profile. You will have to add them back again manually if you change your mind.`}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

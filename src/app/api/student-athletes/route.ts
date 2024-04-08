@@ -1,8 +1,12 @@
-import { Role } from "@prisma/client";
+import { db } from "@db";
+import {
+  studentAthleteProfiles,
+  studentAthleteResumeItems,
+} from "@db/schema/content";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { studentAthleteProfileFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
 import { nameToSlug } from "@lib/utils";
@@ -23,25 +27,24 @@ export async function POST(req: Request) {
     const { graduationYear, firstName, lastName, resumeItems, ...profileData } =
       addProfileRequestBody;
 
-    const newStudentAthleteProfile = await db.studentAthleteProfile.create({
-      data: {
+    const newStudentAthleteProfile = await db
+      .insert(studentAthleteProfiles)
+      .values({
         ...profileData,
         name: `${firstName} ${lastName}`,
         graduationYear: parseInt(graduationYear),
         slug: nameToSlug(`${firstName} ${lastName}`),
-      },
-    });
+      })
+      .returning();
 
     for (const resumeItem of resumeItems) {
-      await db.studentAthleteResumeItem.create({
-        data: {
-          ...resumeItem,
-          studentAthleteId: newStudentAthleteProfile.id,
-        },
+      await db.insert(studentAthleteResumeItems).values({
+        ...resumeItem,
+        studentAthleteId: newStudentAthleteProfile[0].id,
       });
     }
 
-    return new Response(JSON.stringify(newStudentAthleteProfile), {
+    return new Response(JSON.stringify(newStudentAthleteProfile[0]), {
       status: StatusCodes.CREATED,
       statusText: ReasonPhrases.CREATED,
     });

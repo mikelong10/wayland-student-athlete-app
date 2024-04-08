@@ -1,8 +1,10 @@
-import { Role } from "@prisma/client";
+import { db } from "@db";
+import { users } from "@db/schema/auth";
+import { and, desc, eq, ne } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-import { db } from "@lib/db";
+import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import { formatPhoneNumberForServer } from "@lib/utils";
 
@@ -40,44 +42,32 @@ export async function PATCH(
         });
       }
 
-      const userToUpdate = await db.user.findUnique({
-        where: {
-          id: params.userId,
-        },
-      });
-      const allOtherAdmins = await db.user.findMany({
-        where: {
-          role: Role.ADMIN,
-          NOT: {
-            id: {
-              equals: user.id,
-            },
-          },
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      });
+      const userToUpdate = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, params.userId));
+      const allOtherAdmins = await db
+        .select()
+        .from(users)
+        .where(and(eq(users.role, Role.ADMIN), ne(users.id, user.id)))
+        .orderBy(desc(users.createdAt));
 
       // as long as there will be at least 1 admin left after this change, allow it
       if (
         userToUpdate &&
         !(
           allOtherAdmins.length < 1 &&
-          userToUpdate.role === Role.ADMIN &&
+          userToUpdate[0].role === Role.ADMIN &&
           payload.role !== Role.ADMIN
         )
       ) {
-        const updatedUser = await db.user.update({
-          where: {
-            id: params.userId,
-          },
-          data: {
-            role: payload.role,
-          },
-        });
+        const updatedUser = await db
+          .update(users)
+          .set({ role: payload.role })
+          .where(eq(users.id, params.userId))
+          .returning();
 
-        return new Response(JSON.stringify(updatedUser));
+        return new Response(JSON.stringify(updatedUser[0]));
       } else {
         return new Response(
           "Invalid request. You are currently the only admin, and there must be at least 1 admin remaining.",
@@ -97,11 +87,9 @@ export async function PATCH(
         });
       }
       // find the user they are trying to edit
-      const userToUpdate = await db.user.findUnique({
-        where: {
-          id: params.userId,
-        },
-      });
+      const userToUpdate = (
+        await db.select().from(users).where(eq(users.id, params.userId))
+      ).pop();
       // invalid if the user was not found or the emails do not match
       if (!userToUpdate || user.email !== userToUpdate?.email) {
         return new Response(null, {
@@ -119,13 +107,12 @@ export async function PATCH(
         dataToUpdate["phone"] = updatedPhone;
       }
       // update the user
-      const updatedUser = await db.user.update({
-        where: {
-          id: params.userId,
-        },
-        data: dataToUpdate,
-      });
-      return new Response(JSON.stringify(updatedUser));
+      const updatedUser = await db
+        .update(users)
+        .set(dataToUpdate)
+        .where(eq(users.id, params.userId))
+        .returning();
+      return new Response(JSON.stringify(updatedUser[0]));
     }
   } catch (error) {
     if (error instanceof z.ZodError) {

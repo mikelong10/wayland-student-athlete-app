@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Role, User } from "@prisma/client";
+import { JobReviewWithImages, User } from "@db/types";
 import { Quote } from "lucide-react";
 
+import { Role } from "@lib/enums";
 import { cn } from "@lib/utils";
 import Container from "@components/Container";
 import H2 from "@components/typography/h2";
@@ -16,15 +17,14 @@ import {
   CarouselPrevious,
 } from "@components/ui/carousel";
 import AdminManageReviewActions from "./AdminManageReviewActions";
-import { JobReviewWithImages } from "./page";
 
 export default function MultiReviewCarousel({
   user,
-  reviews,
+  jobReviews,
   bgColor,
 }: {
   user: User | undefined;
-  reviews: JobReviewWithImages[];
+  jobReviews: JobReviewWithImages[];
   bgColor: string;
 }) {
   return (
@@ -36,7 +36,7 @@ export default function MultiReviewCarousel({
     >
       <div className="flex items-center gap-4">
         <Quote className="text-secondary size-10" />
-        <H2>{reviews[0].reviewBlurb}</H2>
+        <H2>{jobReviews[0].review.reviewBlurb}</H2>
       </div>
       <Carousel
         opts={{
@@ -46,20 +46,20 @@ export default function MultiReviewCarousel({
         className="w-full max-w-prose lg:max-w-5xl"
       >
         <CarouselContent>
-          {reviews.map((review) => (
+          {jobReviews.map((jobReview) => (
             <CarouselItem
-              key={review.id}
+              key={jobReview.review.id}
               className="flex flex-col items-center lg:basis-1/2"
             >
               <div className="p-1">
                 <Card className="flex flex-col gap-6">
-                  {review.reviewImages.length > 0 && (
+                  {jobReview.images.length > 0 && (
                     <CardContent className="flex items-center justify-center">
                       <Image
-                        src={review.reviewImages[0].src}
-                        alt={review.reviewImages[0].alt}
-                        width={review.reviewImages[0].width}
-                        height={review.reviewImages[0].height}
+                        src={jobReview.images[0].src}
+                        alt={jobReview.images[0].alt}
+                        width={jobReview.images[0].width}
+                        height={jobReview.images[0].height}
                         style={{ objectFit: "contain" }}
                         priority={true}
                         className="max-h-[480px]"
@@ -69,10 +69,10 @@ export default function MultiReviewCarousel({
                   <CardFooter>
                     <div className="flex flex-col gap-2">
                       <blockquote className="border-tertiary whitespace-normal border-l-2 pl-3 leading-6 md:text-lg md:leading-8">
-                        {`"${review.reviewText}"`}
+                        {`"${jobReview.review.reviewText}"`}
                       </blockquote>
                       <p className="text-muted-foreground text-xs italic md:text-sm">
-                        {`- ${review.reviewerName}`}
+                        {`- ${jobReview.review.reviewerName}`}
                       </p>
                     </div>
                   </CardFooter>
@@ -80,8 +80,8 @@ export default function MultiReviewCarousel({
               </div>
               {user?.role === Role.ADMIN && (
                 <AdminManageReviewActions
-                  reviewId={review.id}
-                  reviewerName={review.reviewerName}
+                  reviewId={jobReview.review.id}
+                  reviewerName={jobReview.review.reviewerName}
                 />
               )}
             </CarouselItem>

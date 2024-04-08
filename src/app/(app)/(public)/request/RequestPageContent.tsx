@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { User } from "@prisma/client";
+import { User } from "@db/types";
 import { ChevronLeft, MailCheck, Redo2 } from "lucide-react";
 
 import Container from "@components/Container";
@@ -16,7 +16,7 @@ export default function RequestPageContent({ user }: { user?: User }) {
 
   if (requestSent) {
     return (
-      <Container className="flex size-full min-h-screen flex-col items-center justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] lg:max-w-[960px]">
+      <Container className="flex size-full min-h-screen flex-col items-center justify-center gap-4 pb-20 pt-32 sm:max-w-screen-md lg:max-w-[960px]">
         <div className="bg-success size-12 rounded-full p-3">
           <MailCheck color="white" />
         </div>
@@ -53,7 +53,7 @@ export default function RequestPageContent({ user }: { user?: User }) {
   }
 
   return (
-    <Container className="flex size-full min-h-screen flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-[768px] md:items-center lg:max-w-[960px]">
+    <Container className="flex size-full min-h-screen flex-col justify-center gap-4 pb-20 pt-32 sm:max-w-screen-md md:items-center lg:max-w-[960px]">
       <H1 className="w-full text-left">Request a Job</H1>
       <Separator />
       <RequestJobForm user={user} setRequestSent={setRequestSent} />
