@@ -36,12 +36,12 @@ export default function BusinessJobCard({
       job={job}
       statusAssign={statusToggleAndJobAssign}
       footerActions={
-        <>
+        <div className="flex items-center gap-2">
           {job.status === Status.DONE && (
             <JobCompleteForm job={job} currentAssignees={currentAssignees} />
           )}
           <DeleteJobDialog job={job} />
-        </>
+        </div>
       }
     />
   );
