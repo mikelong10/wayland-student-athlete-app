@@ -27,14 +27,6 @@ export async function POST(req: Request) {
     const { graduationYear, firstName, lastName, resumeItems, ...profileData } =
       addProfileRequestBody;
 
-    // const newStudentAthleteProfile = await db.studentAthleteProfile.create({
-    //   data: {
-    //     ...profileData,
-    //     name: `${firstName} ${lastName}`,
-    //     graduationYear: parseInt(graduationYear),
-    //     slug: nameToSlug(`${firstName} ${lastName}`),
-    //   },
-    // });
     const newStudentAthleteProfile = await db
       .insert(studentAthleteProfiles)
       .values({
@@ -52,7 +44,7 @@ export async function POST(req: Request) {
       });
     }
 
-    return new Response(JSON.stringify(newStudentAthleteProfile), {
+    return new Response(JSON.stringify(newStudentAthleteProfile[0]), {
       status: StatusCodes.CREATED,
       statusText: ReasonPhrases.CREATED,
     });

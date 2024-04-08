@@ -34,7 +34,7 @@ export async function POST(req: Request) {
           ...reviewData,
           order: 1,
         })
-        .returning({ id: jobReviews.id });
+        .returning();
 
       for (const url of reviewImages ?? []) {
         await db.insert(jobReviewImages).values({
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
         });
       }
 
-      return new Response(JSON.stringify(newReview), {
+      return new Response(JSON.stringify(newReview[0]), {
         status: StatusCodes.CREATED,
         statusText: ReasonPhrases.CREATED,
       });
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
               ? highestOrderReview.order + 1
               : parseInt(reviewData.order),
         })
-        .returning({ id: jobReviews.id });
+        .returning();
 
       for (const url of reviewImages ?? []) {
         await db.insert(jobReviewImages).values({
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
         });
       }
 
-      return new Response(JSON.stringify(newReview), {
+      return new Response(JSON.stringify(newReview[0]), {
         status: StatusCodes.CREATED,
         statusText: ReasonPhrases.CREATED,
       });

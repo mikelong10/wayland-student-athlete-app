@@ -151,11 +151,11 @@ export async function getStudentAthleteProfileBySlug(slug: string) {
   >((acc, row) => {
     const profile = row.studentAthleteProfile;
     const resumeItem = row.studentAthleteResumeItem;
-    if (!acc[profile.id]) {
-      acc[profile.id] = { profile: profile, resume: [] };
+    if (!acc[profile.slug]) {
+      acc[profile.slug] = { profile: profile, resume: [] };
     }
     if (resumeItem) {
-      acc[profile.id].resume.push(resumeItem);
+      acc[profile.slug].resume.push(resumeItem);
     }
     return acc;
   }, {});

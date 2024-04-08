@@ -20,7 +20,7 @@ export const users = sqliteTable("user", {
 
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
-    .default(sql`(CURRENT_TIMESTAMP)`),
+    .default(sql`(unixepoch())`),
 });
 
 export const accounts = sqliteTable(

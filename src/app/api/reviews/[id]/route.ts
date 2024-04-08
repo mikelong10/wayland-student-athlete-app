@@ -75,7 +75,7 @@ export async function PATCH(
       });
     }
 
-    return new Response(JSON.stringify(updatedJobReview));
+    return new Response(JSON.stringify(updatedJobReview[0]));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {
@@ -111,9 +111,10 @@ export async function DELETE(
       .where(eq(jobReviewImages.jobReviewId, params.id));
     const deletedReview = await db
       .delete(jobReviews)
-      .where(eq(jobReviews.id, params.id));
+      .where(eq(jobReviews.id, params.id))
+      .returning();
 
-    return new Response(JSON.stringify(deletedReview));
+    return new Response(JSON.stringify(deletedReview[0]));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), {

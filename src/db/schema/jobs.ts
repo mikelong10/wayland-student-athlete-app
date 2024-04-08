@@ -29,7 +29,7 @@ export const jobs = sqliteTable("job", {
 
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
-    .default(sql`(CURRENT_TIMESTAMP)`),
+    .default(sql`(unixepoch())`),
 });
 
 export const jobAssignments = sqliteTable("jobAssignment", {
@@ -39,6 +39,8 @@ export const jobAssignments = sqliteTable("jobAssignment", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
-  assignedAt: text("assigned_at").default(sql`(CURRENT_TIMESTAMP)`),
+  assignedAt: integer("assigned_at", { mode: "timestamp" }).default(
+    sql`(unixepoch())`
+  ),
   assignedBy: text("assigned_by").notNull(),
 });
