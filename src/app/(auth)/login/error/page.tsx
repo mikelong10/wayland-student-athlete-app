@@ -1,19 +1,11 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect } from "react";
 import { KeyRound } from "lucide-react";
 
 import H1 from "@components/typography/h1";
 import { Alert, AlertDescription, AlertTitle } from "@components/ui/alert";
 import { Button } from "@components/ui/button";
 
-export default function Error({ error }: { error: Error }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
-
+export default function LoginError() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center gap-8 text-center">
       <H1>Something went wrong!</H1>
