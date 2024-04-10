@@ -54,7 +54,7 @@ export default async function VerifyEmailPage() {
         </CardContent>
         <CardFooter className="flex justify-center">
           <Link href={"/login"}>
-            <Button variant={"traced"}>Back to login</Button>
+            <Button variant={"accent"}>Back to login</Button>
           </Link>
         </CardFooter>
       </Card>

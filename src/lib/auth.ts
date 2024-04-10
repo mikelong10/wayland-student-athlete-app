@@ -12,8 +12,9 @@ export const {
   adapter: DrizzleAdapter(db),
   pages: {
     signIn: "/login",
-    newUser: "/profile",
+    error: "/login/error",
     verifyRequest: "/login/verify",
+    newUser: "/profile",
   },
   providers: [
     GoogleProvider({
