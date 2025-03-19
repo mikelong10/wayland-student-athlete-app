@@ -17,6 +17,15 @@ import {
   User,
 } from "./types";
 
+export const getAllUsers = async () => {
+  const usersResult = await db
+    .select()
+    .from(users)
+    .orderBy(desc(users.createdAt))
+    .all();
+  return usersResult;
+};
+
 export const getUsersByRole = async (...roles: Role[]) => {
   const usersByRole = await db
     .select()
@@ -24,6 +33,15 @@ export const getUsersByRole = async (...roles: Role[]) => {
     .where(or(...roles.map((role) => eq(users.role, role))))
     .orderBy(desc(users.createdAt));
   return usersByRole;
+};
+
+export const getAllJobs = async () => {
+  const jobsResult = await db
+    .select()
+    .from(jobs)
+    .orderBy(desc(jobs.createdAt))
+    .all();
+  return jobsResult;
 };
 
 export const getJobsByStatus = async (status: Status) => {

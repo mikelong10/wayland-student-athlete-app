@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getAllJobs, getAllUsers } from "@/db/queries";
 import {
   ArrowDown,
   HeartHandshake,
@@ -16,7 +17,12 @@ import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
 
-export default function Home() {
+export default async function Home() {
+  const jobs = await getAllJobs();
+  const jobsCount = jobs.length;
+  const users = await getAllUsers();
+  const usersCount = users.length;
+
   return (
     <main className="flex w-full flex-col items-center justify-center">
       <Container
@@ -76,7 +82,8 @@ export default function Home() {
           <div className="mt-8 flex w-full flex-col justify-center gap-8 sm:flex-row sm:gap-8 md:gap-16 lg:gap-24">
             <div className="flex flex-col items-center gap-2 text-center">
               <H2 className="xs:text-6xl text-5xl sm:text-6xl">
-                800<span className="text-primary">+</span>
+                {810 + jobsCount}
+                <span className="text-primary">+</span>
               </H2>
               <p className="text-accent-foreground text-lg font-semibold underline underline-offset-8">
                 Jobs requested and completed
@@ -84,7 +91,8 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center gap-2 text-center">
               <H2 className="xs:text-6xl text-5xl sm:text-6xl">
-                200<span className="text-primary">+</span>
+                {240 + usersCount}
+                <span className="text-primary">+</span>
               </H2>
               <p className="text-accent-foreground text-lg font-semibold underline underline-offset-8">
                 Parents, kids, and families served
