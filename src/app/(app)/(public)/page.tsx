@@ -4,7 +4,6 @@ import {
   ArrowDown,
   HeartHandshake,
   MoveRight,
-  PartyPopper,
 } from "lucide-react";
 
 import Container from "@components/Container";
@@ -12,7 +11,6 @@ import HomePageReviewCarousel from "@components/HomePageReviewCarousel";
 import ServicesContent from "@components/ServicesContent";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
-import { Alert, AlertDescription, AlertTitle } from "@components/ui/alert";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
@@ -27,17 +25,8 @@ export default async function Home() {
     <main className="flex w-full flex-col items-center justify-center">
       <Container
         id="landing-home"
-        className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-10 bg-gradient-to-tl to-50% py-10 lg:items-center"
+        className="from-tertiary to-background flex h-[540px] w-full flex-col justify-center gap-10 bg-gradient-to-tl to-50% pb-10 pt-20 lg:items-center"
       >
-        <Alert className="text-accent-foreground dark:shadow-tertiary w-fit max-w-prose border-none shadow-xl">
-          <PartyPopper className="size-4" />
-          <AlertTitle>{"We've updated our website!"}</AlertTitle>
-          <AlertDescription>
-            {
-              "Log in and create an account to keep track of your job requests, or just go ahead and request a job as usual :)"
-            }
-          </AlertDescription>
-        </Alert>
         <div className="flex w-full flex-col gap-4 lg:items-center">
           <div className="xs:hidden">
             <H1>Wayland</H1>

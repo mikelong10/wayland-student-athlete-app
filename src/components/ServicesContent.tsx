@@ -35,21 +35,10 @@ export const servicesCards: ServiceCardInfo[] = [
     reviewSectionId: "yard-work-services",
   },
   {
-    icon: <Baby className={cardIconStyle} />,
-    title: "Babysitting",
-    description:
-      "Wayland Student-Athlete makes finding a sitter easier than ever before! Rather than relying on a single sitter for availability, we can quickly connect you with a student-athlete from our wide selection of kind, responsible, and experienced babysitters so that you can always have the freedom to go out and feel safe leaving your kids at home.",
-  },
-  {
     icon: <GraduationCap className={cardIconStyle} />,
     title: "Tutoring",
     description:
       "Biology, Algebra, U.S. History, Spanish, Computer Science... You name it, we have students who've taken these courses at the Honors and AP® level, and we can help!",
-  },
-  {
-    icon: <Snowflake className={cardIconStyle} />,
-    title: "Snow Removal",
-    description: "Unexpected snow storm? We've got you covered.",
   },
   {
     icon: <Medal className={cardIconStyle} />,
@@ -58,10 +47,21 @@ export const servicesCards: ServiceCardInfo[] = [
       "With athletes on the varsity soccer, basketball, baseball, tennis teams, and more, we know we can help your kid (or you!) improve.",
   },
   {
+    icon: <Baby className={cardIconStyle} />,
+    title: "Babysitting",
+    description:
+      "Rather than relying on a single sitter for availability, we can quickly connect you with a student-athlete from our wide selection of kind, responsible, and experienced babysitters so that you can always have the freedom to go out and feel safe leaving your kids at home.",
+  },
+  {
     icon: <Car className={cardIconStyle} />,
     title: "Car Rides / Deliveries",
     description:
       "If you're not available to drive your kid to school in the morning, drop them off at their practices/games/lessons, or need a delivery done for you, we have a number of safe and responsible drivers who can do the job for you.",
+  },
+  {
+    icon: <Snowflake className={cardIconStyle} />,
+    title: "Snow Removal",
+    description: "Unexpected snow storm? We've got you covered.",
   },
   {
     icon: <Wrench className={cardIconStyle} />,

@@ -47,7 +47,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
                 rel="noreferrer"
                 className="hover:text-foreground-less font-medium underline underline-offset-4"
               >
-                mikelong10
+                Michael
               </a>
             </p>
           </div>
