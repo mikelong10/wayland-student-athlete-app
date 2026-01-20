@@ -1,9 +1,7 @@
 import Container from "@components/Container";
 import HomePageReviewCarousel from "@components/HomePageReviewCarousel";
-import {
-  HomePageStats,
-  HomePageStatsSkeleton,
-} from "@components/HomePageStats";
+import { HomePageStats } from "@components/HomePageStats";
+import { HomePageStatsSkeleton } from "@components/HomePageStatsSkeleton";
 import ServicesContent from "@components/ServicesContent";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";

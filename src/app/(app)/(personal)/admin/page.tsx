@@ -2,7 +2,8 @@ import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import { Separator } from "@components/ui/separator";
 import { Suspense } from "react";
-import { AdminUserTabs, AdminUserTabsSkeleton } from "./AdminUserTabs";
+import { AdminUserTabs } from "./AdminUserTabs";
+import { AdminUserTabsSkeleton } from "./AdminUserTabsSkeleton";
 
 export const metadata = {
   title: "Admin Panel | Wayland Student-Athlete",

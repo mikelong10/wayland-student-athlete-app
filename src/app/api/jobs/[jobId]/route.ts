@@ -6,10 +6,8 @@ import { eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-const routeContextSchema = z.object({
-  params: z.object({
-    jobId: z.string(),
-  }),
+const paramsSchema = z.object({
+  jobId: z.string(),
 });
 
 const jobUpdateSchema = z.object({
@@ -18,10 +16,10 @@ const jobUpdateSchema = z.object({
 
 export async function PATCH(
   req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: { params: Promise<{ jobId: string }> }
 ) {
   try {
-    const { params } = routeContextSchema.parse(context);
+    const params = paramsSchema.parse(await context.params);
     const body = await req.json();
     const payload = jobUpdateSchema.parse(body);
 
@@ -73,7 +71,7 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: { params: Promise<{ jobId: string }> }
 ) {
   try {
     const user = await getCurrentUser();
@@ -84,7 +82,7 @@ export async function DELETE(
       });
     }
 
-    const { params } = routeContextSchema.parse(context);
+    const params = paramsSchema.parse(await context.params);
     // delete all job assignments for the job
     await db
       .delete(jobAssignments)

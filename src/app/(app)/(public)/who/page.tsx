@@ -3,10 +3,8 @@ import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
 import { Separator } from "@components/ui/separator";
 import { Suspense } from "react";
-import {
-  StudentAthleteGrid,
-  StudentAthleteGridSkeleton,
-} from "./StudentAthleteGrid";
+import { StudentAthleteGrid } from "./StudentAthleteGrid";
+import { StudentAthleteGridSkeleton } from "./StudentAthleteGridSkeleton";
 
 export const metadata = {
   title: "Who We Are | Wayland Student-Athlete",

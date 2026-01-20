@@ -7,15 +7,13 @@ import { desc, eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-const routeContextSchema = z.object({
-  params: z.object({
-    id: z.string(),
-  }),
+const paramsSchema = z.object({
+  id: z.string(),
 });
 
 export async function PATCH(
   req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser();
@@ -26,7 +24,7 @@ export async function PATCH(
       });
     }
 
-    const { params } = routeContextSchema.parse(context);
+    const params = paramsSchema.parse(await context.params);
     const json = await req.json();
     const updateReviewRequestBody = reviewFormSchema.parse(json);
     const { reviewImages, ...reviewData } = updateReviewRequestBody;
@@ -93,7 +91,7 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser();
@@ -104,7 +102,7 @@ export async function DELETE(
       });
     }
 
-    const { params } = routeContextSchema.parse(context);
+    const params = paramsSchema.parse(await context.params);
     await db
       .delete(jobReviewImages)
       .where(eq(jobReviewImages.jobReviewId, params.id));

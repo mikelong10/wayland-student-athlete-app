@@ -4,18 +4,16 @@ import { GoogleSpreadsheet } from "google-spreadsheet";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-const routeContextSchema = z.object({
-  params: z.object({
-    jobId: z.string(),
-  }),
+const paramsSchema = z.object({
+  jobId: z.string(),
 });
 
 export async function POST(
   req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: { params: Promise<{ jobId: string }> }
 ) {
   try {
-    routeContextSchema.parse(context);
+    paramsSchema.parse(await context.params);
     const json = await req.json();
     const jobCompleteBody = completeJobGoogleSheetSchema.parse(json);
 

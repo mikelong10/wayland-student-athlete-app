@@ -7,10 +7,8 @@ import { and, eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-const routeContextSchema = z.object({
-  params: z.object({
-    jobId: z.string(),
-  }),
+const paramsSchema = z.object({
+  jobId: z.string(),
 });
 
 const toggleAssignSchema = z.object({
@@ -19,10 +17,10 @@ const toggleAssignSchema = z.object({
 
 export async function POST(
   req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: { params: Promise<{ jobId: string }> }
 ) {
   try {
-    const { params } = routeContextSchema.parse(context);
+    const params = paramsSchema.parse(await context.params);
     const body = await req.json();
     const payload = toggleAssignSchema.parse(body);
 
@@ -75,10 +73,10 @@ export async function POST(
 
 export async function DELETE(
   req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: { params: Promise<{ jobId: string }> }
 ) {
   try {
-    const { params } = routeContextSchema.parse(context);
+    const params = paramsSchema.parse(await context.params);
     const body = await req.json();
     const payload = toggleAssignSchema.parse(body);
 

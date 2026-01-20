@@ -7,10 +7,8 @@ import { and, desc, eq, ne } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
 
-const routeContextSchema = z.object({
-  params: z.object({
-    userId: z.string(),
-  }),
+const paramsSchema = z.object({
+  userId: z.string(),
 });
 
 const userEditSchema = z.object({
@@ -22,10 +20,10 @@ const userEditSchema = z.object({
 
 export async function PATCH(
   req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: { params: Promise<{ userId: string }> }
 ) {
   try {
-    const { params } = routeContextSchema.parse(context);
+    const params = paramsSchema.parse(await context.params);
 
     const user = await getCurrentUser();
 

@@ -4,11 +4,10 @@ import { getCurrentUser } from "@lib/session";
 import { notFound } from "next/navigation";
 import EditStudentAthleteProfileForm from "./EditStudentAthleteProfileForm";
 
-export default async function EditStudentAthleteProfilePage({
-  params,
-}: {
-  params: { slug: string };
+export default async function EditStudentAthleteProfilePage(props: {
+  params: Promise<{ slug: string }>;
 }) {
+  const params = await props.params;
   const user = await getCurrentUser();
 
   if (user?.role !== Role.ADMIN) {
