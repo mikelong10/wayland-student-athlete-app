@@ -1,10 +1,6 @@
 import Link from "next/link";
 import { getAllJobs, getAllUsers } from "@/db/queries";
-import {
-  ArrowDown,
-  HeartHandshake,
-  MoveRight,
-} from "lucide-react";
+import { ArrowDown, HeartHandshake, MoveRight } from "lucide-react";
 
 import Container from "@components/Container";
 import HomePageReviewCarousel from "@components/HomePageReviewCarousel";
@@ -14,6 +10,8 @@ import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const jobs = await getAllJobs();
