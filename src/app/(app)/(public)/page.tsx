@@ -1,9 +1,13 @@
 import Link from "next/link";
-import { getAllJobs, getAllUsers } from "@/db/queries";
+import { Suspense } from "react";
 import { ArrowDown, HeartHandshake, MoveRight } from "lucide-react";
 
 import Container from "@components/Container";
 import HomePageReviewCarousel from "@components/HomePageReviewCarousel";
+import {
+  HomePageStats,
+  HomePageStatsSkeleton,
+} from "@components/HomePageStats";
 import ServicesContent from "@components/ServicesContent";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
@@ -11,14 +15,7 @@ import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
 
-export const dynamic = "force-dynamic";
-
-export default async function Home() {
-  const jobs = await getAllJobs();
-  const jobsCount = jobs.length;
-  const users = await getAllUsers();
-  const usersCount = users.length;
-
+export default function Home() {
   return (
     <main className="flex w-full flex-col items-center justify-center">
       <Container
@@ -66,26 +63,9 @@ export default async function Home() {
       </Container>
       <Container className="from-tertiary to-background flex w-full flex-col items-center justify-center gap-6 bg-gradient-to-tr to-50% py-20">
         <div className="flex w-full flex-col items-center justify-center gap-32">
-          <div className="mt-8 flex w-full flex-col justify-center gap-8 sm:flex-row sm:gap-8 md:gap-16 lg:gap-24">
-            <div className="flex flex-col items-center gap-2 text-center">
-              <H2 className="xs:text-6xl text-5xl sm:text-6xl">
-                {810 + jobsCount}
-                <span className="text-primary">+</span>
-              </H2>
-              <p className="text-accent-foreground text-lg font-semibold underline underline-offset-8">
-                Jobs requested and completed
-              </p>
-            </div>
-            <div className="flex flex-col items-center gap-2 text-center">
-              <H2 className="xs:text-6xl text-5xl sm:text-6xl">
-                {240 + usersCount}
-                <span className="text-primary">+</span>
-              </H2>
-              <p className="text-accent-foreground text-lg font-semibold underline underline-offset-8">
-                Parents, kids, and families served
-              </p>
-            </div>
-          </div>
+          <Suspense fallback={<HomePageStatsSkeleton />}>
+            <HomePageStats />
+          </Suspense>
           <div className="flex w-full flex-col items-center gap-8">
             <H2 className="xs:text-3xl text-center text-3xl md:text-4xl">
               <span className="">Trusted</span> by the{" "}
