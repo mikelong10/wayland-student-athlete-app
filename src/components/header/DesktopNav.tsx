@@ -36,7 +36,7 @@ export default function DesktopNav({ user, links }: NavProps) {
               <Button
                 className={`ml-4 rounded-full underline-offset-4 ${
                   pathname === "/request"
-                    ? "border-border text-accent-foreground border bg-transparent underline"
+                    ? "border-border text-accent-foreground decoration-primary border bg-transparent underline"
                     : ""
                 }`}
               >
