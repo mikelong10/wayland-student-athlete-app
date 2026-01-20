@@ -1,8 +1,7 @@
-import { Suspense } from "react";
-
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
+import { Suspense } from "react";
 import { ReviewsList, ReviewsListSkeleton } from "./ReviewsList";
 
 export const metadata = {

@@ -1,13 +1,13 @@
-import { notFound } from "next/navigation";
+import BusinessJobCard from "@components/BusinessJobCard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import { db } from "@db";
 import { getJobsByStatus } from "@db/queries";
 import { users } from "@db/schema/auth";
-import { asc, eq, or } from "drizzle-orm";
 
 import { Role, Status } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
-import BusinessJobCard from "@components/BusinessJobCard";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
+import { asc, eq, or } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 export async function DashboardJobTabs() {
   const [user, allStudentAthletes, toDoJobs, inProgressJobs, doneJobs] =

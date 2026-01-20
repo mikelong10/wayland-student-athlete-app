@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { User } from "@db/types";
-import { MoveRight } from "lucide-react";
-
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
+import type { User } from "@db/types";
+import { MoveRight } from "lucide-react";
+import Link from "next/link";
 import EditProfileForm from "./EditProfileForm";
 
 export default function ProfilePageContent({ user }: { user: User }) {

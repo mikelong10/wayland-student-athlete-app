@@ -1,13 +1,5 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
-import { Job, User } from "@db/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import { useForm } from "react-hook-form";
-
-import { requestJobFormSchema, RequestJobFormValues } from "@lib/schemas";
-import { cn, formatPhoneNumberForClient, scrollToTop } from "@lib/utils";
 import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
 import {
@@ -22,6 +14,13 @@ import {
 import { Input } from "@components/ui/input";
 import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
+import type { Job, User } from "@db/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type RequestJobFormValues, requestJobFormSchema } from "@lib/schemas";
+import { cn, formatPhoneNumberForClient, scrollToTop } from "@lib/utils";
+import { Loader2 } from "lucide-react";
+import { type Dispatch, type SetStateAction, useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function RequestJobForm({
   user,
@@ -33,8 +32,7 @@ export default function RequestJobForm({
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [firstName, lastName] =
-    user && user.name ? user.name.split(" ", 2) : ["", ""];
+  const [firstName, lastName] = user?.name ? user.name.split(" ", 2) : ["", ""];
   const defaultValues = {
     adultFirstName: firstName,
     adultLastName: lastName,
@@ -47,7 +45,7 @@ export default function RequestJobForm({
     contact: user
       ? user.phone
         ? formatPhoneNumberForClient(user.phone)
-        : user.email ?? ""
+        : (user.email ?? "")
       : "",
     learn: "",
     special: "",
@@ -90,7 +88,7 @@ export default function RequestJobForm({
 
       scrollToTop();
       setRequestSent(true);
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: (

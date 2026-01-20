@@ -1,6 +1,5 @@
-import { z } from "zod";
-
 import { phoneRegex } from "@lib/utils";
+import { z } from "zod";
 
 export const emailLoginSchema = z.object({
   email: z

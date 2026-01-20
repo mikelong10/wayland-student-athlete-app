@@ -1,7 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-
 import { Button } from "@components/ui/button";
 import {
   NavigationMenu,
@@ -9,7 +7,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@components/ui/navigation-menu";
-import { NavProps } from "./HeaderContent";
+import { usePathname } from "next/navigation";
+import type { NavProps } from "./HeaderContent";
 import UserAccountNav from "./UserAccountNav";
 
 export default function DesktopNav({ user, links }: NavProps) {

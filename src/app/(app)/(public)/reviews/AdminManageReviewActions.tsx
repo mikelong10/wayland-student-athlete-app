@@ -1,9 +1,7 @@
-import Link from "next/link";
-import React from "react";
-import { Pencil } from "lucide-react";
-
 import { AdminActions } from "@components/AdminActions";
 import { Button } from "@components/ui/button";
+import { Pencil } from "lucide-react";
+import Link from "next/link";
 import DeleteReviewDialog from "./DeleteReviewDialog";
 
 export default function AdminManageReviewActions({

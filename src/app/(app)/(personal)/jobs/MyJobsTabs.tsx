@@ -1,13 +1,12 @@
-import Link from "next/link";
-import { getJobsByRequestor } from "@db/queries";
-import { Job } from "@db/types";
-import { MoveRight } from "lucide-react";
-
-import { Status } from "@lib/enums";
-import { getCurrentUser } from "@lib/session";
 import PersonalJobCard from "@components/PersonalJobCard";
 import { Button } from "@components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
+import { getJobsByRequestor } from "@db/queries";
+import type { Job } from "@db/types";
+import { Status } from "@lib/enums";
+import { getCurrentUser } from "@lib/session";
+import { MoveRight } from "lucide-react";
+import Link from "next/link";
 
 export async function MyJobsTabs() {
   const user = await getCurrentUser();

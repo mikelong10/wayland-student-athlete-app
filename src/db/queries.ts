@@ -1,8 +1,7 @@
 import { db } from "@db";
 import { jobAssignments, jobs } from "@db/schema/jobs";
+import type { Role, Status } from "@lib/enums";
 import { and, desc, eq, or } from "drizzle-orm";
-
-import { Role, Status } from "@lib/enums";
 import { users } from "./schema/auth";
 import {
   jobReviewImages,
@@ -10,7 +9,7 @@ import {
   studentAthleteProfiles,
   studentAthleteResumeItems,
 } from "./schema/content";
-import {
+import type {
   Job,
   JobReviewWithImages,
   StudentAthleteProfileWithResume,

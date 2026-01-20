@@ -1,5 +1,5 @@
+import { type ClassValue, clsx } from "clsx";
 import { createHash } from "crypto";
-import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -32,10 +32,10 @@ export function formatPhoneNumberForServer(input: string): string {
   let formattedNumber = "";
   // given number already has US country code
   if (digits.length > 10) {
-    formattedNumber = "+" + digits;
+    formattedNumber = `+${digits}`;
   } else {
     // Append the country code "+1" to the extracted digits
-    formattedNumber = "+1" + digits;
+    formattedNumber = `+1${digits}`;
   }
 
   return formattedNumber;

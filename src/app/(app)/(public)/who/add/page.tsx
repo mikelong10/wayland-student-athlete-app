@@ -1,7 +1,6 @@
-import { notFound } from "next/navigation";
-
 import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
+import { notFound } from "next/navigation";
 import AddStudentAthleteProfileForm from "./AddStudentAthleteProfileForm";
 
 export default async function AddStudentAthleteProfilePage() {

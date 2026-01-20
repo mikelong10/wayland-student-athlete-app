@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
-import { cn } from "@lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Progress } from "@components/ui/progress";
+
+import { cn } from "@lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 type CarouselItem = {
   key: string;

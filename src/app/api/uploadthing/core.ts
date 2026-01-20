@@ -1,10 +1,9 @@
 import { db } from "@db";
 import { users } from "@db/schema/auth";
-import { eq } from "drizzle-orm";
-import { createUploadthing, type FileRouter } from "uploadthing/next";
-
 import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
+import { eq } from "drizzle-orm";
+import { createUploadthing, type FileRouter } from "uploadthing/next";
 
 const f = createUploadthing();
 

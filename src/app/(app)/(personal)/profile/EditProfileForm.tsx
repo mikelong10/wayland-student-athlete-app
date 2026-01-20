@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { User } from "@db/types";
-
-import { UploadButton } from "@lib/uploadthing";
-import { useToast } from "@components/ui/use-toast";
 import { UserAvatar } from "@components/UserAvatar";
+import { useToast } from "@components/ui/use-toast";
+import type { User } from "@db/types";
+import { UploadButton } from "@lib/uploadthing";
+import { useState } from "react";
 import EditUserNameForm from "./EditUserNameForm";
 import EditUserPhoneForm from "./EditUserPhoneForm";
 

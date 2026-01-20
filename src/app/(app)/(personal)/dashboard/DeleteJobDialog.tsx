@@ -1,10 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Job } from "@db/types";
-import { Trash2 } from "lucide-react";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +12,10 @@ import {
 } from "@components/ui/alert-dialog";
 import { Button } from "@components/ui/button";
 import { useToast } from "@components/ui/use-toast";
+import type { Job } from "@db/types";
+import { Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function DeleteJobDialog({ job }: { job: Job }) {
   const router = useRouter();
@@ -49,7 +48,7 @@ export default function DeleteJobDialog({ job }: { job: Job }) {
       });
 
       router.refresh();
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request. Please try again.",

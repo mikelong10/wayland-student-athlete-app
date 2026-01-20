@@ -3,13 +3,12 @@ import {
   studentAthleteProfiles,
   studentAthleteResumeItems,
 } from "@db/schema/content";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { z } from "zod";
-
 import { Role } from "@lib/enums";
 import { studentAthleteProfileFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
 import { nameToSlug } from "@lib/utils";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { z } from "zod";
 
 export async function POST(req: Request) {
   try {
@@ -32,7 +31,7 @@ export async function POST(req: Request) {
       .values({
         ...profileData,
         name: `${firstName} ${lastName}`,
-        graduationYear: parseInt(graduationYear),
+        graduationYear: parseInt(graduationYear, 10),
         slug: nameToSlug(`${firstName} ${lastName}`),
       })
       .returning();

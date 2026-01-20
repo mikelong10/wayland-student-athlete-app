@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
-import { RotateCw } from "lucide-react";
-
 import H1 from "@components/typography/h1";
 import { Button } from "@components/ui/button";
+import { RotateCw } from "lucide-react";
+import { useEffect } from "react";
 
-export default function Error({
+export default function ErrorPage({
   error,
   reset,
 }: {

@@ -1,15 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { User } from "@db/types";
-import type { VariantProps } from "class-variance-authority";
-
-import { cn } from "@lib/utils";
 import Container from "@components/Container";
 import { WSALogo } from "@components/icons";
-import { buttonVariants } from "@components/ui/button";
+import type { buttonVariants } from "@components/ui/button";
+import type { User } from "@db/types";
+import { cn } from "@lib/utils";
+import type { VariantProps } from "class-variance-authority";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
@@ -70,9 +69,9 @@ export default function HeaderContent({ user }: { user?: User }) {
     },
   ];
 
-  const checkScroll = () => {
+  const checkScroll = useCallback(() => {
     setScrolled(window.scrollY > 1);
-  };
+  }, []);
 
   useEffect(() => {
     checkScroll();
@@ -80,7 +79,7 @@ export default function HeaderContent({ user }: { user?: User }) {
     return () => {
       window.removeEventListener("scroll", checkScroll);
     };
-  }, []);
+  }, [checkScroll]);
 
   return (
     <Container

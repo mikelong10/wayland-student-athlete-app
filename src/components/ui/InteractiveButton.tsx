@@ -1,7 +1,7 @@
 "use client";
 
+import { Button, type ButtonProps } from "@components/ui/button";
 import { scrollToElement } from "@lib/utils";
-import { Button, ButtonProps } from "@components/ui/button";
 
 interface InteractiveButtonProps extends ButtonProps {
   children?: React.ReactNode;

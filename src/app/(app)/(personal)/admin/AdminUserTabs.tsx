@@ -1,10 +1,9 @@
-import { notFound } from "next/navigation";
+import UserCard from "@components/UserCard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import { getUsersByRole } from "@db/queries";
-
 import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
-import UserCard from "@components/UserCard";
+import { notFound } from "next/navigation";
 
 export async function AdminUserTabs() {
   const [user, clients, studentAthletes, admins] = await Promise.all([

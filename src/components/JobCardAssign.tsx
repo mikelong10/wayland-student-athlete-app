@@ -1,13 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { User } from "@db/types";
-import Fuse from "fuse.js";
-import { Check, UserPlus } from "lucide-react";
-
-import { cn } from "@lib/utils";
-import { BusinessJobCardProps } from "@components/BusinessJobCard";
+import type { BusinessJobCardProps } from "@components/BusinessJobCard";
+import { UserAvatar } from "@components/UserAvatar";
 import {
   Command,
   CommandEmpty,
@@ -28,7 +22,12 @@ import {
   TooltipTrigger,
 } from "@components/ui/tooltip";
 import { useToast } from "@components/ui/use-toast";
-import { UserAvatar } from "@components/UserAvatar";
+import type { User } from "@db/types";
+import { cn } from "@lib/utils";
+import Fuse from "fuse.js";
+import { Check, UserPlus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function JobCardAssign({
   job,
@@ -79,7 +78,7 @@ export default function JobCardAssign({
       });
 
       router.refresh();
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "Please try again.",
@@ -118,7 +117,7 @@ export default function JobCardAssign({
       });
 
       router.refresh();
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "Please try again.",

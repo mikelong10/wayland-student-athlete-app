@@ -1,7 +1,6 @@
-import * as React from "react";
-
 import { rubik } from "@lib/fonts";
 import { cn } from "@lib/utils";
+import * as React from "react";
 
 const H1 = React.forwardRef<
   HTMLHeadingElement,

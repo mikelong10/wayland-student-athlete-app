@@ -1,13 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
-import { db } from "@db";
-import { studentAthleteProfiles } from "@db/schema/content";
-import { SquareUser } from "lucide-react";
-
-import { Role } from "@lib/enums";
-import { getCurrentUser } from "@lib/session";
 import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
+import { db } from "@db";
+import { studentAthleteProfiles } from "@db/schema/content";
+import { Role } from "@lib/enums";
+import { getCurrentUser } from "@lib/session";
+import { SquareUser } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const StudentAthleteCard = ({
   name,

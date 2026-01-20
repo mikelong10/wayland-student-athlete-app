@@ -1,7 +1,3 @@
-import { ReactNode } from "react";
-import { Job } from "@db/types";
-
-import { formatDate } from "@lib/utils";
 import {
   Card,
   CardContent,
@@ -10,6 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@components/ui/card";
+import type { Job } from "@db/types";
+
+import { formatDate } from "@lib/utils";
+import type { ReactNode } from "react";
 
 export interface BaseJobCardProps {
   job: Job;

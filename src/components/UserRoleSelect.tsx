@@ -1,12 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { User } from "@db/types";
-import * as SelectPrimitive from "@radix-ui/react-select";
-import { ChevronDown } from "lucide-react";
-
-import { Role } from "@lib/enums";
+import { UserRoleText } from "@components/UserCard";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,7 +14,12 @@ import {
 import { Badge } from "@components/ui/badge";
 import { Select, SelectContent, SelectItem } from "@components/ui/select";
 import { useToast } from "@components/ui/use-toast";
-import { UserRoleText } from "@components/UserCard";
+import type { User } from "@db/types";
+import { Role } from "@lib/enums";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function UserRoleSelect({ user }: { user: User }) {
   const router = useRouter();
@@ -62,7 +61,7 @@ export default function UserRoleSelect({ user }: { user: User }) {
         });
 
         router.refresh();
-      } catch (error) {
+      } catch (_error) {
         toast({
           title: "Uh oh! Something went wrong.",
           description:

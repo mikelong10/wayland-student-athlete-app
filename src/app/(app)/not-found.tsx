@@ -1,8 +1,7 @@
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
-
 import H1 from "@components/typography/h1";
 import { Button } from "@components/ui/button";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function NotFound() {
   return (

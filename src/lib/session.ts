@@ -8,7 +8,7 @@ export async function getCurrentUser() {
   const session = await auth();
   const userFromNextAuth = session?.user;
 
-  if (userFromNextAuth && userFromNextAuth.email) {
+  if (userFromNextAuth?.email) {
     const userFromDb = await db.query.users.findFirst({
       where: eq(users.email, userFromNextAuth.email),
     });

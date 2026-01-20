@@ -1,14 +1,3 @@
-import { useState } from "react";
-import { Job, User } from "@db/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, Table2 } from "lucide-react";
-import { useForm } from "react-hook-form";
-
-import {
-  CompleteJobGoogleSheetValues,
-  jobCompleteFormSchema,
-  JobCompleteFormValues,
-} from "@lib/schemas";
 import {
   Dialog,
   DialogContent,
@@ -28,6 +17,16 @@ import {
 } from "@components/ui/form";
 import { Input } from "@components/ui/input";
 import { useToast } from "@components/ui/use-toast";
+import type { Job, User } from "@db/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  type CompleteJobGoogleSheetValues,
+  type JobCompleteFormValues,
+  jobCompleteFormSchema,
+} from "@lib/schemas";
+import { Loader2, Table2 } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 
 export default function JobCompleteForm({
@@ -70,7 +69,10 @@ export default function JobCompleteForm({
         ...values,
         numPeople: numPeople.toString(),
         cost: `$${values.cost}`,
-        manHours: ((parseInt(values.timeTaken) * numPeople) / 60).toString(),
+        manHours: (
+          (parseInt(values.timeTaken, 10) * numPeople) /
+          60
+        ).toString(),
       };
       const response = await fetch(`/api/jobs/${job.id}/spreadsheet`, {
         method: "POST",
@@ -88,7 +90,7 @@ export default function JobCompleteForm({
         title: "Data successfully sent to Google Sheet!",
         variant: "success",
       });
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description:

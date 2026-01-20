@@ -3,14 +3,13 @@ import {
   studentAthleteProfiles,
   studentAthleteResumeItems,
 } from "@db/schema/content";
-import { eq } from "drizzle-orm";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { z } from "zod";
-
 import { Role } from "@lib/enums";
 import { studentAthleteProfileFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
 import { nameToSlug } from "@lib/utils";
+import { eq } from "drizzle-orm";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { z } from "zod";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -44,7 +43,7 @@ export async function PATCH(
       .set({
         ...profileData,
         name: `${firstName} ${lastName}`,
-        graduationYear: parseInt(graduationYear),
+        graduationYear: parseInt(graduationYear, 10),
         slug: nameToSlug(`${firstName} ${lastName}`),
       })
       .where(eq(studentAthleteProfiles.id, params.id))

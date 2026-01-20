@@ -1,3 +1,4 @@
+import ServiceCard from "@components/ServiceCard";
 import {
   Armchair,
   Baby,
@@ -8,8 +9,6 @@ import {
   Snowflake,
   Wrench,
 } from "lucide-react";
-
-import ServiceCard from "@components/ServiceCard";
 
 export type ServiceCardInfo = {
   icon: JSX.Element;

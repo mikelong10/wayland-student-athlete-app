@@ -1,14 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import { User } from "@db/types";
-import { ChevronLeft, MailCheck, Redo2 } from "lucide-react";
-
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
+import type { User } from "@db/types";
+import { ChevronLeft, MailCheck, Redo2 } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 import RequestJobForm from "./RequestJobForm";
 
 export default function RequestPageContent({ user }: { user?: User }) {

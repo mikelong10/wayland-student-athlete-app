@@ -1,16 +1,15 @@
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getStudentAthleteProfileBySlug } from "@db/queries";
-import { Pencil } from "lucide-react";
-
-import { Role } from "@lib/enums";
-import { getCurrentUser } from "@lib/session";
 import { AdminActions } from "@components/AdminActions";
 import Container from "@components/Container";
 import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
+import { getStudentAthleteProfileBySlug } from "@db/queries";
+import { Role } from "@lib/enums";
+import { getCurrentUser } from "@lib/session";
+import { Pencil } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import DeleteStudentAthleteProfileDialog from "./DeleteStudentAthleteProfileDialog";
 
 export default async function StudentAthletePage({

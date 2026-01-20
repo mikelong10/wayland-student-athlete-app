@@ -1,14 +1,13 @@
 import { db } from "@db";
 import { jobs } from "@db/schema/jobs";
-import { Job } from "@db/types";
+import type { Job } from "@db/types";
+import { type RequestJobFormValues, requestJobFormSchema } from "@lib/schemas";
+import { getCurrentUser } from "@lib/session";
 import { JWT } from "google-auth-library";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import nodemailer from "nodemailer";
 import { z } from "zod";
-
-import { requestJobFormSchema, RequestJobFormValues } from "@lib/schemas";
-import { getCurrentUser } from "@lib/session";
 
 async function sendToGoogleSheet(jobRequestBody: RequestJobFormValues) {
   try {

@@ -1,15 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { Job } from "@db/types";
-import * as SelectPrimitive from "@radix-ui/react-select";
-import { ChevronDown } from "lucide-react";
-
-import { Status } from "@lib/enums";
 import { Badge } from "@components/ui/badge";
 import Dot from "@components/ui/dot";
 import { Select, SelectContent, SelectItem } from "@components/ui/select";
 import { useToast } from "@components/ui/use-toast";
+import type { Job } from "@db/types";
+import { Status } from "@lib/enums";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { JobStatusText } from "./PersonalJobCard";
 
 export default function JobStatusSelect({ job }: { job: Job }) {
@@ -49,7 +48,7 @@ export default function JobStatusSelect({ job }: { job: Job }) {
         });
 
         router.refresh();
-      } catch (error) {
+      } catch (_error) {
         toast({
           title: "Uh oh! Something went wrong.",
           description:
@@ -66,27 +65,25 @@ export default function JobStatusSelect({ job }: { job: Job }) {
   }
 
   return (
-    <>
-      <Select value={job.status} onValueChange={onSelectChange}>
-        <SelectPrimitive.Trigger>
-          <Badge
-            variant={job.status as Status}
-            className="hover:bg-accent dark:hover:bg-background-less w-fit gap-2"
-          >
-            <Dot status={job.status as Status} />
-            <SelectPrimitive.Icon asChild>
-              <ChevronDown className="size-4 opacity-50" />
-            </SelectPrimitive.Icon>
-          </Badge>
-        </SelectPrimitive.Trigger>
-        <SelectContent align="end">
-          {Object.values(Status).map((status) => (
-            <SelectItem key={status} value={status}>
-              {JobStatusText[status]}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </>
+    <Select value={job.status} onValueChange={onSelectChange}>
+      <SelectPrimitive.Trigger>
+        <Badge
+          variant={job.status as Status}
+          className="hover:bg-accent dark:hover:bg-background-less w-fit gap-2"
+        >
+          <Dot status={job.status as Status} />
+          <SelectPrimitive.Icon asChild>
+            <ChevronDown className="size-4 opacity-50" />
+          </SelectPrimitive.Icon>
+        </Badge>
+      </SelectPrimitive.Trigger>
+      <SelectContent align="end">
+        {Object.values(Status).map((status) => (
+          <SelectItem key={status} value={status}>
+            {JobStatusText[status]}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }

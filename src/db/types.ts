@@ -1,11 +1,11 @@
-import { users } from "./schema/auth";
-import {
+import type { users } from "./schema/auth";
+import type {
   jobReviewImages,
   jobReviews,
   studentAthleteProfiles,
   studentAthleteResumeItems,
 } from "./schema/content";
-import { jobs } from "./schema/jobs";
+import type { jobs } from "./schema/jobs";
 
 export type User = typeof users.$inferSelect;
 export type Job = typeof jobs.$inferSelect;
