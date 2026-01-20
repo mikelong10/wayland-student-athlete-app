@@ -10,7 +10,7 @@ export async function HomePageStats() {
     <div className="mt-8 flex w-full flex-col justify-center gap-8 sm:flex-row sm:gap-8 md:gap-16 lg:gap-24">
       <div className="flex flex-col items-center gap-2 text-center">
         <H2 className="xs:text-6xl text-5xl sm:text-6xl">
-          {810 + jobsCount}
+          {820 + jobsCount}
           <span className="text-primary">+</span>
         </H2>
         <p className="text-accent-foreground text-lg font-semibold underline underline-offset-8">
