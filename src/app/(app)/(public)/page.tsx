@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { getAllJobs, getAllUsers } from "@/db/queries";
 import {
   ArrowDown,
   HeartHandshake,
   MoveRight,
-  PartyPopper,
 } from "lucide-react";
 
 import Container from "@components/Container";
@@ -11,27 +11,22 @@ import HomePageReviewCarousel from "@components/HomePageReviewCarousel";
 import ServicesContent from "@components/ServicesContent";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
-import { Alert, AlertDescription, AlertTitle } from "@components/ui/alert";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
 
-export default function Home() {
+export default async function Home() {
+  const jobs = await getAllJobs();
+  const jobsCount = jobs.length;
+  const users = await getAllUsers();
+  const usersCount = users.length;
+
   return (
     <main className="flex w-full flex-col items-center justify-center">
       <Container
         id="landing-home"
-        className="from-tertiary to-background xs:h-[640px] flex h-[600px] w-full flex-col justify-center gap-10 bg-gradient-to-tl to-50% py-10 lg:items-center"
+        className="from-tertiary to-background flex h-[540px] w-full flex-col justify-center gap-10 bg-gradient-to-tl to-50% pb-10 pt-20 lg:items-center"
       >
-        <Alert className="text-accent-foreground dark:shadow-tertiary w-fit max-w-prose border-none shadow-xl">
-          <PartyPopper className="size-4" />
-          <AlertTitle>{"We've updated our website!"}</AlertTitle>
-          <AlertDescription>
-            {
-              "Log in and create an account to keep track of your job requests, or just go ahead and request a job as usual :)"
-            }
-          </AlertDescription>
-        </Alert>
         <div className="flex w-full flex-col gap-4 lg:items-center">
           <div className="xs:hidden">
             <H1>Wayland</H1>
@@ -76,7 +71,8 @@ export default function Home() {
           <div className="mt-8 flex w-full flex-col justify-center gap-8 sm:flex-row sm:gap-8 md:gap-16 lg:gap-24">
             <div className="flex flex-col items-center gap-2 text-center">
               <H2 className="xs:text-6xl text-5xl sm:text-6xl">
-                800<span className="text-primary">+</span>
+                {810 + jobsCount}
+                <span className="text-primary">+</span>
               </H2>
               <p className="text-accent-foreground text-lg font-semibold underline underline-offset-8">
                 Jobs requested and completed
@@ -84,7 +80,8 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center gap-2 text-center">
               <H2 className="xs:text-6xl text-5xl sm:text-6xl">
-                200<span className="text-primary">+</span>
+                {240 + usersCount}
+                <span className="text-primary">+</span>
               </H2>
               <p className="text-accent-foreground text-lg font-semibold underline underline-offset-8">
                 Parents, kids, and families served

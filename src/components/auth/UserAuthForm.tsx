@@ -34,6 +34,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
     const signInResult = await signIn("nodemailer", {
       email: data.email.toLowerCase(),
+      redirect: false,
     });
 
     setIsLoading(false);
