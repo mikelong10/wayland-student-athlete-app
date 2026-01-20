@@ -1,5 +1,8 @@
 import type { WSAFileRouter } from "@app/api/uploadthing/core";
-import { generateComponents } from "@uploadthing/react";
+import {
+  generateUploadButton,
+  generateUploadDropzone,
+} from "@uploadthing/react";
 
-export const { UploadButton, UploadDropzone, Uploader } =
-  generateComponents<WSAFileRouter>();
+export const UploadButton = generateUploadButton<WSAFileRouter>();
+export const UploadDropzone = generateUploadDropzone<WSAFileRouter>();
