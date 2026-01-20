@@ -5,7 +5,7 @@ import { Progress } from "@components/ui/progress";
 
 import { cn } from "@lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 
 type CarouselItem = {
   key: string;

@@ -10,6 +10,8 @@ import {
   Wrench,
 } from "lucide-react";
 
+import type { JSX } from "react";
+
 export type ServiceCardInfo = {
   icon: JSX.Element;
   title: string;

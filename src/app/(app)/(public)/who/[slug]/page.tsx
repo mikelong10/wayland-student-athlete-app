@@ -12,11 +12,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import DeleteStudentAthleteProfileDialog from "./DeleteStudentAthleteProfileDialog";
 
-export default async function StudentAthletePage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function StudentAthletePage(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+) {
+  const params = await props.params;
   const user = await getCurrentUser();
 
   const studentAthlete = await getStudentAthleteProfileBySlug(params.slug);
