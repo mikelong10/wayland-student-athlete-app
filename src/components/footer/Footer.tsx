@@ -32,9 +32,9 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
               />
               <a
                 className="hover:text-muted-foreground font-medium transition-colors"
-                href="tel:+1781-266-8116"
+                href="tel:+1781-778-8457"
               >
-                (781) 266-8116
+                (781) 778-8457
               </a>
             </div>
           </div>
