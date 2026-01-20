@@ -1,18 +1,14 @@
-import { notFound } from "next/navigation";
-import { getAllReviewsGroupedByOrder } from "@db/queries";
+import { Suspense } from "react";
 
-import { Role } from "@lib/enums";
-import { getCurrentUser } from "@lib/session";
-import AddReviewForm from "./AddReviewForm";
+import {
+  AddReviewFormSkeleton,
+  AddReviewFormWrapper,
+} from "./AddReviewFormWrapper";
 
-export default async function AddReviewPage() {
-  const user = await getCurrentUser();
-
-  if (user?.role !== Role.ADMIN) {
-    notFound();
-  }
-
-  const groupedReviewsArray = await getAllReviewsGroupedByOrder();
-
-  return <AddReviewForm groupedReviewsArray={groupedReviewsArray} />;
+export default function AddReviewPage() {
+  return (
+    <Suspense fallback={<AddReviewFormSkeleton />}>
+      <AddReviewFormWrapper />
+    </Suspense>
+  );
 }
