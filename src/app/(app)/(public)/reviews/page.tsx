@@ -2,7 +2,8 @@ import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
 import { Suspense } from "react";
-import { ReviewsList, ReviewsListSkeleton } from "./ReviewsList";
+import { ReviewsList } from "./ReviewsList";
+import { ReviewsListSkeleton } from "./ReviewsListSkeleton";
 
 export const metadata = {
   title: "Reviews | Wayland Student-Athlete",

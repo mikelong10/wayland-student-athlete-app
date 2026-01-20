@@ -2,7 +2,8 @@ import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import { Separator } from "@components/ui/separator";
 import { Suspense } from "react";
-import { MyJobsTabs, MyJobsTabsSkeleton } from "./MyJobsTabs";
+import { MyJobsTabs } from "./MyJobsTabs";
+import { MyJobsTabsSkeleton } from "./MyJobsTabsSkeleton";
 
 export const metadata = {
   title: "My Jobs | Wayland Student-Athlete",

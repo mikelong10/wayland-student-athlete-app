@@ -2,7 +2,8 @@ import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import { Separator } from "@components/ui/separator";
 import { Suspense } from "react";
-import { DashboardJobTabs, DashboardJobTabsSkeleton } from "./DashboardJobTabs";
+import { DashboardJobTabs } from "./DashboardJobTabs";
+import { DashboardJobTabsSkeleton } from "./DashboardJobTabsSkeleton";
 
 export const metadata = {
   title: "Jobs Dashboard | Wayland Student-Athlete",

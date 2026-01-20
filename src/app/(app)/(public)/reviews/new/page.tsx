@@ -1,9 +1,6 @@
 import { Suspense } from "react";
-
-import {
-  AddReviewFormSkeleton,
-  AddReviewFormWrapper,
-} from "./AddReviewFormWrapper";
+import { AddReviewFormSkeleton } from "./AddReviewFormSkeleton";
+import { AddReviewFormWrapper } from "./AddReviewFormWrapper";
 
 export default function AddReviewPage() {
   return (
