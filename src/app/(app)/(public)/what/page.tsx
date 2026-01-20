@@ -1,12 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
-import { BookMarked, MoveRight, Users } from "lucide-react";
-
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter } from "@components/ui/card";
 import { Separator } from "@components/ui/separator";
+import { BookMarked, MoveRight, Users } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import whs from "../../../../../public/whs.jpg";
 import wooHigh from "../../../../../public/woo-high-l.jpg";
 

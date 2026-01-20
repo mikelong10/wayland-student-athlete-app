@@ -1,4 +1,4 @@
-import { ReviewCarouselItemInfo } from "@components/HomePageReviewCarousel";
+import type { ReviewCarouselItemInfo } from "@components/HomePageReviewCarousel";
 
 export default function ReviewCarouselItem({
   review,

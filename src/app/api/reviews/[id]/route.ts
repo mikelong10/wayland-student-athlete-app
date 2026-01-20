@@ -1,12 +1,11 @@
 import { db } from "@db";
 import { jobReviewImages, jobReviews } from "@db/schema/content";
-import { desc, eq } from "drizzle-orm";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { z } from "zod";
-
 import { Role } from "@lib/enums";
 import { reviewFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
+import { desc, eq } from "drizzle-orm";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { z } from "zod";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -45,7 +44,7 @@ export async function PATCH(
         order:
           reviewData.order === "new"
             ? highestOrderReview[0].order + 1
-            : parseInt(reviewData.order),
+            : parseInt(reviewData.order, 10),
       })
       .where(eq(jobReviews.id, params.id))
       .returning();

@@ -1,8 +1,7 @@
-import { notFound } from "next/navigation";
 import { getStudentAthleteProfileBySlug } from "@db/queries";
-
 import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
+import { notFound } from "next/navigation";
 import EditStudentAthleteProfileForm from "./EditStudentAthleteProfileForm";
 
 export default async function EditStudentAthleteProfilePage({

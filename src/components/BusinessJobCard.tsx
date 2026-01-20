@@ -1,10 +1,9 @@
 "use client";
 
 import DeleteJobDialog from "@app/(app)/(personal)/dashboard/DeleteJobDialog";
-import { User } from "@db/types";
-
+import type { JobCardProps } from "@components/PersonalJobCard";
+import type { User } from "@db/types";
 import { Status } from "@lib/enums";
-import { JobCardProps } from "@components/PersonalJobCard";
 import BaseJobCard from "./BaseJobCard";
 import JobCardAssign from "./JobCardAssign";
 import JobCompleteForm from "./JobCompleteForm";

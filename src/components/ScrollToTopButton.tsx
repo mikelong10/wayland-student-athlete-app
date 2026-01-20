@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ArrowUp } from "lucide-react";
-
-import { scrollToTop } from "@lib/utils";
 import { Button } from "@components/ui/button";
+import { scrollToTop } from "@lib/utils";
+import { ArrowUp } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function ScrollToTopButton() {
   const [show, setShow] = useState(false);
 
-  const shouldShow = () => {
+  const shouldShow = useCallback(() => {
     setShow(window.scrollY > 1000);
-  };
+  }, []);
 
   useEffect(() => {
     shouldShow();
@@ -19,7 +18,7 @@ export default function ScrollToTopButton() {
     return () => {
       window.removeEventListener("scroll", shouldShow);
     };
-  }, []);
+  }, [shouldShow]);
 
   return (
     <Button

@@ -1,16 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { JobReview, JobReviewWithImages } from "@db/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import _ from "lodash";
-import { FileCheck, ImagePlus, Loader2 } from "lucide-react";
-import { useForm } from "react-hook-form";
-
-import { reviewFormSchema, ReviewFormValues } from "@lib/schemas";
-import { UploadDropzone } from "@lib/uploadthing";
-import { cn } from "@lib/utils";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
@@ -35,6 +24,16 @@ import {
 import { Separator } from "@components/ui/separator";
 import { Textarea } from "@components/ui/textarea";
 import { useToast } from "@components/ui/use-toast";
+import type { JobReview, JobReviewWithImages } from "@db/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type ReviewFormValues, reviewFormSchema } from "@lib/schemas";
+import { UploadDropzone } from "@lib/uploadthing";
+import { cn } from "@lib/utils";
+import _ from "lodash";
+import { FileCheck, ImagePlus, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function EditReviewForm({
   jobReview,
@@ -107,7 +106,7 @@ export default function EditReviewForm({
 
       router.push("/reviews");
       router.refresh();
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request. Please try again.",

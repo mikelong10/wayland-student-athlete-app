@@ -1,19 +1,18 @@
 "use client";
 
-import { HTMLAttributes, useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import { signIn } from "next-auth/react";
-import { useForm } from "react-hook-form";
-
-import { EmailLoginFormValues, emailLoginSchema } from "@lib/schemas";
-import { cn } from "@lib/utils";
 import { FacebookLogo, GoogleLogo } from "@components/icons";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { Separator } from "@components/ui/separator";
 import { toast } from "@components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type EmailLoginFormValues, emailLoginSchema } from "@lib/schemas";
+import { cn } from "@lib/utils";
+import { Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { type HTMLAttributes, useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -39,7 +38,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
     setIsLoading(false);
 
-    if (signInResult && signInResult.error) {
+    if (signInResult?.error) {
       return toast({
         title: "Something went wrong.",
         description: "Your sign in request failed. Please try again.",

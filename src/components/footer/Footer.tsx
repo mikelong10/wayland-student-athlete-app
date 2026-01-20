@@ -1,10 +1,9 @@
-import Link from "next/link";
-import * as React from "react";
-
-import { cn } from "@lib/utils";
 import Container from "@components/Container";
 import { FacebookLogo } from "@components/icons";
 import { Separator } from "@components/ui/separator";
+import { cn } from "@lib/utils";
+import Link from "next/link";
+import type * as React from "react";
 
 export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
   return (

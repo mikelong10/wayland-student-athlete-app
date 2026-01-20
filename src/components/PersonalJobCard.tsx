@@ -1,8 +1,7 @@
-import { Job } from "@db/types";
-
-import { Status } from "@lib/enums";
 import { Badge } from "@components/ui/badge";
 import Dot from "@components/ui/dot";
+import type { Job } from "@db/types";
+import { Status } from "@lib/enums";
 import BaseJobCard from "./BaseJobCard";
 
 export interface JobCardProps {

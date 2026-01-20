@@ -1,12 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { User } from "@db/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, Pencil } from "lucide-react";
-import { useForm } from "react-hook-form";
-
-import { EditUserNameFormValues, editUserNameSchema } from "@lib/schemas";
 import { Button } from "@components/ui/button";
 import {
   Dialog,
@@ -27,6 +20,12 @@ import {
 } from "@components/ui/form";
 import { Input } from "@components/ui/input";
 import { useToast } from "@components/ui/use-toast";
+import type { User } from "@db/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type EditUserNameFormValues, editUserNameSchema } from "@lib/schemas";
+import { Loader2, Pencil } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function EditUserNameForm({ user }: { user: User }) {
   const { toast } = useToast();
@@ -72,7 +71,7 @@ export default function EditUserNameForm({ user }: { user: User }) {
       });
 
       setActiveUser(updatedUser);
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description:

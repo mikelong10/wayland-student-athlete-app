@@ -1,18 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { StudentAthleteProfile } from "@db/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FileCheck, ImagePlus, Loader2, Plus, Trash2 } from "lucide-react";
-import { useFieldArray, useForm } from "react-hook-form";
-
-import {
-  studentAthleteProfileFormSchema,
-  StudentAthleteProfileFormValues,
-} from "@lib/schemas";
-import { UploadDropzone } from "@lib/uploadthing";
-import { cn } from "@lib/utils";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
@@ -36,6 +23,18 @@ import {
 } from "@components/ui/select";
 import { Separator } from "@components/ui/separator";
 import { useToast } from "@components/ui/use-toast";
+import type { StudentAthleteProfile } from "@db/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  type StudentAthleteProfileFormValues,
+  studentAthleteProfileFormSchema,
+} from "@lib/schemas";
+import { UploadDropzone } from "@lib/uploadthing";
+import { cn } from "@lib/utils";
+import { FileCheck, ImagePlus, Loader2, Plus, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
 
 export default function AddStudentAthleteProfileForm() {
   const router = useRouter();
@@ -98,7 +97,7 @@ export default function AddStudentAthleteProfileForm() {
 
       router.push("/who");
       router.refresh();
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request. Please try again.",

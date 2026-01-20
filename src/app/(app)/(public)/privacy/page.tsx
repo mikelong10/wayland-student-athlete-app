@@ -1,8 +1,8 @@
-import { generateUniqueId } from "@lib/utils";
 import Container from "@components/Container";
 import H1 from "@components/typography/h1";
 import H2 from "@components/typography/h2";
 import { Card, CardContent } from "@components/ui/card";
+import { generateUniqueId } from "@lib/utils";
 
 export const metadata = {
   title: "Privacy Policy | Wayland Student-Athlete",

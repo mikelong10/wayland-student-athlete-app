@@ -1,4 +1,4 @@
-import { ServiceCardInfo } from "@components/ServicesContent";
+import type { ServiceCardInfo } from "@components/ServicesContent";
 import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import { Separator } from "@components/ui/separator";
 

@@ -1,6 +1,5 @@
-import { getAllJobs, getAllUsers } from "@/db/queries";
-
 import H2 from "@components/typography/h2";
+import { getAllJobs, getAllUsers } from "@/db/queries";
 
 export async function HomePageStats() {
   const [jobs, users] = await Promise.all([getAllJobs(), getAllUsers()]);

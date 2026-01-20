@@ -1,9 +1,6 @@
 "use client";
 
-import { User } from "@db/types";
-
-import { Role } from "@lib/enums";
-import { formatDate } from "@lib/utils";
+import { UserAvatar } from "@components/UserAvatar";
 import {
   Card,
   CardDescription,
@@ -11,7 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@components/ui/card";
-import { UserAvatar } from "@components/UserAvatar";
+import type { User } from "@db/types";
+import { Role } from "@lib/enums";
+import { formatDate } from "@lib/utils";
 import UserRoleSelect from "./UserRoleSelect";
 
 export const UserRoleText: Record<Role, string> = {

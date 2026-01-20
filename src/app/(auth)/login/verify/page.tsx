@@ -1,9 +1,3 @@
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import React from "react";
-import { Mailbox } from "lucide-react";
-
-import { getCurrentUser } from "@lib/session";
 import Container from "@components/Container";
 import { Button } from "@components/ui/button";
 import {
@@ -15,6 +9,11 @@ import {
   CardTitle,
 } from "@components/ui/card";
 import { Separator } from "@components/ui/separator";
+
+import { getCurrentUser } from "@lib/session";
+import { Mailbox } from "lucide-react";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function VerifyEmailPage() {
   const user = await getCurrentUser();

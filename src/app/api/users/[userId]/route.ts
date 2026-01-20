@@ -1,12 +1,11 @@
 import { db } from "@db";
 import { users } from "@db/schema/auth";
-import { and, desc, eq, ne } from "drizzle-orm";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { z } from "zod";
-
 import { Role } from "@lib/enums";
 import { getCurrentUser } from "@lib/session";
 import { formatPhoneNumberForServer } from "@lib/utils";
+import { and, desc, eq, ne } from "drizzle-orm";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { z } from "zod";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -100,11 +99,11 @@ export async function PATCH(
       // formulate data to update
       const dataToUpdate: { name?: string; phone?: string } = {};
       if (payload.firstName && payload.lastName) {
-        dataToUpdate["name"] = `${payload.firstName} ${payload.lastName}`;
+        dataToUpdate.name = `${payload.firstName} ${payload.lastName}`;
       }
       if (payload.phone) {
         const updatedPhone = formatPhoneNumberForServer(payload.phone);
-        dataToUpdate["phone"] = updatedPhone;
+        dataToUpdate.phone = updatedPhone;
       }
       // update the user
       const updatedUser = await db

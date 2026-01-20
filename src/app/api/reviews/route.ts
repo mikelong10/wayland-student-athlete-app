@@ -1,12 +1,11 @@
 import { db } from "@db";
 import { jobReviewImages, jobReviews } from "@db/schema/content";
-import { desc } from "drizzle-orm";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { z } from "zod";
-
 import { Role } from "@lib/enums";
 import { reviewFormSchema } from "@lib/schemas";
 import { getCurrentUser } from "@lib/session";
+import { desc } from "drizzle-orm";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { z } from "zod";
 
 export async function POST(req: Request) {
   try {
@@ -60,7 +59,7 @@ export async function POST(req: Request) {
           order:
             reviewData.order === "new"
               ? highestOrderReview.order + 1
-              : parseInt(reviewData.order),
+              : parseInt(reviewData.order, 10),
         })
         .returning();
 

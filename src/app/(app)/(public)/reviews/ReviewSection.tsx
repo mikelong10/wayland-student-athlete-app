@@ -1,18 +1,17 @@
-import Image from "next/image";
-import { JobReviewImage, User } from "@db/types";
+import Carousel from "@components/Carousel";
+import Container from "@components/Container";
+import H2 from "@components/typography/h2";
+import { Card } from "@components/ui/card";
+import type { JobReviewImage, User } from "@db/types";
+import { Role } from "@lib/enums";
+import { cn } from "@lib/utils";
 import {
   MessageSquareHeart,
   MessageSquareMore,
   MessageSquareQuote,
   MessageSquareText,
 } from "lucide-react";
-
-import { Role } from "@lib/enums";
-import { cn } from "@lib/utils";
-import Carousel from "@components/Carousel";
-import Container from "@components/Container";
-import H2 from "@components/typography/h2";
-import { Card } from "@components/ui/card";
+import Image from "next/image";
 import AdminManageReviewActions from "./AdminManageReviewActions";
 
 export default function ReviewSection({

@@ -1,10 +1,9 @@
-import Link from "next/link";
-import { Quote } from "lucide-react";
-
-import { generateUniqueId } from "@lib/utils";
 import Carousel from "@components/Carousel";
 import ReviewCarouselItem from "@components/ReviewCarouselItem";
 import { Button } from "@components/ui/button";
+import { generateUniqueId } from "@lib/utils";
+import { Quote } from "lucide-react";
+import Link from "next/link";
 
 export type ReviewCarouselItemInfo = {
   quote: string;

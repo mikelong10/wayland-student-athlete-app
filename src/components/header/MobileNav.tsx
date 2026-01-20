@@ -1,14 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import { Menu } from "lucide-react";
-
 import { WSALogo } from "@components/icons";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@components/ui/sheet";
-import { NavProps } from "./HeaderContent";
+import { Menu } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import type { NavProps } from "./HeaderContent";
 import UserAccountNav from "./UserAccountNav";
 
 export default function MobileNav({ user, links }: NavProps) {

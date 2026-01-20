@@ -1,7 +1,3 @@
-import Link from "next/link";
-import { Suspense } from "react";
-import { ArrowDown, HeartHandshake, MoveRight } from "lucide-react";
-
 import Container from "@components/Container";
 import HomePageReviewCarousel from "@components/HomePageReviewCarousel";
 import {
@@ -14,6 +10,9 @@ import H2 from "@components/typography/h2";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter } from "@components/ui/card";
 import InteractiveButton from "@components/ui/InteractiveButton";
+import { ArrowDown, HeartHandshake, MoveRight } from "lucide-react";
+import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Home() {
   return (

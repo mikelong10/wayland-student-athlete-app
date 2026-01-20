@@ -1,11 +1,10 @@
 import { db } from "@db";
 import { jobAssignments, jobs } from "@db/schema/jobs";
+import { Role, Status } from "@lib/enums";
+import { getCurrentUser } from "@lib/session";
 import { eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { z } from "zod";
-
-import { Role, Status } from "@lib/enums";
-import { getCurrentUser } from "@lib/session";
 
 const routeContextSchema = z.object({
   params: z.object({

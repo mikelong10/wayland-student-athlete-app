@@ -1,9 +1,8 @@
-import Link from "next/link";
-import { KeyRound } from "lucide-react";
-
 import H1 from "@components/typography/h1";
 import { Alert, AlertDescription, AlertTitle } from "@components/ui/alert";
 import { Button } from "@components/ui/button";
+import { KeyRound } from "lucide-react";
+import Link from "next/link";
 
 export default function LoginError() {
   return (

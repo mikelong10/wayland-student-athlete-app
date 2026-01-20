@@ -1,20 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { HTMLAttributes } from "react";
-import { User } from "@db/types";
-import {
-  CheckSquare,
-  KanbanSquare,
-  LogOut,
-  Menu,
-  UserCircle2,
-  Users,
-} from "lucide-react";
-import { signOut } from "next-auth/react";
-
-import { Role } from "@lib/enums";
 import { LightDarkModeToggle } from "@components/LightDarkModeToggle";
+import { UserAvatar } from "@components/UserAvatar";
 import { Button } from "@components/ui/button";
 import {
   DropdownMenu,
@@ -25,7 +12,19 @@ import {
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
 import { Separator } from "@components/ui/separator";
-import { UserAvatar } from "@components/UserAvatar";
+import type { User } from "@db/types";
+import { Role } from "@lib/enums";
+import {
+  CheckSquare,
+  KanbanSquare,
+  LogOut,
+  Menu,
+  UserCircle2,
+  Users,
+} from "lucide-react";
+import Link from "next/link";
+import { signOut } from "next-auth/react";
+import type { HTMLAttributes } from "react";
 
 interface UserAccountNavProps extends HTMLAttributes<HTMLDivElement> {
   user?: User;

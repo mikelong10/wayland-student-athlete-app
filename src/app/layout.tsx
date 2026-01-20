@@ -2,10 +2,10 @@ import { Analytics } from "@vercel/analytics/react";
 
 import "@styles/globals.css";
 
-import { inter } from "@lib/fonts";
-import { cn } from "@lib/utils";
 import { ThemeProvider } from "@components/ThemeProvider";
 import { Toaster } from "@components/ui/toaster";
+import { inter } from "@lib/fonts";
+import { cn } from "@lib/utils";
 
 export const metadata = {
   title:

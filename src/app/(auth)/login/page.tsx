@@ -1,12 +1,11 @@
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { ChevronLeft } from "lucide-react";
-
-import { getCurrentUser } from "@lib/session";
 import { UserAuthForm } from "@components/auth/UserAuthForm";
 import Container from "@components/Container";
 import { WSALogo } from "@components/icons";
 import { Button } from "@components/ui/button";
+import { getCurrentUser } from "@lib/session";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function LoginPage() {
   const user = await getCurrentUser();

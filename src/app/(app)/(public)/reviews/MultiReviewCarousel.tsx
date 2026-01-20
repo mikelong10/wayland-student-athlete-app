@@ -1,11 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { JobReviewWithImages, User } from "@db/types";
-import { Quote } from "lucide-react";
-
-import { Role } from "@lib/enums";
-import { cn } from "@lib/utils";
 import Container from "@components/Container";
 import H2 from "@components/typography/h2";
 import { Card, CardContent, CardFooter } from "@components/ui/card";
@@ -16,6 +10,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@components/ui/carousel";
+import type { JobReviewWithImages, User } from "@db/types";
+import { Role } from "@lib/enums";
+import { cn } from "@lib/utils";
+import { Quote } from "lucide-react";
+import Image from "next/image";
 import AdminManageReviewActions from "./AdminManageReviewActions";
 
 export default function MultiReviewCarousel({
